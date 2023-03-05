@@ -7,18 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9660490329B1E75A00F64E55 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490229B1E75A00F64E55 /* DataController.swift */; };
+		9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */; };
+		9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490C29B217AC00F64E55 /* ParagraphModel.swift */; };
+		9660492229B2463400F64E55 /* Offense+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */; };
+		9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */; };
+		9660492429B2463400F64E55 /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492029B2463400F64E55 /* Group+CoreDataClass.swift */; };
+		9660492529B2463400F64E55 /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492129B2463400F64E55 /* Group+CoreDataProperties.swift */; };
+		9660492729B2476E00F64E55 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492629B2476E00F64E55 /* MainView.swift */; };
+		9660492929B247B600F64E55 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492829B247B600F64E55 /* FavoritesView.swift */; };
+		9660492B29B463B400F64E55 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492A29B463B400F64E55 /* FilterModel.swift */; };
+		9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492C29B4648500F64E55 /* FilterViewModel.swift */; };
+		9660492F29B5308000F64E55 /* FiltersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492E29B5308000F64E55 /* FiltersList.swift */; };
+		9660493129B537A200F64E55 /* FilteredOffenseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660493029B537A200F64E55 /* FilteredOffenseListView.swift */; };
+		9660493629B53E7700F64E55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9660493529B53E7700F64E55 /* LaunchScreen.storyboard */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
-		96D30B7829B1E18F0018F750 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7729B1E18F0018F750 /* ContentView.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
+		96D30B8529B1E1BC0018F750 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B8429B1E1BC0018F750 /* LibraryView.swift */; };
+		96D30B8929B1E2230018F750 /* JsonDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B8829B1E2230018F750 /* JsonDataController.swift */; };
+		96D30B8B29B1E28D0018F750 /* OffenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B8A29B1E28D0018F750 /* OffenseModel.swift */; };
+		96D30B8D29B1E2A30018F750 /* CrimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B8C29B1E2A30018F750 /* CrimeModel.swift */; };
+		96D30B8F29B1E2BC0018F750 /* LawExtractModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B8E29B1E2BC0018F750 /* LawExtractModel.swift */; };
+		96D30B9329B1E34C0018F750 /* ContentSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B9229B1E34C0018F750 /* ContentSubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9660490229B1E75A00F64E55 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KittDataModel.xcdatamodel; sourceTree = "<group>"; };
+		9660490C29B217AC00F64E55 /* ParagraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphModel.swift; sourceTree = "<group>"; };
+		9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9660492029B2463400F64E55 /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9660492129B2463400F64E55 /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9660492629B2476E00F64E55 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		9660492829B247B600F64E55 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		9660492A29B463B400F64E55 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
+		9660492C29B4648500F64E55 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		9660492E29B5308000F64E55 /* FiltersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersList.swift; sourceTree = "<group>"; };
+		9660493029B537A200F64E55 /* FilteredOffenseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredOffenseListView.swift; sourceTree = "<group>"; };
+		9660493529B53E7700F64E55 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
-		96D30B7729B1E18F0018F750 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		96D30B7929B1E1900018F750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		96D30B8429B1E1BC0018F750 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		96D30B8829B1E2230018F750 /* JsonDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataController.swift; sourceTree = "<group>"; };
+		96D30B8A29B1E28D0018F750 /* OffenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseModel.swift; sourceTree = "<group>"; };
+		96D30B8C29B1E2A30018F750 /* CrimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeModel.swift; sourceTree = "<group>"; };
+		96D30B8E29B1E2BC0018F750 /* LawExtractModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawExtractModel.swift; sourceTree = "<group>"; };
+		96D30B9029B1E2F70018F750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		96D30B9229B1E34C0018F750 /* ContentSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSubView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,9 +71,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9660490B29B1E92600F64E55 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */,
+				9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */,
+				9660492029B2463400F64E55 /* Group+CoreDataClass.swift */,
+				9660492129B2463400F64E55 /* Group+CoreDataProperties.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
 		96D30B6929B1E18F0018F750 = {
 			isa = PBXGroup;
 			children = (
+				9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */,
+				9660493529B53E7700F64E55 /* LaunchScreen.storyboard */,
 				96D30B7429B1E18F0018F750 /* KITT-testApp */,
 				96D30B7329B1E18F0018F750 /* Products */,
 			);
@@ -51,8 +103,14 @@
 		96D30B7429B1E18F0018F750 /* KITT-testApp */ = {
 			isa = PBXGroup;
 			children = (
+				9660490B29B1E92600F64E55 /* DataModels */,
+				96D30B9029B1E2F70018F750 /* Info.plist */,
+				96D30B8829B1E2230018F750 /* JsonDataController.swift */,
+				9660490229B1E75A00F64E55 /* DataController.swift */,
+				96D30B8729B1E2080018F750 /* ViewModels */,
+				96D30B8629B1E1FC0018F750 /* Models */,
+				96D30B8329B1E1AF0018F750 /* Views */,
 				96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */,
-				96D30B7729B1E18F0018F750 /* ContentView.swift */,
 				96D30B7929B1E1900018F750 /* Assets.xcassets */,
 				96D30B7B29B1E1900018F750 /* Preview Content */,
 			);
@@ -65,6 +123,47 @@
 				96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		96D30B8329B1E1AF0018F750 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				96D30B9129B1E33C0018F750 /* Subviews */,
+				96D30B8429B1E1BC0018F750 /* LibraryView.swift */,
+				9660492629B2476E00F64E55 /* MainView.swift */,
+				9660492829B247B600F64E55 /* FavoritesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		96D30B8629B1E1FC0018F750 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				96D30B8A29B1E28D0018F750 /* OffenseModel.swift */,
+				96D30B8C29B1E2A30018F750 /* CrimeModel.swift */,
+				96D30B8E29B1E2BC0018F750 /* LawExtractModel.swift */,
+				9660490C29B217AC00F64E55 /* ParagraphModel.swift */,
+				9660492A29B463B400F64E55 /* FilterModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		96D30B8729B1E2080018F750 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9660492C29B4648500F64E55 /* FilterViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		96D30B9129B1E33C0018F750 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				96D30B9229B1E34C0018F750 /* ContentSubView.swift */,
+				9660492E29B5308000F64E55 /* FiltersList.swift */,
+				9660493029B537A200F64E55 /* FilteredOffenseListView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9660493629B53E7700F64E55 /* LaunchScreen.storyboard in Resources */,
 				96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */,
 				96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */,
 			);
@@ -137,8 +237,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96D30B7829B1E18F0018F750 /* ContentView.swift in Sources */,
+				9660493129B537A200F64E55 /* FilteredOffenseListView.swift in Sources */,
+				9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */,
+				96D30B8D29B1E2A30018F750 /* CrimeModel.swift in Sources */,
+				96D30B8529B1E1BC0018F750 /* LibraryView.swift in Sources */,
+				96D30B8F29B1E2BC0018F750 /* LawExtractModel.swift in Sources */,
 				96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */,
+				96D30B9329B1E34C0018F750 /* ContentSubView.swift in Sources */,
+				9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */,
+				9660492B29B463B400F64E55 /* FilterModel.swift in Sources */,
+				9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */,
+				9660490329B1E75A00F64E55 /* DataController.swift in Sources */,
+				9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */,
+				9660492F29B5308000F64E55 /* FiltersList.swift in Sources */,
+				9660492229B2463400F64E55 /* Offense+CoreDataClass.swift in Sources */,
+				96D30B8B29B1E28D0018F750 /* OffenseModel.swift in Sources */,
+				96D30B8929B1E2230018F750 /* JsonDataController.swift in Sources */,
+				9660492929B247B600F64E55 /* FavoritesView.swift in Sources */,
+				9660492429B2463400F64E55 /* Group+CoreDataClass.swift in Sources */,
+				9660492729B2476E00F64E55 /* MainView.swift in Sources */,
+				9660492529B2463400F64E55 /* Group+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,26 +383,36 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.9;
 				DEVELOPMENT_ASSET_PATHS = "\"KITT-testApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q795WXF4MM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KITT-testApp/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = KITT;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "rjwannabefit.KITT-testApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -294,26 +422,36 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.9;
 				DEVELOPMENT_ASSET_PATHS = "\"KITT-testApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q795WXF4MM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KITT-testApp/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = KITT;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "rjwannabefit.KITT-testApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -339,6 +477,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */,
+			);
+			currentVersion = 9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */;
+			path = KittDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 96D30B6A29B1E18F0018F750 /* Project object */;
 }

@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct KITT_testAppApp: App {
+    @StateObject private var dataController = DataController()
+    @StateObject private var filterViewModel = FilterViewModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(filterViewModel)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .preferredColorScheme(.dark)
         }
     }
 }
