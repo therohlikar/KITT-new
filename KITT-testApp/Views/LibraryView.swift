@@ -13,7 +13,6 @@ enum tabType{
 }
 
 struct LibraryView: View {
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)]) var groups: FetchedResults<Group>
     @EnvironmentObject var fvm: FilterViewModel
     
     @State private var searchKey: String = ""

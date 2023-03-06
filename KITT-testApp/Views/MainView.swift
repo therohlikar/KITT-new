@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var offenses: FetchedResults<Offense>
+    @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
     
     var body: some View {
         NavigationView{
@@ -25,6 +27,8 @@ struct MainView: View {
                         Label("Oblíbené", systemImage: "heart")
                     }
                     .tag("favorites")
+                
+                
             }
         }
         .task {
@@ -59,6 +63,13 @@ struct MainView: View {
                     
                     newOffense.note = note
                     newOffense.isFavorited = isFavorited
+                }
+            }
+            
+            //clear groups
+            for group in groups {
+                if group.offenseArray.isEmpty {
+                    moc.delete(group)
                 }
             }
             

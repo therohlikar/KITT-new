@@ -21,22 +21,13 @@ struct FilteredOffenseListView: View{
                     NavigationLink {
                         ContentSubView(contentItem: offense)
                     } label: {
-                        VStack(alignment: .leading){
-                            Text(offense.wrappedTitle)
-                                .fontWeight(.light)
-                            VStack{
-                                Text(offense.paragraphModel.toString())
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
+                        OffenseRowListView(offense: offense)
                     }
                     .isDetailLink(false)
                 }
             }else{
                 Text("Nothing was found")
             }
-            
         }else{
             ForEach(groups, id: \.self) { group in
                 Section(header:
@@ -49,15 +40,7 @@ struct FilteredOffenseListView: View{
                         NavigationLink {
                             ContentSubView(contentItem: offense)
                         } label: {
-                            VStack(alignment: .leading){
-                                Text(offense.wrappedTitle)
-                                    .fontWeight(.light)
-                                VStack{
-                                    Text(offense.paragraphModel.toString())
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
+                            OffenseRowListView(offense: offense)
                         }
                         .isDetailLink(false)
                     }
@@ -84,5 +67,52 @@ struct FilteredOffenseListView: View{
  
         searchKey = key
         favorites = favoritesOnly
+    }
+}
+
+struct OffenseRowListView: View{
+    @ObservedObject var offense: Offense
+    @State private var isDetailShown: Bool = false
+    
+    var body: some View{
+        VStack(alignment: .leading){
+            Text(offense.wrappedTitle)
+                .fontWeight(.light)
+                .onTapGesture {
+                    isDetailShown.toggle()
+                }
+            VStack(alignment: .leading){
+                Text(offense.paragraphModel.toString())
+                if !offense.wrappedViolationParagraph.isEmpty {
+                    Text("PŘ: \(offense.violationParagraphModel.toString())")
+                }
+                if isDetailShown {
+                    HStack(alignment: .top){
+                        if !offense.wrappedResolveOptions.isEmpty{
+                            VStack{
+                                Text("Řešení")
+                                    .bold()
+                                Text(offense.wrappedResolveOptions)
+                            }
+                        }
+                        if offense.offenseScore >= 0 {
+                            VStack{
+                                Text("Body")
+                                    .bold()
+                                Text("\(offense.offenseScore)")
+                            }
+                        }
+                        VStack{
+                            Text("Sledovaný přestupek")
+                                .bold()
+                            Text(offense.isOffenseTracked ? "Ano" : "Ne")
+                        }
+                    }
+                    .padding(1)
+                }
+            }
+            .font(.caption)
+            .foregroundColor(.secondary)
+        }
     }
 }
