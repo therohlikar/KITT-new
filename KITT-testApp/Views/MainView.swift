@@ -10,26 +10,59 @@ import CoreData
 
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var sc: SettingsController
+    @EnvironmentObject var fvm: FilterViewModel
     @FetchRequest(sortDescriptors: []) var offenses: FetchedResults<Offense>
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
     
+    @State private var searchKey: String = ""
+    @State private var filterListViewOpened: Bool = false
+    @State private var settingsViewOpened: Bool = false
+    
     var body: some View {
         NavigationView{
-            TabView{
-                LibraryView()
-                    .tabItem {
-                        Label("Knihovna", systemImage: "books.vertical.fill")
-                    }
-                    .tag("categories")
+            VStack{
+                HStack{
+                    TextField("Search...", text: $searchKey)
+                        .autocorrectionDisabled()
+                        .padding(10)
+
+                    Image(systemName: "checklist")
+                        .onTapGesture {
+                           filterListViewOpened.toggle()
+                        }
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.blue)
+                    
+                    Image(systemName: "gearshape.fill")
+                        .onTapGesture {
+                           settingsViewOpened.toggle()
+                        }
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.secondary)
+                }
                 
-                FavoritesView()
-                    .tabItem {
-                        Label("Oblíbené", systemImage: "heart")
-                    }
-                    .tag("favorites")
-                
-                
+                TabView(selection: $sc.settings.preferredPanel){
+                    LibraryView(searchKey: $searchKey)
+                        .tabItem {
+                            Label("Knihovna", systemImage: "books.vertical.fill")
+                        }
+                        .tag("library")
+                    
+                    FavoritesView(searchKey: $searchKey)
+                        .tabItem {
+                            Label("Oblíbené", systemImage: "heart")
+                        }
+                        .tag("favorites")
+                }
             }
+            
+        }
+        .sheet(isPresented: $filterListViewOpened) {
+            FiltersList(fvm: fvm)
+        }
+        .sheet(isPresented: $settingsViewOpened) {
+            SettingsView()
         }
         .task {
             let jsonController = JsonDataController()

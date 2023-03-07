@@ -24,6 +24,7 @@ struct ContentSubView: View {
 //OFFENSE
 struct OffenseContent: View {
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var sc: SettingsController
     @ObservedObject var offense: Offense
     
     @State private var customNote = ""
@@ -105,10 +106,9 @@ struct OffenseContent: View {
             noteChanged = false
         }
         .onDisappear{
-            if noteChanged {
+            if noteChanged && sc.settings.saveNotes {
                 try? moc.save()
             }
-            
         }
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -127,6 +127,10 @@ struct OffenseContent: View {
                     .onChange(of: customNote) { _ in
                         offense.note = customNote
                         noteChanged = true
+                    }
+                    .onSubmit {
+                        offense.note = customNote
+                        try? moc.save()
                     }
             }
         }

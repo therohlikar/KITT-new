@@ -21,6 +21,9 @@
 		9660492F29B5308000F64E55 /* FiltersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492E29B5308000F64E55 /* FiltersList.swift */; };
 		9660493129B537A200F64E55 /* FilteredOffenseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660493029B537A200F64E55 /* FilteredOffenseListView.swift */; };
 		9660493629B53E7700F64E55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9660493529B53E7700F64E55 /* LaunchScreen.storyboard */; };
+		96965E6F29B63AA30094520F /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E6E29B63AA30094520F /* SettingsModel.swift */; };
+		96965E7129B63B230094520F /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7029B63B230094520F /* SettingsController.swift */; };
+		96965E7329B7EC5F0094520F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7229B7EC5F0094520F /* SettingsView.swift */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
@@ -47,6 +50,9 @@
 		9660492E29B5308000F64E55 /* FiltersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersList.swift; sourceTree = "<group>"; };
 		9660493029B537A200F64E55 /* FilteredOffenseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredOffenseListView.swift; sourceTree = "<group>"; };
 		9660493529B53E7700F64E55 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		96965E6E29B63AA30094520F /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		96965E7029B63B230094520F /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		96965E7229B7EC5F0094520F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
 		96D30B7929B1E1900018F750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,6 +113,7 @@
 				96D30B9029B1E2F70018F750 /* Info.plist */,
 				96D30B8829B1E2230018F750 /* JsonDataController.swift */,
 				9660490229B1E75A00F64E55 /* DataController.swift */,
+				96965E7029B63B230094520F /* SettingsController.swift */,
 				96D30B8729B1E2080018F750 /* ViewModels */,
 				96D30B8629B1E1FC0018F750 /* Models */,
 				96D30B8329B1E1AF0018F750 /* Views */,
@@ -132,6 +139,7 @@
 				96D30B8429B1E1BC0018F750 /* LibraryView.swift */,
 				9660492629B2476E00F64E55 /* MainView.swift */,
 				9660492829B247B600F64E55 /* FavoritesView.swift */,
+				96965E7229B7EC5F0094520F /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -144,6 +152,7 @@
 				96D30B8E29B1E2BC0018F750 /* LawExtractModel.swift */,
 				9660490C29B217AC00F64E55 /* ParagraphModel.swift */,
 				9660492A29B463B400F64E55 /* FilterModel.swift */,
+				96965E6E29B63AA30094520F /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9660493129B537A200F64E55 /* FilteredOffenseListView.swift in Sources */,
+				96965E7329B7EC5F0094520F /* SettingsView.swift in Sources */,
 				9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */,
 				96D30B8D29B1E2A30018F750 /* CrimeModel.swift in Sources */,
 				96D30B8529B1E1BC0018F750 /* LibraryView.swift in Sources */,
@@ -249,9 +259,11 @@
 				9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */,
 				9660490329B1E75A00F64E55 /* DataController.swift in Sources */,
 				9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */,
+				96965E6F29B63AA30094520F /* SettingsModel.swift in Sources */,
 				9660492F29B5308000F64E55 /* FiltersList.swift in Sources */,
 				9660492229B2463400F64E55 /* Offense+CoreDataClass.swift in Sources */,
 				96D30B8B29B1E28D0018F750 /* OffenseModel.swift in Sources */,
+				96965E7129B63B230094520F /* SettingsController.swift in Sources */,
 				96D30B8929B1E2230018F750 /* JsonDataController.swift in Sources */,
 				9660492929B247B600F64E55 /* FavoritesView.swift in Sources */,
 				9660492429B2463400F64E55 /* Group+CoreDataClass.swift in Sources */,

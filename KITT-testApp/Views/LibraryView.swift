@@ -14,25 +14,14 @@ enum tabType{
 
 struct LibraryView: View {
     @EnvironmentObject var fvm: FilterViewModel
-    
-    @State private var searchKey: String = ""
-    @State private var filterListViewOpened: Bool = false
+    @EnvironmentObject var sc: SettingsController
+
+    @Binding var searchKey: String
+
     @State private var tab:tabType = .offense
     
     var body: some View {
         VStack{
-            HStack{
-                TextField("Search...", text: $searchKey)
-                    .autocorrectionDisabled()
-                    .padding(10)
-
-                Image(systemName: "checklist")
-                    .onTapGesture {
-                        filterListViewOpened.toggle()
-                    }
-                    .padding(.horizontal, 10)
-                    .foregroundColor(.blue)
-            }
             TabView(selection: $tab){
                 // OFFENSE
                 List{
@@ -54,9 +43,7 @@ struct LibraryView: View {
             }
             .tabViewStyle(.page)
         }
-        .sheet(isPresented: $filterListViewOpened) {
-            FiltersList(fvm: fvm)
-        }
+        
     }
 }
 
