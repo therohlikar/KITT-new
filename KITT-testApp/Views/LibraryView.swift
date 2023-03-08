@@ -23,23 +23,12 @@ struct LibraryView: View {
     var body: some View {
         VStack{
             TabView(selection: $tab){
-                // OFFENSE
-                List{
-                    Section("Offenses"){
-                        FilteredOffenseListView(key: searchKey, filters: fvm.filters)
-                    }
-                }
-                .listStyle(.sidebar)
-                .tag(tabType.offense)
+                FilteredOffenseListView(key: searchKey, filters: fvm.filters)
+                    .tag(tabType.offense)
                 
                 // CRIME
-                List{
-                    Section("Crimes"){
-                        FilteredOffenseListView(key: searchKey, filters: fvm.filters)
-                    }
-                }
-                .listStyle(.sidebar)
-                .tag(tabType.crime)
+                FilteredOffenseListView(key: searchKey, filters: fvm.filters)
+                    .tag(tabType.crime)
             }
             .tabViewStyle(.page)
         }

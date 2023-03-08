@@ -23,7 +23,7 @@ struct MainView: View {
         NavigationView{
             VStack{
                 HStack{
-                    TextField("Search...", text: $searchKey)
+                    TextField("Vyhledávání...", text: $searchKey)
                         .autocorrectionDisabled()
                         .padding(10)
 

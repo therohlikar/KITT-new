@@ -13,17 +13,19 @@ struct FiltersList: View{
 
     var body: some View{
         List{
-            ForEach($fvm.filters, id:\.label) { $filter in
-                HStack{
-                    Text(filter.label)
-                    Spacer()
-                    Toggle("", isOn: $filter.active)
-                        .onChange(of: filter.active, perform: { _ in
-                            //fvm.objectWillChange.send()
-                        })
-                        .labelsHidden()
+            Section("Filtry vyhledávání") {
+                ForEach($fvm.filters, id:\.label) { $filter in
+                    HStack{
+                        Text(filter.label)
+                        Spacer()
+                        Toggle("", isOn: $filter.active)
+                            .onChange(of: filter.active, perform: { _ in
+                                //fvm.objectWillChange.send()
+                            })
+                            .labelsHidden()
+                    }
+                    .font(.caption)
                 }
-                .font(.caption)
             }
         }
         .tint(.blue)

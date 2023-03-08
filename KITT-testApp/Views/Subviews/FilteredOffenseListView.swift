@@ -15,39 +15,47 @@ struct FilteredOffenseListView: View{
     private var favorites: Bool = false
     
     var body: some View{
-        if !searchKey.isEmpty || favorites{
-            if foundResults.count > 0{
-                ForEach(foundResults, id:\.self) { offense in
-                    NavigationLink {
-                        ContentSubView(contentItem: offense)
-                    } label: {
-                        OffenseRowListView(offense: offense)
-                    }
-                    .isDetailLink(false)
-                }
-            }else{
-                Text("Nothing was found")
-            }
-        }else{
-            ForEach(groups, id: \.self) { group in
-                Section(header:
-                    HStack{
-                        Text(group.wrappedTitle)
-                    }
-                    .font(.headline)
-                ) {
-                    ForEach(group.offenseArray, id:\.self) { offense in
-                        NavigationLink {
-                            ContentSubView(contentItem: offense)
-                        } label: {
-                            OffenseRowListView(offense: offense)
+        List{
+            Section{
+                if !searchKey.isEmpty || favorites{
+                    if foundResults.count > 0{
+                        ForEach(foundResults, id:\.self) { offense in
+                            NavigationLink {
+                                ContentSubView(contentItem: offense)
+                            } label: {
+                                OffenseRowListView(offense: offense)
+                            }
+                            .isDetailLink(false)
                         }
-                        .isDetailLink(false)
+                    }else{
+                        Text("Nic nebylo nalezeno")
+                    }
+                }else{
+                    ForEach(groups, id: \.self) { group in
+                        DisclosureGroup {
+                            ForEach(group.offenseArray, id:\.self) { offense in
+                                NavigationLink {
+                                    ContentSubView(contentItem: offense)
+                                } label: {
+                                    OffenseRowListView(offense: offense)
+                                }
+                                .isDetailLink(false)
+                            }
+                        } label: {
+                            HStack{
+                                Text(group.wrappedTitle)
+                            }
+                            .font(.headline)
+                        }
                     }
                 }
+            } header: {
+                Text("Přestupky")
+                    .fontWeight(.light)
             }
+            .headerProminence(.increased)
         }
-        
+        .listStyle(.sidebar)
     }
     
     init(key: String = "", filters: [FilterModel], favoritesOnly: Bool = false){
