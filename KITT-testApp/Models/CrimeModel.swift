@@ -15,13 +15,12 @@ CRIME = trestny cin
  
 ]
  */
-struct CrimeModel {
-    var id: String = "" //lawNumber + lawYear + paragraph
+struct CrimeModel: Codable, Hashable {
+    var id: String? = "" //=paragraph basically (the most unique id)
+    var groups: [String] = ["Nezařazeno"]
     var title: String = ""
     var description: String? = ""
-    var lawNumber: Int? = 273
-    var lawYear: Int? = 2008
-    var paragraph: String? = "114"
+    var paragraph: String? = "273-2008-114-1"
     var crimeExample: String? = ""
     var note: String? = ""
     var isFavorited: Bool = false

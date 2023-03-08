@@ -1,0 +1,14 @@
+//
+//  Staging.xcconfig
+//  KITT-testApp
+//
+//  Created by Radek Jeník on 3/8/23.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+JSON_FILE_LINK = http:/$()/rjweb.cz/data/testingkitt/
+OFFENSE_JSON_FILE = offenses.json
+CRIME_JSON_FILE = crimes.json
+LAWEXTRACT_JSON_FILE = lawextracts.json
