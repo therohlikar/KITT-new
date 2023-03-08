@@ -20,9 +20,8 @@ class FilterViewModel: ObservableObject{
                 FilterModel(label: "Název", key: "title", active: true),
                 FilterModel(label: "Zákonné znění", key: "content", active: true),
                 FilterModel(label: "§ Porušení", key: "paragraph", active: true),
-                FilterModel(label: "§ Přestupku (BESIP)", key: "violationParagraph", active: true),
-                FilterModel(label: "Možnosti řešení", key: "resolveOptions", active: true),
-                FilterModel(label: "Příklad příkazového bloku", key: "fineExample", active: true),
+                FilterModel(label: "§ Přestupku (BESIP)", key: "violationParagraph", active: true, specific: "offense"),
+                FilterModel(label: "Možnosti řešení", key: "resolveOptions", active: true, specific: "offense"),
                 FilterModel(label: "Poznámka", key: "note", active: false)
             ]
             

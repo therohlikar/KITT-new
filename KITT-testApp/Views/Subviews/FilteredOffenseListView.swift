@@ -32,20 +32,22 @@ struct FilteredOffenseListView: View{
                     }
                 }else{
                     ForEach(groups, id: \.self) { group in
-                        DisclosureGroup {
-                            ForEach(group.offenseArray, id:\.self) { offense in
-                                NavigationLink {
-                                    ContentSubView(contentItem: offense)
-                                } label: {
-                                    OffenseRowListView(offense: offense)
+                        if !group.offenseArray.isEmpty{
+                            DisclosureGroup {
+                                ForEach(group.offenseArray, id:\.self) { offense in
+                                    NavigationLink {
+                                        ContentSubView(contentItem: offense)
+                                    } label: {
+                                        OffenseRowListView(offense: offense)
+                                    }
+                                    .isDetailLink(false)
                                 }
-                                .isDetailLink(false)
+                            } label: {
+                                HStack{
+                                    Text(group.wrappedTitle)
+                                }
+                                .font(.headline)
                             }
-                        } label: {
-                            HStack{
-                                Text(group.wrappedTitle)
-                            }
-                            .font(.headline)
                         }
                     }
                 }
@@ -63,7 +65,7 @@ struct FilteredOffenseListView: View{
         
         if !key.isEmpty {
             for filter in filters {
-                if filter.active{
+                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "offense"){
                     filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
                 }
             }
@@ -122,6 +124,97 @@ struct OffenseRowListView: View{
                     }
                     .padding(1)
                 }
+            }
+            .font(.caption)
+            .foregroundColor(.secondary)
+        }
+    }
+}
+
+
+struct FilteredCrimeListView: View{
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: nil) var groups: FetchedResults<Group>
+    @FetchRequest(sortDescriptors: []) var foundResults: FetchedResults<Crime>
+    
+    private var searchKey:String = ""
+    private var favorites: Bool = false
+    
+    var body: some View{
+        List{
+            Section{
+                if !searchKey.isEmpty || favorites{
+                    if foundResults.count > 0{
+                        ForEach(foundResults, id:\.self) { crime in
+                            NavigationLink {
+                                ContentSubView(contentItem: crime)
+                            } label: {
+                                CrimeRowListView(crime: crime)
+                            }
+                            .isDetailLink(false)
+                        }
+                    }else{
+                        Text("Nic nebylo nalezeno")
+                    }
+                }else{
+                    ForEach(groups, id: \.self) { group in
+                        if !group.crimeArray.isEmpty{
+                            DisclosureGroup {
+                                ForEach(group.crimeArray, id:\.self) { crime in
+                                    NavigationLink {
+                                        ContentSubView(contentItem: crime)
+                                    } label: {
+                                        CrimeRowListView(crime: crime)
+                                    }
+                                    .isDetailLink(false)
+                                }
+                            } label: {
+                                HStack{
+                                    Text(group.wrappedTitle)
+                                }
+                                .font(.headline)
+                            }
+                        }
+                    }
+                }
+            } header: {
+                Text("Trestné činy")
+                    .fontWeight(.light)
+            }
+            .headerProminence(.increased)
+        }
+        .listStyle(.sidebar)
+    }
+    
+    init(key: String = "", filters: [FilterModel], favoritesOnly: Bool = false){
+        var filterPredicates: [NSPredicate] = []
+        
+        if !key.isEmpty {
+            for filter in filters {
+                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "crime"){
+                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
+                }
+            }
+        }else {
+            filterPredicates.append(NSPredicate(value: true))
+        }
+        
+        _foundResults = FetchRequest<Crime>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(type: .and, subpredicates: [NSCompoundPredicate(orPredicateWithSubpredicates: filterPredicates), NSPredicate(format: favoritesOnly ? "isFavorited == true" : "isFavorited == true OR isFavorited == false")]))
+ 
+        searchKey = key
+        favorites = favoritesOnly
+    }
+}
+
+struct CrimeRowListView: View{
+    @EnvironmentObject var sc: SettingsController
+    @ObservedObject var crime: Crime
+    
+    var body: some View{
+        VStack(alignment: .leading){
+            Text(crime.wrappedTitle)
+                .fontWeight(.light)
+            VStack(alignment: .leading){
+                Text(crime.paragraphModel.toString())
             }
             .font(.caption)
             .foregroundColor(.secondary)

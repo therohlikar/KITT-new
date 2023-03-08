@@ -27,7 +27,7 @@ struct LibraryView: View {
                     .tag(tabType.offense)
                 
                 // CRIME
-                FilteredOffenseListView(key: searchKey, filters: fvm.filters)
+                FilteredCrimeListView(key: searchKey, filters: fvm.filters)
                     .tag(tabType.crime)
             }
             .tabViewStyle(.page)

@@ -13,8 +13,8 @@ struct ContentSubView: View {
     var body: some View {
         if contentItem is Offense {
             OffenseContent(offense: contentItem as! Offense)
-        }else if contentItem is CrimeModel{
-            CrimeContent(crime: contentItem as? CrimeModel)
+        }else if contentItem is Crime{
+            CrimeContent(crime: contentItem as! Crime)
         }else if contentItem is LawExtractModel{
             LawExtractContent(lawExtract: contentItem as? LawExtractModel)
         }
@@ -122,7 +122,7 @@ struct OffenseContent: View {
             }
             
             ToolbarItem(placement: .bottomBar) {
-                TextField("Poznamka", text: $customNote)
+                TextField("Poznámka", text: $customNote)
                     .autocorrectionDisabled()
                     .onChange(of: customNote) { _ in
                         offense.note = customNote
@@ -140,10 +140,74 @@ struct OffenseContent: View {
 
 //CRIME
 struct CrimeContent: View{
-    @State var crime: CrimeModel? = nil
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var sc: SettingsController
+    @ObservedObject var crime: Crime
+    
+    @State private var customNote = ""
+    @State private var noteChanged = false
     
     var body: some View{
-        Text("CRIME")
+        ScrollView{
+            VStack{
+                Text(crime.wrappedTitle)
+                    .font(.headline)
+                Link("\(crime.paragraphModel.toString())",
+                     destination: crime.paragraphModel.generateLawLink())
+                
+                Text(crime.wrappedContent)
+                    .font(.caption)
+                    .padding(.top, 10)
+            }.padding(.vertical, 10)
+            
+            
+            VStack{
+                VStack{
+                    Text("Příklad skutku")
+                        .font(.headline)
+                    
+                    Text(crime.wrappedCrimeExample)
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                }
+                .padding(.vertical, 5)
+            }
+            .padding(.vertical, 10)
+        }
+        .onAppear{
+            customNote = crime.wrappedNote
+            noteChanged = false
+        }
+        .onDisappear{
+            if noteChanged && sc.settings.saveNotes {
+                try? moc.save()
+            }
+        }
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    crime.isFavorited.toggle()
+                    try? moc.save()
+                } label: {
+                    Image(systemName: crime.isFavorited ? "heart.fill" : "heart")
+                        .foregroundColor(.red)
+                }
+            }
+            
+            ToolbarItem(placement: .bottomBar) {
+                TextField("Poznámka", text: $customNote)
+                    .autocorrectionDisabled()
+                    .onChange(of: customNote) { _ in
+                        crime.note = customNote
+                        noteChanged = true
+                    }
+                    .onSubmit {
+                        crime.note = customNote
+                        try? moc.save()
+                    }
+            }
+        }
+        .padding()
     }
 }
 

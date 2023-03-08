@@ -19,7 +19,7 @@ struct CrimeModel: Codable, Hashable {
     var id: String? = "" //=paragraph basically (the most unique id)
     var groups: [String] = ["Nezařazeno"]
     var title: String = ""
-    var description: String? = ""
+    var content: String? = ""
     var paragraph: String? = "273-2008-114-1"
     var crimeExample: String? = ""
     var note: String? = ""

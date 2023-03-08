@@ -23,7 +23,7 @@ struct FavoritesView: View {
                     .tag(tabType.offense)
                 
                 // CRIME
-                FilteredOffenseListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
+                FilteredCrimeListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
                     .tag(tabType.crime)
             }
             .tabViewStyle(.page)

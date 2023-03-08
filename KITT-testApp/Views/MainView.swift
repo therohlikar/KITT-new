@@ -14,6 +14,7 @@ struct MainView: View {
     @EnvironmentObject var fvm: FilterViewModel
     @FetchRequest(sortDescriptors: []) var offenses: FetchedResults<Offense>
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
+    @FetchRequest(sortDescriptors: []) var crimes: FetchedResults<Crime>
     
     @State private var searchKey: String = ""
     @State private var filterListViewOpened: Bool = false
@@ -98,10 +99,38 @@ struct MainView: View {
                     newOffense.isFavorited = isFavorited
                 }
             }
+            if let crimeArray = await jsonController.downloadJsonData(.crime) as? Array<CrimeModel> {
+                for item in crimeArray {
+                    var note: String = ""
+                    var isFavorited: Bool = false
+                    
+                    if let existingCrime = crimes.first(where: {$0.id == item.paragraph}){
+                        note = existingCrime.wrappedNote
+                        isFavorited = existingCrime.isFavorited
+                    }
+                    
+                    let newCrime = Crime(context: moc)
+                    newCrime.id = item.paragraph
+                    // id is same as paragraph, which is unique all the time
+                    //loop through groups, if any, and create or invite them in
+                    for group in item.groups{
+                        let newGroup:Group = Group(context: moc)
+                        newGroup.title = group
+                        newCrime.addToGroup(newGroup)
+                    }
+                    newCrime.title = item.title
+                    newCrime.content = item.content
+                    newCrime.paragraph = item.paragraph
+                    newCrime.crimeExample = item.crimeExample
+                    
+                    newCrime.note = note
+                    newCrime.isFavorited = isFavorited
+                }
+            }
             
             //clear groups
             for group in groups {
-                if group.offenseArray.isEmpty {
+                if group.offenseArray.isEmpty && group.crimeArray.isEmpty {
                     moc.delete(group)
                 }
             }

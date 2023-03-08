@@ -12,8 +12,6 @@
 		9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490C29B217AC00F64E55 /* ParagraphModel.swift */; };
 		9660492229B2463400F64E55 /* Offense+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */; };
 		9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */; };
-		9660492429B2463400F64E55 /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492029B2463400F64E55 /* Group+CoreDataClass.swift */; };
-		9660492529B2463400F64E55 /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492129B2463400F64E55 /* Group+CoreDataProperties.swift */; };
 		9660492729B2476E00F64E55 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492629B2476E00F64E55 /* MainView.swift */; };
 		9660492929B247B600F64E55 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492829B247B600F64E55 /* FavoritesView.swift */; };
 		9660492B29B463B400F64E55 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492A29B463B400F64E55 /* FilterModel.swift */; };
@@ -24,6 +22,10 @@
 		96965E6F29B63AA30094520F /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E6E29B63AA30094520F /* SettingsModel.swift */; };
 		96965E7129B63B230094520F /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7029B63B230094520F /* SettingsController.swift */; };
 		96965E7329B7EC5F0094520F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7229B7EC5F0094520F /* SettingsView.swift */; };
+		96965E7E29B8849C0094520F /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7A29B8849C0094520F /* Group+CoreDataClass.swift */; };
+		96965E7F29B8849C0094520F /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7B29B8849C0094520F /* Group+CoreDataProperties.swift */; };
+		96965E8029B8849C0094520F /* Crime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7C29B8849C0094520F /* Crime+CoreDataClass.swift */; };
+		96965E8129B8849C0094520F /* Crime+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E7D29B8849C0094520F /* Crime+CoreDataProperties.swift */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
@@ -41,8 +43,6 @@
 		9660490C29B217AC00F64E55 /* ParagraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphModel.swift; sourceTree = "<group>"; };
 		9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		9660492029B2463400F64E55 /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9660492129B2463400F64E55 /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9660492629B2476E00F64E55 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9660492829B247B600F64E55 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		9660492A29B463B400F64E55 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
@@ -56,6 +56,10 @@
 		96965E7729B87D880094520F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		96965E7829B87D950094520F /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		96965E7929B87D9D0094520F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		96965E7A29B8849C0094520F /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
+		96965E7B29B8849C0094520F /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		96965E7C29B8849C0094520F /* Crime+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crime+CoreDataClass.swift"; sourceTree = "<group>"; };
+		96965E7D29B8849C0094520F /* Crime+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crime+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
 		96D30B7929B1E1900018F750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,10 +87,12 @@
 		9660490B29B1E92600F64E55 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				96965E7A29B8849C0094520F /* Group+CoreDataClass.swift */,
+				96965E7B29B8849C0094520F /* Group+CoreDataProperties.swift */,
+				96965E7C29B8849C0094520F /* Crime+CoreDataClass.swift */,
+				96965E7D29B8849C0094520F /* Crime+CoreDataProperties.swift */,
 				9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */,
 				9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */,
-				9660492029B2463400F64E55 /* Group+CoreDataClass.swift */,
-				9660492129B2463400F64E55 /* Group+CoreDataProperties.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -260,11 +266,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96965E8029B8849C0094520F /* Crime+CoreDataClass.swift in Sources */,
+				96965E7F29B8849C0094520F /* Group+CoreDataProperties.swift in Sources */,
 				9660493129B537A200F64E55 /* FilteredOffenseListView.swift in Sources */,
+				96965E8129B8849C0094520F /* Crime+CoreDataProperties.swift in Sources */,
 				96965E7329B7EC5F0094520F /* SettingsView.swift in Sources */,
 				9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */,
 				96D30B8D29B1E2A30018F750 /* CrimeModel.swift in Sources */,
 				96D30B8529B1E1BC0018F750 /* LibraryView.swift in Sources */,
+				96965E7E29B8849C0094520F /* Group+CoreDataClass.swift in Sources */,
 				96D30B8F29B1E2BC0018F750 /* LawExtractModel.swift in Sources */,
 				96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */,
 				96D30B9329B1E34C0018F750 /* ContentSubView.swift in Sources */,
@@ -280,9 +290,7 @@
 				96965E7129B63B230094520F /* SettingsController.swift in Sources */,
 				96D30B8929B1E2230018F750 /* JsonDataController.swift in Sources */,
 				9660492929B247B600F64E55 /* FavoritesView.swift in Sources */,
-				9660492429B2463400F64E55 /* Group+CoreDataClass.swift in Sources */,
 				9660492729B2476E00F64E55 /* MainView.swift in Sources */,
-				9660492529B2463400F64E55 /* Group+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
