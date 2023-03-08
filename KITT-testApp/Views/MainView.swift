@@ -92,6 +92,8 @@ struct MainView: View {
                             if let existingOffense = offenses.first(where: {$0.id == item.paragraph}){
                                 note = existingOffense.wrappedNote
                                 isFavorited = existingOffense.isFavorited
+                                
+                                existingOffense.group = nil
                             }
                             
                             let newOffense = Offense(context: moc)
@@ -102,6 +104,8 @@ struct MainView: View {
                                 let newGroup:Group = Group(context: moc)
                                 newGroup.title = group
                                 newOffense.addToGroup(newGroup)
+                                
+                                print(group)
                             }
                             newOffense.title = item.title
                             newOffense.content = item.content
@@ -124,6 +128,8 @@ struct MainView: View {
                             if let existingCrime = crimes.first(where: {$0.id == item.paragraph}){
                                 note = existingCrime.wrappedNote
                                 isFavorited = existingCrime.isFavorited
+                                
+                                existingCrime.group = nil
                             }
                             
                             let newCrime = Crime(context: moc)
@@ -152,6 +158,8 @@ struct MainView: View {
                             if let existingLe = lawextracts.first(where: {$0.id == item.paragraph}){
                                 note = existingLe.wrappedNote
                                 isFavorited = existingLe.isFavorited
+                                
+                                existingLe.group = nil
                             }
 
                             let newLe = LawExtract(context: moc)

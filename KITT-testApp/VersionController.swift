@@ -37,6 +37,9 @@ class VersionController {
     }
     
     func loadVersionUpdates() async -> [VersionModel]? {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        
         guard let baseUrl = Bundle.main.object(forInfoDictionaryKey: "JSON_FILE_LINK") else {
             fatalError("Configuration file missing baseUrl variable")
         }
@@ -51,7 +54,7 @@ class VersionController {
         }
 
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession(configuration: config).data(from: url)
             if let decodedResponse = try? JSONDecoder().decode([VersionModel].self, from: data){
                 return decodedResponse
             }else{

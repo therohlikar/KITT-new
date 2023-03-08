@@ -13,17 +13,14 @@ class JsonDataController{
         case crime
         case lawextract
     }
-    
-    init(){
-        
-    }
 
     func downloadJsonData(_ type: DataType) async -> Array<Any>?{
-        //http://rjweb.cz/data/testingkitt/offenses.json
-        
         guard let baseUrl = Bundle.main.object(forInfoDictionaryKey: "JSON_FILE_LINK") else {
             fatalError("Configuration file missing baseUrl variable")
         }
+        
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
         switch(type){
             case .offense:
@@ -37,7 +34,7 @@ class JsonDataController{
                 }
 
                 do {
-                    let (data, _) = try await URLSession.shared.data(from: url)
+                    let (data, _) = try await URLSession(configuration: config).data(from: url)
                     if let decodedResponse = try? JSONDecoder().decode([OffenseModel].self, from: data){
                         return decodedResponse
                     }else{
@@ -57,7 +54,7 @@ class JsonDataController{
                 }
 
                 do {
-                    let (data, _) = try await URLSession.shared.data(from: url)
+                    let (data, _) = try await URLSession(configuration: config).data(from: url)
                     if let decodedResponse = try? JSONDecoder().decode([CrimeModel].self, from: data){
                         return decodedResponse
                     }else{
@@ -77,7 +74,7 @@ class JsonDataController{
                 }
 
                 do {
-                    let (data, _) = try await URLSession.shared.data(from: url)
+                    let (data, _) = try await URLSession(configuration: config).data(from: url)
                     if let decodedResponse = try? JSONDecoder().decode([LawExtractModel].self, from: data){
                         return decodedResponse
                     }else{
