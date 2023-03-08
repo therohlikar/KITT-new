@@ -14,6 +14,7 @@ struct MainView: View {
     @FetchRequest(sortDescriptors: []) var offenses: FetchedResults<Offense>
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var crimes: FetchedResults<Crime>
+    @FetchRequest(sortDescriptors: []) var lawextracts: FetchedResults<LawExtract>
     
     @State private var searchKey: String = ""
     @State private var filterListViewOpened: Bool = false
@@ -135,7 +136,7 @@ struct MainView: View {
                         var note: String = ""
                         var isFavorited: Bool = false
 
-                        if let existingLe = crimes.first(where: {$0.id == item.paragraph}){
+                        if let existingLe = lawextracts.first(where: {$0.id == item.paragraph}){
                             note = existingLe.wrappedNote
                             isFavorited = existingLe.isFavorited
                         }
@@ -160,7 +161,7 @@ struct MainView: View {
                 
                 //clear groups
                 for group in groups {
-                    if group.offenseArray.isEmpty && group.crimeArray.isEmpty {
+                    if group.offenseArray.isEmpty && group.crimeArray.isEmpty && group.leArray.isEmpty {
                         moc.delete(group)
                     }
                 }
