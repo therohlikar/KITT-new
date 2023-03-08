@@ -9,12 +9,17 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var sc: SettingsController
+    
     private var currentVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
+    
+    @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
+    @AppStorage("hiddenColor") private var hiddenColor: Bool = false
+    
     let developer = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER") as? String ?? "RJ"
     let developerLink = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER_LINK") as? String ?? "rjwannabefit"
     let androidLink = Bundle.main.object(forInfoDictionaryKey: "KITT_ANDROID_LINK") as? String ?? "KITT"
     
-    @AppStorage("hiddenColor") private var hiddenColor: Bool = false
+    @State private var showingNews: Bool = false
     
     var body: some View {
         VStack{
@@ -42,6 +47,9 @@ struct SettingsView: View {
                 }
                 
                 Text("Verze: \(currentVersion)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Text("Zákony: \(dataVersion >= VersionController().newestVersion ? "Aktualizováno" : "Verze dat není správná")")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Link(destination: URL(string: androidLink)!) {
@@ -97,10 +105,16 @@ struct SettingsView: View {
                             .labelsHidden()
                     }
                 }
+                Button("NOVINKY") {
+                    showingNews.toggle()
+                }
             }
         }
         .font(.caption)
         .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
         .tint(.blue)
+        .sheet(isPresented: $showingNews) {
+            NewsView()
+        }
     }
 }

@@ -59,4 +59,13 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Version" representedClassName=".Version" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="version" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="version"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
 </model>

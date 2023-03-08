@@ -29,6 +29,11 @@
 		96965E9329B8BC830094520F /* LawExtract+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E8F29B8BC830094520F /* LawExtract+CoreDataProperties.swift */; };
 		96965E9429B8BC830094520F /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9029B8BC830094520F /* Group+CoreDataClass.swift */; };
 		96965E9529B8BC830094520F /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9129B8BC830094520F /* Group+CoreDataProperties.swift */; };
+		96965E9729B8C51C0094520F /* VersionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9629B8C51C0094520F /* VersionController.swift */; };
+		96965E9929B8CAA90094520F /* VersionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9829B8CAA90094520F /* VersionModel.swift */; };
+		96965E9C29B8CB830094520F /* Version+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9A29B8CB830094520F /* Version+CoreDataClass.swift */; };
+		96965E9D29B8CB830094520F /* Version+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9B29B8CB830094520F /* Version+CoreDataProperties.swift */; };
+		96965E9F29B8CD090094520F /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9E29B8CD090094520F /* NewsView.swift */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
@@ -66,6 +71,11 @@
 		96965E8F29B8BC830094520F /* LawExtract+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LawExtract+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		96965E9029B8BC830094520F /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
 		96965E9129B8BC830094520F /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		96965E9629B8C51C0094520F /* VersionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionController.swift; sourceTree = "<group>"; };
+		96965E9829B8CAA90094520F /* VersionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionModel.swift; sourceTree = "<group>"; };
+		96965E9A29B8CB830094520F /* Version+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Version+CoreDataClass.swift"; sourceTree = "<group>"; };
+		96965E9B29B8CB830094520F /* Version+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Version+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		96965E9E29B8CD090094520F /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
 		96D30B7929B1E1900018F750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,6 +103,8 @@
 		9660490B29B1E92600F64E55 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				96965E9A29B8CB830094520F /* Version+CoreDataClass.swift */,
+				96965E9B29B8CB830094520F /* Version+CoreDataProperties.swift */,
 				96965E8E29B8BC830094520F /* LawExtract+CoreDataClass.swift */,
 				96965E8F29B8BC830094520F /* LawExtract+CoreDataProperties.swift */,
 				96965E9029B8BC830094520F /* Group+CoreDataClass.swift */,
@@ -141,13 +153,14 @@
 				96D30B9029B1E2F70018F750 /* Info.plist */,
 				96D30B8829B1E2230018F750 /* JsonDataController.swift */,
 				9660490229B1E75A00F64E55 /* DataController.swift */,
+				96965E8429B8A4860094520F /* SettingsController.swift */,
+				96965E9629B8C51C0094520F /* VersionController.swift */,
 				96D30B8729B1E2080018F750 /* ViewModels */,
 				96D30B8629B1E1FC0018F750 /* Models */,
 				96D30B8329B1E1AF0018F750 /* Views */,
 				96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */,
 				96D30B7929B1E1900018F750 /* Assets.xcassets */,
 				96D30B7B29B1E1900018F750 /* Preview Content */,
-				96965E8429B8A4860094520F /* SettingsController.swift */,
 			);
 			path = "KITT-testApp";
 			sourceTree = "<group>";
@@ -181,6 +194,7 @@
 				9660490C29B217AC00F64E55 /* ParagraphModel.swift */,
 				9660492A29B463B400F64E55 /* FilterModel.swift */,
 				96965E6E29B63AA30094520F /* SettingsModel.swift */,
+				96965E9829B8CAA90094520F /* VersionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,6 +214,7 @@
 				9660492E29B5308000F64E55 /* FiltersList.swift */,
 				9660493029B537A200F64E55 /* FilteredListView.swift */,
 				96965E8229B8A3660094520F /* MailView.swift */,
+				96965E9E29B8CD090094520F /* NewsView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -283,19 +298,24 @@
 				9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */,
 				96D30B8D29B1E2A30018F750 /* CrimeModel.swift in Sources */,
 				96D30B8529B1E1BC0018F750 /* LibraryView.swift in Sources */,
+				96965E9929B8CAA90094520F /* VersionModel.swift in Sources */,
 				96965E9229B8BC830094520F /* LawExtract+CoreDataClass.swift in Sources */,
 				96D30B8F29B1E2BC0018F750 /* LawExtractModel.swift in Sources */,
 				96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */,
+				96965E9F29B8CD090094520F /* NewsView.swift in Sources */,
 				96965E8329B8A3660094520F /* MailView.swift in Sources */,
 				96D30B9329B1E34C0018F750 /* ContentSubView.swift in Sources */,
 				96965E9529B8BC830094520F /* Group+CoreDataProperties.swift in Sources */,
 				9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */,
+				96965E9C29B8CB830094520F /* Version+CoreDataClass.swift in Sources */,
 				96965E8529B8A4860094520F /* SettingsController.swift in Sources */,
 				9660492B29B463B400F64E55 /* FilterModel.swift in Sources */,
 				9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */,
 				9660490329B1E75A00F64E55 /* DataController.swift in Sources */,
 				9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */,
+				96965E9729B8C51C0094520F /* VersionController.swift in Sources */,
 				96965E9329B8BC830094520F /* LawExtract+CoreDataProperties.swift in Sources */,
+				96965E9D29B8CB830094520F /* Version+CoreDataProperties.swift in Sources */,
 				96965E6F29B63AA30094520F /* SettingsModel.swift in Sources */,
 				9660492F29B5308000F64E55 /* FiltersList.swift in Sources */,
 				9660492229B2463400F64E55 /* Offense+CoreDataClass.swift in Sources */,

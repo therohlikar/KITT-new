@@ -12,6 +12,9 @@ JSON_FILE_LINK = http:/$()/rjweb.cz/data/testingkitt/
 OFFENSE_JSON_FILE = offenses.json
 CRIME_JSON_FILE = crimes.json
 LAWEXTRACT_JSON_FILE = lawextracts.json
+VERSION_JSON_FILE = news.json
+
+VERSION_FILE = version.txt
 
 DEVELOPER = @rjwannabefit
 DEVELOPER_LINK = https:/$()/www.instagram.com/rjwannabefit/
