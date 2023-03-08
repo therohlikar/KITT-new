@@ -20,6 +20,8 @@ struct MainView: View {
     @State private var filterListViewOpened: Bool = false
     @State private var settingsViewOpened: Bool = false
     
+    @State private var preferredPanel: String = UserDefaults.standard.string(forKey: "preferredPanel") ?? "library"
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -43,7 +45,7 @@ struct MainView: View {
                         .foregroundColor(.secondary)
                 }
                 
-                TabView(selection: $sc.settings.preferredPanel){
+                TabView(selection: $preferredPanel){
                     LibraryView(searchKey: $searchKey)
                         .tabItem {
                             Label("Knihovna", systemImage: "books.vertical.fill")

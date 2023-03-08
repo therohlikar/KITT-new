@@ -44,35 +44,6 @@ struct SettingsView: View {
                     .font(.caption)
                 }
             }
-            
-            
-//            Section("O APLIKACI"){
-//                HStack{
-//                    Text("Autor")
-//                        .font(.headline)
-//                    Spacer()
-//                    Button("Radek Jeník, 2023 (@rjwannabefit)") {
-//                        // send mail
-//                    }.font(.caption)
-//                }
-//
-//                HStack{
-//                    Text("Spolupráce")
-//                        .font(.headline)
-//                    Spacer()
-//                    Text("Android KITT app")
-//                        .font(.caption)
-//                }
-//
-//                HStack{
-//                    Text("Verze")
-//                        .font(.headline)
-//                    Spacer()
-//                    Text("\(version ?? "BETA")")
-//                        .font(.caption)
-//                }
-//            }
-            
             List{
                 Section("ÚPRAVA ROZHRANÍ"){
                     HStack{
