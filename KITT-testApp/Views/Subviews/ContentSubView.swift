@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct ContentSubView: View {
     @State var contentItem: Any? = nil
@@ -115,12 +116,20 @@ struct OffenseContent: View {
         }
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    sendingMail.toggle()
-                } label: {
-                    Image(systemName: "exclamationmark.bubble.fill")
+                HStack{
+                    Text("Mail aplikace nelze spustit")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .opacity(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? 1.0 : 0.0)
+                    
+                    Button {
+                        sendingMail.toggle()
+                    } label: {
+                        Image(systemName: "exclamationmark.bubble.fill")
+                    }
+                    .disabled(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? true : false)
                 }
-                .disabled(mailTo.isEmpty ? true : false)
+                
             }
             
             
@@ -146,6 +155,7 @@ struct OffenseContent: View {
                         try? moc.save()
                     }
             }
+        
         }
         .sheet(isPresented: $sendingMail) {
             let content:String = """
@@ -214,12 +224,20 @@ struct CrimeContent: View{
         }
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    sendingMail.toggle()
-                } label: {
-                    Image(systemName: "exclamationmark.bubble.fill")
+                HStack{
+                    Text("Mail aplikace nelze spustit")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .opacity(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? 1.0 : 0.0)
+                    
+                    Button {
+                        sendingMail.toggle()
+                    } label: {
+                        Image(systemName: "exclamationmark.bubble.fill")
+                    }
+                    .disabled(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? true : false)
                 }
-                .disabled(mailTo.isEmpty ? true : false)
+                
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {

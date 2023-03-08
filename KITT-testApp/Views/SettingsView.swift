@@ -14,15 +14,24 @@ struct SettingsView: View {
     let developerLink = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER_LINK") as? String ?? "rjwannabefit"
     let androidLink = Bundle.main.object(forInfoDictionaryKey: "KITT_ANDROID_LINK") as? String ?? "KITT"
     
+    @AppStorage("hiddenColor") private var hiddenColor: Bool = false
+    
     var body: some View {
         VStack{
             VStack{
                 Image("MainLogoTransp")
                     .resizable()
                     .frame(width: 150, height: 150)
-                    .background(sc.settings.darkMode ? nil : Color("BasicColor"))
+                    .background(hiddenColor ? Color.pink : (sc.settings.darkMode ? Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0) : Color("BasicColor")))
                     .cornerRadius(180)
                     .padding()
+                    .onTapGesture(count: 10) {
+                        hiddenColor.toggle()
+                    }
+                    .onLongPressGesture(minimumDuration: 3.0, perform: {
+                        hiddenColor.toggle()
+                    })
+                    .animation(.easeIn, value: hiddenColor)
                 
                 Link(destination: URL(string: developerLink)!) {
                     HStack{
@@ -39,6 +48,7 @@ struct SettingsView: View {
                     HStack{
                         Text("Android verze ke stažení")
                         Image(systemName: "link")
+                            .foregroundColor(.blue)
                     }
                     .foregroundColor(.secondary)
                     .font(.caption)
