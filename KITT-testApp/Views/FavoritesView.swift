@@ -23,6 +23,9 @@ struct FavoritesView: View {
 
                 FilteredCrimeListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
                     .tag(tabType.crime)
+                
+                FilteredLawExtractListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
+                    .tag(tabType.lawextract)
             }
             .tabViewStyle(.page)
             

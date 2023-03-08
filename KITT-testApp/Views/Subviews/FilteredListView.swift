@@ -221,3 +221,92 @@ struct CrimeRowListView: View{
         }
     }
 }
+
+struct FilteredLawExtractListView: View{
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: nil) var groups: FetchedResults<Group>
+    @FetchRequest(sortDescriptors: []) var foundResults: FetchedResults<LawExtract>
+    
+    private var searchKey:String = ""
+    private var favorites: Bool = false
+    
+    var body: some View{
+        List{
+            Section{
+                if !searchKey.isEmpty || favorites{
+                    if foundResults.count > 0{
+                        ForEach(foundResults, id:\.self) { le in
+                            NavigationLink {
+                                ContentSubView(contentItem: le)
+                            } label: {
+                                LawExtractRowListView(le: le)
+                            }
+                            .isDetailLink(false)
+                        }
+                    }else{
+                        Text("Nic nebylo nalezeno")
+                    }
+                }else{
+                    ForEach(groups, id: \.self) { group in
+                        if !group.leArray.isEmpty{
+                            DisclosureGroup {
+                                ForEach(group.leArray, id:\.self) { le in
+                                    NavigationLink {
+                                        ContentSubView(contentItem: le)
+                                    } label: {
+                                        LawExtractRowListView(le: le)
+                                    }
+                                    .isDetailLink(false)
+                                }
+                            } label: {
+                                HStack{
+                                    Text(group.wrappedTitle)
+                                }
+                                .font(.headline)
+                            }
+                        }
+                    }
+                }
+            } header: {
+                Text("Výňatky ze zákona")
+                    .fontWeight(.light)
+            }
+            .headerProminence(.increased)
+        }
+        .listStyle(.sidebar)
+    }
+    
+    init(key: String = "", filters: [FilterModel], favoritesOnly: Bool = false){
+        var filterPredicates: [NSPredicate] = []
+        
+        if !key.isEmpty {
+            for filter in filters {
+                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "lawextract"){
+                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
+                }
+            }
+        }else {
+            filterPredicates.append(NSPredicate(value: true))
+        }
+        
+        _foundResults = FetchRequest<LawExtract>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(type: .and, subpredicates: [NSCompoundPredicate(orPredicateWithSubpredicates: filterPredicates), NSPredicate(format: favoritesOnly ? "isFavorited == true" : "isFavorited == true OR isFavorited == false")]))
+ 
+        searchKey = key
+        favorites = favoritesOnly
+    }
+}
+
+struct LawExtractRowListView: View{
+    @ObservedObject var le: LawExtract
+    
+    var body: some View{
+        VStack(alignment: .leading){
+            Text(le.wrappedTitle)
+                .fontWeight(.light)
+            VStack(alignment: .leading){
+                Text(le.paragraphModel.toString())
+            }
+            .font(.caption)
+            .foregroundColor(.secondary)
+        }
+    }
+}

@@ -25,6 +25,9 @@ struct LibraryView: View {
 
                 FilteredCrimeListView(key: searchKey, filters: fvm.filters)
                     .tag(tabType.crime)
+                
+                FilteredLawExtractListView(key: searchKey, filters: fvm.filters)
+                    .tag(tabType.lawextract)
             }
             .tabViewStyle(.page)
         }

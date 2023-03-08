@@ -18,10 +18,25 @@
     <entity name="Group" representedClassName=".Group" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="crime" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Crime" inverseName="group" inverseEntity="Crime"/>
+        <relationship name="lawextract" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LawExtract" inverseName="group" inverseEntity="LawExtract"/>
         <relationship name="offense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Offense" inverseName="group" inverseEntity="Offense"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="title"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="LawExtract" representedClassName=".LawExtract" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="paragraph" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="lawextract" inverseEntity="Group"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>

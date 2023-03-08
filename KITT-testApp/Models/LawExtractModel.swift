@@ -7,18 +7,12 @@
 
 import Foundation
 
-/*
-LAW EXTRACT = vytazek ze zakona
-[
-
-
-
-]
-*/
-struct LawExtractModel {
-   var id: String = "LE" //LE + shortKeyWord (fe: "LEfreedomRestriction)
-   var title: String? = ""
-   var description: String? = ""
-   var note: String? = ""
-   var isFavorited: Bool = false
+struct LawExtractModel: Codable, Hashable {
+    var id: String? = "" //=paragraph basically (the most unique id)
+    var groups: [String] = ["Nezařazeno"]
+    var title: String? = ""
+    var paragraph: String? = ""
+    var content: String? = ""
+    var note: String? = ""
+    var isFavorited: Bool = false
 }

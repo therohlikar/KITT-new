@@ -16,8 +16,8 @@ struct ContentSubView: View {
             OffenseContent(offense: contentItem as! Offense)
         }else if contentItem is Crime{
             CrimeContent(crime: contentItem as! Crime)
-        }else if contentItem is LawExtractModel{
-            LawExtractContent(lawExtract: contentItem as? LawExtractModel)
+        }else if contentItem is LawExtract{
+            LawExtractContent(le: contentItem as! LawExtract)
         }
     }
 }
@@ -280,9 +280,89 @@ struct CrimeContent: View{
 
 //LAW EXTRACT
 struct LawExtractContent: View{
-    @State var lawExtract: LawExtractModel? = nil
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var sc: SettingsController
+    @ObservedObject var le: LawExtract
+    
+    @State private var customNote = ""
+    @State private var noteChanged = false
+    @State private var sendingMail = false
+    
+    @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     var body: some View{
-        Text("LAW EXTRACT")
+        ScrollView{
+            VStack{
+                Text(le.wrappedTitle)
+                    .font(.headline)
+                Link("\(le.paragraphModel.toString())",
+                     destination: le.paragraphModel.generateLawLink())
+                
+                Text(le.wrappedContent)
+                    .font(.caption)
+                    .padding(.top, 10)
+            }.padding(.vertical, 10)
+        }
+        .onAppear{
+            customNote = le.wrappedNote
+            noteChanged = false
+        }
+        .onDisappear{
+            if noteChanged && sc.settings.saveNotes {
+                try? moc.save()
+            }
+        }
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack{
+                    Text("Mail aplikace nelze spustit")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .opacity(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? 1.0 : 0.0)
+                    
+                    Button {
+                        sendingMail.toggle()
+                    } label: {
+                        Image(systemName: "exclamationmark.bubble.fill")
+                    }
+                    .disabled(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? true : false)
+                }
+                
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    le.isFavorited.toggle()
+                    try? moc.save()
+                } label: {
+                    Image(systemName: le.isFavorited ? "heart.fill" : "heart")
+                        .foregroundColor(.red)
+                }
+            }
+            
+            ToolbarItem(placement: .bottomBar) {
+                TextField("Poznámka", text: $customNote)
+                    .autocorrectionDisabled()
+                    .onChange(of: customNote) { _ in
+                        le.note = customNote
+                        noteChanged = true
+                    }
+                    .onSubmit {
+                        le.note = customNote
+                        try? moc.save()
+                    }
+            }
+        }
+        .sheet(isPresented: $sendingMail) {
+            let content:String = """
+                                <b>NÁZEV</b>: \(le.wrappedTitle)<br>
+                                <b>ZÁKONNÉ ZNĚNÍ</b>: \(le.wrappedContent)<br>
+                                <b>PARAGRAF</b>: <a href=\(le.paragraphModel.generateLawLink())>\(le.paragraphModel.toString())</a><br>
+                                <b>SKUPINY</b>: \(le.groupArray.map({$0.wrappedTitle}).joined(separator: ", "))<br>
+                                """
+
+            MailView(content: content, to: mailTo, subject: "Chyba ve znění: " + le.paragraphModel.toString() + " [" + le.wrappedParagraph + "]", isHTML: true)
+        }
+        .padding()
     }
 }

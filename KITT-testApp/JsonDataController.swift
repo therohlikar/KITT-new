@@ -11,6 +11,7 @@ class JsonDataController{
     enum DataType{
         case offense
         case crime
+        case lawextract
     }
     
     init(){
@@ -64,6 +65,26 @@ class JsonDataController{
                     }
                 }catch{
                     fatalError("CRIME - Data failed to be recieved")
+                }
+            case .lawextract:
+                guard let leFile = Bundle.main.object(forInfoDictionaryKey: "LAWEXTRACT_JSON_FILE") else{
+                    fatalError("LAWEXTRACT - Configuration file missing variable")
+                }
+            
+                guard let url = URL(string: "\(baseUrl)\(leFile)") else{
+                    print("Invalid URL")
+                    return []
+                }
+
+                do {
+                    let (data, _) = try await URLSession.shared.data(from: url)
+                    if let decodedResponse = try? JSONDecoder().decode([LawExtractModel].self, from: data){
+                        return decodedResponse
+                    }else{
+                        fatalError("LAWEXTRACT - Json could not be decoded")
+                    }
+                }catch{
+                    fatalError("LAWEXTRACT - Data failed to be recieved")
                 }
         }
         

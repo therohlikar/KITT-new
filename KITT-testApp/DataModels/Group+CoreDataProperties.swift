@@ -19,16 +19,22 @@ extension Group {
     @NSManaged public var title: String?
     @NSManaged public var offense: NSSet?
     @NSManaged public var crime: NSSet?
-
+    @NSManaged public var lawextract: NSSet?
     public var wrappedTitle: String { title ?? "" }
     public var offenseArray: [Offense] {
         let set = offense as? Set<Offense> ?? []
         return set.sorted {
-            $0.wrappedTitle < $1.wrappedTitle
+           $0.wrappedTitle < $1.wrappedTitle
         }
     }
     public var crimeArray: [Crime] {
-        let set = crime as? Set<Crime> ?? []
+       let set = crime as? Set<Crime> ?? []
+       return set.sorted {
+           $0.wrappedTitle < $1.wrappedTitle
+       }
+    }
+    public var leArray: [LawExtract] {
+        let set = lawextract as? Set<LawExtract> ?? []
         return set.sorted {
             $0.wrappedTitle < $1.wrappedTitle
         }
@@ -66,6 +72,23 @@ extension Group {
 
     @objc(removeCrime:)
     @NSManaged public func removeFromCrime(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for lawextract
+extension Group {
+
+    @objc(addLawextractObject:)
+    @NSManaged public func addToLawextract(_ value: LawExtract)
+
+    @objc(removeLawextractObject:)
+    @NSManaged public func removeFromLawextract(_ value: LawExtract)
+
+    @objc(addLawextract:)
+    @NSManaged public func addToLawextract(_ values: NSSet)
+
+    @objc(removeLawextract:)
+    @NSManaged public func removeFromLawextract(_ values: NSSet)
 
 }
 

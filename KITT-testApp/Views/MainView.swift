@@ -130,6 +130,33 @@ struct MainView: View {
                         newCrime.isFavorited = isFavorited
                     }
                 }
+                if let leArray = await jsonController.downloadJsonData(.lawextract) as? Array<LawExtractModel> {
+                    for item in leArray {
+                        var note: String = ""
+                        var isFavorited: Bool = false
+
+                        if let existingLe = crimes.first(where: {$0.id == item.paragraph}){
+                            note = existingLe.wrappedNote
+                            isFavorited = existingLe.isFavorited
+                        }
+
+                        let newLe = LawExtract(context: moc)
+                        newLe.id = item.paragraph
+                        // id is same as paragraph, which is unique all the time
+                        //loop through groups, if any, and create or invite them in
+                        for group in item.groups{
+                            let newGroup:Group = Group(context: moc)
+                            newGroup.title = group
+                            newLe.addToGroup(newGroup)
+                        }
+                        newLe.title = item.title
+                        newLe.content = item.content
+                        newLe.paragraph = item.paragraph
+
+                        newLe.note = note
+                        newLe.isFavorited = isFavorited
+                    }
+                }
                 
                 //clear groups
                 for group in groups {
