@@ -12,6 +12,7 @@ struct MailView: UIViewControllerRepresentable {
     var content: String
     var to: String
     var subject: String
+    var isHTML: Bool
     
     typealias UIViewControllerType = MFMailComposeViewController
     
@@ -20,7 +21,7 @@ struct MailView: UIViewControllerRepresentable {
         view.mailComposeDelegate = context.coordinator
         view.setToRecipients([to])
         view.setSubject(subject)
-        view.setMessageBody(content, isHTML: false)
+        view.setMessageBody(content, isHTML: isHTML)
         
         return view
     }
@@ -45,10 +46,4 @@ struct MailView: UIViewControllerRepresentable {
             controller.dismiss(animated: true)
         }
     }
-}
-
-struct Constants {
-    var toEmail: String = "kit.app.info@gmail.com"
-    
-    static let shared = Constants()
 }

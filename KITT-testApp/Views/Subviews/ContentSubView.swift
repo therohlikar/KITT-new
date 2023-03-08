@@ -31,6 +31,8 @@ struct OffenseContent: View {
     @State private var noteChanged = false
     @State private var sendingMail = false
     
+    @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
+    
     var body: some View{
         ScrollView{
             VStack{
@@ -118,7 +120,9 @@ struct OffenseContent: View {
                 } label: {
                     Image(systemName: "exclamationmark.bubble.fill")
                 }
+                .disabled(mailTo.isEmpty ? true : false)
             }
+            
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -144,9 +148,17 @@ struct OffenseContent: View {
             }
         }
         .sheet(isPresented: $sendingMail) {
-            let content:String = "\(offense.wrappedTitle)\n\(offense.paragraphModel.toString())"
+            let content:String = """
+                                <b>NÁZEV</b>: \(offense.wrappedTitle)<br>
+                                <b>ZÁKONNÉ ZNĚNÍ</b>: \(offense.wrappedContent)<br>
+                                <b>PARAGRAF</b>: <a href=\(offense.paragraphModel.generateLawLink())>\(offense.paragraphModel.toString())</a><br>
+                                <b>PŘESTUPEK</b>: \(offense.wrappedViolationParagraph.isEmpty ? "NENÍ" : offense.violationParagraphModel.toString()) <br>
+                                <b>PŘÍKLAD PŘÍKAZOVÉHO BLOKU</b>: \(offense.wrappedFineExample)<br>
+                                <b>SKUPINY</b>: \(offense.groupArray.map({$0.wrappedTitle}).joined(separator: ", "))<br>
+                                """
+            
 
-            MailView(content: content, to: Constants.shared.toEmail, subject: "Chyba ve znění")
+            MailView(content: content, to: mailTo, subject: "Chyba ve znění: " + offense.paragraphModel.toString() + " [" + offense.wrappedParagraph + "]", isHTML: true)
         }
         .padding()
     }
@@ -160,6 +172,9 @@ struct CrimeContent: View{
     
     @State private var customNote = ""
     @State private var noteChanged = false
+    @State private var sendingMail = false
+    
+    @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     var body: some View{
         ScrollView{
@@ -200,10 +215,11 @@ struct CrimeContent: View{
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    //
+                    sendingMail.toggle()
                 } label: {
                     Image(systemName: "exclamationmark.bubble.fill")
                 }
+                .disabled(mailTo.isEmpty ? true : false)
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -228,6 +244,17 @@ struct CrimeContent: View{
                         try? moc.save()
                     }
             }
+        }
+        .sheet(isPresented: $sendingMail) {
+            let content:String = """
+                                <b>NÁZEV</b>: \(crime.wrappedTitle)<br>
+                                <b>ZÁKONNÉ ZNĚNÍ</b>: \(crime.wrappedContent)<br>
+                                <b>PARAGRAF</b>: <a href=\(crime.paragraphModel.generateLawLink())>\(crime.paragraphModel.toString())</a><br>
+                                <b>PŘÍKLAD SKUTKU</b>: \(crime.wrappedCrimeExample)<br>
+                                <b>SKUPINY</b>: \(crime.groupArray.map({$0.wrappedTitle}).joined(separator: ", "))<br>
+                                """
+
+            MailView(content: content, to: mailTo, subject: "Chyba ve znění: " + crime.paragraphModel.toString() + " [" + crime.wrappedParagraph + "]", isHTML: true)
         }
         .padding()
     }

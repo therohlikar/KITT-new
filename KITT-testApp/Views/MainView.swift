@@ -41,6 +41,7 @@ struct MainView: View {
                            settingsViewOpened.toggle()
                         }
                         .padding(.horizontal, 10)
+                        .padding(.trailing, 2)
                         .foregroundColor(.secondary)
                 }
                 
@@ -60,7 +61,7 @@ struct MainView: View {
                 }
             }
             .navigationBarTitle("")
-            .navigationBarHidden(false)
+            .navigationBarHidden(true)
             .sheet(isPresented: $filterListViewOpened) {
                 FiltersList(fvm: fvm)
             }

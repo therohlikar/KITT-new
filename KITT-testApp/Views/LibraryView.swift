@@ -22,8 +22,7 @@ struct LibraryView: View {
             TabView(selection: $tab){
                 FilteredOffenseListView(key: searchKey, filters: fvm.filters)
                     .tag(tabType.offense)
-                
-                // CRIME
+
                 FilteredCrimeListView(key: searchKey, filters: fvm.filters)
                     .tag(tabType.crime)
             }
