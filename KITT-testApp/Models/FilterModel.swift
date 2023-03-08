@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FilterModel {
+class FilterModel: Codable {
     var label: String = ""
     var key: String = ""
     var active: Bool = false

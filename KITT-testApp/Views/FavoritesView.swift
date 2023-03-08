@@ -22,7 +22,7 @@ struct FavoritesView: View {
                 // OFFENSE
                 List{
                     Section("Offenses"){
-                        FilteredOffenseListView(key: searchKey, filters: fvm.offenseFilters, favoritesOnly: true)
+                        FilteredOffenseListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
                     }
                 }
                 .listStyle(.sidebar)
@@ -31,7 +31,7 @@ struct FavoritesView: View {
                 // CRIME
                 List{
                     Section("Crimes"){
-                        FilteredOffenseListView(key: searchKey, filters: fvm.offenseFilters, favoritesOnly: true)
+                        FilteredOffenseListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
                     }
                 }
                 .listStyle(.sidebar)

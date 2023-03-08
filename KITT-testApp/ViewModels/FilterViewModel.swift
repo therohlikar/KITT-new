@@ -8,17 +8,40 @@
 import Foundation
 
 class FilterViewModel: ObservableObject{
-    @Published var offenseFilters: [FilterModel] = [
-        FilterModel(label: "Title", key: "title", active: true),
-        FilterModel(label: "Description", key: "content", active: true),
-        FilterModel(label: "Paragraph", key: "paragraph", active: true),
-        FilterModel(label: "ViolationParagraph", key: "violationParagraph", active: true),
-        FilterModel(label: "ResolveOptions", key: "resolveOptions", active: true),
-        FilterModel(label: "FineExample", key: "fineExample", active: true),
-        FilterModel(label: "Note", key: "note", active: true)
-    ]
+    @Published var filters: [FilterModel] = []
     
     init(){
+        decodeLocalFilters()
+    }
+
+    func decodeLocalFilters(){
+        if UserDefaults.standard.data(forKey: "filters") == nil {
+            filters = [
+                FilterModel(label: "Název", key: "title", active: true),
+                FilterModel(label: "Zákonné znění", key: "content", active: true),
+                FilterModel(label: "§ Porušení", key: "paragraph", active: true),
+                FilterModel(label: "§ Přestupku (BESIP)", key: "violationParagraph", active: true),
+                FilterModel(label: "Možnosti řešení", key: "resolveOptions", active: true),
+                FilterModel(label: "Příklad příkazového bloku", key: "fineExample", active: true),
+                FilterModel(label: "Poznámka", key: "note", active: false)
+            ]
+            
+            encodeLocalFilters()
+        }
         
+        guard
+            let data = UserDefaults.standard.data(forKey: "filters"),
+            let decodedFilters = try? JSONDecoder().decode([FilterModel].self, from: data)
+        else {
+            return
+        }
+        
+        self.filters = decodedFilters
+    }
+    
+    func encodeLocalFilters(){
+        if let encoded = try? JSONEncoder().encode(filters){
+            UserDefaults.standard.setValue(encoded, forKey: "filters")
+        }
     }
 }

@@ -8,22 +8,28 @@
 import SwiftUI
 
 struct FiltersList: View{
+    @EnvironmentObject var sc: SettingsController
     @ObservedObject var fvm: FilterViewModel
-    
+
     var body: some View{
         List{
-            Section("Filter Offenses Attributes"){
-                ForEach(fvm.offenseFilters, id:\.label) { filter in
-                    Button{
-                        fvm.objectWillChange.send()
-                        filter.active.toggle()
-                    } label: {
-                        Text(filter.label)
-                    }
-                    .foregroundColor(filter.active ? Color.white : Color.black)
-                    .listRowBackground(filter.active ? Color.blue : Color.secondary)
-                    .animation(.easeIn(duration: 0.8), value: filter.active)
+            ForEach($fvm.filters, id:\.label) { $filter in
+                HStack{
+                    Text(filter.label)
+                    Spacer()
+                    Toggle("", isOn: $filter.active)
+                        .onChange(of: filter.active, perform: { _ in
+                            //fvm.objectWillChange.send()
+                        })
+                        .labelsHidden()
                 }
+                .font(.caption)
+            }
+        }
+        .tint(.blue)
+        .onDisappear{
+            if sc.settings.saveFilters{
+                fvm.encodeLocalFilters()
             }
         }
     }

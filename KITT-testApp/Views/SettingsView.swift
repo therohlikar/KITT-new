@@ -42,9 +42,16 @@ struct SettingsView: View {
                 }
                 Section("UKLÁDÁNÍ DAT"){
                     HStack{
-                        Text("Uložit poznámku automaticky")
+                        Text("Ukládat poznámky automaticky")
                         Spacer()
                         Toggle("", isOn: $sc.settings.saveNotes)
+                            .labelsHidden()
+                    }
+                    
+                    HStack{
+                        Text("Ukládat filtry")
+                        Spacer()
+                        Toggle("", isOn: $sc.settings.saveFilters)
                             .labelsHidden()
                     }
                 }

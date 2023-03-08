@@ -26,7 +26,7 @@ struct LibraryView: View {
                 // OFFENSE
                 List{
                     Section("Offenses"){
-                        FilteredOffenseListView(key: searchKey, filters: fvm.offenseFilters)
+                        FilteredOffenseListView(key: searchKey, filters: fvm.filters)
                     }
                 }
                 .listStyle(.sidebar)
@@ -35,7 +35,7 @@ struct LibraryView: View {
                 // CRIME
                 List{
                     Section("Crimes"){
-                        FilteredOffenseListView(key: searchKey, filters: fvm.offenseFilters)
+                        FilteredOffenseListView(key: searchKey, filters: fvm.filters)
                     }
                 }
                 .listStyle(.sidebar)
