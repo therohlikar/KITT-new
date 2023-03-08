@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FiltersList: View{
-    @EnvironmentObject var sc: SettingsController
     @ObservedObject var fvm: FilterViewModel
+    @EnvironmentObject var sc: SettingsController
 
     var body: some View{
         List{

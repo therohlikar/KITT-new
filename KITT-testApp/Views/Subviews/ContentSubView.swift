@@ -29,6 +29,7 @@ struct OffenseContent: View {
     
     @State private var customNote = ""
     @State private var noteChanged = false
+    @State private var sendingMail = false
     
     var body: some View{
         ScrollView{
@@ -113,6 +114,14 @@ struct OffenseContent: View {
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
+                    sendingMail.toggle()
+                } label: {
+                    Image(systemName: "exclamationmark.bubble.fill")
+                }
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
                     offense.isFavorited.toggle()
                     try? moc.save()
                 } label: {
@@ -133,6 +142,11 @@ struct OffenseContent: View {
                         try? moc.save()
                     }
             }
+        }
+        .sheet(isPresented: $sendingMail) {
+            let content:String = "\(offense.wrappedTitle)\n\(offense.paragraphModel.toString())"
+
+            MailView(content: content, to: Constants.shared.toEmail, subject: "Chyba ve znění")
         }
         .padding()
     }
@@ -184,6 +198,14 @@ struct CrimeContent: View{
             }
         }
         .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    //
+                } label: {
+                    Image(systemName: "exclamationmark.bubble.fill")
+                }
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     crime.isFavorited.toggle()

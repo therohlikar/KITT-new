@@ -58,6 +58,7 @@ struct FilteredOffenseListView: View{
             .headerProminence(.increased)
         }
         .listStyle(.sidebar)
+        .navigationTitle("Přestupky")
     }
     
     init(key: String = "", filters: [FilterModel], favoritesOnly: Bool = false){
@@ -206,7 +207,6 @@ struct FilteredCrimeListView: View{
 }
 
 struct CrimeRowListView: View{
-    @EnvironmentObject var sc: SettingsController
     @ObservedObject var crime: Crime
     
     var body: some View{

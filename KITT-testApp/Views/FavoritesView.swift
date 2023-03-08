@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FavoritesView: View {
     @EnvironmentObject var fvm: FilterViewModel
-    @EnvironmentObject var sc: SettingsController
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "isFavorited == true")) var favorites: FetchedResults<Offense>
     
     @Binding var searchKey: String

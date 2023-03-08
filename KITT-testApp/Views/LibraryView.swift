@@ -14,10 +14,7 @@ enum tabType{
 
 struct LibraryView: View {
     @EnvironmentObject var fvm: FilterViewModel
-    @EnvironmentObject var sc: SettingsController
-
     @Binding var searchKey: String
-
     @State private var tab:tabType = .offense
     
     var body: some View {
