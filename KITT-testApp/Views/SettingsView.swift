@@ -111,7 +111,7 @@ struct SettingsView: View {
                     showingNews.toggle()
                 }
                 Link(destination: URL(string: "mailto:\(mailTo)")!) {
-                    Text("KONTAKTUJTE NÁS")
+                    Text("NAPIŠTE MI")
                 }
             }
         }
