@@ -19,7 +19,7 @@ class FilterViewModel: ObservableObject{
             filters = [
                 FilterModel(label: "Název", key: "title", active: true),
                 FilterModel(label: "Zákonné znění", key: "content", active: true),
-                FilterModel(label: "§ Porušení", key: "paragraph", active: true),
+                FilterModel(label: "§ Skutku", key: "paragraph", active: true),
                 FilterModel(label: "§ Přestupku (BESIP)", key: "violationParagraph", active: true, specific: "offense"),
                 FilterModel(label: "Možnosti řešení", key: "resolveOptions", active: true, specific: "offense"),
                 FilterModel(label: "Poznámka", key: "note", active: false)
