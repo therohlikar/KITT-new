@@ -201,15 +201,17 @@ struct CrimeContent: View{
             
             
             VStack{
-                VStack{
-                    Text("Příklad skutku")
-                        .font(.headline)
-                    
-                    Text(crime.wrappedCrimeExample)
-                        .foregroundColor(.secondary)
-                        .font(.caption)
+                if !crime.wrappedCrimeExample.isEmpty {
+                    VStack{
+                        Text("Příklad skutku")
+                            .font(.headline)
+                        
+                        Text(crime.wrappedCrimeExample)
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
+                    .padding(.vertical, 5)
                 }
-                .padding(.vertical, 5)
             }
             .padding(.vertical, 10)
         }
