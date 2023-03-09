@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var sc: SettingsController
+    @Environment(\.dismiss) private var dismiss
     
     private var currentVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
     
@@ -18,6 +19,7 @@ struct SettingsView: View {
     let developer = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER") as? String ?? "RJ"
     let developerLink = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER_LINK") as? String ?? "rjwannabefit"
     let androidLink = Bundle.main.object(forInfoDictionaryKey: "KITT_ANDROID_LINK") as? String ?? "KITT"
+    let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     @State private var showingNews: Bool = false
     
@@ -107,6 +109,9 @@ struct SettingsView: View {
                 }
                 Button("NOVINKY") {
                     showingNews.toggle()
+                }
+                Link(destination: URL(string: "mailto:\(mailTo)")!) {
+                    Text("KONTAKTUJTE NÁS")
                 }
             }
         }

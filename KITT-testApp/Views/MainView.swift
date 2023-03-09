@@ -19,7 +19,7 @@ struct MainView: View {
     @State private var searchKey: String = ""
     @State private var filterListViewOpened: Bool = false
     @State private var settingsViewOpened: Bool = false
-    
+    @State private var navigationButtonID = UUID()
     @State private var preferredPanel: String = UserDefaults.standard.string(forKey: "preferredPanel") ?? "library"
     
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
@@ -27,27 +27,6 @@ struct MainView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                HStack{
-                    TextField("Vyhledávání...", text: $searchKey)
-                        .autocorrectionDisabled()
-                        .padding(10)
-
-                    Image(systemName: "checklist")
-                        .onTapGesture {
-                           filterListViewOpened.toggle()
-                        }
-                        .padding(.horizontal, 10)
-                        .foregroundColor(.blue)
-                    
-                    Image(systemName: "gearshape.fill")
-                        .onTapGesture {
-                           settingsViewOpened.toggle()
-                        }
-                        .padding(.horizontal, 10)
-                        .padding(.trailing, 2)
-                        .foregroundColor(.secondary)
-                }
-                
                 TabView(selection: $preferredPanel){
                     LibraryView(searchKey: $searchKey)
                         .tabItem {
@@ -63,8 +42,34 @@ struct MainView: View {
                         .tag("favorites")
                 }
             }
+            .toolbar{
+                ToolbarItem(placement: .navigation) {
+                    TextField("Vyhledávání...", text: $searchKey)
+                        .autocorrectionDisabled()
+                        .padding(10)
+                    
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Image(systemName: "checklist")
+                        .onTapGesture {
+                           filterListViewOpened.toggle()
+                        }
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.blue)
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Image(systemName: "gearshape.fill")
+                        .onTapGesture {
+                           settingsViewOpened.toggle()
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.trailing, 2)
+                        .foregroundColor(.secondary)
+                }
+            }
             .navigationBarTitle("")
-            .navigationBarHidden(true)
             .sheet(isPresented: $filterListViewOpened) {
                 FiltersList(fvm: fvm)
             }
