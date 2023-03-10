@@ -43,7 +43,7 @@ struct MainView: View {
                 }
             }
             .toolbar{
-                ToolbarItem(placement: .navigation) {
+                ToolbarItem(placement: .bottomBar) {
                     TextField("Vyhledávání...", text: $searchKey)
                         .autocorrectionDisabled()
                         .padding(10)

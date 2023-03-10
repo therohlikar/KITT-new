@@ -108,6 +108,7 @@ struct OffenseContent: View {
                     TextField("Poznámka", text: $customNote, axis: .vertical)
                         .autocorrectionDisabled()
                         .focused($noteFocused)
+                        .textFieldStyle(.roundedBorder)
                         .onChange(of: customNote) { _ in
                             offense.note = customNote
                             noteChanged = true
@@ -225,6 +226,7 @@ struct CrimeContent: View{
                 TextField("Poznámka", text: $customNote, axis: .vertical)
                     .autocorrectionDisabled()
                     .focused($noteFocused)
+                    .textFieldStyle(.roundedBorder)
                     .onChange(of: customNote) { _ in
                         crime.note = customNote
                         noteChanged = true
@@ -320,6 +322,7 @@ struct LawExtractContent: View{
                     TextField("Poznámka", text: $customNote, axis: .vertical)
                         .autocorrectionDisabled()
                         .focused($noteFocused)
+                        .textFieldStyle(.roundedBorder)
                         .onChange(of: customNote) { _ in
                             le.note = customNote
                             noteChanged = true
