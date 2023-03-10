@@ -37,6 +37,8 @@ struct SettingsView: View {
                         if !foundEasterEgg{
                             foundEasterEgg = true
                             hiddenColor.toggle()
+                            
+                            UIApplication.shared.setAlternateIconName(hiddenColor ? "AlternativeAppIconPink" : nil)
                         }
                     }
                     .animation(.easeIn, value: hiddenColor)
