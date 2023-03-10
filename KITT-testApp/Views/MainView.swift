@@ -22,6 +22,8 @@ struct MainView: View {
     @State private var navigationButtonID = UUID()
     @State private var preferredPanel: String = UserDefaults.standard.string(forKey: "settings.preferredPanel") ?? "library"
     
+    @FocusState private var searchFocused: Bool
+    
     @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
     
@@ -46,6 +48,7 @@ struct MainView: View {
                     TextField("Vyhledávání...", text: $searchKey)
                         .autocorrectionDisabled()
                         .padding(10)
+                        .focused($searchFocused)
                 }
             }
             .toolbar{
@@ -54,6 +57,7 @@ struct MainView: View {
                         TextField("Vyhledávání...", text: $searchKey)
                             .autocorrectionDisabled()
                             .padding(10)
+                            .focused($searchFocused)
 
                     }
                 }
@@ -76,6 +80,9 @@ struct MainView: View {
                         .padding(.trailing, 2)
                         .foregroundColor(.secondary)
                 }
+            }
+            .onTapGesture{
+                searchFocused = false
             }
             .navigationBarTitle("")
             .sheet(isPresented: $filterListViewOpened) {
