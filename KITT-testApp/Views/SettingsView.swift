@@ -7,10 +7,12 @@
 
 import SwiftUI
 import MessageUI
+import CoreData
 
 struct SettingsView: View {
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var networkController: NetworkController
+    @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
     
     private var currentVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
@@ -26,6 +28,7 @@ struct SettingsView: View {
     
     @State private var showingNews: Bool = false
     @State private var canSendMail: Bool = false
+    @State private var showingAlertRemoveData: Bool = false
     
     var body: some View {
         VStack{
@@ -160,6 +163,13 @@ struct SettingsView: View {
                     }
                 }
                 .disabled(!canSendMail ? true : false)
+                Button {
+                    showingAlertRemoveData.toggle()
+                } label: {
+                    Text("VYNUTIT STAŽENÍ DAT")
+                }
+                .foregroundColor(.red)
+                
             }
         }
         .font(.caption)
@@ -169,5 +179,75 @@ struct SettingsView: View {
             NewsView()
                 .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
         }
+        .alert("Vynutit stažení dat", isPresented: $showingAlertRemoveData) {
+            Button("Smazat", role: .destructive) {
+                dataVersion = "0.0.0"
+                
+                if self.removeAll(){
+                    exit(0)
+                }
+            }
+            
+            Button("Zrušit", role: .cancel) {
+                showingAlertRemoveData = false
+            }
+        } message: {
+            Text("Jste si jistý, že chcete vynutit stažení dat?\nVynucení stažení dat způsobí smazání všech aktuálních dat vč. poznámek a oblíbených. \nAplikace bude po souhlasu ukončena.")
+        }
+
+    }
+    
+    func removeAll() -> Bool {
+        var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Offense")
+        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try moc.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error.localizedDescription)")
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: "Crime")
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try moc.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error.localizedDescription)")
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: "LawExtract")
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try moc.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error.localizedDescription)")
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: "Version")
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try moc.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error.localizedDescription)")
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: "Group")
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try moc.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error.localizedDescription)")
+        }
+        
+        return true
     }
 }
