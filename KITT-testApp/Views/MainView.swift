@@ -11,6 +11,7 @@ import CoreData
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var fvm: FilterViewModel
+    @EnvironmentObject var networkController: NetworkController
     @FetchRequest(sortDescriptors: []) var offenses: FetchedResults<Offense>
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var crimes: FetchedResults<Crime>
@@ -44,6 +45,7 @@ struct MainView: View {
                         }
                         .tag("favorites")
                 }
+                .contentShape(Rectangle())
                 if !searchOnTop {
                     TextField("Vyhledávání...", text: $searchKey)
                         .autocorrectionDisabled()
@@ -58,7 +60,6 @@ struct MainView: View {
                             .autocorrectionDisabled()
                             .padding(10)
                             .focused($searchFocused)
-
                     }
                 }
 
@@ -81,9 +82,6 @@ struct MainView: View {
                         .foregroundColor(.secondary)
                 }
             }
-            .onTapGesture{
-                searchFocused = false
-            }
             .navigationBarTitle("")
             .sheet(isPresented: $filterListViewOpened) {
                 FiltersList(fvm: fvm)
@@ -92,124 +90,128 @@ struct MainView: View {
                 SettingsView()
             }
             .task {
-                let newestVersion = await VersionController().getNewestVersion()
-                
-                if newestVersion > currentVersion {
-                    if let versionArray = await VersionController().loadVersionUpdates() {
-                        for item in versionArray {
-                            let version = Version(context: moc)
-                            version.version = item.version
-                            version.content = item.news.joined(separator: "\n")
-                        }
-                    }
+                if !networkController.connected {
                     
-                    let jsonController = JsonDataController()
-                    if let offenseArray = await jsonController.downloadJsonData(.offense) as? Array<OffenseModel> {
-                        for item in offenseArray {
-                            var note: String = ""
-                            var isFavorited: Bool = false
-                            
-                            if let existingOffense = offenses.first(where: {$0.id == item.paragraph}){
-                                note = existingOffense.wrappedNote
-                                isFavorited = existingOffense.isFavorited
-                                
-                                existingOffense.group = nil
+                }else{
+                    let newestVersion = await VersionController().getNewestVersion()
+                    
+                    if newestVersion > currentVersion {
+                        if let versionArray = await VersionController().loadVersionUpdates() {
+                            for item in versionArray {
+                                let version = Version(context: moc)
+                                version.version = item.version
+                                version.content = item.news.joined(separator: "\n")
                             }
-                            
-                            let newOffense = Offense(context: moc)
-                            newOffense.id = item.paragraph
-                            // id is same as paragraph, which is unique all the time
-                            //loop through groups, if any, and create or invite them in
-                            for group in item.groups{
-                                let newGroup:Group = Group(context: moc)
-                                newGroup.title = group
-                                newOffense.addToGroup(newGroup)
-                                
-                                print(group)
-                            }
-                            newOffense.title = item.title
-                            newOffense.content = item.content
-                            newOffense.paragraph = item.paragraph
-                            newOffense.violationParagraph = item.violationParagraph
-                            newOffense.resolveOptions = item.resolveOptions
-                            newOffense.offenseScore = Int16(item.offenseScore)
-                            newOffense.isOffenseTracked = item.isOffenseTracked
-                            newOffense.fineExample = item.fineExample
-                            
-                            newOffense.note = note
-                            newOffense.isFavorited = isFavorited
                         }
-                    }
-                    if let crimeArray = await jsonController.downloadJsonData(.crime) as? Array<CrimeModel> {
-                        for item in crimeArray {
-                            var note: String = ""
-                            var isFavorited: Bool = false
-                            
-                            if let existingCrime = crimes.first(where: {$0.id == item.paragraph}){
-                                note = existingCrime.wrappedNote
-                                isFavorited = existingCrime.isFavorited
+                        
+                        let jsonController = JsonDataController()
+                        if let offenseArray = await jsonController.downloadJsonData(.offense) as? Array<OffenseModel> {
+                            for item in offenseArray {
+                                var note: String = ""
+                                var isFavorited: Bool = false
                                 
-                                existingCrime.group = nil
+                                if let existingOffense = offenses.first(where: {$0.id == item.paragraph}){
+                                    note = existingOffense.wrappedNote
+                                    isFavorited = existingOffense.isFavorited
+                                    
+                                    existingOffense.group = nil
+                                }
+                                
+                                let newOffense = Offense(context: moc)
+                                newOffense.id = item.paragraph
+                                // id is same as paragraph, which is unique all the time
+                                //loop through groups, if any, and create or invite them in
+                                for group in item.groups{
+                                    let newGroup:Group = Group(context: moc)
+                                    newGroup.title = group
+                                    newOffense.addToGroup(newGroup)
+                                    
+                                    print(group)
+                                }
+                                newOffense.title = item.title
+                                newOffense.content = item.content
+                                newOffense.paragraph = item.paragraph
+                                newOffense.violationParagraph = item.violationParagraph
+                                newOffense.resolveOptions = item.resolveOptions
+                                newOffense.offenseScore = Int16(item.offenseScore)
+                                newOffense.isOffenseTracked = item.isOffenseTracked
+                                newOffense.fineExample = item.fineExample
+                                
+                                newOffense.note = note
+                                newOffense.isFavorited = isFavorited
                             }
-                            
-                            let newCrime = Crime(context: moc)
-                            newCrime.id = item.paragraph
-                            // id is same as paragraph, which is unique all the time
-                            //loop through groups, if any, and create or invite them in
-                            for group in item.groups{
-                                let newGroup:Group = Group(context: moc)
-                                newGroup.title = group
-                                newCrime.addToGroup(newGroup)
-                            }
-                            newCrime.title = item.title
-                            newCrime.content = item.content
-                            newCrime.paragraph = item.paragraph
-                            newCrime.crimeExample = item.crimeExample
-                            
-                            newCrime.note = note
-                            newCrime.isFavorited = isFavorited
                         }
-                    }
-                    if let leArray = await jsonController.downloadJsonData(.lawextract) as? Array<LawExtractModel> {
-                        for item in leArray {
-                            var note: String = ""
-                            var isFavorited: Bool = false
+                        if let crimeArray = await jsonController.downloadJsonData(.crime) as? Array<CrimeModel> {
+                            for item in crimeArray {
+                                var note: String = ""
+                                var isFavorited: Bool = false
+                                
+                                if let existingCrime = crimes.first(where: {$0.id == item.paragraph}){
+                                    note = existingCrime.wrappedNote
+                                    isFavorited = existingCrime.isFavorited
+                                    
+                                    existingCrime.group = nil
+                                }
+                                
+                                let newCrime = Crime(context: moc)
+                                newCrime.id = item.paragraph
+                                // id is same as paragraph, which is unique all the time
+                                //loop through groups, if any, and create or invite them in
+                                for group in item.groups{
+                                    let newGroup:Group = Group(context: moc)
+                                    newGroup.title = group
+                                    newCrime.addToGroup(newGroup)
+                                }
+                                newCrime.title = item.title
+                                newCrime.content = item.content
+                                newCrime.paragraph = item.paragraph
+                                newCrime.crimeExample = item.crimeExample
+                                
+                                newCrime.note = note
+                                newCrime.isFavorited = isFavorited
+                            }
+                        }
+                        if let leArray = await jsonController.downloadJsonData(.lawextract) as? Array<LawExtractModel> {
+                            for item in leArray {
+                                var note: String = ""
+                                var isFavorited: Bool = false
 
-                            if let existingLe = lawextracts.first(where: {$0.id == item.paragraph}){
-                                note = existingLe.wrappedNote
-                                isFavorited = existingLe.isFavorited
-                                
-                                existingLe.group = nil
-                            }
+                                if let existingLe = lawextracts.first(where: {$0.id == item.paragraph}){
+                                    note = existingLe.wrappedNote
+                                    isFavorited = existingLe.isFavorited
+                                    
+                                    existingLe.group = nil
+                                }
 
-                            let newLe = LawExtract(context: moc)
-                            newLe.id = item.paragraph
-                            // id is same as paragraph, which is unique all the time
-                            //loop through groups, if any, and create or invite them in
-                            for group in item.groups{
-                                let newGroup:Group = Group(context: moc)
-                                newGroup.title = group
-                                newLe.addToGroup(newGroup)
-                            }
-                            newLe.title = item.title
-                            newLe.content = item.content
-                            newLe.paragraph = item.paragraph
+                                let newLe = LawExtract(context: moc)
+                                newLe.id = item.paragraph
+                                // id is same as paragraph, which is unique all the time
+                                //loop through groups, if any, and create or invite them in
+                                for group in item.groups{
+                                    let newGroup:Group = Group(context: moc)
+                                    newGroup.title = group
+                                    newLe.addToGroup(newGroup)
+                                }
+                                newLe.title = item.title
+                                newLe.content = item.content
+                                newLe.paragraph = item.paragraph
 
-                            newLe.note = note
-                            newLe.isFavorited = isFavorited
+                                newLe.note = note
+                                newLe.isFavorited = isFavorited
+                            }
                         }
-                    }
-                    
-                    //clear groups
-                    for group in groups {
-                        if group.offenseArray.isEmpty && group.crimeArray.isEmpty && group.leArray.isEmpty {
-                            moc.delete(group)
+                        
+                        //clear groups
+                        for group in groups {
+                            if group.offenseArray.isEmpty && group.crimeArray.isEmpty && group.leArray.isEmpty {
+                                moc.delete(group)
+                            }
                         }
+                        
+                        try? moc.save()
+                        
+                        currentVersion = newestVersion
                     }
-                    
-                    try? moc.save()
-                    
-                    currentVersion = newestVersion
                 }
             }
         }

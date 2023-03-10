@@ -26,13 +26,15 @@ struct ContentSubView: View {
 struct OffenseContent: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var sc: SettingsController
+    @EnvironmentObject var networkController: NetworkController
     @ObservedObject var offense: Offense
     
+    @State private var canSendMail: Bool = false
     @State private var customNote = ""
     @State private var noteChanged = false
     @State private var sendingMail = false
     @FocusState private var noteFocused:Bool
-    
+
     @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     var body: some View{
@@ -140,16 +142,18 @@ struct OffenseContent: View {
                     Text("Mail aplikace nelze spustit")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .opacity(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? 1.0 : 0.0)
+                        .opacity(!canSendMail ? 1.0 : 0.0)
                     
                     Button {
                         sendingMail.toggle()
                     } label: {
                         Image(systemName: "exclamationmark.bubble.fill")
                     }
-                    .disabled(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? true : false)
+                    .disabled(!canSendMail ? true : false)
                 }
-                
+                .onAppear{
+                    canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
+                }
             }
             
             
@@ -184,8 +188,10 @@ struct OffenseContent: View {
 struct CrimeContent: View{
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var sc: SettingsController
+    @EnvironmentObject var networkController: NetworkController
     @ObservedObject var crime: Crime
     
+    @State private var canSendMail: Bool = false
     @State private var customNote = ""
     @State private var noteChanged = false
     @State private var sendingMail = false
@@ -256,16 +262,18 @@ struct CrimeContent: View{
                     Text("Mail aplikace nelze spustit")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .opacity(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? 1.0 : 0.0)
+                        .opacity(!canSendMail ? 1.0 : 0.0)
                     
                     Button {
                         sendingMail.toggle()
                     } label: {
                         Image(systemName: "exclamationmark.bubble.fill")
                     }
-                    .disabled(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? true : false)
+                    .disabled(!canSendMail ? true : false)
                 }
-                
+                .onAppear{
+                    canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
+                }
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -297,8 +305,10 @@ struct CrimeContent: View{
 struct LawExtractContent: View{
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var sc: SettingsController
+    @EnvironmentObject var networkController: NetworkController
     @ObservedObject var le: LawExtract
     
+    @State private var canSendMail: Bool = false
     @State private var customNote = ""
     @State private var noteChanged = false
     @State private var sendingMail = false
@@ -353,14 +363,17 @@ struct LawExtractContent: View{
                     Text("Mail aplikace nelze spustit")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .opacity(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? 1.0 : 0.0)
+                        .opacity(!canSendMail ? 1.0 : 0.0)
                     
                     Button {
                         sendingMail.toggle()
                     } label: {
                         Image(systemName: "exclamationmark.bubble.fill")
                     }
-                    .disabled(mailTo.isEmpty || !MFMailComposeViewController.canSendMail() ? true : false)
+                    .disabled(!canSendMail ? true : false)
+                }
+                .onAppear{
+                    canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
                 }
                 
             }

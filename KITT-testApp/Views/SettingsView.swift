@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct SettingsView: View {
     @EnvironmentObject var sc: SettingsController
+    @EnvironmentObject var networkController: NetworkController
     @Environment(\.dismiss) private var dismiss
     
     private var currentVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
@@ -23,6 +25,7 @@ struct SettingsView: View {
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     @State private var showingNews: Bool = false
+    @State private var canSendMail: Bool = false
     
     var body: some View {
         VStack{
@@ -138,8 +141,19 @@ struct SettingsView: View {
                     showingNews.toggle()
                 }
                 Link(destination: URL(string: "mailto:\(mailTo)")!) {
-                    Text("NAPIŠTE MI")
+                    HStack{
+                        Text("NAPIŠTE MI")
+                        
+                        Text("(Mail aplikace nelze spustit)")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .opacity(!canSendMail ? 1.0 : 0.0)
+                    }
+                    .onAppear{
+                        canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
+                    }
                 }
+                .disabled(!canSendMail ? true : false)
             }
         }
         .font(.caption)
