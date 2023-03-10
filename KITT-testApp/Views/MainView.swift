@@ -85,7 +85,6 @@ struct MainView: View {
                             .padding(.horizontal, 10)
                             .padding(.trailing, 2)
                             .foregroundColor(.secondary)
-                            //.overlay(!networkController.connected ? CustomBadgeView(imageSystem: "wifi.slash", backgroundColor: Color("NetworkErrorColor")) : nil)
                     }
                     if !networkController.connected {
                         ToolbarItem(placement: .status) {
