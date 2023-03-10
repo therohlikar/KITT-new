@@ -13,6 +13,6 @@ struct LawExtractModel: Codable, Hashable {
     var title: String? = ""
     var paragraph: String? = ""
     var content: String? = ""
-    var note: String? = ""
+    var note: String = ""
     var isFavorited: Bool = false
 }

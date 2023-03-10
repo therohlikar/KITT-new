@@ -143,7 +143,9 @@ struct MainView: View {
                         var isFavorited: Bool = false
                         
                         for item in offenseArray {
-                            note = ""
+                            
+                            
+                            note = item.note
                             isFavorited = false
                             
                             if let existingOffense = offenses.first(where: {$0.id == (item.id == nil ? item.paragraph : item.id)}){
@@ -176,9 +178,11 @@ struct MainView: View {
                         }
                     }
                     if let crimeArray = await jsonController.downloadJsonData(.crime) as? Array<CrimeModel> {
+                        var note: String = ""
+                        var isFavorited: Bool = false
                         for item in crimeArray {
-                            var note: String = ""
-                            var isFavorited: Bool = false
+                            note = item.note
+                            isFavorited = false
                             
                             if let existingCrime = crimes.first(where: {$0.id == item.paragraph}){
                                 note = existingCrime.wrappedNote
@@ -206,9 +210,11 @@ struct MainView: View {
                         }
                     }
                     if let leArray = await jsonController.downloadJsonData(.lawextract) as? Array<LawExtractModel> {
+                        var note: String = ""
+                        var isFavorited: Bool = false
                         for item in leArray {
-                            var note: String = ""
-                            var isFavorited: Bool = false
+                            note = item.note
+                            isFavorited = false
                             
                             if let existingLe = lawextracts.first(where: {$0.id == item.paragraph}){
                                 note = existingLe.wrappedNote
