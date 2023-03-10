@@ -141,11 +141,12 @@ struct MainView: View {
                     if let offenseArray = await jsonController.downloadJsonData(.offense) as? Array<OffenseModel> {
                         var note: String = ""
                         var isFavorited: Bool = false
+                        
                         for item in offenseArray {
                             note = ""
                             isFavorited = false
                             
-                            if let existingOffense = offenses.first(where: {$0.id == item.paragraph}){
+                            if let existingOffense = offenses.first(where: {$0.id == (item.id == nil ? item.paragraph : item.id)}){
                                 note = existingOffense.wrappedNote
                                 isFavorited = existingOffense.isFavorited
                                 
@@ -153,7 +154,7 @@ struct MainView: View {
                             }
                             
                             let newOffense = Offense(context: moc)
-                            newOffense.id = item.paragraph
+                            newOffense.id = item.id == nil ? item.paragraph : item.id
                             // id is same as paragraph, which is unique all the time
                             //loop through groups, if any, and create or invite them in
                             for group in item.groups{
