@@ -14,7 +14,7 @@ struct SettingsView: View {
     private var currentVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
     
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
-    @AppStorage("hiddenColor") private var hiddenColor: Bool = false
+    @AppStorage("settings.hiddenColor") private var hiddenColor: Bool = false
     @AppStorage("foundEasterEgg") private var foundEasterEgg: Bool = false
     
     let developer = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER") as? String ?? "RJ"
@@ -103,6 +103,18 @@ struct SettingsView: View {
                                 .tag("library")
                             Text("Oblíbené")
                                 .tag("favorites")
+                        }
+                        .labelsHidden()
+                    }
+                    
+                    HStack{
+                        Text("Pole pro vyhledávání")
+                        Spacer()
+                        Picker("", selection: $sc.settings.searchOnTop) {
+                            Text("Nahoře")
+                                .tag(true)
+                            Text("Dole")
+                                .tag(false)
                         }
                         .labelsHidden()
                     }

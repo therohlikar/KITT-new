@@ -20,8 +20,9 @@ struct MainView: View {
     @State private var filterListViewOpened: Bool = false
     @State private var settingsViewOpened: Bool = false
     @State private var navigationButtonID = UUID()
-    @State private var preferredPanel: String = UserDefaults.standard.string(forKey: "preferredPanel") ?? "library"
+    @State private var preferredPanel: String = UserDefaults.standard.string(forKey: "settings.preferredPanel") ?? "library"
     
+    @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
     
     var body: some View {
@@ -41,15 +42,22 @@ struct MainView: View {
                         }
                         .tag("favorites")
                 }
-            }
-            .toolbar{
-                ToolbarItem(placement: .bottomBar) {
+                if !searchOnTop {
                     TextField("Vyhledávání...", text: $searchKey)
                         .autocorrectionDisabled()
                         .padding(10)
-                    
                 }
-                
+            }
+            .toolbar{
+                if searchOnTop {
+                    ToolbarItem(placement: .navigation) {
+                        TextField("Vyhledávání...", text: $searchKey)
+                            .autocorrectionDisabled()
+                            .padding(10)
+
+                    }
+                }
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Image(systemName: "checklist")
                         .onTapGesture {

@@ -15,7 +15,7 @@ class FilterViewModel: ObservableObject{
     }
 
     func decodeLocalFilters(){
-        if UserDefaults.standard.data(forKey: "filters") == nil {
+        if UserDefaults.standard.data(forKey: "settings.filters") == nil {
             filters = [
                 FilterModel(label: "Název", key: "title", active: true),
                 FilterModel(label: "Zákonné znění", key: "content", active: true),
@@ -29,7 +29,7 @@ class FilterViewModel: ObservableObject{
         }
         
         guard
-            let data = UserDefaults.standard.data(forKey: "filters"),
+            let data = UserDefaults.standard.data(forKey: "settings.filters"),
             let decodedFilters = try? JSONDecoder().decode([FilterModel].self, from: data)
         else {
             return
@@ -40,7 +40,7 @@ class FilterViewModel: ObservableObject{
     
     func encodeLocalFilters(){
         if let encoded = try? JSONEncoder().encode(filters){
-            UserDefaults.standard.setValue(encoded, forKey: "filters")
+            UserDefaults.standard.setValue(encoded, forKey: "settings.filters")
         }
     }
 }

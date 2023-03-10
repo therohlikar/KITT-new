@@ -13,50 +13,58 @@ struct SettingsModel {
     
     var darkMode: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "darkMode")
+            return UserDefaults.standard.bool(forKey: "settings.darkMode")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "darkMode")
+            UserDefaults.standard.set(newValue, forKey: "settings.darkMode")
         }
     }
     var saveFilters: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "saveFilters")
+            return UserDefaults.standard.bool(forKey: "settings.saveFilters")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "saveFilters")
+            UserDefaults.standard.set(newValue, forKey: "settings.saveFilters")
         }
     }
     var saveNotes: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "saveNotes")
+            return UserDefaults.standard.bool(forKey: "settings.saveNotes")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "saveNotes")
+            UserDefaults.standard.set(newValue, forKey: "settings.saveNotes")
         }
     }
     var downloadDataOnStartup: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "downloadDataOnStartup")
+            return UserDefaults.standard.bool(forKey: "settings.downloadDataOnStartup")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "downloadDataOnStartup")
+            UserDefaults.standard.set(newValue, forKey: "settings.downloadDataOnStartup")
         }
     }
     var showDetail: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "showDetail")
+            return UserDefaults.standard.bool(forKey: "settings.showDetail")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "showDetail")
+            UserDefaults.standard.set(newValue, forKey: "settings.showDetail")
         }
     }
     var preferredPanel: String {
         get {
-            return UserDefaults.standard.string(forKey: "preferredPanel") ?? defaultPanel
+            return UserDefaults.standard.string(forKey: "settings.preferredPanel") ?? defaultPanel
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "preferredPanel")
+            UserDefaults.standard.set(newValue, forKey: "settings.preferredPanel")
+        }
+    }
+    var searchOnTop: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "settings.searchOnTop")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "settings.searchOnTop")
         }
     }
 }
