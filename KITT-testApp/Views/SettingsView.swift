@@ -49,6 +49,8 @@ struct SettingsView: View {
                 Link(destination: URL(string: developerLink)!) {
                     HStack{
                         Text(developer)
+                        Image(systemName: "link")
+                            .foregroundColor(.blue)
                     }
                     .foregroundColor(.secondary)
                     .font(.caption)
