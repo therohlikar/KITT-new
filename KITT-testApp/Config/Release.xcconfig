@@ -8,7 +8,7 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-JSON_FILE_LINK = http:/$()/rjweb.cz/data/testingkitt/
+JSON_FILE_LINK = https:/$()/kittapp.store/kittdata/ios/
 OFFENSE_JSON_FILE = offenses.json
 CRIME_JSON_FILE = crimes.json
 LAWEXTRACT_JSON_FILE = lawextracts.json
@@ -21,3 +21,4 @@ DEVELOPER_LINK = https:/$()/www.instagram.com/rjwannabefit/
 KITT_ANDROID_LINK = https:/$()/play.google.com/store/apps/details?id=pack.example.kitt
 
 MAIL_TO = info@kittapp.store
+
