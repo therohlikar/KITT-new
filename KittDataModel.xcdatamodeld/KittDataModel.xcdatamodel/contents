@@ -61,6 +61,7 @@
     </entity>
     <entity name="Version" representedClassName=".Version" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="version" optional="YES" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>

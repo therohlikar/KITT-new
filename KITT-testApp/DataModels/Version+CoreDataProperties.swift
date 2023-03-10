@@ -18,6 +18,7 @@ extension Version {
 
     @NSManaged public var version: String?
     @NSManaged public var content: String?
+    @NSManaged public var read: Bool
 
     public var wrappedVersion: String { version ?? "" }
     public var wrappedContent: String { content ?? "" }

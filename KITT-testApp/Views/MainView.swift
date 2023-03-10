@@ -12,10 +12,13 @@ struct MainView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var fvm: FilterViewModel
     @EnvironmentObject var networkController: NetworkController
+    @EnvironmentObject var sc: SettingsController
+    
     @FetchRequest(sortDescriptors: []) var offenses: FetchedResults<Offense>
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var crimes: FetchedResults<Crime>
     @FetchRequest(sortDescriptors: []) var lawextracts: FetchedResults<LawExtract>
+    @FetchRequest(sortDescriptors: []) var versions: FetchedResults<Version>
     
     @State private var ready: Bool = false
     @State private var searchKey: String = ""
@@ -101,9 +104,11 @@ struct MainView: View {
                 .navigationBarTitle("")
                 .sheet(isPresented: $filterListViewOpened) {
                     FiltersList(fvm: fvm)
+                        .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
                 }
                 .sheet(isPresented: $settingsViewOpened) {
                     SettingsView()
+                        .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
                 }
             }
         }
@@ -118,18 +123,27 @@ struct MainView: View {
                 }
                 else {
                     if let versionArray = await VersionController().loadVersionUpdates() {
+                        var read:Bool = false
                         for item in versionArray {
+                            read = false
+                            if let versionExists = versions.first(where: {$0.version == item.version }){
+                                read = versionExists.read
+                            }
+                            
                             let version = Version(context: moc)
                             version.version = item.version
                             version.content = item.news.joined(separator: "\n")
+                            version.read = read
                         }
                     }
                     
                     let jsonController = JsonDataController()
                     if let offenseArray = await jsonController.downloadJsonData(.offense) as? Array<OffenseModel> {
+                        var note: String = ""
+                        var isFavorited: Bool = false
                         for item in offenseArray {
-                            var note: String = ""
-                            var isFavorited: Bool = false
+                            note = ""
+                            isFavorited = false
                             
                             if let existingOffense = offenses.first(where: {$0.id == item.paragraph}){
                                 note = existingOffense.wrappedNote
@@ -146,8 +160,6 @@ struct MainView: View {
                                 let newGroup:Group = Group(context: moc)
                                 newGroup.title = group
                                 newOffense.addToGroup(newGroup)
-                                
-                                print(group)
                             }
                             newOffense.title = item.title
                             newOffense.content = item.content

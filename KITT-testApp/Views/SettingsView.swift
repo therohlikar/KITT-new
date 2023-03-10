@@ -11,7 +11,7 @@ import MessageUI
 struct SettingsView: View {
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var networkController: NetworkController
-    @Environment(\.dismiss) private var dismiss
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
     
     private var currentVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
     
@@ -139,9 +139,13 @@ struct SettingsView: View {
                             .labelsHidden()
                     }
                 }
-                Button("NOVINKY") {
+                Button {
                     showingNews.toggle()
+                } label: {
+                    Text("NOVINKY")
                 }
+                .badge(news.count)
+                
                 Link(destination: URL(string: "mailto:\(mailTo)")!) {
                     HStack{
                         Text("NAPIŠTE MI")
@@ -163,6 +167,7 @@ struct SettingsView: View {
         .tint(.blue)
         .sheet(isPresented: $showingNews) {
             NewsView()
+                .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
         }
     }
 }
