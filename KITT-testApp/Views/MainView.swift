@@ -85,7 +85,7 @@ struct MainView: View {
                             .padding(.horizontal, 10)
                             .padding(.trailing, 2)
                             .foregroundColor(.secondary)
-                            //.overlay(networkController.connected ? CustomBadgeView(imageSystem: "wifi.slash", backgroundColor: Color("NetworkErrorColor")) : nil)
+                            //.overlay(!networkController.connected ? CustomBadgeView(imageSystem: "wifi.slash", backgroundColor: Color("NetworkErrorColor")) : nil)
                     }
                     if !networkController.connected {
                         ToolbarItem(placement: .status) {
@@ -110,11 +110,7 @@ struct MainView: View {
         }
         .task {
             if !networkController.connected {
-                if currentVersion > "0.0.0" {
-                    ready = true
-                }else{
-                    //
-                }
+                ready = true
             }else{
                 let newestVersion = await VersionController().getNewestVersion()
                 

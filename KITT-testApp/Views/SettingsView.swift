@@ -59,7 +59,7 @@ struct SettingsView: View {
                 Text("Verze: \(currentVersion)")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                Text("Zákony \(dataVersion >= VersionController().newestVersion ? "aktualizovány" : "Verze dat není správná") [\(dataVersion)]")
+                Text("Zákonná znění ve verzi: \(dataVersion)")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Link(destination: URL(string: androidLink)!) {
