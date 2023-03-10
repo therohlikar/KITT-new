@@ -15,6 +15,7 @@ struct SettingsView: View {
     
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
     @AppStorage("hiddenColor") private var hiddenColor: Bool = false
+    @AppStorage("foundEasterEgg") private var foundEasterEgg: Bool = false
     
     let developer = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER") as? String ?? "RJ"
     let developerLink = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER_LINK") as? String ?? "rjwannabefit"
@@ -33,11 +34,11 @@ struct SettingsView: View {
                     .cornerRadius(180)
                     .padding()
                     .onTapGesture(count: 10) {
-                        hiddenColor.toggle()
+                        if !foundEasterEgg{
+                            foundEasterEgg = true
+                            hiddenColor.toggle()
+                        }
                     }
-                    .onLongPressGesture(minimumDuration: 3.0, perform: {
-                        hiddenColor.toggle()
-                    })
                     .animation(.easeIn, value: hiddenColor)
                 
                 Link(destination: URL(string: developerLink)!) {
@@ -66,6 +67,18 @@ struct SettingsView: View {
             }
             List{
                 Section("ÚPRAVA ROZHRANÍ"){
+                    if foundEasterEgg{
+                        HStack{
+                            Text("EASTER EGG SPECIÁL")
+                            Spacer()
+                            Toggle("", isOn: $hiddenColor)
+                                .onChange(of: hiddenColor) { value in
+                                    UIApplication.shared.setAlternateIconName(value ? "AlternativeAppIconPink" : nil)
+                                }
+                                .labelsHidden()
+                                
+                        }
+                    }
                     HStack{
                         Text("Tmavý režim")
                         Spacer()
