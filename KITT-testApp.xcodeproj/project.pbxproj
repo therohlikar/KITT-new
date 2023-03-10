@@ -35,6 +35,7 @@
 		96965E9D29B8CB830094520F /* Version+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9B29B8CB830094520F /* Version+CoreDataProperties.swift */; };
 		96965E9F29B8CD090094520F /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9E29B8CD090094520F /* NewsView.swift */; };
 		96965EA129BB680F0094520F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EA029BB680F0094520F /* NetworkController.swift */; };
+		96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EA229BB8D890094520F /* CustomBadgeView.swift */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		96965E9B29B8CB830094520F /* Version+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Version+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		96965E9E29B8CD090094520F /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		96965EA029BB680F0094520F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		96965EA229BB8D890094520F /* CustomBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBadgeView.swift; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
 		96D30B7929B1E1900018F750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				9660493029B537A200F64E55 /* FilteredListView.swift */,
 				96965E8229B8A3660094520F /* MailView.swift */,
 				96965E9E29B8CD090094520F /* NewsView.swift */,
+				96965EA229BB8D890094520F /* CustomBadgeView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				96D30B9329B1E34C0018F750 /* ContentSubView.swift in Sources */,
 				96965E9529B8BC830094520F /* Group+CoreDataProperties.swift in Sources */,
 				9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */,
+				96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */,
 				96965E9C29B8CB830094520F /* Version+CoreDataClass.swift in Sources */,
 				96965E8529B8A4860094520F /* SettingsController.swift in Sources */,
 				9660492B29B463B400F64E55 /* FilterModel.swift in Sources */,
