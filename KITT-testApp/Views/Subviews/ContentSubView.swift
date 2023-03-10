@@ -31,6 +31,7 @@ struct OffenseContent: View {
     @State private var customNote = ""
     @State private var noteChanged = false
     @State private var sendingMail = false
+    @FocusState private var noteFocused:Bool
     
     @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
@@ -102,8 +103,26 @@ struct OffenseContent: View {
                         .font(.caption)
                 }
                 .padding(.vertical, 5)
+                
+                VStack{
+                    TextField("Poznámka", text: $customNote, axis: .vertical)
+                        .autocorrectionDisabled()
+                        .focused($noteFocused)
+                        .onChange(of: customNote) { _ in
+                            offense.note = customNote
+                            noteChanged = true
+                        }
+                        .onSubmit {
+                            offense.note = customNote
+                            try? moc.save()
+                        }
+                }
+                .padding(.vertical, 5)
             }
             .padding(.vertical, 10)
+        }
+        .onTapGesture{
+            noteFocused = false
         }
         .onAppear{
             customNote = offense.wrappedNote
@@ -142,20 +161,6 @@ struct OffenseContent: View {
                         .foregroundColor(.red)
                 }
             }
-            
-            ToolbarItem(placement: .bottomBar) {
-                TextField("Poznámka", text: $customNote)
-                    .autocorrectionDisabled()
-                    .onChange(of: customNote) { _ in
-                        offense.note = customNote
-                        noteChanged = true
-                    }
-                    .onSubmit {
-                        offense.note = customNote
-                        try? moc.save()
-                    }
-            }
-        
         }
         .sheet(isPresented: $sendingMail) {
             let content:String = """
@@ -183,6 +188,7 @@ struct CrimeContent: View{
     @State private var customNote = ""
     @State private var noteChanged = false
     @State private var sendingMail = false
+    @FocusState private var noteFocused:Bool
     
     @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
@@ -214,6 +220,24 @@ struct CrimeContent: View{
                 }
             }
             .padding(.vertical, 10)
+            
+            VStack{
+                TextField("Poznámka", text: $customNote, axis: .vertical)
+                    .autocorrectionDisabled()
+                    .focused($noteFocused)
+                    .onChange(of: customNote) { _ in
+                        crime.note = customNote
+                        noteChanged = true
+                    }
+                    .onSubmit {
+                        crime.note = customNote
+                        try? moc.save()
+                    }
+            }
+            .padding(.vertical, 5)
+        }
+        .onTapGesture{
+            noteFocused = false
         }
         .onAppear{
             customNote = crime.wrappedNote
@@ -251,19 +275,6 @@ struct CrimeContent: View{
                         .foregroundColor(.red)
                 }
             }
-            
-            ToolbarItem(placement: .bottomBar) {
-                TextField("Poznámka", text: $customNote)
-                    .autocorrectionDisabled()
-                    .onChange(of: customNote) { _ in
-                        crime.note = customNote
-                        noteChanged = true
-                    }
-                    .onSubmit {
-                        crime.note = customNote
-                        try? moc.save()
-                    }
-            }
         }
         .sheet(isPresented: $sendingMail) {
             let content:String = """
@@ -289,6 +300,7 @@ struct LawExtractContent: View{
     @State private var customNote = ""
     @State private var noteChanged = false
     @State private var sendingMail = false
+    @FocusState private var noteFocused:Bool
     
     @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
@@ -303,7 +315,25 @@ struct LawExtractContent: View{
                 Text(le.wrappedContent)
                     .font(.caption)
                     .padding(.top, 10)
+                
+                VStack{
+                    TextField("Poznámka", text: $customNote, axis: .vertical)
+                        .autocorrectionDisabled()
+                        .focused($noteFocused)
+                        .onChange(of: customNote) { _ in
+                            le.note = customNote
+                            noteChanged = true
+                        }
+                        .onSubmit {
+                            le.note = customNote
+                            try? moc.save()
+                        }
+                }
+                .padding(.vertical, 5)
             }.padding(.vertical, 10)
+        }
+        .onTapGesture{
+            noteFocused = false
         }
         .onAppear{
             customNote = le.wrappedNote
@@ -340,19 +370,6 @@ struct LawExtractContent: View{
                     Image(systemName: le.isFavorited ? "heart.fill" : "heart")
                         .foregroundColor(.red)
                 }
-            }
-            
-            ToolbarItem(placement: .bottomBar) {
-                TextField("Poznámka", text: $customNote)
-                    .autocorrectionDisabled()
-                    .onChange(of: customNote) { _ in
-                        le.note = customNote
-                        noteChanged = true
-                    }
-                    .onSubmit {
-                        le.note = customNote
-                        try? moc.save()
-                    }
             }
         }
         .sheet(isPresented: $sendingMail) {
