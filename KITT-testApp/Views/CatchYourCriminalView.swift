@@ -58,6 +58,7 @@ class ImagePersonController: ObservableObject{
             case .criminal:
                 if clicked {
                     self.highestScore += 1
+                    self.harderDifficulty()
                 }
                 else{
                     self.mistakes += 1
@@ -73,8 +74,6 @@ class ImagePersonController: ObservableObject{
                 finishTheGame()
                 return
             }
-            
-            self.harderDifficulty()
             
             selectedType.timer?.cancel()
             self.images.removeAll(where: {$0.id == selectedType.id})
