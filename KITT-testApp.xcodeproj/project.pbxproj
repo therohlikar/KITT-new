@@ -36,6 +36,7 @@
 		96965E9F29B8CD090094520F /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965E9E29B8CD090094520F /* NewsView.swift */; };
 		96965EA129BB680F0094520F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EA029BB680F0094520F /* NetworkController.swift */; };
 		96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EA229BB8D890094520F /* CustomBadgeView.swift */; };
+		96965EBF29BCFB560094520F /* CatchYourCriminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EBE29BCFB560094520F /* CatchYourCriminalView.swift */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		96965E9E29B8CD090094520F /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		96965EA029BB680F0094520F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		96965EA229BB8D890094520F /* CustomBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBadgeView.swift; sourceTree = "<group>"; };
+		96965EBE29BCFB560094520F /* CatchYourCriminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchYourCriminalView.swift; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
 		96D30B7929B1E1900018F750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				9660492629B2476E00F64E55 /* MainView.swift */,
 				9660492829B247B600F64E55 /* FavoritesView.swift */,
 				96965E7229B7EC5F0094520F /* SettingsView.swift */,
+				96965EBE29BCFB560094520F /* CatchYourCriminalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				96965E8129B8849C0094520F /* Crime+CoreDataProperties.swift in Sources */,
 				96965E7329B7EC5F0094520F /* SettingsView.swift in Sources */,
 				9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */,
+				96965EBF29BCFB560094520F /* CatchYourCriminalView.swift in Sources */,
 				96D30B8D29B1E2A30018F750 /* CrimeModel.swift in Sources */,
 				96D30B8529B1E1BC0018F750 /* LibraryView.swift in Sources */,
 				96965E9929B8CAA90094520F /* VersionModel.swift in Sources */,

@@ -31,6 +31,9 @@ struct MainView: View {
     
     @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
+    @AppStorage("catchYourCriminalUnlocked") private var catchYourCriminalUnlocked: Bool = false
+    
+    @State private var isBored: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -54,13 +57,23 @@ struct MainView: View {
                             .tag("favorites")
                     }
                     .contentShape(Rectangle())
+                    
                     if !searchOnTop {
                         TextField("Vyhledávání...", text: $searchKey)
                             .autocorrectionDisabled()
                             .padding(10)
                             .focused($searchFocused)
+                            .onSubmit {
+                                catchYourCriminalUnlocked = true
+                                if searchKey == "I am bored" {
+                                    isBored.toggle()
+                                }
+                            }
                     }
                 }
+                .navigationDestination(isPresented: $isBored, destination: {
+                    CatchYourCriminalView()
+                })
                 .toolbar{
                     if searchOnTop {
                         ToolbarItem(placement: .navigation) {
@@ -68,6 +81,24 @@ struct MainView: View {
                                 .autocorrectionDisabled()
                                 .padding(10)
                                 .focused($searchFocused)
+                                .onSubmit {
+                                    catchYourCriminalUnlocked = true
+                                    if searchKey == "I am bored" {
+                                        isBored.toggle()
+                                    }
+                                }
+                        }
+                    }
+                    
+                    if catchYourCriminalUnlocked {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            NavigationLink {
+                                CatchYourCriminalView()
+                            } label: {
+                                Image("criminal")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            }
                         }
                     }
                     

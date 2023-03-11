@@ -20,6 +20,7 @@ struct SettingsView: View {
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
     @AppStorage("settings.hiddenColor") private var hiddenColor: Bool = false
     @AppStorage("foundEasterEgg") private var foundEasterEgg: Bool = false
+    @AppStorage("catchYourCriminalUnlocked") private var catchYourCriminalUnlocked: Bool = false
     
     let developer = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER") as? String ?? "RJ"
     let developerLink = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER_LINK") as? String ?? "rjwannabefit"
@@ -142,34 +143,35 @@ struct SettingsView: View {
                             .labelsHidden()
                     }
                 }
-                Button {
-                    showingNews.toggle()
-                } label: {
-                    Text("NOVINKY")
-                }
-                .badge(news.count)
-                
-                Link(destination: URL(string: "mailto:\(mailTo)")!) {
-                    HStack{
-                        Text("NAPIŠTE MI")
-                        
-                        Text("(Mail aplikace nelze spustit)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .opacity(!canSendMail ? 1.0 : 0.0)
+                Section("SYSTÉM"){
+                    Button {
+                        showingNews.toggle()
+                    } label: {
+                        Text("NOVINKY")
                     }
-                    .onAppear{
-                        canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
+                    .badge(news.count)
+                    
+                    Link(destination: URL(string: "mailto:\(mailTo)")!) {
+                        HStack{
+                            Text("NAPIŠTE MI")
+                            
+                            Text("(Mail aplikace nelze spustit)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .opacity(!canSendMail ? 1.0 : 0.0)
+                        }
+                        .onAppear{
+                            canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
+                        }
                     }
+                    .disabled(!canSendMail ? true : false)
+                    Button {
+                        showingAlertRemoveData.toggle()
+                    } label: {
+                        Text("VYMAZAT DATA")
+                    }
+                    .foregroundColor(.red)
                 }
-                .disabled(!canSendMail ? true : false)
-                Button {
-                    showingAlertRemoveData.toggle()
-                } label: {
-                    Text("VYNUTIT STAŽENÍ DAT")
-                }
-                .foregroundColor(.red)
-                
             }
         }
         .font(.caption)
@@ -179,7 +181,7 @@ struct SettingsView: View {
             NewsView()
                 .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
         }
-        .alert("Vynutit stažení dat", isPresented: $showingAlertRemoveData) {
+        .alert("VYMAZAT DATA", isPresented: $showingAlertRemoveData) {
             Button("Smazat", role: .destructive) {
                 dataVersion = "0.0.0"
                 
