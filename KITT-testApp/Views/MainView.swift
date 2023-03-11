@@ -99,6 +99,7 @@ struct MainView: View {
                                     .resizable()
                                     .frame(width: 30, height: 30)
                             }
+                            .isDetailLink(false)
                         }
                     }
                     
