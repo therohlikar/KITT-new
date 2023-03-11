@@ -29,6 +29,7 @@ struct SettingsView: View {
     @State private var showingNews: Bool = false
     @State private var canSendMail: Bool = false
     @State private var showingAlertRemoveData: Bool = false
+    @State private var showingAlertClearData: Bool = false
     
     var body: some View {
         VStack{
@@ -174,6 +175,12 @@ struct SettingsView: View {
                     }
                     .disabled(!canSendMail ? true : false)
                     Button {
+                        showingAlertClearData.toggle()
+                    } label: {
+                        Text("ZNOVUSTAŽENÍ DAT")
+                    }
+                    .foregroundColor(.red)
+                    Button {
                         showingAlertRemoveData.toggle()
                     } label: {
                         Text("VYMAZAT DATA")
@@ -202,9 +209,20 @@ struct SettingsView: View {
                 showingAlertRemoveData = false
             }
         } message: {
-            Text("Jste si jistý, že chcete vynutit stažení dat?\nVynucení stažení dat způsobí smazání všech aktuálních dat vč. poznámek a oblíbených. \nAplikace bude po souhlasu ukončena.")
+            Text("Jste si jistý, že chcete vymazat data?\nVymazání dat způsobí smazání všech aktuálních dat vč. poznámek a oblíbených. \nAplikace bude po souhlasu ukončena.")
         }
-
+        .alert("ZNOVUSTAŽENÍ DAT", isPresented: $showingAlertClearData) {
+            Button("Znovustáhnout", role: .destructive) {
+                dataVersion = "0.0.0"
+                exit(0)
+            }
+            
+            Button("Zrušit", role: .cancel) {
+                showingAlertClearData = false
+            }
+        } message: {
+            Text("Jste si jistý, že chcete znovustáhnout data?\nTato akce způsobí stažení dat znovu, ponechá oblíbené a poznámky\nAplikace bude po souhlasu ukončena.")
+        }
     }
     
     func removeAll() -> Bool {

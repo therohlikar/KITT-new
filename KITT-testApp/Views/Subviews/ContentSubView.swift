@@ -96,15 +96,19 @@ struct OffenseContent: View {
                 }
                 .padding(.vertical, 5)
                 
-                VStack{
-                    Text("Obsah příkazového bloku")
-                        .font(.headline)
-                    
-                    Text(offense.wrappedFineExample)
-                        .foregroundColor(.secondary)
-                        .font(.caption)
+                if !offense.wrappedFineExample.isEmpty{
+                    VStack{
+                        Text("Obsah příkazového bloku")
+                            .font(.headline)
+                        
+                        Text(offense.wrappedFineExample)
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
+                    .padding(.vertical, 5)
                 }
-                .padding(.vertical, 5)
+                
+                
                 
                 VStack{
                     TextField("Poznámka", text: $customNote, axis: .vertical)
