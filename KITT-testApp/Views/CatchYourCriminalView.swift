@@ -105,16 +105,22 @@ class ImagePersonController: ObservableObject{
     }
     
     func finishTheGame(){
-        self.finished = true
-    }
-    
-    func restart(){
         for img in images{
             if img.timer != nil {
                 img.timer?.cancel()
             }
         }
         
+        let highestScore = UserDefaults.standard.integer(forKey: "criminalHighestScore")
+        
+        if highestScore < self.highestScore {
+            UserDefaults.standard.set(self.highestScore, forKey: "criminalHighestScore")
+        }
+        
+        self.finished = true
+    }
+    
+    func restart(){
         self.images = []
         self.highestScore = 0
         self.mistakes = 0
@@ -126,6 +132,7 @@ class ImagePersonController: ObservableObject{
 
 struct CatchYourCriminalView: View {
     @ObservedObject var ipController: ImagePersonController = ImagePersonController()
+    @AppStorage("criminalHighestScore") private var criminalHighestScore: Int = 0
     @State private var timer:AnyCancellable? = nil
     
     var body: some View {
@@ -151,6 +158,9 @@ struct CatchYourCriminalView: View {
                         .foregroundColor(.red)
                 }
                 
+                Text("NEJVYŠŠÍ SKÓRE: \(criminalHighestScore)")
+                        .font(.caption)
+                        .foregroundColor(.gray)
                 
                 Text("RYCHLOST: \(ipController.currentLevel) / za sekudu")
                     .font(.caption)
@@ -185,7 +195,7 @@ struct CatchYourCriminalView: View {
                 
                 VStack{
                     HStack{
-                        Text("NEJVYŠŠÍ SKÓRE: ")
+                        Text("SKÓRE: ")
                             
                         + Text("\(ipController.highestScore)")
                             .bold()
@@ -193,6 +203,10 @@ struct CatchYourCriminalView: View {
                             .foregroundColor(.green)
                     }
                     .foregroundColor(.white)
+                    
+                    Text("NEJVYŠŠÍ SKÓRE: \(criminalHighestScore)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
                     
                     Text("RYCHLOST: \(ipController.currentLevel) / za sekundu")
                         .font(.caption)

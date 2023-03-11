@@ -20,7 +20,6 @@ struct SettingsView: View {
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
     @AppStorage("settings.hiddenColor") private var hiddenColor: Bool = false
     @AppStorage("foundEasterEgg") private var foundEasterEgg: Bool = false
-    @AppStorage("catchYourCriminalUnlocked") private var catchYourCriminalUnlocked: Bool = false
     
     let developer = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER") as? String ?? "RJ"
     let developerLink = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER_LINK") as? String ?? "rjwannabefit"
@@ -69,6 +68,15 @@ struct SettingsView: View {
                 Link(destination: URL(string: androidLink)!) {
                     HStack{
                         Text("Android verze ke stažení")
+                        Image(systemName: "link")
+                            .foregroundColor(.blue)
+                    }
+                    .foregroundColor(.secondary)
+                    .font(.caption)
+                }
+                Link(destination: URL(string: "https://www.kittapp.store/")!) {
+                    HStack{
+                        Text("KITTAPP.STORE")
                         Image(systemName: "link")
                             .foregroundColor(.blue)
                     }
