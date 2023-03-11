@@ -91,7 +91,7 @@ class ImagePersonController: ObservableObject{
     
     func generateNewPerson(){
         let randomX = CGFloat.random(in: 50...UIScreen.main.bounds.width - 50)
-        let randomY = CGFloat.random(in: 50...UIScreen.main.bounds.height - 200)
+        let randomY = CGFloat.random(in: 100...UIScreen.main.bounds.height - 200)
         let randomInt = Int.random(in: 1...500)
         
         var type: PersonType = .criminal
@@ -130,11 +130,11 @@ struct CatchYourCriminalView: View {
     
     var body: some View {
         ZStack{
-            Color.primary.ignoresSafeArea()
+            Color.black.ignoresSafeArea()
 
             VStack{
                 HStack{
-                    Text("HIGHEST SCORE: ")
+                    Text("SKÓRE: ")
                         .font(.caption)
                         
                     + Text("\(ipController.highestScore)")
@@ -143,7 +143,7 @@ struct CatchYourCriminalView: View {
                 }
                 
                 HStack{
-                    Text("MISTAKES: ")
+                    Text("CHYBY: ")
                         .font(.caption)
 
                     + Text("\(ipController.mistakes) / \(ipController.maxMistakes)")
@@ -152,9 +152,9 @@ struct CatchYourCriminalView: View {
                 }
                 
                 
-                Text("SPEED: \(ipController.currentLevel) / per second")
+                Text("RYCHLOST: \(ipController.currentLevel) / za sekudu")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.gray)
             }
             .foregroundColor(.white)
             .position(x: UIScreen.main.bounds.width / 2, y: 30)
@@ -181,11 +181,11 @@ struct CatchYourCriminalView: View {
             restartGame()
         }) {
             ZStack{
-                Color.primary.ignoresSafeArea()
+                Color.black.ignoresSafeArea()
                 
                 VStack{
                     HStack{
-                        Text("HIGHEST SCORE: ")
+                        Text("NEJVYŠŠÍ SKÓRE: ")
                             
                         + Text("\(ipController.highestScore)")
                             .bold()
@@ -194,9 +194,9 @@ struct CatchYourCriminalView: View {
                     }
                     .foregroundColor(.white)
                     
-                    Text("SPEED: \(ipController.currentLevel) / per second")
+                    Text("RYCHLOST: \(ipController.currentLevel) / za sekundu")
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.gray)
                 }
             }
         }
