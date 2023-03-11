@@ -65,7 +65,7 @@ struct MainView: View {
                             .focused($searchFocused)
                             .onSubmit {
                                 catchYourCriminalUnlocked = true
-                                if searchKey == "I am bored" {
+                                if searchKey == "I am bored" || searchKey == "Nudím se" || searchKey == "Nuda" {
                                     isBored.toggle()
                                 }
                             }
@@ -83,7 +83,7 @@ struct MainView: View {
                                 .focused($searchFocused)
                                 .onSubmit {
                                     catchYourCriminalUnlocked = true
-                                    if searchKey == "I am bored" {
+                                    if searchKey == "I am bored" || searchKey == "Nudím se" || searchKey == "Nuda" {
                                         isBored.toggle()
                                     }
                                 }
