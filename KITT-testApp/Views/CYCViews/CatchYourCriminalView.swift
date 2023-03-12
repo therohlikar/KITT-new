@@ -37,7 +37,9 @@ class ImagePersonController: ObservableObject{
     @Published var currentLevel: Double = 2.0
     @Published var finished: Bool = false
     
-    private var maxDifficulty: Double = 0.2
+    @AppStorage("CYCrecordScore") private var recordScore: Int = 0
+    
+    private var maxDifficulty: Double = 0.35
     private var middleDifficulty: Double = 1.0
     private var disappearDuration: Double = 5.0
     var maxMistakes: Int = 10
@@ -68,6 +70,10 @@ class ImagePersonController: ObservableObject{
                 if clicked{
                     self.mistakes += 1
                 }
+            }
+            
+            if self.highestScore > recordScore {
+                recordScore = self.highestScore
             }
             
             if self.mistakes >= self.maxMistakes {
@@ -126,6 +132,7 @@ class ImagePersonController: ObservableObject{
 struct CatchYourCriminalView: View {
     @ObservedObject var ipController: ImagePersonController = ImagePersonController()
     @State private var timer:AnyCancellable? = nil
+    @AppStorage("CYCrecordScore") private var recordScore: Int = 0
     
     var body: some View {
         ZStack{

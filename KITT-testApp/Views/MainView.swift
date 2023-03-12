@@ -72,7 +72,7 @@ struct MainView: View {
                     }
                 }
                 .navigationDestination(isPresented: $isBored, destination: {
-                    CatchYourCriminalView()
+                    CYCMenuView()
                 })
                 .toolbar{
                     if searchOnTop {
@@ -93,7 +93,7 @@ struct MainView: View {
                     if catchYourCriminalUnlocked {
                         ToolbarItem(placement: .navigationBarLeading) {
                             NavigationLink {
-                                CatchYourCriminalView()
+                                CYCMenuView()
                             } label: {
                                 Image("criminal")
                                     .resizable()
