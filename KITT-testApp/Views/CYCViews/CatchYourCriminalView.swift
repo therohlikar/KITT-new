@@ -39,7 +39,7 @@ class ImagePersonController: ObservableObject{
     
     @AppStorage("CYCrecordScore") private var recordScore: Int = 0
     
-    private var maxDifficulty: Double = 0.35
+    private var maxDifficulty: Double = 0.28
     private var middleDifficulty: Double = 1.0
     private var disappearDuration: Double = 5.0
     var maxMistakes: Int = 10
