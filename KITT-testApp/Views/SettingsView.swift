@@ -66,9 +66,10 @@ struct SettingsView: View {
                 Text("Zákonná znění ve verzi: \(dataVersion)")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                Link(destination: URL(string: androidLink)!) {
+
+                Link(destination: URL(string: "mailto:\(mailTo)")!) {
                     HStack{
-                        Text("Android verze ke stažení")
+                        Text(mailTo)
                         Image(systemName: "link")
                             .foregroundColor(.blue)
                     }
@@ -161,25 +162,14 @@ struct SettingsView: View {
                     .badge(news.count)
                     
                     Link(destination: URL(string: "mailto:\(mailTo)")!) {
-                        HStack{
-                            Text("NAPIŠTE MI")
-                            
-                            Text("(Mail aplikace nelze spustit)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .opacity(!canSendMail ? 1.0 : 0.0)
-                        }
-                        .onAppear{
-                            canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
-                        }
+                        Text("NAPIŠTE MI")
                     }
-                    .disabled(!canSendMail ? true : false)
+                    
                     Button {
                         showingAlertClearData.toggle()
                     } label: {
-                        Text("ZNOVUSTAŽENÍ DAT")
+                        Text("AKTUALIZACE DAT")
                     }
-                    .foregroundColor(.red)
                     Button {
                         showingAlertRemoveData.toggle()
                     } label: {
@@ -211,8 +201,8 @@ struct SettingsView: View {
         } message: {
             Text("Jste si jistý, že chcete vymazat data?\nVymazání dat způsobí smazání všech aktuálních dat vč. poznámek a oblíbených. \nAplikace bude po souhlasu ukončena.")
         }
-        .alert("ZNOVUSTAŽENÍ DAT", isPresented: $showingAlertClearData) {
-            Button("Znovustáhnout", role: .destructive) {
+        .alert("AKTUALIZACE DAT", isPresented: $showingAlertClearData) {
+            Button("Aktualizovat", role: .destructive) {
                 dataVersion = "0.0.0"
                 exit(0)
             }
@@ -221,7 +211,7 @@ struct SettingsView: View {
                 showingAlertClearData = false
             }
         } message: {
-            Text("Jste si jistý, že chcete znovustáhnout data?\nTato akce způsobí stažení dat znovu, ponechá oblíbené a poznámky\nAplikace bude po souhlasu ukončena.")
+            Text("Jste si jistý, že chcete aktualizovat data?\nTato akce způsobí stažení dat znovu, PONECHÁ oblíbené a poznámky\nAplikace bude po souhlasu ukončena.")
         }
     }
     
