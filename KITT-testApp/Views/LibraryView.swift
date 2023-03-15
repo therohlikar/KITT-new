@@ -29,7 +29,7 @@ struct LibraryView: View {
                 FilteredLawExtractListView(key: searchKey, filters: fvm.filters)
                     .tag(tabType.lawextract)
             }
-            .tabViewStyle(.page)
+            .tabViewStyle(.page(indexDisplayMode: .never))
         }
         
     }

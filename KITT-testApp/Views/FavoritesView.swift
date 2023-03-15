@@ -27,8 +27,7 @@ struct FavoritesView: View {
                 FilteredLawExtractListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
                     .tag(tabType.lawextract)
             }
-            .tabViewStyle(.page)
-            
+            .tabViewStyle(.page(indexDisplayMode: .never))
         }
     }
 }
