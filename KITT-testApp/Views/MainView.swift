@@ -32,6 +32,7 @@ struct MainView: View {
     @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
     @AppStorage("catchYourCriminalUnlocked") private var catchYourCriminalUnlocked: Bool = false
+    @AppStorage("firstOpen") private var firstOpen: Bool = false
     
     @State private var isBored: Bool = false
     
@@ -149,7 +150,7 @@ struct MainView: View {
                 ready = true
             }else{
                 let newestVersion = await VersionController().getNewestVersion()
-                
+                print(newestVersion, currentVersion)
                 if newestVersion <= currentVersion {
                     ready = true
                 }
@@ -170,15 +171,17 @@ struct MainView: View {
                     }
                     
                     let jsonController = JsonDataController()
-                    if let offenseArray = await jsonController.downloadJsonData(.offense) as? Array<OffenseModel> {
+                    if let offenseArray: Array<OffenseModel> = await jsonController.downloadJsonData(.offense) as? Array<OffenseModel> {
                         var note: String = ""
                         var isFavorited: Bool = false
+                        var customId: String? = ""
                         
                         for item in offenseArray {
                             note = item.note
                             isFavorited = false
+                            customId = item.id == nil ? item.paragraph : item.id
                             
-                            if let existingOffense = offenses.first(where: {$0.id == (item.id == nil ? item.paragraph : item.id)}){
+                            if let existingOffense = offenses.first(where: {$0.id == customId}){
                                 note = existingOffense.wrappedNote
                                 isFavorited = existingOffense.isFavorited
                                 
@@ -186,7 +189,7 @@ struct MainView: View {
                             }
                             
                             let newOffense = Offense(context: moc)
-                            newOffense.id = item.id == nil ? item.paragraph : item.id
+                            newOffense.id = customId
                             // id is same as paragraph, which is unique all the time
                             //loop through groups, if any, and create or invite them in
                             for group in item.groups{
@@ -202,11 +205,18 @@ struct MainView: View {
                             newOffense.offenseScore = Int16(item.offenseScore)
                             newOffense.isOffenseTracked = item.isOffenseTracked
                             newOffense.fineExample = item.fineExample
-                            newOffense.miranda = item.miranda
-                            newOffense.warning = item.warning
+                            newOffense.miranda = item.miranda ?? ""
+                            newOffense.warning = item.warning ?? ""
                             
                             newOffense.note = note
                             newOffense.isFavorited = isFavorited
+                        }
+                        
+                        // list through all offenses and if it is NOT on the remote by its id, remove test
+                        for duplicate in offenses {
+                            if !offenseArray.contains(where: { $0.id != nil ? $0.id == duplicate.id : $0.paragraph == duplicate.paragraph }) {
+                                moc.delete(duplicate)
+                            }
                         }
                     }
                     if let crimeArray = await jsonController.downloadJsonData(.crime) as? Array<CrimeModel> {
@@ -242,6 +252,12 @@ struct MainView: View {
                             newCrime.note = note
                             newCrime.isFavorited = isFavorited
                         }
+                        
+                        for duplicate in crimes {
+                            if !crimeArray.contains(where: { $0.id != nil ? $0.id == duplicate.id : $0.paragraph == duplicate.paragraph }) {
+                                moc.delete(duplicate)
+                            }
+                        }
                     }
                     if let leArray = await jsonController.downloadJsonData(.lawextract) as? Array<LawExtractModel> {
                         var note: String = ""
@@ -275,6 +291,12 @@ struct MainView: View {
                             newLe.note = note
                             newLe.isFavorited = isFavorited
                         }
+                        
+                        for duplicate in lawextracts {
+                            if !leArray.contains(where: { $0.id != nil ? $0.id == duplicate.id : $0.paragraph == duplicate.paragraph }) {
+                                moc.delete(duplicate)
+                            }
+                        }
                     }
                     
                     //clear groups
@@ -289,6 +311,9 @@ struct MainView: View {
                     currentVersion = newestVersion
                     
                     ready = true
+                    if !firstOpen {
+                        firstOpen = true
+                    }
                 }
             }
         }
