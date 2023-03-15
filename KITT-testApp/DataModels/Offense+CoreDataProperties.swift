@@ -24,6 +24,8 @@ extension Offense {
     @NSManaged public var resolveOptions: String?
     @NSManaged public var offenseScore: Int16
     @NSManaged public var isOffenseTracked: Bool
+    @NSManaged public var warning: String?
+    @NSManaged public var miranda: String?
     @NSManaged public var fineExample: String?
     @NSManaged public var note: String?
     @NSManaged public var isFavorited: Bool
@@ -35,6 +37,8 @@ extension Offense {
     public var wrappedViolationParagraph: String { violationParagraph ?? ""}
     public var wrappedResolveOptions: String { resolveOptions ?? "" }
     public var wrappedFineExample: String { fineExample ?? "" }
+    public var wrappedWarning: String { warning ?? "" }
+    public var wrappedMiranda: String { miranda ?? "" }
     public var wrappedNote: String { note ?? "" }
     public var groupArray: [Group] {
         let set = group as? Set<Group> ?? []

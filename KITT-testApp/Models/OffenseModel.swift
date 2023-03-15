@@ -38,6 +38,8 @@ struct OffenseModel: Codable, Hashable {
     var offenseScore: Int = 0
     var isOffenseTracked: Bool = false
     var fineExample: String = ""
+    var warning: String? = nil
+    var miranda: String? = nil
     var note: String = ""
     var isFavorited: Bool = false
 }

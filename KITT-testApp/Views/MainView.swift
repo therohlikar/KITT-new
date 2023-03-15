@@ -175,8 +175,6 @@ struct MainView: View {
                         var isFavorited: Bool = false
                         
                         for item in offenseArray {
-                            
-                            
                             note = item.note
                             isFavorited = false
                             
@@ -204,6 +202,8 @@ struct MainView: View {
                             newOffense.offenseScore = Int16(item.offenseScore)
                             newOffense.isOffenseTracked = item.isOffenseTracked
                             newOffense.fineExample = item.fineExample
+                            newOffense.miranda = item.miranda
+                            newOffense.warning = item.warning
                             
                             newOffense.note = note
                             newOffense.isFavorited = isFavorited
@@ -236,6 +236,8 @@ struct MainView: View {
                             newCrime.content = item.content
                             newCrime.paragraph = item.paragraph
                             newCrime.crimeExample = item.crimeExample
+                            newCrime.miranda = item.miranda
+                            newCrime.warning = item.warning
                             
                             newCrime.note = note
                             newCrime.isFavorited = isFavorited
@@ -267,6 +269,8 @@ struct MainView: View {
                             newLe.title = item.title
                             newLe.content = item.content
                             newLe.paragraph = item.paragraph
+                            newLe.miranda = item.miranda
+                            newLe.warning = item.warning
                             
                             newLe.note = note
                             newLe.isFavorited = isFavorited

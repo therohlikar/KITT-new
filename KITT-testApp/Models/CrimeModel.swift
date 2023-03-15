@@ -22,6 +22,8 @@ struct CrimeModel: Codable, Hashable {
     var content: String? = ""
     var paragraph: String? = "273-2008-114-1"
     var crimeExample: String? = ""
+    var warning: String? = nil
+    var miranda: String? = nil
     var note: String = ""
     var isFavorited: Bool = false
 }

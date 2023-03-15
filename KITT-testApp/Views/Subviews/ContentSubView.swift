@@ -39,6 +39,19 @@ struct OffenseContent: View {
     
     var body: some View{
         ScrollView{
+            if !offense.wrappedWarning.isEmpty {
+                VStack(alignment: .leading){
+                    Text(offense.wrappedWarning)
+                }
+                .padding(3)
+                .frame(width: 350, alignment: .leading)
+                .padding(2)
+                .background(Color("NetworkErrorColor"))
+                .cornerRadius(6)
+                .font(.caption)
+                .foregroundColor(.white)
+            }
+            
             VStack{
                 Text(offense.wrappedTitle)
                     .font(.headline)
@@ -108,7 +121,17 @@ struct OffenseContent: View {
                     .padding(.vertical, 5)
                 }
                 
-                
+                if !offense.wrappedMiranda.isEmpty{
+                    VStack{
+                        Text("Poučení")
+                            .font(.headline)
+                        
+                        Text(offense.wrappedMiranda)
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
+                    .padding(.vertical, 5)
+                }
                 
                 VStack{
                     TextField("Poznámka", text: $customNote, axis: .vertical)
@@ -159,7 +182,6 @@ struct OffenseContent: View {
                     canSendMail = networkController.connected && !mailTo.isEmpty && MFMailComposeViewController.canSendMail()
                 }
             }
-            
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
