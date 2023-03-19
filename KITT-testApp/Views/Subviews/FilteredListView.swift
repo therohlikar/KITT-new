@@ -86,41 +86,50 @@ struct OffenseRowListView: View{
     @ObservedObject var offense: Offense
 
     var body: some View{
-        VStack(alignment: .leading){
-            Text(offense.wrappedTitle)
-                .fontWeight(.light)
-            VStack(alignment: .leading){
-                Text(offense.paragraphModel.toString())
-                if !offense.wrappedViolationParagraph.isEmpty {
-                    Text("PŘ: \(offense.violationParagraphModel.toString())")
-                }
-                if sc.settings.showDetail {
-                    HStack(alignment: .top){
-                        if !offense.wrappedResolveOptions.isEmpty{
-                            VStack{
-                                Text("Řešení")
-                                    .bold()
-                                Text(offense.wrappedResolveOptions)
-                            }
-                        }
-                        if offense.offenseScore >= 0 {
-                            VStack{
-                                Text("Body")
-                                    .bold()
-                                Text("\(offense.offenseScore)")
-                            }
-                        }
-                        VStack{
-                            Text("Sledovaný přestupek")
-                                .bold()
-                            Text(offense.isOffenseTracked ? "Ano" : "Ne")
-                        }
-                    }
-                    .padding(1)
-                }
+        HStack{
+            if !offense.wrappedWarning.isEmpty{
+                Rectangle()
+                    .foregroundColor(Color("NetworkErrorColor"))
+                    .frame(width: 5)
             }
-            .font(.caption)
-            .foregroundColor(.secondary)
+
+            VStack(alignment: .leading){
+                Text(offense.wrappedTitle)
+                    .fontWeight(.light)
+                
+                VStack{
+                    Text(offense.paragraphModel.toString())
+                    if !offense.wrappedViolationParagraph.isEmpty {
+                        Text("PŘ: \(offense.violationParagraphModel.toString())")
+                    }
+                    if sc.settings.showDetail {
+                        HStack(alignment: .top){
+                            if !offense.wrappedResolveOptions.isEmpty{
+                                VStack{
+                                    Text("Řešení")
+                                        .bold()
+                                    Text(offense.wrappedResolveOptions)
+                                }
+                            }
+                            if offense.offenseScore >= 0 {
+                                VStack{
+                                    Text("Body")
+                                        .bold()
+                                    Text("\(offense.offenseScore)")
+                                }
+                            }
+                            VStack{
+                                Text("Sledovaný přestupek")
+                                    .bold()
+                                Text(offense.isOffenseTracked ? "Ano" : "Ne")
+                            }
+                        }
+                        .padding(1)
+                    }
+                }
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
         }
     }
 }
@@ -203,14 +212,22 @@ struct CrimeRowListView: View{
     @ObservedObject var crime: Crime
     
     var body: some View{
-        VStack(alignment: .leading){
-            Text(crime.wrappedTitle)
-                .fontWeight(.light)
-            VStack(alignment: .leading){
-                Text(crime.paragraphModel.toString())
+        HStack{
+            if !crime.wrappedWarning.isEmpty{
+                Rectangle()
+                    .foregroundColor(Color("NetworkErrorColor"))
+                    .frame(width: 5)
             }
-            .font(.caption)
-            .foregroundColor(.secondary)
+            
+            VStack(alignment: .leading){
+                Text(crime.wrappedTitle)
+                    .fontWeight(.light)
+                VStack(alignment: .leading){
+                    Text(crime.paragraphModel.toString())
+                }
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
         }
     }
 }
@@ -292,14 +309,22 @@ struct LawExtractRowListView: View{
     @ObservedObject var le: LawExtract
     
     var body: some View{
-        VStack(alignment: .leading){
-            Text(le.wrappedTitle)
-                .fontWeight(.light)
-            VStack(alignment: .leading){
-                Text(le.paragraphModel.toString())
+        HStack{
+            if !le.wrappedWarning.isEmpty{
+                Rectangle()
+                    .foregroundColor(Color("NetworkErrorColor"))
+                    .frame(width: 5)
+                
+                VStack(alignment: .leading){
+                    Text(le.wrappedTitle)
+                        .fontWeight(.light)
+                    VStack(alignment: .leading){
+                        Text(le.paragraphModel.toString())
+                    }
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                }
             }
-            .font(.caption)
-            .foregroundColor(.secondary)
         }
     }
 }

@@ -250,8 +250,8 @@ struct MainView: View {
                             newCrime.content = item.content
                             newCrime.paragraph = item.paragraph
                             newCrime.crimeExample = item.crimeExample
-//                            newCrime.miranda = item.miranda
-//                            newCrime.warning = item.warning
+                            newCrime.miranda = item.miranda
+                            newCrime.warning = item.warning
                             
                             newCrime.note = note
                             newCrime.isFavorited = isFavorited
@@ -291,8 +291,8 @@ struct MainView: View {
                             newLe.title = item.title
                             newLe.content = item.content
                             newLe.paragraph = item.paragraph
-//                            newLe.miranda = item.miranda
-//                            newLe.warning = item.warning
+                            newLe.miranda = item.miranda
+                            newLe.warning = item.warning
                             
                             newLe.note = note
                             newLe.isFavorited = isFavorited
