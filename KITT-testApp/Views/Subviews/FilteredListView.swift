@@ -87,17 +87,11 @@ struct OffenseRowListView: View{
 
     var body: some View{
         HStack{
-            if !offense.wrappedWarning.isEmpty{
-                Rectangle()
-                    .foregroundColor(Color("NetworkErrorColor"))
-                    .frame(width: 5)
-            }
-
             VStack(alignment: .leading){
                 Text(offense.wrappedTitle)
                     .fontWeight(.light)
                 
-                VStack{
+                VStack(alignment: .leading){
                     Text(offense.paragraphModel.toString())
                     if !offense.wrappedViolationParagraph.isEmpty {
                         Text("PŘ: \(offense.violationParagraphModel.toString())")
@@ -130,6 +124,13 @@ struct OffenseRowListView: View{
                 .font(.caption)
                 .foregroundColor(.secondary)
             }
+            VStack(alignment: .trailing){
+                if !offense.wrappedWarning.isEmpty{
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(Color("NetworkErrorColor"))
+                }
+            }
+            
         }
     }
 }
@@ -213,12 +214,6 @@ struct CrimeRowListView: View{
     
     var body: some View{
         HStack{
-            if !crime.wrappedWarning.isEmpty{
-                Rectangle()
-                    .foregroundColor(Color("NetworkErrorColor"))
-                    .frame(width: 5)
-            }
-            
             VStack(alignment: .leading){
                 Text(crime.wrappedTitle)
                     .fontWeight(.light)
@@ -227,6 +222,13 @@ struct CrimeRowListView: View{
                 }
                 .font(.caption)
                 .foregroundColor(.secondary)
+            }
+            
+            VStack(alignment: .trailing){
+                if !crime.wrappedWarning.isEmpty{
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(Color("NetworkErrorColor"))
+                }
             }
         }
     }
@@ -310,19 +312,20 @@ struct LawExtractRowListView: View{
     
     var body: some View{
         HStack{
-            if !le.wrappedWarning.isEmpty{
-                Rectangle()
-                    .foregroundColor(Color("NetworkErrorColor"))
-                    .frame(width: 5)
-                
+            VStack(alignment: .leading){
+                Text(le.wrappedTitle)
+                    .fontWeight(.light)
                 VStack(alignment: .leading){
-                    Text(le.wrappedTitle)
-                        .fontWeight(.light)
-                    VStack(alignment: .leading){
-                        Text(le.paragraphModel.toString())
-                    }
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    Text(le.paragraphModel.toString())
+                }
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
+            
+            VStack(alignment: .trailing){
+                if !le.wrappedWarning.isEmpty{
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(Color("NetworkErrorColor"))
                 }
             }
         }
