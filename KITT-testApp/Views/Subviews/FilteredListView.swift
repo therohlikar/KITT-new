@@ -84,24 +84,17 @@ struct FilteredOffenseListView: View{
 struct OffenseRowListView: View{
     @EnvironmentObject var sc: SettingsController
     @ObservedObject var offense: Offense
-    @State private var isDetailShown: Bool = false
-    
+
     var body: some View{
         VStack(alignment: .leading){
             Text(offense.wrappedTitle)
                 .fontWeight(.light)
-                .onTapGesture {
-                    if !sc.settings.showDetail {
-                        isDetailShown.toggle()
-                    }
-                    
-                }
             VStack(alignment: .leading){
                 Text(offense.paragraphModel.toString())
                 if !offense.wrappedViolationParagraph.isEmpty {
                     Text("PŘ: \(offense.violationParagraphModel.toString())")
                 }
-                if isDetailShown || sc.settings.showDetail {
+                if sc.settings.showDetail {
                     HStack(alignment: .top){
                         if !offense.wrappedResolveOptions.isEmpty{
                             VStack{
