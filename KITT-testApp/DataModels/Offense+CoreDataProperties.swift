@@ -2,7 +2,7 @@
 //  Offense+CoreDataProperties.swift
 //  KITT-testApp
 //
-//  Created by Radek Jeník on 3/3/23.
+//  Created by Radek Jeník on 3/17/23.
 //
 //
 

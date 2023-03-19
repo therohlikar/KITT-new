@@ -46,12 +46,14 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isOffenseTracked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="miranda" optional="YES" attributeType="String"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="offenseScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="paragraph" optional="YES" attributeType="String"/>
         <attribute name="resolveOptions" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="violationParagraph" optional="YES" attributeType="String"/>
+        <attribute name="warning" optional="YES" attributeType="String"/>
         <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="offense" inverseEntity="Group"/>
         <uniquenessConstraints>
             <uniquenessConstraint>

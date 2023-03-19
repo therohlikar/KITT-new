@@ -20,8 +20,8 @@ extension Crime {
     @NSManaged public var content: String?
     @NSManaged public var title: String?
     @NSManaged public var paragraph: String?
-    @NSManaged public var warning: String?
-    @NSManaged public var miranda: String?
+//    @NSManaged public var warning: String?
+//    @NSManaged public var miranda: String?
     @NSManaged public var crimeExample: String?
     @NSManaged public var note: String?
     @NSManaged public var isFavorited: Bool
@@ -31,8 +31,8 @@ extension Crime {
     public var wrappedContent: String { content ?? "" }
     public var wrappedParagraph: String { paragraph ?? "" }
     public var wrappedCrimeExample: String { crimeExample ?? "" }
-    public var wrappedWarning: String { warning ?? "" }
-    public var wrappedMiranda: String { miranda ?? "" }
+//    public var wrappedWarning: String { warning ?? "" }
+//    public var wrappedMiranda: String { miranda ?? "" }
     public var wrappedNote: String { note ?? "" }
     public var groupArray: [Group] {
         let set = group as? Set<Group> ?? []

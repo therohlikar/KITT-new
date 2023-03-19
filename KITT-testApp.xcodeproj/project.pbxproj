@@ -10,8 +10,6 @@
 		9660490329B1E75A00F64E55 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490229B1E75A00F64E55 /* DataController.swift */; };
 		9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */; };
 		9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490C29B217AC00F64E55 /* ParagraphModel.swift */; };
-		9660492229B2463400F64E55 /* Offense+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */; };
-		9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */; };
 		9660492729B2476E00F64E55 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492629B2476E00F64E55 /* MainView.swift */; };
 		9660492929B247B600F64E55 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492829B247B600F64E55 /* FavoritesView.swift */; };
 		9660492B29B463B400F64E55 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492A29B463B400F64E55 /* FilterModel.swift */; };
@@ -38,6 +36,8 @@
 		96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EA229BB8D890094520F /* CustomBadgeView.swift */; };
 		96965EBF29BCFB560094520F /* CatchYourCriminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EBE29BCFB560094520F /* CatchYourCriminalView.swift */; };
 		96965EC229BE768C0094520F /* CYCMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EC129BE768C0094520F /* CYCMenuView.swift */; };
+		96B498DA29C41C8400883BFA /* Offense+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B498D829C41C8400883BFA /* Offense+CoreDataClass.swift */; };
+		96B498DB29C41C8400883BFA /* Offense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B498D929C41C8400883BFA /* Offense+CoreDataProperties.swift */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
@@ -53,8 +53,6 @@
 		9660490229B1E75A00F64E55 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KittDataModel.xcdatamodel; sourceTree = "<group>"; };
 		9660490C29B217AC00F64E55 /* ParagraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphModel.swift; sourceTree = "<group>"; };
-		9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9660492629B2476E00F64E55 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9660492829B247B600F64E55 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		9660492A29B463B400F64E55 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
@@ -84,6 +82,9 @@
 		96965EA229BB8D890094520F /* CustomBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBadgeView.swift; sourceTree = "<group>"; };
 		96965EBE29BCFB560094520F /* CatchYourCriminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchYourCriminalView.swift; sourceTree = "<group>"; };
 		96965EC129BE768C0094520F /* CYCMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYCMenuView.swift; sourceTree = "<group>"; };
+		96B498D529C4195300883BFA /* KittDataModel AddWarningAndMiranda.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "KittDataModel AddWarningAndMiranda.xcdatamodel"; sourceTree = "<group>"; };
+		96B498D829C41C8400883BFA /* Offense+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataClass.swift"; sourceTree = "<group>"; };
+		96B498D929C41C8400883BFA /* Offense+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offense+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
 		96D30B7929B1E1900018F750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +112,8 @@
 		9660490B29B1E92600F64E55 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				96B498D829C41C8400883BFA /* Offense+CoreDataClass.swift */,
+				96B498D929C41C8400883BFA /* Offense+CoreDataProperties.swift */,
 				96965E9A29B8CB830094520F /* Version+CoreDataClass.swift */,
 				96965E9B29B8CB830094520F /* Version+CoreDataProperties.swift */,
 				96965E8E29B8BC830094520F /* LawExtract+CoreDataClass.swift */,
@@ -119,8 +122,6 @@
 				96965E9129B8BC830094520F /* Group+CoreDataProperties.swift */,
 				96965E7C29B8849C0094520F /* Crime+CoreDataClass.swift */,
 				96965E7D29B8849C0094520F /* Crime+CoreDataProperties.swift */,
-				9660491E29B2463400F64E55 /* Offense+CoreDataClass.swift */,
-				9660491F29B2463400F64E55 /* Offense+CoreDataProperties.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -315,10 +316,10 @@
 				9660493129B537A200F64E55 /* FilteredListView.swift in Sources */,
 				96965E8129B8849C0094520F /* Crime+CoreDataProperties.swift in Sources */,
 				96965E7329B7EC5F0094520F /* SettingsView.swift in Sources */,
-				9660492329B2463400F64E55 /* Offense+CoreDataProperties.swift in Sources */,
 				96965EBF29BCFB560094520F /* CatchYourCriminalView.swift in Sources */,
 				96D30B8D29B1E2A30018F750 /* CrimeModel.swift in Sources */,
 				96D30B8529B1E1BC0018F750 /* LibraryView.swift in Sources */,
+				96B498DB29C41C8400883BFA /* Offense+CoreDataProperties.swift in Sources */,
 				96965E9929B8CAA90094520F /* VersionModel.swift in Sources */,
 				96965E9229B8BC830094520F /* LawExtract+CoreDataClass.swift in Sources */,
 				96D30B8F29B1E2BC0018F750 /* LawExtractModel.swift in Sources */,
@@ -331,6 +332,7 @@
 				9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */,
 				96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */,
 				96965E9C29B8CB830094520F /* Version+CoreDataClass.swift in Sources */,
+				96B498DA29C41C8400883BFA /* Offense+CoreDataClass.swift in Sources */,
 				96965E8529B8A4860094520F /* SettingsController.swift in Sources */,
 				9660492B29B463B400F64E55 /* FilterModel.swift in Sources */,
 				96965EA129BB680F0094520F /* NetworkController.swift in Sources */,
@@ -342,7 +344,6 @@
 				96965E9D29B8CB830094520F /* Version+CoreDataProperties.swift in Sources */,
 				96965E6F29B63AA30094520F /* SettingsModel.swift in Sources */,
 				9660492F29B5308000F64E55 /* FiltersList.swift in Sources */,
-				9660492229B2463400F64E55 /* Offense+CoreDataClass.swift in Sources */,
 				96D30B8B29B1E28D0018F750 /* OffenseModel.swift in Sources */,
 				96D30B8929B1E2230018F750 /* JsonDataController.swift in Sources */,
 				9660492929B247B600F64E55 /* FavoritesView.swift in Sources */,
@@ -478,7 +479,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_PROJECT_VERSION = 1.1.1;
 				DEVELOPMENT_ASSET_PATHS = "\"KITT-testApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q795WXF4MM;
 				ENABLE_PREVIEWS = YES;
@@ -486,7 +487,6 @@
 				INFOPLIST_FILE = "KITT-testApp/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = KITT;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -499,7 +499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.11;
+				MARKETING_VERSION = 1.0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "rjwannabefit.KITT-testApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -518,7 +518,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_PROJECT_VERSION = 1.1.1;
 				DEVELOPMENT_ASSET_PATHS = "\"KITT-testApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q795WXF4MM;
 				ENABLE_PREVIEWS = YES;
@@ -526,7 +526,6 @@
 				INFOPLIST_FILE = "KITT-testApp/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = KITT;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -539,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.11;
+				MARKETING_VERSION = 1.0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "rjwannabefit.KITT-testApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -578,9 +577,10 @@
 		9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				96B498D529C4195300883BFA /* KittDataModel AddWarningAndMiranda.xcdatamodel */,
 				9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */,
 			);
-			currentVersion = 9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */;
+			currentVersion = 96B498D529C4195300883BFA /* KittDataModel AddWarningAndMiranda.xcdatamodel */;
 			path = KittDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

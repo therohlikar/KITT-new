@@ -10,14 +10,14 @@ import Foundation
 
 class DataController: ObservableObject{
     let container = NSPersistentContainer(name: "KittDataModel")
-    
-    init () {
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                print("Core data failed to load: \(error.localizedDescription)")
+        
+        init () {
+            container.loadPersistentStores { description, error in
+                if let error = error {
+                    print("Core data failed to load: \(error.localizedDescription)")
+                }
+                
+                self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
             }
-            
-            self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         }
-    }
 }

@@ -186,6 +186,8 @@ struct MainView: View {
                                 isFavorited = existingOffense.isFavorited
                                 
                                 existingOffense.group = nil
+                                
+                                moc.delete(existingOffense)
                             }
                             
                             let newOffense = Offense(context: moc)
@@ -205,8 +207,8 @@ struct MainView: View {
                             newOffense.offenseScore = Int16(item.offenseScore)
                             newOffense.isOffenseTracked = item.isOffenseTracked
                             newOffense.fineExample = item.fineExample
-                            newOffense.miranda = item.miranda ?? ""
-                            newOffense.warning = item.warning ?? ""
+                            newOffense.miranda = item.miranda
+                            newOffense.warning = item.warning
                             
                             newOffense.note = note
                             newOffense.isFavorited = isFavorited
@@ -231,6 +233,8 @@ struct MainView: View {
                                 isFavorited = existingCrime.isFavorited
                                 
                                 existingCrime.group = nil
+                                
+                                moc.delete(existingCrime)
                             }
                             
                             let newCrime = Crime(context: moc)
@@ -246,8 +250,8 @@ struct MainView: View {
                             newCrime.content = item.content
                             newCrime.paragraph = item.paragraph
                             newCrime.crimeExample = item.crimeExample
-                            newCrime.miranda = item.miranda
-                            newCrime.warning = item.warning
+//                            newCrime.miranda = item.miranda
+//                            newCrime.warning = item.warning
                             
                             newCrime.note = note
                             newCrime.isFavorited = isFavorited
@@ -271,6 +275,8 @@ struct MainView: View {
                                 isFavorited = existingLe.isFavorited
                                 
                                 existingLe.group = nil
+                                
+                                moc.delete(existingLe)
                             }
                             
                             let newLe = LawExtract(context: moc)
@@ -285,8 +291,8 @@ struct MainView: View {
                             newLe.title = item.title
                             newLe.content = item.content
                             newLe.paragraph = item.paragraph
-                            newLe.miranda = item.miranda
-                            newLe.warning = item.warning
+//                            newLe.miranda = item.miranda
+//                            newLe.warning = item.warning
                             
                             newLe.note = note
                             newLe.isFavorited = isFavorited
