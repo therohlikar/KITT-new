@@ -31,7 +31,6 @@ struct MainView: View {
     
     @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
-    @AppStorage("catchYourCriminalUnlocked") private var catchYourCriminalUnlocked: Bool = false
     @AppStorage("firstOpen") private var firstOpen: Bool = false
     
     @State private var isBored: Bool = false
@@ -64,17 +63,8 @@ struct MainView: View {
                             .autocorrectionDisabled()
                             .padding(10)
                             .focused($searchFocused)
-                            .onSubmit {
-                                if searchKey.lowercased() == "i am bored" || searchKey.lowercased() == "nudím se" || searchKey.lowercased() == "nuda" {
-                                    catchYourCriminalUnlocked = true
-                                    isBored.toggle()
-                                }
-                            }
                     }
                 }
-                .navigationDestination(isPresented: $isBored, destination: {
-                    CYCMenuView()
-                })
                 .toolbar{
                     if searchOnTop {
                         ToolbarItem(placement: .navigation) {
@@ -82,28 +72,20 @@ struct MainView: View {
                                 .autocorrectionDisabled()
                                 .padding(10)
                                 .focused($searchFocused)
-                                .onSubmit {
-                                    if searchKey.lowercased() == "i am bored" || searchKey.lowercased() == "nudím se" || searchKey.lowercased() == "nuda" {
-                                        catchYourCriminalUnlocked = true
-                                        isBored.toggle()
-                                    }
-                                }
                         }
                     }
                     
-                    if catchYourCriminalUnlocked {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            NavigationLink {
-                                CYCMenuView()
-                            } label: {
-                                Image("criminal")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                            }
-                            .isDetailLink(false)
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink {
+                            CYCMenuView()
+                        } label: {
+                            Image("criminal")
+                                .resizable()
+                                .frame(width: 30, height: 30)
                         }
+                        .isDetailLink(false)
                     }
-                    
+
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Image(systemName: "checklist")
                             .onTapGesture {
