@@ -212,13 +212,6 @@ struct MainView: View {
                         newOffense.note = note
                         newOffense.isFavorited = isFavorited
                     }
-                    
-                    // list through all offenses and if it is NOT on the remote by its id, remove test
-                    for duplicate in offenses {
-                        if !offenseArray.contains(where: { $0.id != nil ? $0.id == duplicate.id : $0.paragraph == duplicate.paragraph }) {
-                            moc.delete(duplicate)
-                        }
-                    }
                 }
                 if let crimeArray = await jsonController.downloadJsonData(.crime) as? Array<CrimeModel> {
                     var note: String = ""
@@ -255,12 +248,6 @@ struct MainView: View {
                         newCrime.note = note
                         newCrime.isFavorited = isFavorited
                     }
-                    
-                    for duplicate in crimes {
-                        if !crimeArray.contains(where: { $0.id != nil ? $0.id == duplicate.id : $0.paragraph == duplicate.paragraph }) {
-                            moc.delete(duplicate)
-                        }
-                    }
                 }
                 if let leArray = await jsonController.downloadJsonData(.lawextract) as? Array<LawExtractModel> {
                     var note: String = ""
@@ -295,12 +282,6 @@ struct MainView: View {
                         
                         newLe.note = note
                         newLe.isFavorited = isFavorited
-                    }
-                    
-                    for duplicate in lawextracts {
-                        if !leArray.contains(where: { $0.id != nil ? $0.id == duplicate.id : $0.paragraph == duplicate.paragraph }) {
-                            moc.delete(duplicate)
-                        }
                     }
                 }
                 
