@@ -10,6 +10,9 @@ import MessageUI
 import CoreData
 
 struct SettingsView: View {
+    @Binding var update: Bool
+    @Binding var dismiss: Bool
+    
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var networkController: NetworkController
     @Environment(\.managedObjectContext) var moc
@@ -29,8 +32,12 @@ struct SettingsView: View {
     @State private var showingNews: Bool = false
     @State private var canSendMail: Bool = false
     @State private var showingAlertRemoveData: Bool = false
-    @State private var showingAlertClearData: Bool = false
     
+    public init (update: Binding<Bool>, isPresented: Binding<Bool>) {
+        self._update = update
+        self._dismiss = isPresented
+    }
+
     var body: some View {
         VStack{
             VStack{
@@ -166,7 +173,9 @@ struct SettingsView: View {
                     }
                     
                     Button {
-                        showingAlertClearData.toggle()
+                        dataVersion = "0.0.0"
+                        self.update = true
+                        self.dismiss = false
                     } label: {
                         Text("AKTUALIZACE DAT")
                     }
@@ -200,18 +209,6 @@ struct SettingsView: View {
             }
         } message: {
             Text("Jste si jistý, že chcete vymazat data?\nVymazání dat způsobí smazání všech aktuálních dat vč. poznámek a oblíbených. \nAplikace bude po souhlasu ukončena.")
-        }
-        .alert("AKTUALIZACE DAT", isPresented: $showingAlertClearData) {
-            Button("Aktualizovat", role: .destructive) {
-                dataVersion = "0.0.0"
-                exit(0)
-            }
-            
-            Button("Zrušit", role: .cancel) {
-                showingAlertClearData = false
-            }
-        } message: {
-            Text("Jste si jistý, že chcete aktualizovat data?\nTato akce způsobí stažení dat znovu, PONECHÁ oblíbené a poznámky\nAplikace bude po souhlasu ukončena.")
         }
     }
     

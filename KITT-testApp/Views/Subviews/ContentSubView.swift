@@ -39,16 +39,19 @@ struct OffenseContent: View {
     
     var body: some View{
         ScrollView{
-            VStack(alignment: .leading){
-                Text(offense.warning ?? "HEY!")
+            if !offense.wrappedWarning.isEmpty{
+                VStack(alignment: .leading){
+                    Text(offense.wrappedWarning)
+                }
+                .padding(3)
+                .frame(width: 350, alignment: .leading)
+                .padding(2)
+                .background(Color("NetworkErrorColor"))
+                .cornerRadius(6)
+                .font(.caption)
+                .foregroundColor(.white)
             }
-            .padding(3)
-            .frame(width: 350, alignment: .leading)
-            .padding(2)
-            .background(Color("NetworkErrorColor"))
-            .cornerRadius(6)
-            .font(.caption)
-            .foregroundColor(.white)
+            
             
             VStack{
                 Text(offense.wrappedTitle)

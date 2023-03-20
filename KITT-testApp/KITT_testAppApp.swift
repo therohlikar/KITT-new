@@ -20,6 +20,7 @@ struct KITT_testAppApp: App {
                 .environmentObject(filterViewModel)
                 .environmentObject(settingsController)
                 .environmentObject(networkController)
+                .environmentObject(dataController)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .preferredColorScheme(settingsController.settings.darkMode ? .dark : .light)
         }
