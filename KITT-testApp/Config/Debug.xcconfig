@@ -20,4 +20,4 @@ DEVELOPER = @rjwannabefit
 DEVELOPER_LINK = https:/$()/www.instagram.com/rjwannabefit/
 KITT_ANDROID_LINK = https:/$()/play.google.com/store/apps/details?id=pack.example.kitt
 
-MAIL_TO = info@kittapp.store
+MAIL_TO = kitt.app.info@gmail.com
