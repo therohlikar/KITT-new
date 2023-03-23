@@ -124,6 +124,7 @@ struct OffenseRowListView: View{
                 .font(.caption)
                 .foregroundColor(.secondary)
             }
+            Spacer()
             VStack(alignment: .trailing){
                 if !offense.wrappedWarning.isEmpty{
                     Image(systemName: "exclamationmark.triangle.fill")
