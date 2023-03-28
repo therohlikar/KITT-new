@@ -44,7 +44,12 @@ struct FilteredOffenseListView: View{
                                 }
                             } label: {
                                 HStack{
+                                    Spacer()
+                                    
                                     Text(group.wrappedTitle)
+                                        .padding(8)
+                                    
+                                    Spacer()
                                 }
                                 .font(.headline)
                             }
@@ -58,7 +63,6 @@ struct FilteredOffenseListView: View{
             .headerProminence(.increased)
         }
         .listStyle(.sidebar)
-        .navigationTitle("Přestupky")
     }
     
     init(key: String = "", filters: [FilterModel], favoritesOnly: Bool = false){
@@ -174,7 +178,12 @@ struct FilteredCrimeListView: View{
                                 }
                             } label: {
                                 HStack{
+                                    Spacer()
+                                    
                                     Text(group.wrappedTitle)
+                                        .padding(8)
+                                    
+                                    Spacer()
                                 }
                                 .font(.headline)
                             }
@@ -272,7 +281,12 @@ struct FilteredLawExtractListView: View{
                                 }
                             } label: {
                                 HStack{
+                                    Spacer()
+                                    
                                     Text(group.wrappedTitle)
+                                        .padding(8)
+                                    
+                                    Spacer()
                                 }
                                 .font(.headline)
                             }
