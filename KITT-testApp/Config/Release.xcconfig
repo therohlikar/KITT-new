@@ -16,7 +16,7 @@ VERSION_JSON_FILE = news.json
 
 VERSION_FILE = version.txt
 
-DEVELOPER = @rjwannabefit
+DEVELOPER = Radek Jeník, OOP Brno-Židenice
 DEVELOPER_LINK = https:/$()/www.instagram.com/rjwannabefit/
 KITT_ANDROID_LINK = https:/$()/play.google.com/store/apps/details?id=pack.example.kitt
 
