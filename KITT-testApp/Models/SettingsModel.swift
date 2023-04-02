@@ -9,8 +9,6 @@ import Foundation
 
 
 struct SettingsModel {
-    let defaultPanel: String = "library"
-    
     var darkMode: Bool {
         get {
             return UserDefaults.standard.bool(forKey: "settings.darkMode")
@@ -49,14 +47,6 @@ struct SettingsModel {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "settings.showDetail")
-        }
-    }
-    var preferredPanel: String {
-        get {
-            return UserDefaults.standard.string(forKey: "settings.preferredPanel") ?? defaultPanel
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "settings.preferredPanel")
         }
     }
     var searchOnTop: Bool {

@@ -7,14 +7,6 @@
 
 import Foundation
 
-/*
-CRIME = trestny cin
-[
- 
- 
- 
-]
- */
 struct CrimeModel: Codable, Hashable {
     var id: String? = "" //=paragraph basically (the most unique id)
     var groups: [String] = ["Nezařazeno"]

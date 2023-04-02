@@ -30,6 +30,7 @@ struct SettingsView: View {
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     @State private var showingNews: Bool = false
+    @State private var showingCYC: Bool = false
     @State private var canSendMail: Bool = false
     @State private var showingAlertRemoveData: Bool = false
     
@@ -94,6 +95,21 @@ struct SettingsView: View {
                 }
             }
             List{
+                Section("OSTATNÍ"){
+                    Button {
+                        showingCYC.toggle()
+                    } label: {
+                        HStack{
+                            Image("criminal")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            
+                            Spacer()
+                            
+                            Text("CHYŤ SI SVÉHO ZLOČINCE")
+                        }
+                    }
+                }
                 Section("ÚPRAVA ROZHRANÍ"){
                     if foundEasterEgg{
                         HStack{
@@ -119,18 +135,6 @@ struct SettingsView: View {
                         Spacer()
                         Toggle("", isOn: $sc.settings.showDetail)
                             .labelsHidden()
-                    }
-                    
-                    HStack{
-                        Text("Preferovaný panel při otevření")
-                        Spacer()
-                        Picker("", selection: $sc.settings.preferredPanel) {
-                            Text("Knihovna")
-                                .tag("library")
-                            Text("Oblíbené")
-                                .tag("favorites")
-                        }
-                        .labelsHidden()
                     }
                     
                     HStack{
@@ -195,6 +199,9 @@ struct SettingsView: View {
             NewsView()
                 .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
         }
+        .fullScreenCover(isPresented: $showingCYC) {
+            CYCMenuView(showingCYC: $showingCYC)
+        }
         .alert("VYMAZAT DATA", isPresented: $showingAlertRemoveData) {
             Button("Smazat", role: .destructive) {
                 dataVersion = "0.0.0"
@@ -213,28 +220,8 @@ struct SettingsView: View {
     }
     
     func removeAll() -> Bool {
-        var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Offense")
+        var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ContentItem")
         var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            try moc.execute(deleteRequest)
-        } catch let error as NSError {
-            // TODO: handle the error
-            fatalError("\(error.localizedDescription)")
-        }
-        
-        fetchRequest = NSFetchRequest(entityName: "Crime")
-        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            try moc.execute(deleteRequest)
-        } catch let error as NSError {
-            // TODO: handle the error
-            fatalError("\(error.localizedDescription)")
-        }
-        
-        fetchRequest = NSFetchRequest(entityName: "LawExtract")
-        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
             try moc.execute(deleteRequest)

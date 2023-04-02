@@ -9,9 +9,7 @@ import Foundation
 
 class JsonDataController{
     enum DataType{
-        case offense
-        case crime
-        case lawextract
+        case contentitem
     }
 
     func downloadJsonData(_ type: DataType) async -> Array<Any>?{
@@ -23,65 +21,25 @@ class JsonDataController{
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
         switch(type){
-            case .offense:
-                guard let offenseFile = Bundle.main.object(forInfoDictionaryKey: "OFFENSE_JSON_FILE") else{
-                    fatalError("OFFENSE - Configuration file missing variable")
+            case .contentitem:
+                guard let ciFile = Bundle.main.object(forInfoDictionaryKey: "CONTENTITEM_JSON_FILE") else{
+                    fatalError("CONTENTITEM - Configuration file missing variable")
                 }
             
-                guard let url = URL(string: "\(baseUrl)\(offenseFile)") else{
+                guard let url = URL(string: "\(baseUrl)\(ciFile)") else{
                     print("Invalid URL")
                     return []
                 }
 
                 do {
                     let (data, _) = try await URLSession(configuration: config).data(from: url)
-                    if let decodedResponse = try? JSONDecoder().decode([OffenseModel].self, from: data){
+                    if let decodedResponse = try? JSONDecoder().decode([ItemModel].self, from: data){
                         return decodedResponse
                     }else{
-                        fatalError("OFFENSE - Json could not be decoded")
+                        fatalError("CONTENTITEM - Json could not be decoded")
                     }
                 }catch{
-                    fatalError("OFFENSE - Data failed to be recieved")
-                }
-            case .crime:
-                guard let crimeFile = Bundle.main.object(forInfoDictionaryKey: "CRIME_JSON_FILE") else{
-                    fatalError("CRIME - Configuration file missing variable")
-                }
-            
-                guard let url = URL(string: "\(baseUrl)\(crimeFile)") else{
-                    print("Invalid URL")
-                    return []
-                }
-
-                do {
-                    let (data, _) = try await URLSession(configuration: config).data(from: url)
-                    if let decodedResponse = try? JSONDecoder().decode([CrimeModel].self, from: data){
-                        return decodedResponse
-                    }else{
-                        fatalError("CRIME - Json could not be decoded")
-                    }
-                }catch{
-                    fatalError("CRIME - Data failed to be recieved")
-                }
-            case .lawextract:
-                guard let leFile = Bundle.main.object(forInfoDictionaryKey: "LAWEXTRACT_JSON_FILE") else{
-                    fatalError("LAWEXTRACT - Configuration file missing variable")
-                }
-            
-                guard let url = URL(string: "\(baseUrl)\(leFile)") else{
-                    print("Invalid URL")
-                    return []
-                }
-
-                do {
-                    let (data, _) = try await URLSession(configuration: config).data(from: url)
-                    if let decodedResponse = try? JSONDecoder().decode([LawExtractModel].self, from: data){
-                        return decodedResponse
-                    }else{
-                        fatalError("LAWEXTRACT - Json could not be decoded")
-                    }
-                }catch{
-                    fatalError("LAWEXTRACT - Data failed to be recieved")
+                    fatalError("CONTENTITEM - Data failed to be recieved")
                 }
         }
         

@@ -136,7 +136,6 @@ struct OffenseContent: View {
                 
                 VStack{
                     TextField("Poznámka", text: $customNote, axis: .vertical)
-                        .autocorrectionDisabled()
                         .focused($noteFocused)
                         .textFieldStyle(.roundedBorder)
                         .onChange(of: customNote) { _ in
@@ -257,7 +256,6 @@ struct CrimeContent: View{
             
             VStack{
                 TextField("Poznámka", text: $customNote, axis: .vertical)
-                    .autocorrectionDisabled()
                     .focused($noteFocused)
                     .textFieldStyle(.roundedBorder)
                     .onChange(of: customNote) { _ in
@@ -357,7 +355,6 @@ struct LawExtractContent: View{
                 
                 VStack{
                     TextField("Poznámka", text: $customNote, axis: .vertical)
-                        .autocorrectionDisabled()
                         .focused($noteFocused)
                         .textFieldStyle(.roundedBorder)
                         .onChange(of: customNote) { _ in

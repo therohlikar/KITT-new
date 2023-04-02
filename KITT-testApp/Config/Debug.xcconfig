@@ -12,6 +12,7 @@ JSON_FILE_LINK = https:/$()/kittapp.store/kittdatatest/ios/
 OFFENSE_JSON_FILE = offenses.json
 CRIME_JSON_FILE = crimes.json
 LAWEXTRACT_JSON_FILE = lawextracts.json
+CONTENTITEM_JSON_FILE = items.json
 VERSION_JSON_FILE = news.json
 
 VERSION_FILE = version.txt

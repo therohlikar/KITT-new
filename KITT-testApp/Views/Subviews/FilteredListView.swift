@@ -69,11 +69,11 @@ struct FilteredOffenseListView: View{
         var filterPredicates: [NSPredicate] = []
         
         if !key.isEmpty {
-            for filter in filters {
-                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "offense"){
-                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
-                }
-            }
+//            for filter in filters {
+//                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "offense"){
+//                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
+//                }
+//            }
         }else {
             filterPredicates.append(NSPredicate(value: true))
         }
@@ -203,16 +203,19 @@ struct FilteredCrimeListView: View{
         var filterPredicates: [NSPredicate] = []
         
         if !key.isEmpty {
-            for filter in filters {
-                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "crime"){
-                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
-                }
-            }
+//            for filter in filters {
+//                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "crime"){
+//                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
+//                }
+//            }
         }else {
             filterPredicates.append(NSPredicate(value: true))
         }
         
-        _foundResults = FetchRequest<Crime>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(type: .and, subpredicates: [NSCompoundPredicate(orPredicateWithSubpredicates: filterPredicates), NSPredicate(format: favoritesOnly ? "isFavorited == true" : "isFavorited == true OR isFavorited == false")]))
+        _foundResults = FetchRequest<Crime>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate:
+                            NSCompoundPredicate(type: .and, subpredicates:
+                                    [
+                                        NSCompoundPredicate(orPredicateWithSubpredicates: filterPredicates), NSPredicate(format: favoritesOnly ? "isFavorited == true" : "isFavorited == true OR isFavorited == false")]))
  
         searchKey = key
         favorites = favoritesOnly
@@ -306,11 +309,11 @@ struct FilteredLawExtractListView: View{
         var filterPredicates: [NSPredicate] = []
         
         if !key.isEmpty {
-            for filter in filters {
-                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "lawextract"){
-                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
-                }
-            }
+//            for filter in filters {
+//                if filter.active && (filter.specific == "" || filter.specific == nil || filter.specific == "lawextract"){
+//                    filterPredicates.append(NSPredicate(format: "%K CONTAINS[cd] %@", filter.key, key))
+//                }
+//            }
         }else {
             filterPredicates.append(NSPredicate(value: true))
         }

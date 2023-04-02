@@ -23,6 +23,7 @@ struct KITT_testAppApp: App {
                 .environmentObject(dataController)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .preferredColorScheme(settingsController.settings.darkMode ? .dark : .light)
+                .autocorrectionDisabled(true)
         }
     }
 }

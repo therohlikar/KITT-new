@@ -18,10 +18,12 @@ class FilterViewModel: ObservableObject{
         if UserDefaults.standard.data(forKey: "settings.filters") == nil {
             filters = [
                 FilterModel(label: "Název", key: "title", active: true),
-                FilterModel(label: "Zákonné znění", key: "content", active: true),
-                FilterModel(label: "§ Skutku", key: "paragraph", active: true),
-                FilterModel(label: "§ Přestupku (BESIP)", key: "violationParagraph", active: true, specific: "offense"),
-                FilterModel(label: "Možnosti řešení", key: "resolveOptions", active: true, specific: "offense"),
+                FilterModel(label: "Obsah zákonného znění", key: "content", active: true),
+                FilterModel(label: "Klíčová slova", key: "keywords", active: true),
+                FilterModel(label: "Sankce", key: "sanctions", active: true),
+                FilterModel(label: "Odkazy", key: "links", active: true),
+                FilterModel(label: "Poučení", key: "miranda", active: true),
+                FilterModel(label: "Varování", key: "warning", active: true),
                 FilterModel(label: "Poznámka", key: "note", active: false)
             ]
             
