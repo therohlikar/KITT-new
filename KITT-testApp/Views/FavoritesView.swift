@@ -8,26 +8,21 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @EnvironmentObject var fvm: FilterViewModel
-    @FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "isFavorited == true")) var favorites: FetchedResults<Offense>
-    
-    @Binding var searchKey: String
-
-    @State private var tab:tabType = .offense
-
     var body: some View {
         VStack{
-            TabView(selection: $tab){
-                FilteredOffenseListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
-                    .tag(tabType.offense)
+            List{
+                Section {
+                    
+                } header: {
+                    Text("PŘESTUPKY")
+                }
 
-                FilteredCrimeListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
-                    .tag(tabType.crime)
-                
-                FilteredLawExtractListView(key: searchKey, filters: fvm.filters, favoritesOnly: true)
-                    .tag(tabType.lawextract)
+                Section {
+                    
+                } header: {
+                    Text("TRESTNÉ ČINY")
+                }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
         }
     }
 }
