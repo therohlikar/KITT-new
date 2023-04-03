@@ -16,6 +16,7 @@ struct MainView: View {
     @EnvironmentObject var dc: DataController
 
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
+    @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     @FetchRequest(sortDescriptors: []) var versions: FetchedResults<Version>
     
     @State private var ready: Bool = false
@@ -75,6 +76,8 @@ struct MainView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Image(systemName: "gearshape.fill")
                             .onTapGesture {
+                                searchFocused = false
+                                
                                 settingsViewOpened.toggle()
                             }
                             .padding(.horizontal, 10)
@@ -153,6 +156,15 @@ struct MainView: View {
 
                         let new = ContentItem(context: moc)
                         new.id = item.id
+                        
+                        var currentFavorited = false
+                        var currentNote = ""
+                        
+                        if let exists = items.first(where: {$0.id == item.id}){
+                            currentFavorited = exists.favorited
+                            currentNote = exists.wrappedNote
+                        }
+                        
                         new.group = group
                         new.subgroup = item.subgroup
                         new.type = item.type
@@ -163,8 +175,10 @@ struct MainView: View {
                         new.warning = item.warning
                         new.miranda = item.miranda
                         new.content = item.content
+                        new.example = item.example
                         
-                        new.favorited = false
+                        new.note = currentNote
+                        new.favorited = currentFavorited
                     }
                 }
                 

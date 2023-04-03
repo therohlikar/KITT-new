@@ -33,7 +33,6 @@ struct SubGroupListView: View {
                 }
             }
         }
-        .searchable(text: $searchKey)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(currentGroup.wrappedTitle)
         .listStyle(.plain)

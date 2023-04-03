@@ -19,4 +19,5 @@ struct ItemModel: Codable, Hashable {
     var miranda: String? = ""
     var sanctions: String? = ""
     var links: String? = ""
+    var example: String? = ""
 }

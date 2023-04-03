@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ContentItem" representedClassName=".ContentItem" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="example" optional="YES" attributeType="String"/>
         <attribute name="favorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="keywords" optional="YES" attributeType="String"/>
@@ -20,69 +21,12 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="Crime" representedClassName=".Crime" syncable="YES">
-        <attribute name="content" optional="YES" attributeType="String"/>
-        <attribute name="crimeExample" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="miranda" optional="YES" attributeType="String"/>
-        <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="paragraph" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="warning" optional="YES" attributeType="String"/>
-        <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="crime" inverseEntity="Group"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="id"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
-    </entity>
     <entity name="Group" representedClassName=".Group" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="contentitem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ContentItem" inverseName="group" inverseEntity="ContentItem"/>
-        <relationship name="crime" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Crime" inverseName="group" inverseEntity="Crime"/>
-        <relationship name="lawextract" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LawExtract" inverseName="group" inverseEntity="LawExtract"/>
-        <relationship name="offense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Offense" inverseName="group" inverseEntity="Offense"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="title"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
-    </entity>
-    <entity name="LawExtract" representedClassName=".LawExtract" syncable="YES">
-        <attribute name="content" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="miranda" optional="YES" attributeType="String"/>
-        <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="paragraph" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="warning" optional="YES" attributeType="String"/>
-        <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="lawextract" inverseEntity="Group"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="id"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
-    </entity>
-    <entity name="Offense" representedClassName=".Offense" syncable="YES">
-        <attribute name="content" optional="YES" attributeType="String"/>
-        <attribute name="fineExample" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="isOffenseTracked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="miranda" optional="YES" attributeType="String"/>
-        <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="offenseScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="paragraph" optional="YES" attributeType="String"/>
-        <attribute name="resolveOptions" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="violationParagraph" optional="YES" attributeType="String"/>
-        <attribute name="warning" optional="YES" attributeType="String"/>
-        <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="offense" inverseEntity="Group"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>

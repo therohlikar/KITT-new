@@ -8,31 +8,41 @@
 import SwiftUI
 
 struct ContentItemView: View {
+    
+    enum panelShowed {
+        case none, miranda, links, note, example
+    }
+    
     @Environment(\.managedObjectContext) var moc
     
     @ObservedObject var item: ContentItem
     
-    @State private var showingLinks: Bool = false
-    @State private var showingMiranda: Bool = false
+    @State private var currentPanel: panelShowed = .none
     @State private var showPanel: Bool = false
     
     @State private var favoriteToggle: Bool = false
+    @State private var customNote: String = ""
     
     var body: some View {
         VStack{
-            Text(item.wrappedTitle)
-                .font(Font.custom("Raleway-Black", size: 36))
             
-            if !item.wrappedKeywords.isEmpty {
-                Text("(\(item.wrappedKeywords))")
-                    .font(Font.custom("Raleway-Light", size: 10))
-                    .foregroundColor(.secondary)
+            VStack(alignment: .center){
+                Text(item.wrappedTitle)
+                    .font(Font.custom("Raleway-Black", size: 18))
+                
+                if !item.wrappedKeywords.isEmpty {
+                    Text("(\(item.wrappedKeywords))")
+                        .font(Font.custom("Raleway-Light", size: 10))
+                        .foregroundColor(.secondary)
+                }
             }
+            
             
             ScrollView{
                 if !item.wrappedWarning.isEmpty {
                     Text(item.wrappedWarning)
                         .font(Font.custom("Raleway-Medium", size: 12))
+                        .foregroundColor(.white)
                         .padding(7)
                         .frame(width: 350)
                         .background(
@@ -47,7 +57,7 @@ struct ContentItemView: View {
                     ForEach(item.contentList, id: \.title) { content in
                         VStack(alignment: .leading){
                             Text(content.title)
-                                .font(Font.custom("Raleway-Black", size: 18))
+                                .font(Font.custom("Raleway-Black", size: 14))
                             
                             if !content.link.isEmpty {
                                 Link(destination: URL(string: content.link)!) {
@@ -94,18 +104,63 @@ struct ContentItemView: View {
                     
                     Button {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            if !showingLinks {
+                            if currentPanel == .none || currentPanel == .example {
                                 showPanel.toggle()
                             }
-                            showingLinks = false
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                showingMiranda.toggle()
+                            currentPanel = .none
+                            
+                            if showPanel {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    currentPanel = .example
+                                }
+                            }
+                        }
+                    } label: {
+                        Text("PŘÍKLAD UŽITÍ")
+                            .fontWeight(currentPanel == .example ? .bold : .thin)
+                            .foregroundColor(.primary)
+                    }
+                    .opacity(item.wrappedExample.isEmpty ? 0.0 : 1.0)
+                    .disabled(item.wrappedExample.isEmpty)
+                    
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            if currentPanel == .none || currentPanel == .note {
+                                showPanel.toggle()
+                            }
+                            
+                            currentPanel = .none
+                            
+                            if showPanel {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    currentPanel = .note
+                                }
+                            }
+                        }
+                    } label: {
+                        Text("POZNÁMKA")
+                            .fontWeight(currentPanel == .note ? .bold : .thin)
+                            .foregroundColor(.primary)
+                    }
+                    
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            if currentPanel == .none || currentPanel == .miranda {
+                                showPanel.toggle()
+                            }
+                            
+                            currentPanel = .none
+                            
+                            if showPanel {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    currentPanel = .miranda
+                                }
                             }
                         }
                     } label: {
                         Text("POUČENÍ")
-                            .fontWeight(showingMiranda ? .bold : .thin)
+                            .fontWeight(currentPanel == .miranda ? .bold : .thin)
                             .foregroundColor(.primary)
                     }
                     .opacity(item.wrappedMiranda.isEmpty ? 0.0 : 1.0)
@@ -114,19 +169,21 @@ struct ContentItemView: View {
                     
                     Button {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            if !showingMiranda {
+                            if currentPanel == .none || currentPanel == .links {
                                 showPanel.toggle()
                             }
                             
-                            showingMiranda = false
+                            currentPanel = .none
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                showingLinks.toggle()
+                            if showPanel {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    currentPanel = .links
+                                }
                             }
                         }
                     } label: {
                         Text("ODKAZY")
-                            .fontWeight(showingLinks ? .bold : .thin)
+                            .fontWeight(currentPanel == .links ? .bold : .thin)
                             .foregroundColor(.primary)
                     }
                     .opacity(item.wrappedLinks.isEmpty ? 0.0 : 1.0)
@@ -137,7 +194,7 @@ struct ContentItemView: View {
                 if showPanel {
                     ScrollView{
                         VStack{
-                            if showingLinks {
+                            if currentPanel == .links {
                                 VStack(alignment: .leading){
                                     ForEach(item.linkList, id: \.title) { link in
                                         HStack{
@@ -155,10 +212,22 @@ struct ContentItemView: View {
                                 .padding(.vertical, 12)
                             }
                             
-                            if showingMiranda {
+                            if currentPanel == .miranda {
                                 Text(item.wrappedMiranda)
                                     .font(Font.custom("Raleway-Regular", size: 12))
                                     .padding(.vertical, 12)
+                            }
+                            
+                            if currentPanel == .example {
+                                Text(item.wrappedExample)
+                                    .font(Font.custom("Raleway-Regular", size: 12))
+                                    .padding(.vertical, 12)
+                            }
+                            
+                            if currentPanel == .note {
+                                TextField("Poznámka", text: $customNote, axis: .vertical)
+                                    .textFieldStyle(.roundedBorder)
+
                             }
                         }
                         
@@ -172,7 +241,7 @@ struct ContentItemView: View {
         }
         .navigationTitle("")
         .navigationBarTitle("")
-        .padding(10)
+        .padding(20)
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: item.favorited ? "heart.fill" : "heart")
@@ -184,8 +253,6 @@ struct ContentItemView: View {
                             withAnimation(.linear(duration: 0.2)) {
                                 favoriteToggle = true
                                 item.favorited.toggle()
-                                
-                                try? moc.save()
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -196,6 +263,14 @@ struct ContentItemView: View {
                         }
                     }
             }
+        }
+        .onAppear{
+            customNote = item.wrappedNote
+        }
+        .onDisappear{
+            item.note = customNote
+            
+            try? moc.save()
         }
     }
 }

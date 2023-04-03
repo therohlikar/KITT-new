@@ -29,6 +29,7 @@ extension ContentItem {
     @NSManaged public var keywords: String?
     @NSManaged public var favorited: Bool
     @NSManaged public var note: String?
+    @NSManaged public var example: String?
 
     public var wrappedTitle: String { title ?? "" }
     public var wrappedType: String { type ?? "" }
@@ -40,6 +41,7 @@ extension ContentItem {
     public var wrappedWarning: String { warning ?? "" }
     public var wrappedKeywords: String { keywords ?? "" }
     public var wrappedNote: String { note ?? "" }
+    public var wrappedExample: String { example ?? "" }
     
     var sanctionList: [SanctionModel] {
         if !wrappedSanctions.isEmpty {
