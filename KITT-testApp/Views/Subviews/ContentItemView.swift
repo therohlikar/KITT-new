@@ -28,11 +28,11 @@ struct ContentItemView: View {
             
             VStack(alignment: .center){
                 Text(item.wrappedTitle)
-                    .font(Font.custom("Raleway-Black", size: 18))
+                    .font(Font.custom("Roboto-Black", size: 18))
                 
                 if !item.wrappedKeywords.isEmpty {
                     Text("(\(item.wrappedKeywords))")
-                        .font(Font.custom("Raleway-Light", size: 10))
+                        .font(Font.custom("Roboto-Light", size: 10))
                         .foregroundColor(.secondary)
                 }
             }
@@ -41,7 +41,7 @@ struct ContentItemView: View {
             ScrollView{
                 if !item.wrappedWarning.isEmpty {
                     Text(item.wrappedWarning)
-                        .font(Font.custom("Raleway-Medium", size: 12))
+                        .font(Font.custom("Roboto-Medium", size: 12))
                         .foregroundColor(.white)
                         .padding(7)
                         .frame(width: 350)
@@ -57,17 +57,17 @@ struct ContentItemView: View {
                     ForEach(item.contentList, id: \.title) { content in
                         VStack(alignment: .leading){
                             Text(content.title)
-                                .font(Font.custom("Raleway-Black", size: 14))
+                                .font(Font.custom("Roboto-Black", size: 14))
                             
                             if !content.link.isEmpty {
                                 Link(destination: URL(string: content.link)!) {
                                     Text(content.link)
-                                        .font(Font.custom("Raleway-Light", size: 10))
+                                        .font(Font.custom("Roboto-Light", size: 10))
                                 }
                             }
                             
                             Text(content.content)
-                                .font(Font.custom("Raleway-Regular", size: 14))
+                                .font(Font.custom("Roboto-Regular", size: 14))
                                 .padding(.leading, 5)
                         }
                         .padding(.vertical, 10)
@@ -77,7 +77,7 @@ struct ContentItemView: View {
                 if !item.wrappedSanctions.isEmpty {
                     VStack(alignment: .leading){
                         Text("sankce".uppercased())
-                            .font(Font.custom("Raleway-Black", size: 18))
+                            .font(Font.custom("Roboto-Black", size: 18))
                         
                         VStack{
                             ForEach(item.sanctionList, id: \.title) { sanction in
@@ -87,7 +87,7 @@ struct ContentItemView: View {
                                     Spacer()
                                     Text(sanction.content)
                                 }
-                                .font(Font.custom("Raleway-Regular", size: 14))
+                                .font(Font.custom("Roboto-Regular", size: 14))
                             }
                         }
                         .padding(.leading, 5)
@@ -189,7 +189,7 @@ struct ContentItemView: View {
                     .opacity(item.wrappedLinks.isEmpty ? 0.0 : 1.0)
                     .disabled(item.wrappedLinks.isEmpty)
                 }
-                .font(Font.custom("Raleway-Thin", size: 14))
+                .font(Font.custom("Roboto-Thin", size: 14))
                 
                 if showPanel {
                     ScrollView{
@@ -208,25 +208,26 @@ struct ContentItemView: View {
                                         .padding(.bottom, 5)
                                     }
                                 }
-                                .font(Font.custom("Raleway-Regular", size: 12))
+                                .font(Font.custom("Roboto-Regular", size: 12))
                                 .padding(.vertical, 12)
                             }
                             
                             if currentPanel == .miranda {
                                 Text(item.wrappedMiranda)
-                                    .font(Font.custom("Raleway-Regular", size: 12))
+                                    .font(Font.custom("Roboto-Regular", size: 12))
                                     .padding(.vertical, 12)
                             }
                             
                             if currentPanel == .example {
                                 Text(item.wrappedExample)
-                                    .font(Font.custom("Raleway-Regular", size: 12))
+                                    .font(Font.custom("Roboto-Regular", size: 12))
                                     .padding(.vertical, 12)
                             }
                             
                             if currentPanel == .note {
                                 TextField("Poznámka", text: $customNote, axis: .vertical)
                                     .textFieldStyle(.roundedBorder)
+                                    .font(Font.custom("Roboto-Regular", size: 12))
 
                             }
                         }

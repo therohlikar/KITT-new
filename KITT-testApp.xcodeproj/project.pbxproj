@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		964D0BB729DF3EFE008ED31C /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */; };
+		964D0BB829DF3EFE008ED31C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */; };
+		964D0BB929DF3EFE008ED31C /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */; };
+		964D0BBA29DF3EFE008ED31C /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB429DF3EFE008ED31C /* Roboto-Black.ttf */; };
+		964D0BBB29DF3EFE008ED31C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB529DF3EFE008ED31C /* Roboto-Bold.ttf */; };
+		964D0BBC29DF3EFE008ED31C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB629DF3EFE008ED31C /* Roboto-Regular.ttf */; };
 		9660490329B1E75A00F64E55 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490229B1E75A00F64E55 /* DataController.swift */; };
 		9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */; };
 		9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490C29B217AC00F64E55 /* ParagraphModel.swift */; };
@@ -36,15 +42,6 @@
 		96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EA229BB8D890094520F /* CustomBadgeView.swift */; };
 		96965EBF29BCFB560094520F /* CatchYourCriminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EBE29BCFB560094520F /* CatchYourCriminalView.swift */; };
 		96965EC229BE768C0094520F /* CYCMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96965EC129BE768C0094520F /* CYCMenuView.swift */; };
-		969F06F629D6CC610017FB99 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06E429D6CC600017FB99 /* Raleway-Black.ttf */; };
-		969F06F729D6CC610017FB99 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06E529D6CC600017FB99 /* Raleway-Bold.ttf */; };
-		969F06F829D6CC610017FB99 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06E629D6CC600017FB99 /* Raleway-Medium.ttf */; };
-		969F06F929D6CC610017FB99 /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06E729D6CC600017FB99 /* Raleway-SemiBold.ttf */; };
-		969F06FA29D6CC610017FB99 /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06E829D6CC600017FB99 /* Raleway-Thin.ttf */; };
-		969F070229D6CC610017FB99 /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06F029D6CC610017FB99 /* Raleway-Light.ttf */; };
-		969F070329D6CC610017FB99 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06F129D6CC610017FB99 /* Raleway-Regular.ttf */; };
-		969F070429D6CC610017FB99 /* Raleway-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06F229D6CC610017FB99 /* Raleway-ExtraLight.ttf */; };
-		969F070529D6CC610017FB99 /* Raleway-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 969F06F329D6CC610017FB99 /* Raleway-ExtraBold.ttf */; };
 		969F070829D745D30017FB99 /* SanctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070729D745D30017FB99 /* SanctionModel.swift */; };
 		969F070A29D74BFF0017FB99 /* LinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070929D74BFF0017FB99 /* LinkModel.swift */; };
 		969F070C29D7594E0017FB99 /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070B29D7594E0017FB99 /* ContentModel.swift */; };
@@ -56,6 +53,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		964D0BB429DF3EFE008ED31C /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		964D0BB529DF3EFE008ED31C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		964D0BB629DF3EFE008ED31C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		9660490229B1E75A00F64E55 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KittDataModel.xcdatamodel; sourceTree = "<group>"; };
 		9660490C29B217AC00F64E55 /* ParagraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphModel.swift; sourceTree = "<group>"; };
@@ -89,15 +92,6 @@
 		96965EA229BB8D890094520F /* CustomBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBadgeView.swift; sourceTree = "<group>"; };
 		96965EBE29BCFB560094520F /* CatchYourCriminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchYourCriminalView.swift; sourceTree = "<group>"; };
 		96965EC129BE768C0094520F /* CYCMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYCMenuView.swift; sourceTree = "<group>"; };
-		969F06E429D6CC600017FB99 /* Raleway-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Black.ttf"; sourceTree = "<group>"; };
-		969F06E529D6CC600017FB99 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
-		969F06E629D6CC600017FB99 /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
-		969F06E729D6CC600017FB99 /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
-		969F06E829D6CC600017FB99 /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
-		969F06F029D6CC610017FB99 /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Light.ttf"; sourceTree = "<group>"; };
-		969F06F129D6CC610017FB99 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
-		969F06F229D6CC610017FB99 /* Raleway-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLight.ttf"; sourceTree = "<group>"; };
-		969F06F329D6CC610017FB99 /* Raleway-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBold.ttf"; sourceTree = "<group>"; };
 		969F070729D745D30017FB99 /* SanctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SanctionModel.swift; sourceTree = "<group>"; };
 		969F070929D74BFF0017FB99 /* LinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkModel.swift; sourceTree = "<group>"; };
 		969F070B29D7594E0017FB99 /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
@@ -138,15 +132,12 @@
 		969638AF29D6C67F009365C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				969F06E429D6CC600017FB99 /* Raleway-Black.ttf */,
-				969F06E529D6CC600017FB99 /* Raleway-Bold.ttf */,
-				969F06F329D6CC610017FB99 /* Raleway-ExtraBold.ttf */,
-				969F06F229D6CC610017FB99 /* Raleway-ExtraLight.ttf */,
-				969F06F029D6CC610017FB99 /* Raleway-Light.ttf */,
-				969F06E629D6CC600017FB99 /* Raleway-Medium.ttf */,
-				969F06F129D6CC610017FB99 /* Raleway-Regular.ttf */,
-				969F06E729D6CC600017FB99 /* Raleway-SemiBold.ttf */,
-				969F06E829D6CC600017FB99 /* Raleway-Thin.ttf */,
+				964D0BB429DF3EFE008ED31C /* Roboto-Black.ttf */,
+				964D0BB529DF3EFE008ED31C /* Roboto-Bold.ttf */,
+				964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */,
+				964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */,
+				964D0BB629DF3EFE008ED31C /* Roboto-Regular.ttf */,
+				964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -325,18 +316,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				969F06F829D6CC610017FB99 /* Raleway-Medium.ttf in Resources */,
-				969F06F929D6CC610017FB99 /* Raleway-SemiBold.ttf in Resources */,
+				964D0BB829DF3EFE008ED31C /* Roboto-Medium.ttf in Resources */,
 				9660493629B53E7700F64E55 /* LaunchScreen.storyboard in Resources */,
-				969F06FA29D6CC610017FB99 /* Raleway-Thin.ttf in Resources */,
-				969F06F729D6CC610017FB99 /* Raleway-Bold.ttf in Resources */,
+				964D0BB929DF3EFE008ED31C /* Roboto-Thin.ttf in Resources */,
 				96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */,
-				969F070429D6CC610017FB99 /* Raleway-ExtraLight.ttf in Resources */,
+				964D0BBA29DF3EFE008ED31C /* Roboto-Black.ttf in Resources */,
+				964D0BB729DF3EFE008ED31C /* Roboto-Light.ttf in Resources */,
+				964D0BBC29DF3EFE008ED31C /* Roboto-Regular.ttf in Resources */,
+				964D0BBB29DF3EFE008ED31C /* Roboto-Bold.ttf in Resources */,
 				96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */,
-				969F070329D6CC610017FB99 /* Raleway-Regular.ttf in Resources */,
-				969F070229D6CC610017FB99 /* Raleway-Light.ttf in Resources */,
-				969F070529D6CC610017FB99 /* Raleway-ExtraBold.ttf in Resources */,
-				969F06F629D6CC610017FB99 /* Raleway-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

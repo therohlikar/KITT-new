@@ -16,15 +16,12 @@
 	<string>$(LAWEXTRACT_JSON_FILE)</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Raleway-Black.ttf</string>
-		<string>Raleway-Bold.ttf</string>
-		<string>Raleway-ExtraBold.ttf</string>
-		<string>Raleway-ExtraLight.ttf</string>
-		<string>Raleway-Light.ttf</string>
-		<string>Raleway-Medium.ttf</string>
-		<string>Raleway-Regular.ttf</string>
-		<string>Raleway-SemiBold.ttf</string>
-		<string>Raleway-Thin.ttf</string>
+		<string>Roboto-Black.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Light.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Thin.ttf</string>
 	</array>
 	<key>OFFENSE_JSON_FILE</key>
 	<string>$(OFFENSE_JSON_FILE)</string>

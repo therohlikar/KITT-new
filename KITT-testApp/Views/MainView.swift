@@ -61,7 +61,7 @@ struct MainView: View {
                                 onlyFavorites.toggle()
                             }
                             .padding(.horizontal, 10)
-                            .foregroundColor(.red)
+                            .foregroundColor(Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 1)))
                     }
 
                     ToolbarItem(placement: .navigationBarTrailing) {
