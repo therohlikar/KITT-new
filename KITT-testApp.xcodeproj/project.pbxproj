@@ -46,6 +46,7 @@
 		969F070829D745D30017FB99 /* SanctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070729D745D30017FB99 /* SanctionModel.swift */; };
 		969F070A29D74BFF0017FB99 /* LinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070929D74BFF0017FB99 /* LinkModel.swift */; };
 		969F070C29D7594E0017FB99 /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070B29D7594E0017FB99 /* ContentModel.swift */; };
+		96A9EB2A29E1654600F10947 /* SubmenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9EB2929E1654600F10947 /* SubmenuView.swift */; };
 		96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */; };
 		96D30B7A29B1E1900018F750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7929B1E1900018F750 /* Assets.xcassets */; };
 		96D30B7D29B1E1900018F750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D30B7C29B1E1900018F750 /* Preview Assets.xcassets */; };
@@ -97,6 +98,7 @@
 		969F070729D745D30017FB99 /* SanctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SanctionModel.swift; sourceTree = "<group>"; };
 		969F070929D74BFF0017FB99 /* LinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkModel.swift; sourceTree = "<group>"; };
 		969F070B29D7594E0017FB99 /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
+		96A9EB2929E1654600F10947 /* SubmenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmenuView.swift; sourceTree = "<group>"; };
 		96B498D529C4195300883BFA /* KittDataModel AddWarningAndMiranda.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "KittDataModel AddWarningAndMiranda.xcdatamodel"; sourceTree = "<group>"; };
 		96D30B7229B1E18F0018F750 /* KITT-testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITT-testApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30B7529B1E18F0018F750 /* KITT_testAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KITT_testAppApp.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				96965EC029BE76740094520F /* CYCViews */,
 				96D30B9129B1E33C0018F750 /* Subviews */,
 				96D30B8429B1E1BC0018F750 /* LibraryView.swift */,
+				96A9EB2929E1654600F10947 /* SubmenuView.swift */,
 				9660492629B2476E00F64E55 /* MainView.swift */,
 				9660492829B247B600F64E55 /* FavoritesView.swift */,
 				96965E7229B7EC5F0094520F /* SettingsView.swift */,
@@ -372,6 +375,7 @@
 				96D30B8929B1E2230018F750 /* JsonDataController.swift in Sources */,
 				969F070829D745D30017FB99 /* SanctionModel.swift in Sources */,
 				9660492929B247B600F64E55 /* FavoritesView.swift in Sources */,
+				96A9EB2A29E1654600F10947 /* SubmenuView.swift in Sources */,
 				9660492729B2476E00F64E55 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

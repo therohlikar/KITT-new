@@ -23,6 +23,7 @@ struct MainView: View {
     @State private var searchKey: String = ""
     @State private var filterListViewOpened: Bool = false
     @State private var settingsViewOpened: Bool = false
+    @State private var submenuViewOpened: Bool = false
     @State private var onlyFavorites: Bool = false
     
     @FocusState private var searchFocused: Bool
@@ -31,6 +32,7 @@ struct MainView: View {
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
 
     @State private var toBeUpdated: Bool = false
+    @State private var settingsToOpen: Bool = false
 
     var body: some View {
         NavigationStack{
@@ -75,11 +77,11 @@ struct MainView: View {
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Image(systemName: "gearshape.fill")
+                        Image(systemName: "line.3.horizontal.circle")
                             .onTapGesture {
                                 searchFocused = false
                                 
-                                settingsViewOpened.toggle()
+                                submenuViewOpened.toggle()
                             }
                             .padding(.horizontal, 10)
                             .padding(.trailing, 2)
@@ -97,12 +99,6 @@ struct MainView: View {
                         }
                     }
                 }
-                .sheet(isPresented: $filterListViewOpened, onDismiss: {
-                    searchFocused = true
-                }, content: {
-                    FiltersList(fvm: fvm, onlyFavorites: $onlyFavorites)
-                        .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
-                })
                 .sheet(isPresented: $settingsViewOpened, onDismiss: {
                     //
                 }, content: {
@@ -117,6 +113,23 @@ struct MainView: View {
                             }
                         }
                 })
+                .sheet(isPresented: $filterListViewOpened, onDismiss: {
+                    searchFocused = true
+                }, content: {
+                    FiltersList(fvm: fvm, onlyFavorites: $onlyFavorites)
+                        .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
+                })
+                .sheet(isPresented: $submenuViewOpened) {
+                    //
+                } content: {
+                    SubmenuView(settingsToOpen: $settingsToOpen, submenuViewOpened: $submenuViewOpened)
+                        .onDisappear{
+                            settingsViewOpened = settingsToOpen
+                            
+                            settingsToOpen = false
+                        }
+                }
+
             }
         }
         .task {

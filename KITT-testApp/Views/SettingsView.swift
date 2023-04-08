@@ -30,7 +30,6 @@ struct SettingsView: View {
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     @State private var showingNews: Bool = false
-    @State private var showingCYC: Bool = false
     @State private var canSendMail: Bool = false
     @State private var showingAlertRemoveData: Bool = false
     
@@ -95,21 +94,6 @@ struct SettingsView: View {
                 }
             }
             List{
-                Section("OSTATNÍ"){
-                    Button {
-                        showingCYC.toggle()
-                    } label: {
-                        HStack{
-                            Image("criminal")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                            
-                            Spacer()
-                            
-                            Text("CHYŤ SI SVÉHO ZLOČINCE")
-                        }
-                    }
-                }
                 Section("ÚPRAVA ROZHRANÍ"){
                     if foundEasterEgg{
                         HStack{
@@ -131,13 +115,6 @@ struct SettingsView: View {
                     }
                     
                     HStack{
-                        Text("Zobrazovat detail v seznamu")
-                        Spacer()
-                        Toggle("", isOn: $sc.settings.showDetail)
-                            .labelsHidden()
-                    }
-                    
-                    HStack{
                         Text("Pole pro vyhledávání")
                         Spacer()
                         Picker("", selection: $sc.settings.searchOnTop) {
@@ -147,21 +124,6 @@ struct SettingsView: View {
                                 .tag(false)
                         }
                         .labelsHidden()
-                    }
-                }
-                Section("UKLÁDÁNÍ DAT"){
-                    HStack{
-                        Text("Ukládat poznámky automaticky")
-                        Spacer()
-                        Toggle("", isOn: $sc.settings.saveNotes)
-                            .labelsHidden()
-                    }
-                    
-                    HStack{
-                        Text("Ukládat filtry")
-                        Spacer()
-                        Toggle("", isOn: $sc.settings.saveFilters)
-                            .labelsHidden()
                     }
                 }
                 Section("SYSTÉM"){
@@ -198,9 +160,6 @@ struct SettingsView: View {
         .sheet(isPresented: $showingNews) {
             NewsView()
                 .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
-        }
-        .fullScreenCover(isPresented: $showingCYC) {
-            CYCMenuView(showingCYC: $showingCYC)
         }
         .alert("VYMAZAT DATA", isPresented: $showingAlertRemoveData) {
             Button("Smazat", role: .destructive) {

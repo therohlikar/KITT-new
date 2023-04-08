@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FiltersList: View{
     @ObservedObject var fvm: FilterViewModel
-    @EnvironmentObject var sc: SettingsController
     
     @Binding var onlyFavorites: Bool
 
@@ -38,9 +37,7 @@ struct FiltersList: View{
         }
         .tint(.blue)
         .onDisappear{
-            if sc.settings.saveFilters{
-                fvm.encodeLocalFilters()
-            }
+            fvm.encodeLocalFilters()
         }
     }
 }
