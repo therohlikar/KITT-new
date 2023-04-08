@@ -20,30 +20,47 @@ class JsonDataController{
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
-        switch(type){
-            case .contentitem:
-                guard let ciFile = Bundle.main.object(forInfoDictionaryKey: "CONTENTITEM_JSON_FILE") else{
-                    fatalError("CONTENTITEM - Configuration file missing variable")
-                }
-            
-                guard let url = URL(string: "\(baseUrl)\(ciFile)") else{
-                    print("Invalid URL")
-                    return []
-                }
+        //DOWNLOAD LIST OF .JSON FILES
 
-                do {
-                    let (data, _) = try await URLSession(configuration: config).data(from: url)
-                    if let decodedResponse = try? JSONDecoder().decode([ItemModel].self, from: data){
-                        return decodedResponse
-                    }else{
-                        fatalError("CONTENTITEM - Json could not be decoded")
-                    }
-                }catch{
-                    fatalError("CONTENTITEM - Data failed to be recieved")
-                }
+        guard let listFile = Bundle.main.object(forInfoDictionaryKey: "LIST_JSON_FILES") else{
+            fatalError("LIST.TXT - Configuration file missing variable")
+        }
+    
+        guard let url = URL(string: "\(baseUrl)\(listFile)") else{
+            print("Invalid URL")
+            return []
         }
         
-        
+        do {
+            let (data, _) = try await URLSession(configuration: config).data(from: url)
+            if let files = try? JSONDecoder().decode([FileModel].self, from: data){
+                var items: [ItemModel] = []
+                
+                for file in files {
+                    guard let url = URL(string: "\(baseUrl)\(file.name)\(file.format)") else{
+                        print("Invalid URL")
+                        return []
+                    }
+
+                    do {
+                        let (data, _) = try await URLSession(configuration: config).data(from: url)
+                        if let decodedResponse = try? JSONDecoder().decode([ItemModel].self, from: data){
+                            items.append(contentsOf: decodedResponse)
+                        }else{
+                            fatalError("CONTENTITEM - Json could not be decoded")
+                        }
+                    }catch{
+                        fatalError("CONTENTITEM - Data failed to be recieved")
+                    }
+                }
+                
+                return items
+            }else{
+                fatalError("LIST.TXT - Json could not be decoded")
+            }
+        }catch{
+            fatalError("LIST.TXT - Data failed to be recieved")
+        }
         return []
     }
 }

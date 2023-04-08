@@ -100,8 +100,8 @@ struct ContentItemView: View {
                 if !item.wrappedSanctions.isEmpty {
                     VStack(alignment: .leading){
                         HStack{
-                            Text("sankce".uppercased())
-                                .font(Font.custom("Roboto-Black", size: 18))
+                            Text("SANKCE")
+                                .fontWeight(.semibold)
                             Spacer()
                         }
                         .padding(10)

@@ -9,11 +9,11 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 JSON_FILE_LINK = https:/$()/kittapp.store/kittdata/ios/
-OFFENSE_JSON_FILE = offenses.json
-CRIME_JSON_FILE = crimes.json
-LAWEXTRACT_JSON_FILE = lawextracts.json
+
+CONTENTITEM_JSON_FILE = items.json
 VERSION_JSON_FILE = news.json
 
+LIST_JSON_FILES = list.json
 VERSION_FILE = version.txt
 
 DEVELOPER = Radek Jeník, OOP Brno-Židenice

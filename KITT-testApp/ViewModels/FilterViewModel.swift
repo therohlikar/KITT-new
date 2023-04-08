@@ -33,8 +33,6 @@ class FilterViewModel: ObservableObject{
             ]
             
             encodeLocalFilters()
-            
-            print("HAPPENS")
         }
         
         guard

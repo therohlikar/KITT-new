@@ -4,6 +4,8 @@
 <dict>
 	<key>CRIME_JSON_FILE</key>
 	<string>$(CRIME_JSON_FILE)</string>
+	<key>LIST_JSON_FILES</key>
+	<string>$(LIST_JSON_FILES)</string>
 	<key>DEVELOPER</key>
 	<string>$(DEVELOPER)</string>
 	<key>DEVELOPER_LINK</key>
