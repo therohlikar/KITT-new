@@ -92,7 +92,9 @@ struct ContentItemView: View {
                                 .font(Font.custom("Roboto-Regular", size: 14))
                                 .padding(.leading, 5)
                                 .textSelection(.enabled)
+                                
                         }
+                        .frame(minWidth: 310, minHeight: 20)
                         .padding(.bottom, 8)
                     }
                 }
@@ -134,28 +136,6 @@ struct ContentItemView: View {
                     
                     Button {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            if currentPanel == .none || currentPanel == .example {
-                                showPanel.toggle()
-                            }
-                            
-                            currentPanel = .none
-                            
-                            if showPanel {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    currentPanel = .example
-                                }
-                            }
-                        }
-                    } label: {
-                        Text("PŘÍKLAD UŽITÍ")
-                            .fontWeight(currentPanel == .example ? .bold : .thin)
-                            .foregroundColor(.primary)
-                    }
-                    .opacity(item.wrappedExample.isEmpty ? 0.0 : 1.0)
-                    .disabled(item.wrappedExample.isEmpty)
-                    
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.5)) {
                             if currentPanel == .none || currentPanel == .note {
                                 showPanel.toggle()
                             }
@@ -174,50 +154,73 @@ struct ContentItemView: View {
                             .foregroundColor(.primary)
                     }
                     
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            if currentPanel == .none || currentPanel == .miranda {
-                                showPanel.toggle()
-                            }
-                            
-                            currentPanel = .none
-                            
-                            if showPanel {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    currentPanel = .miranda
+                    if !item.wrappedExample.isEmpty {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                if currentPanel == .none || currentPanel == .example {
+                                    showPanel.toggle()
+                                }
+                                
+                                currentPanel = .none
+                                
+                                if showPanel {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        currentPanel = .example
+                                    }
                                 }
                             }
+                        } label: {
+                            Text("PŘÍKLAD UŽITÍ")
+                                .fontWeight(currentPanel == .example ? .bold : .thin)
+                                .foregroundColor(.primary)
                         }
-                    } label: {
-                        Text("POUČENÍ")
-                            .fontWeight(currentPanel == .miranda ? .bold : .thin)
-                            .foregroundColor(.primary)
                     }
-                    .opacity(item.wrappedMiranda.isEmpty ? 0.0 : 1.0)
-                    .disabled(item.wrappedMiranda.isEmpty)
-                    
-                    
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            if currentPanel == .none || currentPanel == .links {
-                                showPanel.toggle()
-                            }
-                            
-                            currentPanel = .none
-                            
-                            if showPanel {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    currentPanel = .links
+
+                    if !item.wrappedMiranda.isEmpty {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                if currentPanel == .none || currentPanel == .miranda {
+                                    showPanel.toggle()
+                                }
+                                
+                                currentPanel = .none
+                                
+                                if showPanel {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        currentPanel = .miranda
+                                    }
                                 }
                             }
+                        } label: {
+                            Text("POUČENÍ")
+                                .fontWeight(currentPanel == .miranda ? .bold : .thin)
+                                .foregroundColor(.primary)
                         }
-                    } label: {
-                        Text("ODKAZY")
-                            .fontWeight(currentPanel == .links ? .bold : .thin)
-                            .foregroundColor(.primary)
                     }
-                    .opacity(item.wrappedLinks.isEmpty ? 0.0 : 1.0)
-                    .disabled(item.wrappedLinks.isEmpty)
+                    
+                    
+                    
+                    if !item.wrappedLinks.isEmpty {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                if currentPanel == .none || currentPanel == .links {
+                                    showPanel.toggle()
+                                }
+                                
+                                currentPanel = .none
+                                
+                                if showPanel {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        currentPanel = .links
+                                    }
+                                }
+                            }
+                        } label: {
+                            Text("ODKAZY")
+                                .fontWeight(currentPanel == .links ? .bold : .thin)
+                                .foregroundColor(.primary)
+                        }
+                    }
                 }
                 .font(Font.custom("Roboto-Thin", size: 14))
                 
