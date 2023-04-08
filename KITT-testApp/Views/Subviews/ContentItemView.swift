@@ -64,38 +64,45 @@ struct ContentItemView: View {
                 //CONTENT
                 if !item.wrappedContent.isEmpty{
                     ForEach(item.contentList, id: \.title) { content in
-                        VStack(alignment: .leading){
+                        VStack{
+                            VStack(alignment: .leading){
+                                HStack{
+                                    Text(content.title)
+                                        .fontWeight(.semibold)
+                                        .textSelection(.enabled)
+                                    
+                                    Spacer()
+                                }
+                                .frame(minWidth: 310)
+                                
+                                if !content.link.isEmpty {
+                                    Link(destination: URL(string: content.link)!) {
+                                        Text(content.link)
+                                            .font(Font.custom("Roboto-Light", size: 10))
+                                            .foregroundColor(.secondary)
+                                            .textSelection(.enabled)
+                                    }
+                                }
+                            }
+                            .padding(10)
+                            
+                            .background(item.typeToColor)
+                            .cornerRadius(7)
+                            
                             HStack{
-                                Text(content.title)
-                                    .fontWeight(.semibold)
+                                Text(content.content)
+                                    .font(Font.custom("Roboto-Regular", size: 14))
                                     .textSelection(.enabled)
                                 
                                 Spacer()
                             }
-                            
-                            if !content.link.isEmpty {
-                                Link(destination: URL(string: content.link)!) {
-                                    Text(content.link)
-                                        .font(Font.custom("Roboto-Light", size: 10))
-                                        .foregroundColor(.secondary)
-                                        .textSelection(.enabled)
-                                }
-                            }
+                            .padding()
+                            .frame(minWidth: 310)
+                            .background(
+                                Color(#colorLiteral(red: 0.2365566492, green: 0.2983926237, blue: 0.4225605428, alpha: 0.3656297929))
+                            )
+                            .cornerRadius(7)
                         }
-                        .padding(10)
-                        .frame(minWidth: 310, minHeight: 20)
-                        .background(item.typeToColor)
-                        .cornerRadius(7)
-                        
-                        GroupBox{
-                            Text(content.content)
-                                .font(Font.custom("Roboto-Regular", size: 14))
-                                .padding(.leading, 5)
-                                .textSelection(.enabled)
-                                
-                        }
-                        .frame(minWidth: 310, minHeight: 20)
-                        .padding(.bottom, 8)
                     }
                 }
                 
@@ -112,7 +119,7 @@ struct ContentItemView: View {
                         .cornerRadius(7)
                         
                         
-                        GroupBox{
+                        VStack{
                             ForEach(item.sanctionList, id: \.title) { sanction in
                                 HStack{
                                     Text(sanction.title.uppercased())
@@ -123,6 +130,11 @@ struct ContentItemView: View {
                                 .font(Font.custom("Roboto-Regular", size: 14))
                             }
                         }
+                        .padding()
+                        .background(
+                            Color(#colorLiteral(red: 0.2365566492, green: 0.2983926237, blue: 0.4225605428, alpha: 0.3656297929))
+                        )
+                        .cornerRadius(7)
                     }
                     .padding(.vertical, 10)
                 }
