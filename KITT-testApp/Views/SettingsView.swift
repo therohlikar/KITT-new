@@ -18,7 +18,7 @@ struct SettingsView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
     
-    private var currentVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
+    private var appVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
     
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
     @AppStorage("settings.hiddenColor") private var hiddenColor: Bool = false
@@ -68,7 +68,7 @@ struct SettingsView: View {
                     .font(.caption)
                 }
                 
-                Text("Verze: \(currentVersion)")
+                Text("Verze: \(appVersion)")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Text("Zákonná znění ve verzi: \(dataVersion)")

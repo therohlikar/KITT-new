@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct ContentItemView: View {
     
@@ -23,6 +24,10 @@ struct ContentItemView: View {
     @State private var favoriteToggle: Bool = false
     @State private var customNote: String = ""
     
+    @State private var reporting: Bool = false
+    
+    @State private var mailTo:String = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
+    
     var body: some View {
         VStack{
             
@@ -30,56 +35,82 @@ struct ContentItemView: View {
                 Text(item.wrappedTitle)
                     .font(Font.custom("Roboto-Black", size: 18))
                 
-                if !item.wrappedKeywords.isEmpty {
-                    Text("(\(item.wrappedKeywords))")
-                        .font(Font.custom("Roboto-Light", size: 10))
-                        .foregroundColor(.secondary)
-                }
+                Text("\(item.wrappedGroup) - \(item.wrappedSubgroup)")
+                    .font(Font.custom("Roboto-Light", size: 10))
+                    .foregroundColor(.secondary)
             }
             
             
             ScrollView{
                 if !item.wrappedWarning.isEmpty {
-                    Text(item.wrappedWarning)
-                        .font(Font.custom("Roboto-Medium", size: 12))
-                        .foregroundColor(.white)
-                        .padding(7)
-                        .frame(width: 350)
-                        .background(
-                            Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 1))
-                        )
-                        .padding(.vertical, 5)
-                        .cornerRadius(8)
+                    HStack{
+                        Text("POZOR")
+                            .fontWeight(.black)
+                        Text(item.wrappedWarning)
+                        Spacer()
+                    }
+                    .font(Font.custom("Roboto-Medium", size: 10))
+                    .foregroundColor(.white)
+                    .padding(7)
+                    .frame(minWidth: 310)
+                    .background(
+                        Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 0.8))
+                    )
+                    .padding(.vertical, 5)
+                    .cornerRadius(10)
+                    
                 }
                 
                 //CONTENT
                 if !item.wrappedContent.isEmpty{
                     ForEach(item.contentList, id: \.title) { content in
                         VStack(alignment: .leading){
-                            Text(content.title)
-                                .font(Font.custom("Roboto-Black", size: 14))
+                            HStack{
+                                Text(content.title)
+                                    .fontWeight(.semibold)
+                                    .textSelection(.enabled)
+                                
+                                Spacer()
+                            }
                             
                             if !content.link.isEmpty {
                                 Link(destination: URL(string: content.link)!) {
                                     Text(content.link)
                                         .font(Font.custom("Roboto-Light", size: 10))
+                                        .foregroundColor(.secondary)
+                                        .textSelection(.enabled)
                                 }
                             }
-                            
+                        }
+                        .padding(10)
+                        .frame(minWidth: 310, minHeight: 20)
+                        .background(item.typeToColor)
+                        .cornerRadius(7)
+                        
+                        GroupBox{
                             Text(content.content)
                                 .font(Font.custom("Roboto-Regular", size: 14))
                                 .padding(.leading, 5)
+                                .textSelection(.enabled)
                         }
-                        .padding(.vertical, 10)
+                        .padding(.bottom, 8)
                     }
                 }
                 
                 if !item.wrappedSanctions.isEmpty {
                     VStack(alignment: .leading){
-                        Text("sankce".uppercased())
-                            .font(Font.custom("Roboto-Black", size: 18))
+                        HStack{
+                            Text("sankce".uppercased())
+                                .font(Font.custom("Roboto-Black", size: 18))
+                            Spacer()
+                        }
+                        .padding(10)
+                        .frame(minWidth: 310, minHeight: 20)
+                        .background(item.typeToColor)
+                        .cornerRadius(7)
                         
-                        VStack{
+                        
+                        GroupBox{
                             ForEach(item.sanctionList, id: \.title) { sanction in
                                 HStack{
                                     Text(sanction.title.uppercased())
@@ -90,7 +121,6 @@ struct ContentItemView: View {
                                 .font(Font.custom("Roboto-Regular", size: 14))
                             }
                         }
-                        .padding(.leading, 5)
                     }
                     .padding(.vertical, 10)
                 }
@@ -203,6 +233,7 @@ struct ContentItemView: View {
                                             Spacer()
                                             Link(destination: URL(string: link.link)!) {
                                                 Text(link.link)
+                                                    .textSelection(.enabled)
                                             }
                                         }
                                         .padding(.bottom, 5)
@@ -216,18 +247,22 @@ struct ContentItemView: View {
                                 Text(item.wrappedMiranda)
                                     .font(Font.custom("Roboto-Regular", size: 12))
                                     .padding(.vertical, 12)
+                                    .textSelection(.enabled)
+                                    
                             }
                             
                             if currentPanel == .example {
                                 Text(item.wrappedExample)
                                     .font(Font.custom("Roboto-Regular", size: 12))
                                     .padding(.vertical, 12)
+                                    .textSelection(.enabled)
                             }
                             
                             if currentPanel == .note {
                                 TextField("Poznámka", text: $customNote, axis: .vertical)
                                     .textFieldStyle(.roundedBorder)
                                     .font(Font.custom("Roboto-Regular", size: 12))
+                                    .textSelection(.enabled)
 
                             }
                         }
@@ -244,6 +279,24 @@ struct ContentItemView: View {
         .navigationBarTitle("")
         .padding(20)
         .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if !MFMailComposeViewController.canSendMail() {
+                    Link(destination: URL(string: "mailto:\(mailTo)")!) {
+                        Image(systemName: "exclamationmark.bubble")
+                            .font(.title3)
+                            .foregroundColor(.primary)
+                    }
+                }else {
+                    Image(systemName: "exclamationmark.bubble")
+                        .font(.title3)
+                        .onTapGesture {
+                            reporting.toggle()
+                        }
+                        .foregroundColor(.primary)
+                }
+                
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: item.favorited ? "heart.fill" : "heart")
                     .font(.title3)
@@ -273,6 +326,17 @@ struct ContentItemView: View {
             
             try? moc.save()
         }
+        .sheet(isPresented: $reporting) {
+             let content:String = """
+                                 <b>ID</b>: \(item.wrappedId)<br>
+                                 <b>TYP</b>: \(item.wrappedType)<br>
+                                 <b>NÁZEV</b>: \(item.wrappedTitle)<br>
+                                 <b>VAŠE PŘIPOMÍNKA</b>: <br>
+                                 """
+
+
+            MailView(content: content, to: mailTo, subject: "PŘIPOMÍNKA: \(item.wrappedId)", isHTML: true)
+         }
     }
 }
 

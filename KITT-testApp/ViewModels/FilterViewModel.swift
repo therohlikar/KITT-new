@@ -9,13 +9,18 @@ import Foundation
 
 class FilterViewModel: ObservableObject{
     @Published var filters: [FilterModel] = []
+    private var version140updated: Bool = UserDefaults.standard.bool(forKey: "version140updated")
     
     init(){
         decodeLocalFilters()
     }
 
     func decodeLocalFilters(){
-        if UserDefaults.standard.data(forKey: "settings.filters") == nil {
+        if UserDefaults.standard.data(forKey: "settings.filters") == nil || !version140updated  {
+            
+            version140updated = true
+            UserDefaults.standard.setValue(true, forKey: "version140updated")
+            
             filters = [
                 FilterModel(label: "Název", key: "title", active: true),
                 FilterModel(label: "Obsah zákonného znění", key: "content", active: true),
@@ -28,6 +33,8 @@ class FilterViewModel: ObservableObject{
             ]
             
             encodeLocalFilters()
+            
+            print("HAPPENS")
         }
         
         guard

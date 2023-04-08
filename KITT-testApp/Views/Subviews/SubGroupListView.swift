@@ -15,27 +15,31 @@ struct SubGroupListView: View {
     var favoritesOnly: Bool
     
     var body: some View {
-        List {
+        ScrollView {
             ForEach(dict, id: \.description) { subgroup in
-                Section {
+                LazyVStack {
+                    HStack{
+                        Text(subgroup.description.uppercased())
+                            .font(.caption)
+                        Spacer()
+                    }
+                    
                     ForEach(currentGroup.ciArray) { item in
                         if favoritesOnly == false || item.favorited == favoritesOnly {
                             NavigationLink {
                                 ContentItemView(item: item)
                             } label: {
-                                Text(item.wrappedTitle)
+                                ContentItemRowView(item: item)
                             }
                             .isDetailLink(false)
                         }
                     }
-                } header: {
-                    Text(subgroup.description)
                 }
             }
         }
+        .padding()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(currentGroup.wrappedTitle)
-        .listStyle(.plain)
         .onAppear{
             for group in currentGroup.ciArray {
                 if !group.wrappedSubgroup.isEmpty && !dict.contains(where: {$0 == group.wrappedSubgroup}) {

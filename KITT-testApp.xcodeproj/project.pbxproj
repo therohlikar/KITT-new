@@ -13,6 +13,7 @@
 		964D0BBA29DF3EFE008ED31C /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB429DF3EFE008ED31C /* Roboto-Black.ttf */; };
 		964D0BBB29DF3EFE008ED31C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB529DF3EFE008ED31C /* Roboto-Bold.ttf */; };
 		964D0BBC29DF3EFE008ED31C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB629DF3EFE008ED31C /* Roboto-Regular.ttf */; };
+		964D0BBE29E00C95008ED31C /* ContentItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */; };
 		9660490329B1E75A00F64E55 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490229B1E75A00F64E55 /* DataController.swift */; };
 		9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */; };
 		9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490C29B217AC00F64E55 /* ParagraphModel.swift */; };
@@ -59,6 +60,7 @@
 		964D0BB429DF3EFE008ED31C /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		964D0BB529DF3EFE008ED31C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		964D0BB629DF3EFE008ED31C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentItemRowView.swift; sourceTree = "<group>"; };
 		9660490229B1E75A00F64E55 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KittDataModel.xcdatamodel; sourceTree = "<group>"; };
 		9660490C29B217AC00F64E55 /* ParagraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphModel.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				96965EA229BB8D890094520F /* CustomBadgeView.swift */,
 				9696388C29D4757F009365C5 /* SubGroupListView.swift */,
 				969638AD29D6C580009365C5 /* ContentItemView.swift */,
+				964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				96965E9C29B8CB830094520F /* Version+CoreDataClass.swift in Sources */,
 				96965E8529B8A4860094520F /* SettingsController.swift in Sources */,
 				9696388D29D4757F009365C5 /* SubGroupListView.swift in Sources */,
+				964D0BBE29E00C95008ED31C /* ContentItemRowView.swift in Sources */,
 				9660492B29B463B400F64E55 /* FilterModel.swift in Sources */,
 				96965EA129BB680F0094520F /* NetworkController.swift in Sources */,
 				9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */,

@@ -18,7 +18,7 @@ struct MainView: View {
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     @FetchRequest(sortDescriptors: []) var versions: FetchedResults<Version>
-    
+
     @State private var ready: Bool = false
     @State private var searchKey: String = ""
     @State private var filterListViewOpened: Bool = false
@@ -44,7 +44,6 @@ struct MainView: View {
                             Label("Knihovna", systemImage: "books.vertical.fill")
                         }
                         .tag("library")
-                    
                 }
                 .toolbar{
                     ToolbarItem(placement: searchOnTop ? .navigation : .bottomBar) {
@@ -67,6 +66,8 @@ struct MainView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Image(systemName: "checklist")
                             .onTapGesture {
+                                searchFocused = false
+                                
                                 filterListViewOpened.toggle()
                             }
                             .padding(.horizontal, 10)
@@ -96,11 +97,15 @@ struct MainView: View {
                         }
                     }
                 }
-                .sheet(isPresented: $filterListViewOpened) {
+                .sheet(isPresented: $filterListViewOpened, onDismiss: {
+                    searchFocused = true
+                }, content: {
                     FiltersList(fvm: fvm, onlyFavorites: $onlyFavorites)
                         .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
-                }
-                .sheet(isPresented: $settingsViewOpened) {
+                })
+                .sheet(isPresented: $settingsViewOpened, onDismiss: {
+                    //
+                }, content: {
                     SettingsView(update: $toBeUpdated, isPresented: $settingsViewOpened)
                         .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
                         .onDisappear{
@@ -111,7 +116,7 @@ struct MainView: View {
                                 }
                             }
                         }
-                }
+                })
             }
         }
         .task {

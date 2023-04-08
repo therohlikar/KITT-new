@@ -17,56 +17,87 @@ struct LibraryView: View {
     var searchKey: String
     
     var body: some View {
-        VStack{
-            List{
-                if searchKey.isEmpty && !favoritesOnly {
-                    Section {
-                        ForEach(offenseGroups) { group in
-                            NavigationLink {
-                                SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
-                            } label: {
+        ScrollView{
+            if searchKey.isEmpty && !favoritesOnly {
+                LazyVStack {
+                    HStack{
+                        Text("PŘESTUPKY".uppercased())
+                            .font(.caption)
+                        Spacer()
+                    }
+                    ForEach(offenseGroups) { group in
+                        NavigationLink {
+                            SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
+                        } label: {
+                            HStack{
+                                Spacer()
                                 Text(group.wrappedTitle)
+                                    .padding()
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
                             }
-                            .isDetailLink(false)
+                            .foregroundColor(.primary)
+                            .frame(minWidth: 310, minHeight: 80)
+                            .background(
+                                Color(#colorLiteral(red: 0, green: 0.5147912502, blue: 0.7548790574, alpha: 0.7))
+                            )
+                            .cornerRadius(7)
                         }
-                    } header: {
-                        Text("PŘESTUPKY")
+                        .isDetailLink(false)
                     }
-
-                    Section {
-                        ForEach(crimeGroups) { group in
-                            NavigationLink {
-                                SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
-                            } label: {
+                }
+                LazyVStack {
+                    HStack{
+                        Text("TRESTNÉ ČINY".uppercased())
+                            .font(.caption)
+                        Spacer()
+                    }
+                    ForEach(crimeGroups) { group in
+                        NavigationLink {
+                            SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
+                        } label: {
+                            HStack{
+                                Spacer()
                                 Text(group.wrappedTitle)
+                                    .padding()
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
                             }
-                            .isDetailLink(false)
+                            .foregroundColor(.primary)
+                            .frame(minWidth: 310, minHeight: 80)
+                            .background(
+                                Color(#colorLiteral(red: 0.9154744148, green: 0.4044153094, blue: 0, alpha: 0.7))
+                            )
+                            .cornerRadius(7)
                         }
-                    } header: {
-                        Text("TRESTNÉ ČINY")
+                        .isDetailLink(false)
                     }
-                }else{
-                    Section {
-                        ForEach(searchedContent) { item in
-                            NavigationLink {
-                                ContentItemView(item: item)
-                            } label: {
-                                VStack(alignment: .leading){
-                                    Text(item.wrappedType)
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                    Text(item.wrappedTitle)
-                                }
-                            }
-                            .isDetailLink(false)
+                }
+            }else{
+                LazyVStack {
+                    HStack{
+                        Text(favoritesOnly ? "Oblíbené:".uppercased() : "Nalezené:".uppercased())
+                            .font(.caption)
+                        Spacer()
+                    }
+                    
+                    ForEach(searchedContent) { item in
+                        NavigationLink {
+                            ContentItemView(item: item)
+                        } label: {
+                            ContentItemRowView(item: item)
                         }
-                    } header: {
-                        Text(favoritesOnly ? "Oblíbené:" : "Nalezené:")
+                        .isDetailLink(false)
                     }
-
                 }
             }
+            Spacer()
         }
+        .padding()
     }
     
     init(searchKey: String = "", favoritesOnly: Bool = false, fvm: FilterViewModel){
