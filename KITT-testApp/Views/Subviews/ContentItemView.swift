@@ -290,6 +290,9 @@ struct ContentItemView: View {
             
             Spacer()
         }
+        .onTapGesture(perform: {
+            UIApplication.shared.endEditing()
+        })
         .navigationTitle("")
         .navigationBarTitle("")
         .padding(20)
