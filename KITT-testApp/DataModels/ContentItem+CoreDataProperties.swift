@@ -70,7 +70,7 @@ extension ContentItem {
     }
     
     var contentList: [ContentModel] {
-        if !wrappedLinks.isEmpty {
+        if !wrappedContent.isEmpty {
             if let decodedResponse = try? JSONDecoder().decode([ContentModel].self, from: Data(wrappedContent.utf8)){
                 return decodedResponse
             }else{
