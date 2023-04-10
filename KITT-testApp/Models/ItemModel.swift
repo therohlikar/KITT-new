@@ -9,8 +9,8 @@ import Foundation
 
 struct ItemModel: Codable, Hashable {
     var id: String? = ""
-    var group: String? = "Nezařazeno"
-    var subgroup: String? = "Nezařazeno"
+    var group: String? = "OSTATNÍ"
+    var subgroup: String? = "OSTATNÍ"
     var type: String? = "offense"
     var title: String? = ""
     var content: String? = ""
