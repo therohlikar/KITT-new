@@ -25,13 +25,15 @@ struct SubGroupListView: View {
                     }
                     
                     ForEach(currentGroup.ciArray) { item in
-                        if favoritesOnly == false || item.favorited == favoritesOnly {
-                            NavigationLink {
-                                ContentItemView(item: item)
-                            } label: {
-                                ContentItemRowView(item: item)
+                        if item.wrappedSubgroup == subgroup.description {
+                            if favoritesOnly == false || item.favorited == favoritesOnly {
+                                NavigationLink {
+                                    ContentItemView(item: item)
+                                } label: {
+                                    ContentItemRowView(item: item)
+                                }
+                                .isDetailLink(false)
                             }
-                            .isDetailLink(false)
                         }
                     }
                 }
@@ -41,9 +43,9 @@ struct SubGroupListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(currentGroup.wrappedTitle)
         .onAppear{
-            for group in currentGroup.ciArray {
-                if !group.wrappedSubgroup.isEmpty && !dict.contains(where: {$0 == group.wrappedSubgroup}) {
-                    dict.append(group.wrappedSubgroup)
+            for item in currentGroup.ciArray {
+                if !item.wrappedSubgroup.isEmpty && !dict.contains(where: {$0 == item.wrappedSubgroup}) {
+                    dict.append(item.wrappedSubgroup)
                 }
             }
         }

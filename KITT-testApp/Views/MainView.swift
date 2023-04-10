@@ -189,7 +189,7 @@ struct MainView: View {
                             subgroupName = "NEZAŘAZENO"
                         }
                         new.subgroup = subgroupName
-                        
+                        print(subgroupName)
                         new.type = item.type
                         new.title = item.title
                         new.sanctions = item.sanctions

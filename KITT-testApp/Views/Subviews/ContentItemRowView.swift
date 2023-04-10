@@ -26,10 +26,11 @@ struct ContentItemRowView: View {
                     .font(.subheadline)
                     .fontWeight(.medium)
             }
+            .padding(.leading, 5)
             Spacer()
         }
         .foregroundColor(.primary)
-        .frame(minWidth: 310, minHeight: 20)
+        .frame(minWidth: 310, minHeight: 50)
         .padding(8)
         .background(.regularMaterial)
         .cornerRadius(7)
