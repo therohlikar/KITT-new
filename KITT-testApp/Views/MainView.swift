@@ -184,7 +184,12 @@ struct MainView: View {
                         }
                         
                         new.group = group
-                        new.subgroup = item.subgroup
+                        var subgroupName = item.subgroup ?? "NEZAŘAZENO"
+                        if subgroupName.isEmpty {
+                            subgroupName = "NEZAŘAZENO"
+                        }
+                        new.subgroup = subgroupName
+                        
                         new.type = item.type
                         new.title = item.title
                         new.sanctions = item.sanctions
