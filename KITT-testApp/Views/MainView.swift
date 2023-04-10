@@ -46,15 +46,28 @@ struct MainView: View {
                             Label("Knihovna", systemImage: "books.vertical.fill")
                         }
                         .tag("library")
-                }
-                .toolbar{
-                    ToolbarItem(placement: searchOnTop ? .navigation : .bottomBar) {
+                    
+                    Spacer()
+                    
+                    if !searchOnTop {
                         TextField("Vyhledávání...", text: $searchKey)
                             .autocorrectionDisabled()
                             .padding(10)
                             .focused($searchFocused)
                     }
-                    
+                }
+                .onTapGesture {
+                    UIApplication.shared.endEditing()
+                }
+                .toolbar{
+                    if searchOnTop {
+                        ToolbarItem(placement: .navigation) {
+                            TextField("Vyhledávání...", text: $searchKey)
+                                .autocorrectionDisabled()
+                                .padding(10)
+                                .focused($searchFocused)
+                        }
+                    }
 
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Image(systemName: onlyFavorites ? "heart.fill" : "heart")
