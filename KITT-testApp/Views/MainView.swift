@@ -189,7 +189,6 @@ struct MainView: View {
                             subgroupName = "NEZAŘAZENO"
                         }
                         new.subgroup = subgroupName
-                        print(subgroupName)
                         new.type = item.type
                         new.title = item.title
                         new.sanctions = item.sanctions
@@ -202,6 +201,12 @@ struct MainView: View {
                         
                         new.note = currentNote
                         new.favorited = currentFavorited
+                    }
+                    
+                    for item in items {
+                        if !ciArray.contains(where: {$0.id == item.wrappedId}){
+                            moc.delete(item)
+                        }
                     }
                 }
                 
