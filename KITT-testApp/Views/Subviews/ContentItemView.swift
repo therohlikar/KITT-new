@@ -10,9 +10,12 @@ import MessageUI
 
 struct ContentItemView: View {
     
+    
     enum panelShowed {
         case none, miranda, links, note, example
     }
+    
+    @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     
     @Environment(\.managedObjectContext) var moc
     
@@ -34,6 +37,7 @@ struct ContentItemView: View {
             VStack(alignment: .center){
                 Text(item.wrappedTitle)
                     .font(Font.custom("Roboto-Black", size: 18))
+                    .multilineTextAlignment(.center)
                 
                 Text("\(item.wrappedGroup) - \(item.wrappedSubgroup)")
                     .font(Font.custom("Roboto-Light", size: 10))
@@ -246,10 +250,24 @@ struct ContentItemView: View {
                                             Text(link.title.uppercased())
                                                 .fontWeight(.semibold)
                                             Spacer()
-                                            Link(destination: URL(string: link.link)!) {
-                                                Text(link.link)
-                                                    .textSelection(.enabled)
+                                            
+                                            if link.link.hasPrefix("in:") {
+                                                NavigationLink {
+                                                    let str = link.link.replacingOccurrences(of: "in:", with: "")
+                                                    if let found = items.first(where: { $0.id == str }) {
+                                                        ContentItemView(item: found)
+                                                    }
+                                                    
+                                                } label: {
+                                                    Text("PŘEMÍSTIT SE V APLIKACI")
+                                                }
+                                            }else {
+                                                Link(destination: URL(string: link.link)!) {
+                                                    Text(link.link)
+                                                        .textSelection(.enabled)
+                                                }
                                             }
+                                            
                                         }
                                         .padding(.bottom, 5)
                                     }
@@ -356,6 +374,7 @@ struct ContentItemView: View {
             MailView(content: content, to: mailTo, subject: "PŘIPOMÍNKA: \(item.wrappedId)", isHTML: true)
          }
     }
+                                                                                      
 }
 
 struct ContentItemView_Previews: PreviewProvider {
