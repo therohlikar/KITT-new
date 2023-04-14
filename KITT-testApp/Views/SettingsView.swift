@@ -14,19 +14,13 @@ struct SettingsView: View {
     @Binding var dismiss: Bool
     
     @EnvironmentObject var sc: SettingsController
-    @EnvironmentObject var networkController: NetworkController
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
-    
-    private var appVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
-    
+
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
     @AppStorage("settings.hiddenColor") private var hiddenColor: Bool = false
     @AppStorage("foundEasterEgg") private var foundEasterEgg: Bool = false
     
-    let developer = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER") as? String ?? "RJ"
-    let developerLink = Bundle.main.object(forInfoDictionaryKey: "DEVELOPER_LINK") as? String ?? "rjwannabefit"
-    let androidLink = Bundle.main.object(forInfoDictionaryKey: "KITT_ANDROID_LINK") as? String ?? "KITT"
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
     @State private var showingNews: Bool = false
@@ -40,59 +34,6 @@ struct SettingsView: View {
 
     var body: some View {
         VStack{
-            VStack{
-                Image("MainLogoTransp")
-                    .resizable()
-                    .frame(width: 150, height: 150)
-                    .background(hiddenColor ? Color.pink : (sc.settings.darkMode ? Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0) : Color("BasicColor")))
-                    .cornerRadius(180)
-                    .padding()
-                    .onTapGesture(count: 10) {
-                        if !foundEasterEgg{
-                            foundEasterEgg = true
-                            hiddenColor.toggle()
-                            
-                            UIApplication.shared.setAlternateIconName(hiddenColor ? "AlternativeAppIconPink" : nil)
-                        }
-                    }
-                    .animation(.easeIn, value: hiddenColor)
-                
-                Link(destination: URL(string: developerLink)!) {
-                    HStack{
-                        Text(developer)
-                        Image(systemName: "link")
-                            .foregroundColor(.blue)
-                    }
-                    .foregroundColor(.secondary)
-                    .font(.caption)
-                }
-                
-                Text("Verze: \(appVersion)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Text("Zákonná znění ve verzi: \(dataVersion)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-
-                Link(destination: URL(string: "mailto:\(mailTo)")!) {
-                    HStack{
-                        Text(mailTo)
-                        Image(systemName: "link")
-                            .foregroundColor(.blue)
-                    }
-                    .foregroundColor(.secondary)
-                    .font(.caption)
-                }
-                Link(destination: URL(string: "https://www.kittapp.store/")!) {
-                    HStack{
-                        Text("KITTAPP.STORE")
-                        Image(systemName: "link")
-                            .foregroundColor(.blue)
-                    }
-                    .foregroundColor(.secondary)
-                    .font(.caption)
-                }
-            }
             List{
                 Section("ÚPRAVA ROZHRANÍ"){
                     if foundEasterEgg{
