@@ -56,6 +56,12 @@ struct MainView: View {
                             .focused($searchFocused)
                     }
                 }
+                .refreshable {
+                    currentVersion = "0.0.0"
+                    Task {
+                        await self.prepareData()
+                    }
+                }
                 .onTapGesture {
                     UIApplication.shared.endEditing()
                 }
