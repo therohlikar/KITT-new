@@ -91,7 +91,6 @@ struct SubmenuView: View {
                         
                         Text("Nastavení")
                     }
-                    
                 }
                 
                 Section {
