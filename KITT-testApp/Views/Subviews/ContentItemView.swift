@@ -103,7 +103,7 @@ struct ContentItemView: View {
                             .padding()
                             .frame(minWidth: 310)
                             .background(
-                                Color(#colorLiteral(red: 0.2365566492, green: 0.2983926237, blue: 0.4225605428, alpha: 0.3656297929))
+                                item.typeToColor.opacity(0.3)
                             )
                             .cornerRadius(7)
                         }
@@ -136,7 +136,7 @@ struct ContentItemView: View {
                         }
                         .padding()
                         .background(
-                            Color(#colorLiteral(red: 0.2365566492, green: 0.2983926237, blue: 0.4225605428, alpha: 0.3656297929))
+                            item.typeToColor.opacity(0.3)
                         )
                         .cornerRadius(7)
                     }

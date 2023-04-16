@@ -108,6 +108,7 @@ struct SubmenuView: View {
                     Text("OSTATNÍ")
                 }
             }
+            .cornerRadius(12)
         }
         .font(.caption)
         .fullScreenCover(isPresented: $showingCYC) {
