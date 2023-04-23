@@ -14,11 +14,13 @@ struct MainView: View {
     @EnvironmentObject var networkController: NetworkController
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var dc: DataController
-
+    
+    @ObservedObject var urlViewModel: UrlViewModel = UrlViewModel()
+    
     @FetchRequest(sortDescriptors: []) var groups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     @FetchRequest(sortDescriptors: []) var versions: FetchedResults<Version>
-
+    
     @State private var ready: Bool = false
     @State private var searchKey: String = ""
     @State private var filterListViewOpened: Bool = false
@@ -148,11 +150,33 @@ struct MainView: View {
                             settingsToOpen = false
                         }
                 }
+                .navigationDestination(isPresented: $urlViewModel.open) {
+                    if let item = urlViewModel.item {
+                        ContentItemView(item: item)
+                    }
+                }
 
             }
         }
         .task {
             await self.prepareData()
+        }
+        .onOpenURL { url in
+            let str = url.absoluteString.replacingOccurrences(of: "kittapp://", with: "")
+            
+            let components = str.components(separatedBy: "?")
+            
+            for component in components {
+                if component.contains("id="){
+                    let rawValue = component.replacingOccurrences(of: "id=", with: "")
+                    
+                    if let found = items.first(where: { $0.id == rawValue }) {
+                        urlViewModel.item = found
+                        urlViewModel.open = true
+                        urlViewModel.id = rawValue
+                    }
+                }
+            }
         }
     }
     

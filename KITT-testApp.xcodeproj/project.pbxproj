@@ -15,6 +15,7 @@
 		964D0BBC29DF3EFE008ED31C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB629DF3EFE008ED31C /* Roboto-Regular.ttf */; };
 		964D0BBE29E00C95008ED31C /* ContentItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */; };
 		964D719429E1A254006155B0 /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D719329E1A254006155B0 /* FileModel.swift */; };
+		964D719929F5C89E006155B0 /* UrlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D719829F5C89E006155B0 /* UrlViewModel.swift */; };
 		9660490329B1E75A00F64E55 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490229B1E75A00F64E55 /* DataController.swift */; };
 		9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */; };
 		9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490C29B217AC00F64E55 /* ParagraphModel.swift */; };
@@ -64,6 +65,7 @@
 		964D0BB629DF3EFE008ED31C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentItemRowView.swift; sourceTree = "<group>"; };
 		964D719329E1A254006155B0 /* FileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
+		964D719829F5C89E006155B0 /* UrlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlViewModel.swift; sourceTree = "<group>"; };
 		9660490229B1E75A00F64E55 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KittDataModel.xcdatamodel; sourceTree = "<group>"; };
 		9660490C29B217AC00F64E55 /* ParagraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphModel.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				9660492C29B4648500F64E55 /* FilterViewModel.swift */,
+				964D719829F5C89E006155B0 /* UrlViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */,
 				969638AB29D490A9009365C5 /* Group+CoreDataClass.swift in Sources */,
 				96965E9729B8C51C0094520F /* VersionController.swift in Sources */,
+				964D719929F5C89E006155B0 /* UrlViewModel.swift in Sources */,
 				96965E9D29B8CB830094520F /* Version+CoreDataProperties.swift in Sources */,
 				96965E6F29B63AA30094520F /* SettingsModel.swift in Sources */,
 				969638A829D48969009365C5 /* ItemModel.swift in Sources */,
@@ -520,6 +524,7 @@
 				INFOPLIST_FILE = "KITT-testApp/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = KITT;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -559,6 +564,7 @@
 				INFOPLIST_FILE = "KITT-testApp/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = KITT;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

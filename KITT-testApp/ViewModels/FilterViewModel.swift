@@ -9,18 +9,13 @@ import Foundation
 
 class FilterViewModel: ObservableObject{
     @Published var filters: [FilterModel] = []
-    private var version140updated: Bool = UserDefaults.standard.bool(forKey: "version140updated")
     
     init(){
         decodeLocalFilters()
     }
 
     func decodeLocalFilters(){
-        if UserDefaults.standard.data(forKey: "settings.filters") == nil || !version140updated  {
-            
-            version140updated = true
-            UserDefaults.standard.setValue(true, forKey: "version140updated")
-            
+        if UserDefaults.standard.data(forKey: "filters") == nil {
             filters = [
                 FilterModel(label: "Název", key: "title", active: true),
                 FilterModel(label: "Obsah zákonného znění", key: "content", active: true),
@@ -36,7 +31,7 @@ class FilterViewModel: ObservableObject{
         }
         
         guard
-            let data = UserDefaults.standard.data(forKey: "settings.filters"),
+            let data = UserDefaults.standard.data(forKey: "filters"),
             let decodedFilters = try? JSONDecoder().decode([FilterModel].self, from: data)
         else {
             return
@@ -47,7 +42,7 @@ class FilterViewModel: ObservableObject{
     
     func encodeLocalFilters(){
         if let encoded = try? JSONEncoder().encode(filters){
-            UserDefaults.standard.setValue(encoded, forKey: "settings.filters")
+            UserDefaults.standard.setValue(encoded, forKey: "filters")
         }
     }
 }
