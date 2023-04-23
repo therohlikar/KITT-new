@@ -68,7 +68,11 @@ struct SubGroupListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(currentGroup.wrappedTitle)
             .onAppear{
-                for item in currentGroup.ciArray {
+                let sorted = currentGroup.ciArray.sorted{
+                    $0.wrappedTitle < $1.wrappedTitle
+                }
+                
+                for item in sorted {
                     if !item.wrappedSubgroup.isEmpty && !dict.contains(where: {$0 == item.wrappedSubgroup}) {
                         dict.append(item.wrappedSubgroup)
                     }
