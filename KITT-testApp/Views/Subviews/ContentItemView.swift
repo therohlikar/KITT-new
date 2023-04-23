@@ -97,6 +97,7 @@ struct ContentItemView: View {
                                 Text(content.content)
                                     .font(Font.custom("Roboto-Regular", size: 14))
                                     .textSelection(.enabled)
+                                    .lineSpacing(5)
                                 
                                 Spacer()
                             }
@@ -132,6 +133,11 @@ struct ContentItemView: View {
                                     Text(sanction.content)
                                 }
                                 .font(Font.custom("Roboto-Regular", size: 14))
+                                
+                                Rectangle()
+                                    .fill(Color.secondary)
+                                    .frame(width: 300, height: 2)
+                                    .opacity(0.5)
                             }
                         }
                         .padding()
