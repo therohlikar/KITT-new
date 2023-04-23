@@ -10,6 +10,7 @@ import SwiftUI
 struct LibraryView: View {
     @FetchRequest(sortDescriptors: []) var offenseGroups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var crimeGroups: FetchedResults<Group>
+    @FetchRequest(sortDescriptors: []) var lawGroups: FetchedResults<Group>
     
     @FetchRequest(sortDescriptors: []) var searchedContent: FetchedResults<ContentItem>
     
@@ -41,7 +42,7 @@ struct LibraryView: View {
                             .foregroundColor(.primary)
                             .frame(minWidth: 310, minHeight: 80)
                             .background(
-                                Color(#colorLiteral(red: 0, green: 0.5147912502, blue: 0.7548790574, alpha: 0.7))
+                                Color(#colorLiteral(red: 0, green: 0.5147912502, blue: 0.7548790574, alpha: 0.5))
                             )
                             .cornerRadius(7)
                         }
@@ -50,11 +51,11 @@ struct LibraryView: View {
                 }
                 LazyVStack {
                     HStack{
-                        Text("TRESTNÉ ČINY".uppercased())
+                        Text("CITACE ZÁKONA".uppercased())
                             .font(.caption)
                         Spacer()
                     }
-                    ForEach(crimeGroups) { group in
+                    ForEach(lawGroups) { group in
                         NavigationLink {
                             SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
                         } label: {
@@ -70,7 +71,7 @@ struct LibraryView: View {
                             .foregroundColor(.primary)
                             .frame(minWidth: 310, minHeight: 80)
                             .background(
-                                Color(#colorLiteral(red: 0.9154744148, green: 0.4044153094, blue: 0, alpha: 0.7))
+                                Color(#colorLiteral(red: 0.9154744148, green: 0.4044153094, blue: 0, alpha: 0.5))
                             )
                             .cornerRadius(7)
                         }
@@ -124,6 +125,9 @@ struct LibraryView: View {
 
             _crimeGroups = FetchRequest<Group>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(
                 type: .and, subpredicates: [NSPredicate(format: "ANY contentitem.type == 'crime'")]))
+            
+            _lawGroups = FetchRequest<Group>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(
+                type: .and, subpredicates: [NSPredicate(format: "ANY contentitem.type == 'law'")]))
         }
     }
 }

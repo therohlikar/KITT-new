@@ -84,6 +84,7 @@ extension ContentItem {
         switch(wrappedType){
             case "offense": return "PŘ"
             case "crime": return "TČ"
+            case "law": return "Z"
             default: return "?"
         }
     }
@@ -92,6 +93,7 @@ extension ContentItem {
         switch(wrappedType){
             case "offense": return Color(#colorLiteral(red: 0, green: 0.5147912502, blue: 0.7548790574, alpha: 0.5))
             case "crime": return Color(#colorLiteral(red: 0.9154744148, green: 0.4044153094, blue: 0, alpha: 0.5))
+            case "law": return Color(#colorLiteral(red: 0.9154744148, green: 0.4044153094, blue: 0, alpha: 0.5))
             default: return Color(#colorLiteral(red: 0.8621224761, green: 0.807695806, blue: 0.8492537141, alpha: 0.5))
         }
     }
