@@ -77,6 +77,10 @@ struct SubGroupListView: View {
                         dict.append(item.wrappedSubgroup)
                     }
                 }
+                
+                dict.sort{
+                    $0.description < $1.description
+                }
             }
         }
         
