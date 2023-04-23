@@ -359,6 +359,12 @@ struct ContentItemView: View {
                         }
                     }
             }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if let url = URL(string: "kittapp://id=\(item.wrappedId)") {
+                    ShareLink(item: url)
+                }
+            }
         }
         .onAppear{
             customNote = item.wrappedNote
