@@ -32,13 +32,15 @@ struct MainView: View {
     
     @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
+    @AppStorage("welcome") private var welcome: Bool = false
 
     @State private var toBeUpdated: Bool = false
     @State private var settingsToOpen: Bool = false
+    @State private var showWelcomePanel: Bool = false
 
     var body: some View {
         NavigationStack{
-            if !ready{
+            if !ready && welcome {
                 ProgressView("Aplikace se připravuje")
                     .tint(.blue)
             }else{
@@ -155,6 +157,16 @@ struct MainView: View {
                         ContentItemView(item: item)
                     }
                 }
+                .fullScreenCover(isPresented: $showWelcomePanel) {
+                    welcome = true
+                    currentVersion = "0.0.0"
+                    Task {
+                        await self.prepareData()
+                    }
+                } content: {
+                    WelcomeView()
+                }
+
 
             }
         }
@@ -259,6 +271,10 @@ struct MainView: View {
                 
                 ready = true
             }
+        }
+        
+        if ready{
+            showWelcomePanel = !welcome
         }
     }
 }
