@@ -37,16 +37,14 @@ struct ThankYouSubView: View {
                 .background(Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0))
                 .cornerRadius(180)
                 .opacity(imgAnim ? 1.0 : 0.0).animation(.easeInOut(duration: 4.0), value: imgAnim)
-                
             
             if textAnim {
-                VStack{
-                    
+                ScrollView{
                     VStack(alignment: .leading){
                         Text("Děkuji za užívání aplikace a šíření mezi Vaše kolegy.\nVěřím, že i přes určitý nedostatek materiálu naleznete aplikaci užitečnou a především nápomocnou v už tak náročných situacích na ulici.\n\nAplikace je zdarma a taková navždy zůstane. I přesto se našlo několik desítek z Vás, kteří podpořili mě, tak i kolegu z Android verze KITTu. Děkujeme.")
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.bottom)
-
+                        
                         Text("Od 14.3.2023 do 23.04.2023 si aplikaci KITT na iOS stáhlo: ")
                             .padding(.bottom)
                         
@@ -77,25 +75,23 @@ struct ThankYouSubView: View {
                     .foregroundColor(.blue)
                 }
                 .opacity(textAnim ? 1.0 : 0.0)
-                
+                .font(Font.custom("Roboto-Light", size: 16))
+                .foregroundColor(.white)
+                .lineSpacing(4)
+                .padding()
             }
             
             if logoMove {
                 Spacer()
             }
-            
         }
-        .font(Font.custom("Roboto-Light", size: 16))
-        .foregroundColor(.white)
-        .lineSpacing(4)
-        .padding()
         .onAppear{
             imgAnim = true
-
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 withAnimation(.easeInOut(duration: 0.8)) {
                     logoMove = true
-
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         withAnimation(.easeInOut(duration: 1.5)) {
                             textAnim = true
