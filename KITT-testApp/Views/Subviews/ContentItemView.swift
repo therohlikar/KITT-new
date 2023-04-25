@@ -376,7 +376,7 @@ struct ContentItemView: View {
         }
         .sheet(isPresented: $reporting) {
              let content:String = """
-                                 <b>ID</b>: \(item.wrappedId)<br>
+                                 <b>ID</b>: <a href='kittapp://id=\(item.wrappedId)'>\(item.wrappedId)</a><br>
                                  <b>TYP</b>: \(item.wrappedType)<br>
                                  <b>NÁZEV</b>: \(item.wrappedTitle)<br>
                                  <b>VAŠE PŘIPOMÍNKA</b>: <br>
