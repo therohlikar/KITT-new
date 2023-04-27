@@ -12,6 +12,8 @@ struct SubGroupListView: View {
     @State private var dict = [String]()
     @State private var searchKey: String = ""
     
+    @State private var categoriesRoll: Bool = false
+    
     var favoritesOnly: Bool
     
     var body: some View {
@@ -19,26 +21,37 @@ struct SubGroupListView: View {
             ScrollView {
                 GroupBox(content: {
                     VStack(alignment: .leading){
-                        ForEach(dict, id: \.description) { subgroup in
-                            HStack{
-                                Button("- \(subgroup.description.uppercased())") {
-                                    withAnimation(.spring()) {
-                                        value.scrollTo(subgroup.description, anchor: .top)
-                                    }
-                                }
-                                .font(.callout)
-                                .foregroundColor(.secondary)
-                                
-                                Spacer()
-                            }
-                            .padding(.bottom, 2)
+                        HStack{
+                            Text("KATEGORIE")
+                                .padding(.bottom, categoriesRoll ? 3 : 0)
+                            Spacer()
+                            Image(systemName: categoriesRoll ? "arrow.up.circle" : "arrow.down.circle")
+                                .foregroundColor(.white)
+                                .font(.title2)
                         }
-                    }
-                }, label: {
-                    HStack{
-                        Text("KATEGORIE")
-                            .font(.caption)
-                        Spacer()
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                categoriesRoll.toggle()
+                            }
+                        }
+                        
+                        if categoriesRoll {
+                            ForEach(dict, id: \.description) { subgroup in
+                                HStack{
+                                    Button("- \(subgroup.description.uppercased())") {
+                                        withAnimation(.spring()) {
+                                            value.scrollTo(subgroup.description, anchor: .top)
+                                        }
+                                    }
+                                    .font(.callout)
+                                    .foregroundColor(.secondary)
+                                    
+                                    Spacer()
+                                }
+                                .padding(.bottom, 2)
+                            }
+                        }
                     }
                 })
                 ForEach(dict, id: \.description) { subgroup in
