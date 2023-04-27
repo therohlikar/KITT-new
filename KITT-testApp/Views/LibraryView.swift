@@ -51,6 +51,35 @@ struct LibraryView: View {
                 }
                 LazyVStack {
                     HStack{
+                        Text("TRESTNÉ ČINY".uppercased())
+                            .font(.caption)
+                        Spacer()
+                    }
+                    ForEach(crimeGroups) { group in
+                        NavigationLink {
+                            SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
+                        } label: {
+                            HStack{
+                                Spacer()
+                                Text(group.wrappedTitle)
+                                    .padding()
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
+                            }
+                            .foregroundColor(.primary)
+                            .frame(minWidth: 310, minHeight: 80)
+                            .background(
+                                Color(#colorLiteral(red: 0.638913691, green: 0.6389137506, blue: 0.638913691, alpha: 0.5))
+                            )
+                            .cornerRadius(7)
+                        }
+                        .isDetailLink(false)
+                    }
+                }
+                LazyVStack {
+                    HStack{
                         Text("CITACE ZÁKONA".uppercased())
                             .font(.caption)
                         Spacer()
