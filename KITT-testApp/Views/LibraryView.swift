@@ -122,12 +122,18 @@ struct LibraryView: View {
                             ContentItemRowView(item: item)
                         }
                         .isDetailLink(false)
+                        .onTapGesture {
+                            
+                        }
                     }
                 }
             }
             Spacer()
         }
         .padding()
+        .onAppear{
+            UIApplication.shared.endEditing()
+        }
     }
     
     init(searchKey: String = "", favoritesOnly: Bool = false, fvm: FilterViewModel){
