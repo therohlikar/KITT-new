@@ -40,7 +40,7 @@ struct MainView: View {
 
     var body: some View {
         NavigationStack{
-            if !ready && welcome {
+            if !ready {
                 ProgressView("Aplikace se připravuje")
                     .tint(.blue)
             }else{
@@ -166,8 +166,6 @@ struct MainView: View {
                 } content: {
                     WelcomeView()
                 }
-
-
             }
         }
         .task {
