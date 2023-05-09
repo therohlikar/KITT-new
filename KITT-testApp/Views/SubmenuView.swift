@@ -112,6 +112,7 @@ struct SubmenuView: View {
         .font(.caption)
         .fullScreenCover(isPresented: $showingCYC) {
             CYCMenuView(showingCYC: $showingCYC)
+                .preferredColorScheme(.dark)
         }
         .foregroundColor(.primary)
         .padding()
