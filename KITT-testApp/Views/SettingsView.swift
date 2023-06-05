@@ -55,6 +55,12 @@ struct SettingsView: View {
                         Toggle("", isOn: $sc.settings.darkMode)
                             .labelsHidden()
                     }
+                    HStack{
+                        Text("Vypnout usínání displeje při prohlížení")
+                        Spacer()
+                        Toggle("", isOn: $sc.settings.keepDisplayOn)
+                            .labelsHidden()
+                    }
                     
                     HStack{
                         Text("Pole pro vyhledávání")

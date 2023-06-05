@@ -31,6 +31,7 @@ struct MainView: View {
     @FocusState private var searchFocused: Bool
     
     @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
+    @AppStorage("settings.displayOn") private var keepDisplayOn: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
     @AppStorage("welcome") private var welcome: Bool = false
 
@@ -44,6 +45,23 @@ struct MainView: View {
                 ProgressView("Aplikace se připravuje")
                     .tint(.blue)
             }else{
+                if searchOnTop {
+                    HStack{
+                        TextField("Vyhledávání...", text: $searchKey)
+                            .autocorrectionDisabled()
+                            .padding(10)
+                            .focused($searchFocused)
+                        
+                        if !searchKey.isEmpty {
+                            Image(systemName: "x.circle.fill")
+                                .onTapGesture {
+                                    searchKey = ""
+                                }
+                                .opacity(0.7)
+                        }
+                    }
+                    .padding(.horizontal, 10)
+                }
                 VStack{
                     LibraryView(searchKey: searchKey, favoritesOnly: onlyFavorites, fvm: fvm)
                         .tabItem {
@@ -54,10 +72,21 @@ struct MainView: View {
                     Spacer()
                     
                     if !searchOnTop {
-                        TextField("Vyhledávání...", text: $searchKey)
-                            .autocorrectionDisabled()
-                            .padding(10)
-                            .focused($searchFocused)
+                        HStack{
+                            TextField("Vyhledávání...", text: $searchKey)
+                                .autocorrectionDisabled()
+                                .padding(10)
+                                .focused($searchFocused)
+                            
+                            if !searchKey.isEmpty {
+                                Image(systemName: "x.circle.fill")
+                                    .onTapGesture {
+                                        searchKey = ""
+                                    }
+                                    .opacity(0.7)
+                            }
+                        }
+                        .padding(.horizontal, 10)
                     }
                 }
                 .refreshable {
@@ -70,15 +99,6 @@ struct MainView: View {
                     UIApplication.shared.endEditing()
                 }
                 .toolbar{
-                    if searchOnTop {
-                        ToolbarItem(placement: .navigation) {
-                            TextField("Vyhledávání...", text: $searchKey)
-                                .autocorrectionDisabled()
-                                .padding(10)
-                                .focused($searchFocused)
-                        }
-                    }
-
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Image(systemName: onlyFavorites ? "heart.fill" : "heart")
                             .onTapGesture {
@@ -167,6 +187,9 @@ struct MainView: View {
                     WelcomeView()
                 }
             }
+        }
+        .onAppear{
+            UIApplication.shared.isIdleTimerDisabled = keepDisplayOn
         }
         .task {
             await self.prepareData()
