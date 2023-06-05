@@ -79,6 +79,15 @@ struct SubmenuView: View {
                     .foregroundColor(.secondary)
                     .font(.caption)
                 }
+                Link(destination: URL(string: "https://www.kittapp.store/www/files/iOS_tutorial.pdf")!) {
+                    HStack{
+                        Text("TUTORIAL")
+                        Image(systemName: "link")
+                            .foregroundColor(.blue)
+                    }
+                    .foregroundColor(.secondary)
+                    .font(.caption)
+                }
             }
             
             List{
