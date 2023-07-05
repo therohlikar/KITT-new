@@ -12,7 +12,7 @@ struct ContentItemRowView: View {
     
     var body: some View {
         HStack{
-            if item.wrappedType == "sign" {
+            if item.wrappedType == "sign" && UIImage(named: "\(item.wrappedId).webp") != nil {
                 Image(uiImage: (UIImage(named: "\(item.wrappedId).webp")!))
                     .resizable()
                     .frame(width: 100, height: 90)
