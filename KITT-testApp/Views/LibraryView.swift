@@ -11,6 +11,7 @@ struct LibraryView: View {
     @FetchRequest(sortDescriptors: []) var offenseGroups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var crimeGroups: FetchedResults<Group>
     @FetchRequest(sortDescriptors: []) var lawGroups: FetchedResults<Group>
+    @FetchRequest(sortDescriptors: []) var signGroup: FetchedResults<Group>
     
     @FetchRequest(sortDescriptors: []) var searchedContent: FetchedResults<ContentItem>
     
@@ -107,6 +108,35 @@ struct LibraryView: View {
                         .isDetailLink(false)
                     }
                 }
+                LazyVStack {
+                    HStack{
+                        Text("OSTATNÍ".uppercased())
+                            .font(.caption)
+                        Spacer()
+                    }
+                    ForEach(signGroup) { group in
+                        NavigationLink {
+                            SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
+                        } label: {
+                            HStack{
+                                Spacer()
+                                Text(group.wrappedTitle)
+                                    .padding()
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
+                            }
+                            .foregroundColor(.primary)
+                            .frame(minWidth: 310, minHeight: 80)
+                            .background(
+                                Color(#colorLiteral(red: 0.9999999404, green: 1, blue: 1, alpha: 0.5))
+                            )
+                            .cornerRadius(7)
+                        }
+                        .isDetailLink(false)
+                    }
+                }
             }else{
                 LazyVStack {
                     HStack{
@@ -163,6 +193,9 @@ struct LibraryView: View {
             
             _lawGroups = FetchRequest<Group>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(
                 type: .and, subpredicates: [NSPredicate(format: "ANY contentitem.type == 'law'")]))
+            
+            _signGroup = FetchRequest<Group>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(
+                type: .and, subpredicates: [NSPredicate(format: "ANY contentitem.type == 'sign'")]))
         }
     }
 }

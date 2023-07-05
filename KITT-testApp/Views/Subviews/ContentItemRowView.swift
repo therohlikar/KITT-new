@@ -12,14 +12,22 @@ struct ContentItemRowView: View {
     
     var body: some View {
         HStack{
-            Text(item.typeToLabel)
-                .fontWeight(.semibold)
-                .background(
-                    Rectangle()
-                        .frame(minWidth: 100, minHeight: 100)
-                        .foregroundColor(item.typeToColor)
-                )
-                .padding(.horizontal, 25)
+            if item.wrappedType == "sign" {
+                Image(uiImage: (UIImage(named: "\(item.wrappedId).webp")!))
+                    .resizable()
+                    .frame(width: 100, height: 90)
+                    .padding(.horizontal, 25)
+            }else{
+                Text(item.typeToLabel)
+                    .fontWeight(.semibold)
+                    .background(
+                        Rectangle()
+                            .frame(minWidth: 100, minHeight: 100)
+                            .foregroundColor(item.typeToColor)
+                    )
+                    .padding(.horizontal, 25)
+            }
+            
             Spacer()
             VStack{
                 Text(item.wrappedTitle)

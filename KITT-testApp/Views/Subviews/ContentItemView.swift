@@ -66,32 +66,40 @@ struct ContentItemView: View {
                 }
                 
                 //CONTENT
+                if item.wrappedType == "sign" {
+                    Image(uiImage: (UIImage(named: "\(item.wrappedId).webp")!))
+                        .resizable()
+                        .frame(width: 200, height: 180)
+                        .padding(.horizontal, 25)
+                }
+                
                 if !item.wrappedContent.isEmpty{
                     ForEach(item.contentList, id: \.title) { content in
                         VStack{
-                            VStack(alignment: .leading){
-                                HStack{
-                                    Text(content.title)
-                                        .fontWeight(.semibold)
-                                        .textSelection(.enabled)
-                                    
-                                    Spacer()
-                                }
-                                .frame(minWidth: 310)
-                                
-                                if !content.link.isEmpty {
-                                    Link(destination: URL(string: content.link)!) {
-                                        Text(content.link)
-                                            .font(Font.custom("Roboto-Light", size: 10))
-                                            .foregroundColor(.secondary)
+                            if !content.title.isEmpty {
+                                VStack(alignment: .leading){
+                                    HStack{
+                                        Text(content.title)
+                                            .fontWeight(.semibold)
                                             .textSelection(.enabled)
+                                        
+                                        Spacer()
+                                    }
+                                    .frame(minWidth: 310)
+
+                                    if !content.link.isEmpty {
+                                        Link(destination: URL(string: content.link)!) {
+                                            Text(content.link)
+                                                .font(Font.custom("Roboto-Light", size: 10))
+                                                .foregroundColor(.secondary)
+                                                .textSelection(.enabled)
+                                        }
                                     }
                                 }
+                                .padding(10)
+                                .background(item.typeToColor)
+                                .cornerRadius(7)
                             }
-                            .padding(10)
-                            
-                            .background(item.typeToColor)
-                            .cornerRadius(7)
                             
                             HStack{
                                 Text(content.content)
