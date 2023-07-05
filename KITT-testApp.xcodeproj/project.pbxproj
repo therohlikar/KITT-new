@@ -89,6 +89,7 @@
 		969A63BC2A5537D900A7D378 /* A30.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63922A5537D900A7D378 /* A30.webp */; };
 		969A63BD2A5537D900A7D378 /* A2a.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63932A5537D900A7D378 /* A2a.webp */; };
 		969A63BE2A5537D900A7D378 /* A20.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63942A5537D900A7D378 /* A20.webp */; };
+		969A63CE2A55EA5900A7D378 /* A12c.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63CD2A55EA5900A7D378 /* A12c.webp */; };
 		969F070829D745D30017FB99 /* SanctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070729D745D30017FB99 /* SanctionModel.swift */; };
 		969F070A29D74BFF0017FB99 /* LinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070929D74BFF0017FB99 /* LinkModel.swift */; };
 		969F070C29D7594E0017FB99 /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070B29D7594E0017FB99 /* ContentModel.swift */; };
@@ -187,6 +188,7 @@
 		969A63922A5537D900A7D378 /* A30.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = A30.webp; sourceTree = "<group>"; };
 		969A63932A5537D900A7D378 /* A2a.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = A2a.webp; sourceTree = "<group>"; };
 		969A63942A5537D900A7D378 /* A20.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = A20.webp; sourceTree = "<group>"; };
+		969A63CD2A55EA5900A7D378 /* A12c.webp */ = {isa = PBXFileReference; lastKnownFileType = file; name = A12c.webp; path = ../../../../../Desktop/A12c.webp; sourceTree = "<group>"; };
 		969F070729D745D30017FB99 /* SanctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SanctionModel.swift; sourceTree = "<group>"; };
 		969F070929D74BFF0017FB99 /* LinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkModel.swift; sourceTree = "<group>"; };
 		969F070B29D7594E0017FB99 /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				969A638E2A5537D900A7D378 /* A11.webp */,
 				969A63902A5537D900A7D378 /* A12a.webp */,
 				969A636B2A5537D800A7D378 /* A12b.webp */,
+				969A63CD2A55EA5900A7D378 /* A12c.webp */,
 				969A636D2A5537D800A7D378 /* A13.webp */,
 				969A63822A5537D800A7D378 /* A14.webp */,
 				969A638D2A5537D900A7D378 /* A15.webp */,
@@ -485,6 +488,7 @@
 				969A63B52A5537D900A7D378 /* A32a.webp in Resources */,
 				969A63AE2A5537D900A7D378 /* A1b.webp in Resources */,
 				969A63AC2A5537D900A7D378 /* A14.webp in Resources */,
+				969A63CE2A55EA5900A7D378 /* A12c.webp in Resources */,
 				969A63BB2A5537D900A7D378 /* A10.webp in Resources */,
 				964D0BBA29DF3EFE008ED31C /* Roboto-Black.ttf in Resources */,
 				964D0BB729DF3EFE008ED31C /* Roboto-Light.ttf in Resources */,
