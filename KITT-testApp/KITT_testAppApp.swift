@@ -17,11 +17,11 @@ struct KITT_testAppApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environment(\.managedObjectContext, dataController.context)
                 .environmentObject(filterViewModel)
                 .environmentObject(settingsController)
                 .environmentObject(networkController)
                 .environmentObject(dataController)
-                .environment(\.managedObjectContext, dataController.context)
                 .preferredColorScheme(settingsController.settings.darkMode ? .dark : .light)
                 .autocorrectionDisabled(true)
         }
