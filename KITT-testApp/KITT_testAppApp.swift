@@ -21,7 +21,7 @@ struct KITT_testAppApp: App {
                 .environmentObject(settingsController)
                 .environmentObject(networkController)
                 .environmentObject(dataController)
-                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environment(\.managedObjectContext, dataController.context)
                 .preferredColorScheme(settingsController.settings.darkMode ? .dark : .light)
                 .autocorrectionDisabled(true)
         }

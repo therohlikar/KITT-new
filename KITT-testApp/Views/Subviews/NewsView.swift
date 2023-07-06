@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewsView: View {
-    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dc: DataController
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)]) var news: FetchedResults<Version>
     
     var body: some View {
@@ -34,7 +34,7 @@ struct NewsView: View {
             }
         }
         .onDisappear{
-            try? moc.save()
+            dc.save()
         }
     }
 }

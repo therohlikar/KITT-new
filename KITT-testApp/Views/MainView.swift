@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 struct MainView: View {
-    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var fvm: FilterViewModel
     @EnvironmentObject var networkController: NetworkController
     @EnvironmentObject var sc: SettingsController
@@ -233,7 +232,7 @@ struct MainView: View {
                             read = versionExists.read
                         }
                         
-                        let version = Version(context: moc)
+                        let version = Version(context: dc.context)
                         version.version = item.version
                         version.content = item.news.joined(separator: "\n")
                         version.read = read
@@ -245,10 +244,10 @@ struct MainView: View {
                 if let ciArray = await jsonController.downloadJsonData(.contentitem) as? Array<ItemModel> {
                     for item in ciArray {
                         //prepare group
-                        let group = Group(context: moc)
+                        let group = Group(context: dc.context)
                         group.title = item.group
 
-                        let new = ContentItem(context: moc)
+                        let new = ContentItem(context: dc.context)
                         new.id = item.id
                         
                         var currentFavorited = false
@@ -281,12 +280,12 @@ struct MainView: View {
                     
                     for item in items {
                         if !ciArray.contains(where: {$0.id == item.wrappedId}){
-                            moc.delete(item)
+                            dc.context.delete(item)
                         }
                     }
                 }
                 
-                dc.trySave()
+                dc.save()
                 
                 currentVersion = newestVersion
                 

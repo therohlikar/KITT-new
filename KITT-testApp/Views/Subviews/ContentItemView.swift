@@ -17,7 +17,7 @@ struct ContentItemView: View {
     
     @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     
-    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dc: DataController
     
     @ObservedObject var item: ContentItem
     
@@ -380,7 +380,7 @@ struct ContentItemView: View {
         .onDisappear{
             item.note = customNote
             
-            try? moc.save()
+            dc.save()
         }
         .sheet(isPresented: $reporting) {
              let content:String = """

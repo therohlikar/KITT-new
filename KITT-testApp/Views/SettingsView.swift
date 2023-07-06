@@ -14,7 +14,7 @@ struct SettingsView: View {
     @Binding var dismiss: Bool
     
     @EnvironmentObject var sc: SettingsController
-    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dc: DataController
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
 
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
@@ -132,7 +132,7 @@ struct SettingsView: View {
         var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try moc.execute(deleteRequest)
+            try dc.context.execute(deleteRequest)
         } catch let error as NSError {
             // TODO: handle the error
             fatalError("\(error.localizedDescription)")
@@ -142,7 +142,7 @@ struct SettingsView: View {
         deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try moc.execute(deleteRequest)
+            try dc.context.execute(deleteRequest)
         } catch let error as NSError {
             // TODO: handle the error
             fatalError("\(error.localizedDescription)")
@@ -152,7 +152,7 @@ struct SettingsView: View {
         deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try moc.execute(deleteRequest)
+            try dc.context.execute(deleteRequest)
         } catch let error as NSError {
             // TODO: handle the error
             fatalError("\(error.localizedDescription)")

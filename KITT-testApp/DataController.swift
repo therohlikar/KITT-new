@@ -11,6 +11,13 @@ import Foundation
 
 class DataController: ObservableObject{
     //@AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
+    
+    static let instance = DataController()
+    
+    lazy var context: NSManagedObjectContext = {
+        return container.viewContext
+    }()
+    
     let container = NSPersistentContainer(name: "KittDataModel")
     
     init () {
@@ -23,7 +30,14 @@ class DataController: ObservableObject{
         }
     }
     
-    func trySave(){
-        try? self.container.viewContext.save()
+    func save(){
+        do {
+            try context.save()
+        }catch let error{
+            print("Error saving Core Data. \(error.localizedDescription)")
+        }
+        
     }
+    
+    
 }
