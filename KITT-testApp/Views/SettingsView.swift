@@ -10,6 +10,7 @@ import MessageUI
 import CoreData
 
 struct SettingsView: View {
+    @EnvironmentObject var fvm: FilterViewModel
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var dc: DataController
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
@@ -66,6 +67,13 @@ struct SettingsView: View {
                     }
                 }
                 Section("SYSTÉM"){
+                    NavigationLink {
+                        FiltersList(fvm: fvm)
+                    } label: {
+                        Text("Nastavení filtrů vyhledávání")
+                        
+                    }
+                    
                     NavigationLink {
                         NewsView()
                     } label: {

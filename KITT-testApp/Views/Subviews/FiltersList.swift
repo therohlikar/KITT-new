@@ -10,19 +10,8 @@ import SwiftUI
 struct FiltersList: View{
     @ObservedObject var fvm: FilterViewModel
     
-    @Binding var onlyFavorites: Bool
-
     var body: some View{
         List{
-            HStack{
-                Text("Pouze oblíbené")
-                Spacer()
-                Toggle("", isOn: $onlyFavorites)
-                    .labelsHidden()
-                    .tint(.red)
-            }
-            .font(.caption)
-            
             Section("Filtry vyhledávání") {
                 ForEach($fvm.filters, id:\.label) { $filter in
                     HStack{

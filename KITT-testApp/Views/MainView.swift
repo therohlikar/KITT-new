@@ -33,17 +33,17 @@ struct MainView: View {
     @AppStorage("settings.displayOn") private var keepDisplayOn: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
     @AppStorage("welcome") private var welcome: Bool = false
+    @AppStorage("settings.hiddenColor") var hiddenColor: Bool = false
 
     @State private var toBeUpdated: Bool = false
     @State private var settingsToOpen: Bool = false
     @State private var showWelcomePanel: Bool = false
+    
+    @State private var loadingDataRotation:Double = 0.0
 
     var body: some View {
         NavigationStack{
-            if !ready {
-                ProgressView("Aplikace se připravuje")
-                    .tint(.blue)
-            }else{
+            VStack{
                 if searchOnTop {
                     HStack{
                         TextField("Vyhledávání...", text: $searchKey)
@@ -60,106 +60,127 @@ struct MainView: View {
                         }
                     }
                     .padding(.horizontal, 10)
+                    .disabled(!ready)
+                    .opacity(ready ? 1 : 0.5)
                 }
-                VStack{
-                    LibraryView(searchKey: searchKey, favoritesOnly: onlyFavorites, fvm: fvm)
-                        .tabItem {
-                            Label("Knihovna", systemImage: "books.vertical.fill")
+                
+                if !ready && loadingDataRotation == 0.0{
+                    VStack{
+                        Image("MainLogoTransp")
+                            .resizable()
+                            .frame(width: loadingDataRotation > 0 ? 80 : 0, height: loadingDataRotation > 0 ? 80 : 0)
+                            .background(hiddenColor ? Color.pink : (sc.settings.darkMode ? Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0) : Color("BasicColor")))
+                            .cornerRadius(180)
+                        
+                        Text("Načítání obsahu ...")
+                            .font(.headline)
+                    }
+                }
+                
+                LibraryView(searchKey: searchKey, favoritesOnly: onlyFavorites, fvm: fvm)
+                    .tabItem {
+                        Label("Knihovna", systemImage: "books.vertical.fill")
+                    }
+                    .tag("library")
+                    .disabled(!ready)
+                    .opacity(ready ? 1 : 0.5)
+                
+                Spacer()
+                
+                if !searchOnTop {
+                    HStack{
+                        TextField("Vyhledávání...", text: $searchKey)
+                            .autocorrectionDisabled()
+                            .padding(10)
+                            .focused($searchFocused)
+                        
+                        if !searchKey.isEmpty {
+                            Image(systemName: "x.circle.fill")
+                                .onTapGesture {
+                                    searchKey = ""
+                                }
+                                .opacity(0.7)
                         }
-                        .tag("library")
-                    
-                    Spacer()
-                    
-                    if !searchOnTop {
-                        HStack{
-                            TextField("Vyhledávání...", text: $searchKey)
-                                .autocorrectionDisabled()
-                                .padding(10)
-                                .focused($searchFocused)
-                            
-                            if !searchKey.isEmpty {
-                                Image(systemName: "x.circle.fill")
-                                    .onTapGesture {
-                                        searchKey = ""
-                                    }
-                                    .opacity(0.7)
-                            }
-                        }
-                        .padding(.horizontal, 10)
                     }
+                    .padding(.horizontal, 10)
+                    .disabled(!ready)
+                    .opacity(ready ? 1 : 0.5)
                 }
-                .refreshable {
-                    currentVersion = "0.0.0"
-                    Task {
-                        await self.prepareData()
-                    }
-                }
-                .onTapGesture {
-                    UIApplication.shared.endEditing()
-                }
-                .toolbar{
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Image(systemName: onlyFavorites ? "heart.fill" : "heart")
-                            .onTapGesture {
-                                onlyFavorites.toggle()
-                            }
-                            .padding(.horizontal, 10)
-                            .foregroundColor(Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 1)))
-                    }
+            }
+            .onTapGesture {
+                UIApplication.shared.endEditing()
+            }
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .onTapGesture {
+                            loadingDataRotation = 360
 
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Image(systemName: "checklist")
-                            .onTapGesture {
-                                searchFocused = false
-                                
-                                filterListViewOpened.toggle()
-                            }
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.blue)
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink {
-                            SubmenuView(settingsToOpen: $settingsToOpen, submenuViewOpened: $submenuViewOpened)
-                        } label: {
-                            Image(systemName: "line.3.horizontal.circle")
-                                .padding(.horizontal, 10)
-                                .padding(.trailing, 2)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    if !networkController.connected {
-                        ToolbarItem(placement: .status) {
-                            HStack{
-                                Text("Nejste připojen k Internetu")
-                                    .frame(width: 400, height: 25, alignment: .center)
-                                    .padding(2)
-                                    .background(Color("NetworkErrorColor"))
-                                    .cornerRadius(25)
+                            currentVersion = "0.0.0"
+                            Task {
+                                await self.prepareData()
                             }
                         }
+                        .foregroundColor(.secondary)
+                        .rotationEffect(.degrees(loadingDataRotation))
+                        .animation(loadingDataRotation > 0 ? .linear(duration: 3).repeatForever(autoreverses: false) : .default, value: loadingDataRotation)
+                        .disabled(!ready)
+                        .padding(.horizontal, 2)
+                        .imageScale(.large)
+                        .scaleEffect(ready ? 1.1 : 1.5)
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Image(systemName: onlyFavorites ? "heart.fill" : "heart")
+                        .onTapGesture {
+                            onlyFavorites.toggle()
+                        }
+                        .foregroundColor(Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 1)))
+                        .disabled(!ready)
+                        .opacity(ready ? 1 : 0.5)
+                        .padding(.horizontal, 2)
+                        .imageScale(.large)
+                        .scaleEffect(1.1)
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        SubmenuView(settingsToOpen: $settingsToOpen, submenuViewOpened: $submenuViewOpened)
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .foregroundColor(.secondary)
+                            .disabled(!ready)
+                            .opacity(ready ? 1 : 0.5)
+                            .imageScale(.large)
+                            .scaleEffect(1.1)
                     }
                 }
-                .sheet(isPresented: $filterListViewOpened, onDismiss: {
-                    searchFocused = true
-                }, content: {
-                    FiltersList(fvm: fvm, onlyFavorites: $onlyFavorites)
-                        .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
-                })
-                .navigationDestination(isPresented: $urlViewModel.open) {
-                    if let item = urlViewModel.item {
-                        ContentItemView(item: item)
+                
+                if !networkController.connected {
+                    ToolbarItem(placement: .status) {
+                        HStack{
+                            Text("Nejste připojen k Internetu")
+                                .frame(width: 400, height: 25, alignment: .center)
+                                .padding(2)
+                                .background(Color("NetworkErrorColor"))
+                                .cornerRadius(7)
+                        }
                     }
                 }
-                .fullScreenCover(isPresented: $showWelcomePanel) {
-                    welcome = true
-                    currentVersion = "0.0.0"
-                    Task {
-                        await self.prepareData()
-                    }
-                } content: {
-                    WelcomeView()
+            }
+            .navigationDestination(isPresented: $urlViewModel.open) {
+                if let item = urlViewModel.item {
+                    ContentItemView(item: item)
                 }
+            }
+            .fullScreenCover(isPresented: $showWelcomePanel) {
+                welcome = true
+                currentVersion = "0.0.0"
+                Task {
+                    await self.prepareData()
+                }
+            } content: {
+                WelcomeView()
             }
         }
         .onAppear{
@@ -188,7 +209,10 @@ struct MainView: View {
     }
     
     func prepareData() async {
-        ready = false
+        withAnimation(.easeInOut(duration: 0.5)) {
+            ready = false
+        }
+        
         
         if !networkController.connected {
             ready = true
@@ -265,6 +289,8 @@ struct MainView: View {
                 currentVersion = newestVersion
                 
                 ready = true
+                
+                loadingDataRotation = 0.0
             }
         }
         
