@@ -91,9 +91,8 @@ struct SubmenuView: View {
             }
             
             List{
-                Button {
-                    settingsToOpen = true
-                    submenuViewOpened = false
+                NavigationLink {
+                    SettingsView()
                 } label: {
                     HStack{
                         Image(systemName: "gearshape.fill")
@@ -102,27 +101,19 @@ struct SubmenuView: View {
                     }
                 }
                 
-                Section {
-                    Button {
-                        showingCYC.toggle()
-                    } label: {
-                        HStack{
-                            Image(systemName: "gamecontroller.fill")
-                            
-                            Text("CHYŤ SI SVÉHO ZLOČINCE")
-                        }
+                NavigationLink{
+                    CYCMenuView(showingCYC: $showingCYC)
+                } label: {
+                    HStack{
+                        Image(systemName: "gamecontroller.fill")
+                        
+                        Text("CHYŤ SI SVÉHO ZLOČINCE")
                     }
-                } header: {
-                    Text("OSTATNÍ")
                 }
             }
             .cornerRadius(12)
         }
         .font(.caption)
-        .fullScreenCover(isPresented: $showingCYC) {
-            CYCMenuView(showingCYC: $showingCYC)
-                .preferredColorScheme(.dark)
-        }
         .foregroundColor(.primary)
         .padding()
     }

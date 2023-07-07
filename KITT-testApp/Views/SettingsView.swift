@@ -10,9 +10,6 @@ import MessageUI
 import CoreData
 
 struct SettingsView: View {
-    @Binding var update: Bool
-    @Binding var dismiss: Bool
-    
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var dc: DataController
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
@@ -24,14 +21,8 @@ struct SettingsView: View {
     
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
-    @State private var showingNews: Bool = false
     @State private var canSendMail: Bool = false
     @State private var showingAlertRemoveData: Bool = false
-    
-    public init (update: Binding<Bool>, isPresented: Binding<Bool>) {
-        self._update = update
-        self._dismiss = isPresented
-    }
 
     var body: some View {
         VStack{
@@ -75,24 +66,23 @@ struct SettingsView: View {
                     }
                 }
                 Section("SYSTÉM"){
-                    Button {
-                        showingNews.toggle()
+                    NavigationLink {
+                        NewsView()
                     } label: {
-                        Text("NOVINKY")
+                        if news.count > 0 {
+                            Text("NOVINKY (\(news.count))")
+                                .foregroundColor(.blue)
+                        }else {
+                            Text("NOVINKY")
+                                .foregroundColor(.blue)
+                        }
+                        
                     }
-                    .badge(news.count)
                     
                     Link(destination: URL(string: "mailto:\(mailTo)")!) {
                         Text("NAPIŠTE MI")
                     }
                     
-                    Button {
-                        dataVersion = "0.0.0"
-                        self.update = true
-                        self.dismiss = false
-                    } label: {
-                        Text("AKTUALIZACE DAT")
-                    }
                     Button {
                         showingAlertRemoveData.toggle()
                     } label: {
@@ -105,10 +95,6 @@ struct SettingsView: View {
         .font(.caption)
         .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
         .tint(.blue)
-        .sheet(isPresented: $showingNews) {
-            NewsView()
-                .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
-        }
         .alert("VYMAZAT DATA", isPresented: $showingAlertRemoveData) {
             Button("Smazat", role: .destructive) {
                 dataVersion = "0.0.0"

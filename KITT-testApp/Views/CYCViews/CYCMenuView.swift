@@ -17,13 +17,6 @@ struct CYCMenuView: View {
             Color.black.ignoresSafeArea()
             
             NavigationStack{
-                HStack{
-                    Button {
-                        showingCYC.toggle()
-                    } label: {
-                        Text("ZAVŘÍT")
-                    }
-                }
                 ZStack{
                     VStack (alignment: .center){
                         Text("Chyť si svého zločince")

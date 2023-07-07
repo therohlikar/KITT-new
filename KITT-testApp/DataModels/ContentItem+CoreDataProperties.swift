@@ -88,13 +88,13 @@ extension ContentItem {
             default: return "?"
         }
     }
-    
+
     var typeToColor: Color {
         switch(wrappedType){
-            case "offense": return Color(#colorLiteral(red: 0, green: 0.5147912502, blue: 0.7548790574, alpha: 0.5))
-            case "crime": return Color(#colorLiteral(red: 0.638913691, green: 0.6389137506, blue: 0.638913691, alpha: 0.5))
-            case "law": return Color(#colorLiteral(red: 0.9154744148, green: 0.4044153094, blue: 0, alpha: 0.5))
-            default: return Color(#colorLiteral(red: 0.9999999404, green: 1, blue: 1, alpha: 0.5))
+            case "offense": return Color(#colorLiteral(red: 0, green: 0.431452632, blue: 0.77961272, alpha: 0.5))
+            case "crime": return Color(#colorLiteral(red: 0.7391448617, green: 0, blue: 0.02082144469, alpha: 0.5))
+            case "law": return Color(#colorLiteral(red: 0.9611360431, green: 0.5784681439, blue: 0, alpha: 0.5))
+            default: return Color(#colorLiteral(red: 0.7754455209, green: 0.7807555795, blue: 0.7612403035, alpha: 0.5))
         }
     }
 }

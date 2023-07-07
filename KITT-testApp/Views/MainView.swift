@@ -119,15 +119,14 @@ struct MainView: View {
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Image(systemName: "line.3.horizontal.circle")
-                            .onTapGesture {
-                                searchFocused = false
-                                
-                                submenuViewOpened.toggle()
-                            }
-                            .padding(.horizontal, 10)
-                            .padding(.trailing, 2)
-                            .foregroundColor(.secondary)
+                        NavigationLink {
+                            SubmenuView(settingsToOpen: $settingsToOpen, submenuViewOpened: $submenuViewOpened)
+                        } label: {
+                            Image(systemName: "line.3.horizontal.circle")
+                                .padding(.horizontal, 10)
+                                .padding(.trailing, 2)
+                                .foregroundColor(.secondary)
+                        }
                     }
                     if !networkController.connected {
                         ToolbarItem(placement: .status) {
@@ -141,36 +140,12 @@ struct MainView: View {
                         }
                     }
                 }
-                .sheet(isPresented: $settingsViewOpened, onDismiss: {
-                    //
-                }, content: {
-                    SettingsView(update: $toBeUpdated, isPresented: $settingsViewOpened)
-                        .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
-                        .onDisappear{
-                            if toBeUpdated {
-                                toBeUpdated = false
-                                Task {
-                                    await self.prepareData()
-                                }
-                            }
-                        }
-                })
                 .sheet(isPresented: $filterListViewOpened, onDismiss: {
                     searchFocused = true
                 }, content: {
                     FiltersList(fvm: fvm, onlyFavorites: $onlyFavorites)
                         .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
                 })
-                .sheet(isPresented: $submenuViewOpened) {
-                    //
-                } content: {
-                    SubmenuView(settingsToOpen: $settingsToOpen, submenuViewOpened: $submenuViewOpened)
-                        .onDisappear{
-                            settingsViewOpened = settingsToOpen
-                            
-                            settingsToOpen = false
-                        }
-                }
                 .navigationDestination(isPresented: $urlViewModel.open) {
                     if let item = urlViewModel.item {
                         ContentItemView(item: item)

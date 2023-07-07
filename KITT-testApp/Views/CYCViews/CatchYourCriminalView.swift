@@ -36,6 +36,7 @@ class ImagePersonController: ObservableObject{
     @Published var highestScore: Int = 0
     @Published var currentLevel: Double = 2.0
     @Published var finished: Bool = false
+    @Published var left: Bool = false
     
     @AppStorage("CYCrecordScore") private var recordScore: Int = 0
     
@@ -55,7 +56,7 @@ class ImagePersonController: ObservableObject{
     }
     
     func updateScore(_ selectedType: ImageModel, clicked: Bool = false){
-        if !self.finished {
+        if !self.finished && !self.left {
             switch(selectedType.type){
             case .criminal:
                 if clicked {
@@ -110,13 +111,16 @@ class ImagePersonController: ObservableObject{
     }
     
     func finishTheGame(){
-        self.finished = true
-        
+        if !self.left {
+            self.finished = true
+        }
+
         for img in images{
             if img.timer != nil {
                 img.timer?.cancel()
             }
         }
+        self.left = false
     }
     
     func restart(){
@@ -126,6 +130,7 @@ class ImagePersonController: ObservableObject{
         self.currentLevel = 2.0
         
         self.finished = false
+        self.left = false
     }
 }
 
@@ -208,7 +213,7 @@ struct CatchYourCriminalView: View {
     }
     
     func newCriminal(_ duration: Double = 1.5){
-        if !ipController.finished{
+        if !ipController.finished && !ipController.left {
             ipController.generateNewPerson()
             
             timer = Timer
