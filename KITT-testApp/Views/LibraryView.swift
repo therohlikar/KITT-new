@@ -23,116 +23,176 @@ struct LibraryView: View {
             if searchKey.isEmpty && !favoritesOnly {
                 LazyVStack {
                     HStack{
-                        Text("PŘESTUPKY".uppercased())
-                            .font(.caption)
+                        Text("PŘESTUPKY")
+                            .font(Font.caption2)
+                        
                         Spacer()
                     }
+                    .padding(.bottom, 2)
+                    .foregroundColor(.primary)
+                    
                     ForEach(offenseGroups) { group in
                         NavigationLink {
                             SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
                         } label: {
                             HStack{
+                                Rectangle()
+                                    .frame(width: 10)
+                                    .ignoresSafeArea(edges: [.leading, .top, .bottom])
+                                    .foregroundColor(group.typeToColor)
+                                    .roundedCorner(4, corners: .bottomLeft)
+                                    .roundedCorner(4, corners: .topLeft)
+                                
                                 Spacer()
-                                Text(group.wrappedTitle)
-                                    .padding()
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-
+                                
+                                VStack{
+                                    
+                                    
+                                    Text(group.wrappedTitle)
+                                        .fontWeight(Font.Weight.medium)
+                                }
+                                .padding()
+                                
+                                .foregroundColor(.primary)
+                                
                                 Spacer()
                             }
-                            .foregroundColor(.primary)
-                            .frame(minWidth: 310, minHeight: 80)
+                            .frame(height: 75)
                             .background(
-                                Color(#colorLiteral(red: 0, green: 0.431452632, blue: 0.77961272, alpha: 0.5))
+                                Color("ItemRowMenuColor")
                             )
-                            .cornerRadius(7)
                         }
                         .isDetailLink(false)
                     }
                 }
                 LazyVStack {
                     HStack{
-                        Text("TRESTNÉ ČINY".uppercased())
-                            .font(.caption)
+                        Text("TRESTNÉ ČINY")
+                            .font(Font.caption2)
+                        
                         Spacer()
                     }
+                    .padding(.bottom, 2)
+                    .foregroundColor(.primary)
+                    
                     ForEach(crimeGroups) { group in
                         NavigationLink {
                             SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
                         } label: {
                             HStack{
+                                Rectangle()
+                                    .frame(width: 10)
+                                    .ignoresSafeArea(edges: [.leading, .top, .bottom])
+                                    .foregroundColor(group.typeToColor)
+                                    .roundedCorner(4, corners: .bottomLeft)
+                                    .roundedCorner(4, corners: .topLeft)
+                                
                                 Spacer()
-                                Text(group.wrappedTitle)
-                                    .padding()
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
+                                
+                                VStack{
+                                    
+                                    
+                                    Text(group.wrappedTitle)
+                                        .fontWeight(Font.Weight.medium)
+                                }
+                                .padding()
+                                
+                                .foregroundColor(.primary)
                                 
                                 Spacer()
                             }
-                            .foregroundColor(.primary)
-                            .frame(minWidth: 310, minHeight: 80)
+                            .frame(height: 75)
                             .background(
-                                Color(#colorLiteral(red: 0.7391448617, green: 0, blue: 0.02082144469, alpha: 0.5))
+                                Color("ItemRowMenuColor")
                             )
-                            .cornerRadius(7)
                         }
                         .isDetailLink(false)
                     }
                 }
                 LazyVStack {
                     HStack{
-                        Text("CITACE ZÁKONA".uppercased())
-                            .font(.caption)
+                        Text("VÝŇATKY ZE ZÁKONA")
+                            .font(Font.caption2)
+                        
                         Spacer()
                     }
+                    .padding(.bottom, 2)
+                    .foregroundColor(.primary)
+                    
                     ForEach(lawGroups) { group in
                         NavigationLink {
                             SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
                         } label: {
                             HStack{
+                                Rectangle()
+                                    .frame(width: 10)
+                                    .ignoresSafeArea(edges: [.leading, .top, .bottom])
+                                    .foregroundColor(group.typeToColor)
+                                    .roundedCorner(4, corners: .bottomLeft)
+                                    .roundedCorner(4, corners: .topLeft)
+                                
                                 Spacer()
-                                Text(group.wrappedTitle)
-                                    .padding()
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
+                                
+                                VStack{
+                                    
+                                    
+                                    Text(group.wrappedTitle)
+                                        .fontWeight(Font.Weight.medium)
+                                }
+                                .padding()
+                                
+                                .foregroundColor(.primary)
                                 
                                 Spacer()
                             }
-                            .foregroundColor(.primary)
-                            .frame(minWidth: 310, minHeight: 80)
+                            .frame(height: 75)
                             .background(
-                                Color(#colorLiteral(red: 0.9611360431, green: 0.5784681439, blue: 0, alpha: 0.5))
+                                Color("ItemRowMenuColor")
                             )
-                            .cornerRadius(7)
                         }
                         .isDetailLink(false)
                     }
                 }
                 LazyVStack {
                     HStack{
-                        Text("OSTATNÍ".uppercased())
-                            .font(.caption)
+                        Text("DOPRAVNÍ ZNAČENÍ")
+                            .font(Font.caption2)
+                        
                         Spacer()
                     }
+                    .padding(.bottom, 2)
+                    .foregroundColor(.primary)
+                    
                     ForEach(signGroup) { group in
                         NavigationLink {
                             SubGroupListView(currentGroup: group, favoritesOnly: favoritesOnly)
                         } label: {
                             HStack{
+                                Rectangle()
+                                    .frame(width: 10)
+                                    .ignoresSafeArea(edges: [.leading, .top, .bottom])
+                                    .foregroundColor(group.typeToColor)
+                                    .roundedCorner(4, corners: .bottomLeft)
+                                    .roundedCorner(4, corners: .topLeft)
+                                
                                 Spacer()
-                                Text(group.wrappedTitle)
-                                    .padding()
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
+                                
+                                VStack{
+                                    
+                                    
+                                    Text(group.wrappedTitle)
+                                        .fontWeight(Font.Weight.medium)
+                                }
+                                .padding()
+                                
+                                .foregroundColor(.primary)
                                 
                                 Spacer()
                             }
-                            .foregroundColor(.primary)
-                            .frame(minWidth: 310, minHeight: 80)
+                            .frame(height: 75)
                             .background(
-                                Color(#colorLiteral(red: 0.7754455209, green: 0.7807555795, blue: 0.7612403035, alpha: 0.5))
+                                Color("ItemRowMenuColor")
                             )
-                            .cornerRadius(7)
                         }
                         .isDetailLink(false)
                     }
@@ -166,6 +226,7 @@ struct LibraryView: View {
         }
     }
     
+    
     init(searchKey: String = "", favoritesOnly: Bool = false, fvm: FilterViewModel){
         var filterPredicates: [NSPredicate] = []
         self.searchKey = searchKey
@@ -197,6 +258,22 @@ struct LibraryView: View {
             _signGroup = FetchRequest<Group>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(
                 type: .and, subpredicates: [NSPredicate(format: "ANY contentitem.type == 'sign'")]))
         }
+    }
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+                            
+extension View {
+    func roundedCorner(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners) )
     }
 }
 

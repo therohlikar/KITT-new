@@ -15,17 +15,16 @@ struct ContentItemRowView: View {
             if item.wrappedType == "sign" && UIImage(named: "\(item.wrappedId).webp") != nil {
                 Image(uiImage: (UIImage(named: "\(item.wrappedId).webp")!))
                     .resizable()
-                    .frame(width: 100, height: 90)
+                    .scaledToFit()
                     .padding(.horizontal, 25)
+                    .padding(.vertical, 2)
             }else{
-                Text(item.typeToLabel)
-                    .fontWeight(.semibold)
-                    .background(
-                        Rectangle()
-                            .frame(minWidth: 100, minHeight: 100)
-                            .foregroundColor(item.typeToColor)
-                    )
-                    .padding(.horizontal, 25)
+                Rectangle()
+                    .frame(width: 10)
+                    .ignoresSafeArea(edges: [.leading, .top, .bottom])
+                    .foregroundColor(item.typeToColor)
+                    .roundedCorner(4, corners: .bottomLeft)
+                    .roundedCorner(4, corners: .topLeft)
             }
             
             Spacer()
@@ -38,9 +37,9 @@ struct ContentItemRowView: View {
             Spacer()
         }
         .foregroundColor(.primary)
-        .frame(minWidth: 310, minHeight: 50)
-        .padding(8)
-        .background(.regularMaterial)
-        .cornerRadius(7)
+        .frame(height: 50)
+        .background(
+            Color("ItemRowMenuColor")
+        )
     }
 }
