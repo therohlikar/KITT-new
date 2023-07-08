@@ -26,7 +26,7 @@ struct SubGroupListView: View {
                                 .padding(.bottom, categoriesRoll ? 3 : 0)
                             Spacer()
                             Image(systemName: categoriesRoll ? "arrow.up.circle" : "arrow.down.circle")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("BasicColor"))
                                 .font(.title2)
                         }
                         .contentShape(Rectangle())

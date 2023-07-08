@@ -25,6 +25,8 @@ struct SubmenuView: View {
     let androidLink = Bundle.main.object(forInfoDictionaryKey: "KITT_ANDROID_LINK") as? String ?? "KITT"
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
+    
     var body: some View {
         VStack{
             VStack{
@@ -101,6 +103,20 @@ struct SubmenuView: View {
                     }
                 }
                 .isDetailLink(false)
+                
+                NavigationLink {
+                    NewsView()
+                } label: {
+                    HStack{
+                        Image(systemName: "info.circle")
+                        
+                        if news.count > 0 {
+                            Text("NOVINKY (\(news.count))")
+                        }else {
+                            Text("NOVINKY")
+                        }
+                    }
+                }
                 
                 NavigationLink{
                     CYCMenuView(showingCYC: $showingCYC)

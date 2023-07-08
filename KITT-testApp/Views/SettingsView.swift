@@ -13,7 +13,6 @@ struct SettingsView: View {
     @EnvironmentObject var fvm: FilterViewModel
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var dc: DataController
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "version", ascending: false)], predicate: NSPredicate(format: "read == 'false'")) var news: FetchedResults<Version>
 
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
     @AppStorage("settings.hiddenColor") private var hiddenColor: Bool = false
@@ -73,20 +72,7 @@ struct SettingsView: View {
                         Text("Nastavení filtrů vyhledávání")
                         
                     }
-                    
-                    NavigationLink {
-                        NewsView()
-                    } label: {
-                        if news.count > 0 {
-                            Text("NOVINKY (\(news.count))")
-                                .foregroundColor(.blue)
-                        }else {
-                            Text("NOVINKY")
-                                .foregroundColor(.blue)
-                        }
-                        
-                    }
-                    
+
                     Link(destination: URL(string: "mailto:\(mailTo)")!) {
                         Text("NAPIŠTE MI")
                     }
