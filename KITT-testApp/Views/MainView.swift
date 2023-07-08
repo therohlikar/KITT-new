@@ -64,16 +64,13 @@ struct MainView: View {
                     .opacity(ready ? 1 : 0.5)
                 }
                 
-                if !ready && loadingDataRotation == 0.0{
+                if !ready{
                     VStack{
                         Image("MainLogoTransp")
                             .resizable()
                             .frame(width: loadingDataRotation > 0 ? 80 : 0, height: loadingDataRotation > 0 ? 80 : 0)
                             .background(hiddenColor ? Color.pink : (sc.settings.darkMode ? Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0) : Color("BasicColor")))
                             .cornerRadius(180)
-                        
-                        Text("Načítání obsahu ...")
-                            .font(.headline)
                     }
                 }
                 
@@ -154,6 +151,7 @@ struct MainView: View {
                             .imageScale(.large)
                             .scaleEffect(1.1)
                     }
+                    .isDetailLink(false)
                 }
                 
                 if !networkController.connected {
@@ -187,6 +185,7 @@ struct MainView: View {
             UIApplication.shared.isIdleTimerDisabled = keepDisplayOn
         }
         .task {
+            loadingDataRotation = 360.0
             await self.prepareData()
         }
         .onOpenURL { url in
@@ -213,14 +212,15 @@ struct MainView: View {
             ready = false
         }
         
+        var isReady = false
         
         if !networkController.connected {
-            ready = true
+            isReady = true
         }else{
             let newestVersion = await VersionController().getNewestVersion()
             
             if newestVersion <= currentVersion {
-                ready = true
+                isReady = true
             }
             else {
                 if let versionArray = await VersionController().loadVersionUpdates() {
@@ -288,11 +288,15 @@ struct MainView: View {
                 
                 currentVersion = newestVersion
                 
-                ready = true
-                
-                loadingDataRotation = 0.0
+                isReady = true
             }
         }
+        
+        withAnimation(.easeInOut(duration: 0.7)) {
+            loadingDataRotation = 0.0
+            ready = isReady
+        }
+        
         
         if ready{
             showWelcomePanel = !welcome

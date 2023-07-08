@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9619DC712A5938F2006D479C /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619DC702A5938F2006D479C /* TutorialView.swift */; };
 		964D0BB729DF3EFE008ED31C /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */; };
 		964D0BB829DF3EFE008ED31C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */; };
 		964D0BB929DF3EFE008ED31C /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */; };
@@ -184,6 +185,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9619DC702A5938F2006D479C /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				9660492829B247B600F64E55 /* FavoritesView.swift */,
 				96965E7229B7EC5F0094520F /* SettingsView.swift */,
 				964D719A29F6447C006155B0 /* WelcomeView.swift */,
+				9619DC702A5938F2006D479C /* TutorialView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				9660490329B1E75A00F64E55 /* DataController.swift in Sources */,
 				9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */,
 				969638AB29D490A9009365C5 /* Group+CoreDataClass.swift in Sources */,
+				9619DC712A5938F2006D479C /* TutorialView.swift in Sources */,
 				96965E9729B8C51C0094520F /* VersionController.swift in Sources */,
 				964D719929F5C89E006155B0 /* UrlViewModel.swift in Sources */,
 				96965E9D29B8CB830094520F /* Version+CoreDataProperties.swift in Sources */,

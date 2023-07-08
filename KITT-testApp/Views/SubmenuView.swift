@@ -100,6 +100,7 @@ struct SubmenuView: View {
                         Text("Nastavení")
                     }
                 }
+                .isDetailLink(false)
                 
                 NavigationLink{
                     CYCMenuView(showingCYC: $showingCYC)
@@ -110,6 +111,7 @@ struct SubmenuView: View {
                         Text("CHYŤ SI SVÉHO ZLOČINCE")
                     }
                 }
+                .isDetailLink(false)
             }
             .cornerRadius(12)
         }
