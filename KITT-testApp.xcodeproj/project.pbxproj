@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9619DC712A5938F2006D479C /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619DC702A5938F2006D479C /* TutorialView.swift */; };
+		9619DC732A59E634006D479C /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619DC722A59E634006D479C /* CoreDataViewModel.swift */; };
 		964D0BB729DF3EFE008ED31C /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */; };
 		964D0BB829DF3EFE008ED31C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */; };
 		964D0BB929DF3EFE008ED31C /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */; };
@@ -186,6 +187,7 @@
 
 /* Begin PBXFileReference section */
 		9619DC702A5938F2006D479C /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		9619DC722A59E634006D479C /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 		964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 			children = (
 				9660492C29B4648500F64E55 /* FilterViewModel.swift */,
 				964D719829F5C89E006155B0 /* UrlViewModel.swift */,
+				9619DC722A59E634006D479C /* CoreDataViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				96965E9F29B8CD090094520F /* NewsView.swift in Sources */,
 				969F070C29D7594E0017FB99 /* ContentModel.swift in Sources */,
 				96965E8329B8A3660094520F /* MailView.swift in Sources */,
+				9619DC732A59E634006D479C /* CoreDataViewModel.swift in Sources */,
 				9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */,
 				969638A429D4861D009365C5 /* ContentItem+CoreDataProperties.swift in Sources */,
 				96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */,

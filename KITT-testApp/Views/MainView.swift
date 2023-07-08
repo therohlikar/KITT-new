@@ -20,7 +20,7 @@ struct MainView: View {
     @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     @FetchRequest(sortDescriptors: []) var versions: FetchedResults<Version>
     
-    @State private var ready: Bool = false
+    @State private var ready: Bool = true
     @State private var searchKey: String = ""
     @State private var filterListViewOpened: Bool = false
     @State private var settingsViewOpened: Bool = false
@@ -32,9 +32,10 @@ struct MainView: View {
     @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("settings.displayOn") private var keepDisplayOn: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
+    @AppStorage("globalVersion") private var globalVersion: String = "0.0.0"
     @AppStorage("welcome") private var welcome: Bool = false
     @AppStorage("settings.hiddenColor") var hiddenColor: Bool = false
-
+    
     @State private var toBeUpdated: Bool = false
     @State private var settingsToOpen: Bool = false
     @State private var showWelcomePanel: Bool = false
@@ -113,7 +114,6 @@ struct MainView: View {
                         .onTapGesture {
                             loadingDataRotation = 360
 
-                            currentVersion = "0.0.0"
                             Task {
                                 await self.prepareData()
                             }
@@ -125,6 +125,11 @@ struct MainView: View {
                         .padding(.horizontal, 2)
                         .imageScale(.large)
                         .scaleEffect(ready ? 1.1 : 1.5)
+                        .overlay {
+                            if globalVersion != currentVersion {
+                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.09057433158, green: 0.1663101912, blue: 0.5200116038, alpha: 0.8707342791)))
+                            }
+                        }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -173,7 +178,6 @@ struct MainView: View {
             }
             .fullScreenCover(isPresented: $showWelcomePanel) {
                 welcome = true
-                currentVersion = "0.0.0"
                 Task {
                     await self.prepareData()
                 }
@@ -185,8 +189,7 @@ struct MainView: View {
             UIApplication.shared.isIdleTimerDisabled = keepDisplayOn
         }
         .task {
-            loadingDataRotation = 360.0
-            await self.prepareData()
+            await self.isNewVersionDownloadable()
         }
         .onOpenURL { url in
             let str = url.absoluteString.replacingOccurrences(of: "kittapp://", with: "")
@@ -207,6 +210,16 @@ struct MainView: View {
         }
     }
     
+    func isNewVersionDownloadable() async {
+        if networkController.connected {
+            let newestVersion = await VersionController().getNewestVersion()
+            
+            if newestVersion > currentVersion {
+                globalVersion = newestVersion
+            }
+        }
+    }
+    
     func prepareData() async {
         withAnimation(.easeInOut(duration: 0.5)) {
             ready = false
@@ -217,79 +230,75 @@ struct MainView: View {
         if !networkController.connected {
             isReady = true
         }else{
-            let newestVersion = await VersionController().getNewestVersion()
             
-            if newestVersion <= currentVersion {
-                isReady = true
-            }
-            else {
-                if let versionArray = await VersionController().loadVersionUpdates() {
-                    var read:Bool = false
-                    for item in versionArray {
-                        read = false
-                        if let versionExists = versions.first(where: {$0.version == item.version }){
-                            read = versionExists.read
-                        }
-                        
-                        let version = Version(context: dc.context)
-                        version.version = item.version
-                        version.content = item.news.joined(separator: "\n")
-                        version.read = read
-                    }
-                }
-                
-                let jsonController = JsonDataController()
-
-                if let ciArray = await jsonController.downloadJsonData(.contentitem) as? Array<ItemModel> {
-                    for item in ciArray {
-                        //prepare group
-                        let group = Group(context: dc.context)
-                        group.title = item.group
-
-                        let new = ContentItem(context: dc.context)
-                        new.id = item.id
-                        
-                        var currentFavorited = false
-                        var currentNote = ""
-                        
-                        if let exists = items.first(where: {$0.id == item.id}){
-                            currentFavorited = exists.favorited
-                            currentNote = exists.wrappedNote
-                        }
-                        
-                        new.group = group
-                        var subgroupName = item.subgroup ?? "NEZAŘAZENO"
-                        if subgroupName.isEmpty {
-                            subgroupName = "NEZAŘAZENO"
-                        }
-                        new.subgroup = subgroupName
-                        new.type = item.type
-                        new.title = item.title
-                        new.sanctions = item.sanctions
-                        new.links = item.links
-                        new.keywords = item.keywords
-                        new.warning = item.warning
-                        new.miranda = item.miranda
-                        new.content = item.content
-                        new.example = item.example
-                        
-                        new.note = currentNote
-                        new.favorited = currentFavorited
+            await isNewVersionDownloadable()
+            
+            if let versionArray = await VersionController().loadVersionUpdates() {
+                var read:Bool = false
+                for item in versionArray {
+                    read = false
+                    if let versionExists = versions.first(where: {$0.version == item.version }){
+                        read = versionExists.read
                     }
                     
-                    for item in items {
-                        if !ciArray.contains(where: {$0.id == item.wrappedId}){
-                            dc.context.delete(item)
-                        }
+                    let version = Version(context: dc.context)
+                    version.version = item.version
+                    version.content = item.news.joined(separator: "\n")
+                    version.read = read
+                }
+            }
+            
+            let jsonController = JsonDataController()
+
+            if let ciArray = await jsonController.downloadJsonData(.contentitem) as? Array<ItemModel> {
+                for item in ciArray {
+                    //prepare group
+                    let group = Group(context: dc.context)
+                    group.title = item.group
+
+                    let new = ContentItem(context: dc.context)
+                    new.id = item.id
+                    
+                    var currentFavorited = false
+                    var currentNote = ""
+                    
+                    if let exists = items.first(where: {$0.id == item.id}){
+                        currentFavorited = exists.favorited
+                        currentNote = exists.wrappedNote
                     }
+                    
+                    new.group = group
+                    var subgroupName = item.subgroup ?? "NEZAŘAZENO"
+                    if subgroupName.isEmpty {
+                        subgroupName = "NEZAŘAZENO"
+                    }
+                    new.subgroup = subgroupName
+                    new.type = item.type
+                    new.title = item.title
+                    new.sanctions = item.sanctions
+                    new.links = item.links
+                    new.keywords = item.keywords
+                    new.warning = item.warning
+                    new.miranda = item.miranda
+                    new.content = item.content
+                    new.example = item.example
+                    
+                    new.note = currentNote
+                    new.favorited = currentFavorited
                 }
                 
-                dc.save()
-                
-                currentVersion = newestVersion
-                
-                isReady = true
+                for item in items {
+                    if !ciArray.contains(where: {$0.id == item.wrappedId}){
+                        dc.context.delete(item)
+                    }
+                }
             }
+            
+            dc.save()
+            
+            currentVersion = globalVersion
+            
+            isReady = true
         }
         
         withAnimation(.easeInOut(duration: 0.7)) {
