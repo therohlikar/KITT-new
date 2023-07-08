@@ -72,6 +72,11 @@ struct MainView: View {
                             .frame(width: loadingDataRotation > 0 ? 80 : 0, height: loadingDataRotation > 0 ? 80 : 0)
                             .background(hiddenColor ? Color.pink : (sc.settings.darkMode ? Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0) : Color("BasicColor")))
                             .cornerRadius(180)
+                        
+                        Text("Aktualní verze dat: \(currentVersion)")
+                            .font(.subheadline)
+                        Text("Verze ke stažení: \(globalVersion)")
+                            .font(.headline)
                     }
                 }
                 
