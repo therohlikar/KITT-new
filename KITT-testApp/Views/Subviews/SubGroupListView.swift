@@ -19,41 +19,39 @@ struct SubGroupListView: View {
     var body: some View {
         ScrollViewReader { value in
             ScrollView {
-                GroupBox(content: {
-                    VStack(alignment: .leading){
-                        HStack{
-                            Text("KATEGORIE")
-                                .padding(.bottom, categoriesRoll ? 3 : 0)
-                            Spacer()
-                            Image(systemName: categoriesRoll ? "arrow.up.circle" : "arrow.down.circle")
-                                .foregroundColor(Color("BasicColor"))
-                                .font(.title2)
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            withAnimation(.spring()) {
-                                categoriesRoll.toggle()
-                            }
-                        }
-                        
-                        if categoriesRoll {
-                            ForEach(dict, id: \.description) { subgroup in
-                                HStack{
-                                    Button("- \(subgroup.description.uppercased())") {
-                                        withAnimation(.spring()) {
-                                            value.scrollTo(subgroup.description, anchor: .top)
-                                        }
-                                    }
-                                    .font(.callout)
-                                    .foregroundColor(.secondary)
-                                    
-                                    Spacer()
-                                }
-                                .padding(.bottom, 2)
-                            }
-                        }
+                HStack{
+                    Spacer()
+                    Image(systemName: "arrow.up.and.down.text.horizontal")
+                        .foregroundColor(.primary.opacity(categoriesRoll ? 1.0 : 0.5))
+                        .font(.title2)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation(.spring()) {
+                        categoriesRoll.toggle()
                     }
-                })
+                }
+                
+                if categoriesRoll {
+                    GroupBox(content: {
+                        ForEach(dict, id: \.description) { subgroup in
+                            HStack{
+                                Button("\(subgroup.description.uppercased())") {
+                                    withAnimation(.spring()) {
+                                        value.scrollTo(subgroup.description, anchor: .top)
+                                    }
+                                }
+                                .font(.callout)
+                                .foregroundColor(.secondary)
+                                .buttonStyle(.bordered)
+                                
+                                Spacer()
+                            }
+                            .padding(.bottom, 2)
+                        }
+                    })
+                }
+                
                 ForEach(dict, id: \.description) { subgroup in
                     LazyVStack {
                         HStack{
