@@ -121,10 +121,10 @@ struct MainView: View {
                         .scaleEffect(ready ? 1.1 : 1.5)
                         .overlay {
                             if !networkController.connected{
-                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)))
+                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 2.8)
                             }
                             else if globalVersion != currentVersion {
-                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.09057433158, green: 0.1663101912, blue: 0.5200116038, alpha: 0.8707342791)))
+                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.09057433158, green: 0.1663101912, blue: 0.5200116038, alpha: 0.8707342791)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 0.4)
                             }
                         }
                 }
