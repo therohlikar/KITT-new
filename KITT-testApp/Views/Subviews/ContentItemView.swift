@@ -69,6 +69,7 @@ struct ContentItemView: View {
                 if item.wrappedType == "sign" && UIImage(named: "\(item.wrappedId).webp") != nil {
                     Image(uiImage: (UIImage(named: "\(item.wrappedId).webp")!))
                         .resizable()
+                        .scaledToFit()
                         .frame(width: 200, height: 180)
                         .padding(.horizontal, 25)
                 }
