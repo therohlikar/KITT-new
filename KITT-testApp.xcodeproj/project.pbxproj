@@ -18,7 +18,6 @@
 		964D0BBE29E00C95008ED31C /* ContentItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */; };
 		964D719429E1A254006155B0 /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D719329E1A254006155B0 /* FileModel.swift */; };
 		964D719929F5C89E006155B0 /* UrlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D719829F5C89E006155B0 /* UrlViewModel.swift */; };
-		964D719B29F6447C006155B0 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D719A29F6447C006155B0 /* WelcomeView.swift */; };
 		9660490329B1E75A00F64E55 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490229B1E75A00F64E55 /* DataController.swift */; };
 		9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */; };
 		9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660490C29B217AC00F64E55 /* ParagraphModel.swift */; };
@@ -197,7 +196,6 @@
 		964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentItemRowView.swift; sourceTree = "<group>"; };
 		964D719329E1A254006155B0 /* FileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
 		964D719829F5C89E006155B0 /* UrlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlViewModel.swift; sourceTree = "<group>"; };
-		964D719A29F6447C006155B0 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		9660490229B1E75A00F64E55 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KittDataModel.xcdatamodel; sourceTree = "<group>"; };
 		9660490C29B217AC00F64E55 /* ParagraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphModel.swift; sourceTree = "<group>"; };
@@ -619,7 +617,6 @@
 				9660492629B2476E00F64E55 /* MainView.swift */,
 				9660492829B247B600F64E55 /* FavoritesView.swift */,
 				96965E7229B7EC5F0094520F /* SettingsView.swift */,
-				964D719A29F6447C006155B0 /* WelcomeView.swift */,
 				9619DC702A5938F2006D479C /* TutorialView.swift */,
 			);
 			path = Views;
@@ -875,7 +872,6 @@
 				969638AC29D490A9009365C5 /* Group+CoreDataProperties.swift in Sources */,
 				96965E9929B8CAA90094520F /* VersionModel.swift in Sources */,
 				969638A329D4861D009365C5 /* ContentItem+CoreDataClass.swift in Sources */,
-				964D719B29F6447C006155B0 /* WelcomeView.swift in Sources */,
 				96D30B7629B1E18F0018F750 /* KITT_testAppApp.swift in Sources */,
 				96965EC229BE768C0094520F /* CYCMenuView.swift in Sources */,
 				96965E9F29B8CD090094520F /* NewsView.swift in Sources */,

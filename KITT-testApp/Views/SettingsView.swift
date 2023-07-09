@@ -21,73 +21,68 @@ struct SettingsView: View {
     
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
-    @State private var canSendMail: Bool = false
     @State private var showingAlertRemoveData: Bool = false
 
     var body: some View {
-        VStack{
-            List{
-                Section("ÚPRAVA ROZHRANÍ"){
-                    if foundEasterEgg{
-                        HStack{
-                            Text("EASTER EGG SPECIÁL")
-                            Spacer()
-                            Toggle("", isOn: $hiddenColor)
-                                .onChange(of: hiddenColor) { value in
-                                    UIApplication.shared.setAlternateIconName(value ? "AlternativeAppIconPink" : nil)
-                                }
-                                .labelsHidden()
-                                
-                        }
-                    }
+        List{
+            Section("ÚPRAVA ROZHRANÍ"){
+                if foundEasterEgg{
                     HStack{
-                        Text("Tmavý režim")
+                        Text("EASTER EGG SPECIÁL")
                         Spacer()
-                        Toggle("", isOn: $sc.settings.darkMode)
+                        Toggle("", isOn: $hiddenColor)
+                            .onChange(of: hiddenColor) { value in
+                                UIApplication.shared.setAlternateIconName(value ? "AlternativeAppIconPink" : nil)
+                            }
                             .labelsHidden()
                     }
-                    HStack{
-                        Text("Vypnout usínání displeje při prohlížení")
-                        Spacer()
-                        Toggle("", isOn: $sc.settings.keepDisplayOn)
-                            .labelsHidden()
-                    }
-                    
-                    HStack{
-                        Text("Pole pro vyhledávání")
-                        Spacer()
-                        Picker("", selection: $sc.settings.searchOnTop) {
-                            Text("Nahoře")
-                                .tag(true)
-                            Text("Dole")
-                                .tag(false)
-                        }
+                }
+                HStack{
+                    Text("Tmavý režim")
+                    Spacer()
+                    Toggle("", isOn: $sc.settings.darkMode)
                         .labelsHidden()
-                    }
                 }
-                Section("SYSTÉM"){
-                    NavigationLink {
-                        FiltersList(fvm: fvm)
-                    } label: {
-                        Text("Nastavení filtrů vyhledávání")
-                        
+                HStack{
+                    Text("Vypnout usínání displeje při prohlížení")
+                    Spacer()
+                    Toggle("", isOn: $sc.settings.keepDisplayOn)
+                        .labelsHidden()
+                }
+                
+                HStack{
+                    Text("Pole pro vyhledávání")
+                    Spacer()
+                    Picker("", selection: $sc.settings.searchOnTop) {
+                        Text("Nahoře")
+                            .tag(true)
+                        Text("Dole")
+                            .tag(false)
                     }
-
-                    Link(destination: URL(string: "mailto:\(mailTo)")!) {
-                        Text("NAPIŠTE MI")
-                    }
+                    .labelsHidden()
+                }
+            }
+            Section("SYSTÉM"){
+                NavigationLink {
+                    FiltersList(fvm: fvm)
+                } label: {
+                    Text("Nastavení filtrů vyhledávání")
                     
-                    Button {
-                        showingAlertRemoveData.toggle()
-                    } label: {
-                        Text("VYMAZAT DATA")
-                    }
-                    .foregroundColor(.red)
                 }
+
+                Link(destination: URL(string: "mailto:\(mailTo)")!) {
+                    Text("NAPIŠTE MI")
+                }
+                
+                Button {
+                    showingAlertRemoveData.toggle()
+                } label: {
+                    Text("VYMAZAT DATA")
+                }
+                .foregroundColor(.red)
             }
         }
         .font(.caption)
-        .preferredColorScheme(sc.settings.darkMode ? .dark : .light)
         .tint(.blue)
         .alert("VYMAZAT DATA", isPresented: $showingAlertRemoveData) {
             Button("Smazat", role: .destructive) {

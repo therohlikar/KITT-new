@@ -88,8 +88,6 @@ struct MainView: View {
                     .disabled(!ready)
                     .opacity(ready ? 1 : 0.5)
                 
-                Spacer()
-                
                 if !searchOnTop {
                     HStack{
                         TextField("Vyhledávání...", text: $searchKey)
@@ -117,8 +115,6 @@ struct MainView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Image(systemName: "arrow.triangle.2.circlepath")
                         .onTapGesture {
-                            loadingDataRotation = 360
-
                             Task {
                                 await self.prepareData()
                             }
@@ -181,20 +177,17 @@ struct MainView: View {
                     ContentItemView(item: item)
                 }
             }
-            .fullScreenCover(isPresented: $showWelcomePanel) {
-                welcome = true
-                Task {
-                    await self.prepareData()
-                }
-            } content: {
-                WelcomeView()
-            }
         }
         .onAppear{
             UIApplication.shared.isIdleTimerDisabled = keepDisplayOn
         }
         .task {
             await self.isNewVersionDownloadable()
+            
+            if !welcome {
+                welcome = true
+                await self.prepareData()
+            }
         }
         .onOpenURL { url in
             let str = url.absoluteString.replacingOccurrences(of: "kittapp://", with: "")
@@ -226,6 +219,8 @@ struct MainView: View {
     }
     
     func prepareData() async {
+        loadingDataRotation = 360
+        
         withAnimation(.easeInOut(duration: 0.5)) {
             ready = false
         }
