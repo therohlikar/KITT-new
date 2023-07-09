@@ -43,24 +43,12 @@ struct SettingsView: View {
                     Toggle("", isOn: $sc.settings.darkMode)
                         .labelsHidden()
                 }
-                HStack{
-                    Text("Vypnout usínání displeje při prohlížení")
-                    Spacer()
-                    Toggle("", isOn: $sc.settings.keepDisplayOn)
-                        .labelsHidden()
-                }
-                
-                HStack{
-                    Text("Pole pro vyhledávání")
-                    Spacer()
-                    Picker("", selection: $sc.settings.searchOnTop) {
-                        Text("Nahoře")
-                            .tag(true)
-                        Text("Dole")
-                            .tag(false)
-                    }
-                    .labelsHidden()
-                }
+//                HStack{
+//                    Text("Vypnout usínání displeje při prohlížení")
+//                    Spacer()
+//                    Toggle("", isOn: $sc.settings.keepDisplayOn)
+//                        .labelsHidden()
+//                }
             }
             Section("SYSTÉM"){
                 NavigationLink {

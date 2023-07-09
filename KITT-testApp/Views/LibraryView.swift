@@ -243,7 +243,7 @@ struct LibraryView: View {
                 filterPredicates.append(NSPredicate(value: true))
             }
 
-            _searchedContent = FetchRequest<ContentItem>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(
+            _searchedContent = FetchRequest<ContentItem>(sortDescriptors: [NSSortDescriptor(key: "type", ascending: true)], predicate: NSCompoundPredicate(
                 type: .and, subpredicates: [NSCompoundPredicate(orPredicateWithSubpredicates: filterPredicates), NSPredicate(format: favoritesOnly ? "favorited == true" : "favorited == true OR favorited == false")]))
         }else {
             _offenseGroups = FetchRequest<Group>(sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSCompoundPredicate(

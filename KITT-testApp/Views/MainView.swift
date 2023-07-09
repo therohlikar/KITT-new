@@ -23,10 +23,11 @@ struct MainView: View {
     @State private var ready: Bool = true
     @State private var searchKey: String = ""
     @State private var onlyFavorites: Bool = false
+    @State private var isSearchVisible: Bool = false
+    @State private var searchBarOpacity: Double = 0.6
     
     @FocusState private var searchFocused: Bool
     
-    @AppStorage("settings.searchOnTop") private var searchOnTop: Bool = false
     @AppStorage("settings.displayOn") private var keepDisplayOn: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
     @AppStorage("globalVersion") private var globalVersion: String = "0.0.0"
@@ -37,130 +38,157 @@ struct MainView: View {
 
     var body: some View {
         NavigationStack{
-            VStack{
-                if searchOnTop {
-                    HStack{
-                        TextField("Vyhledávání...", text: $searchKey)
-                            .autocorrectionDisabled()
-                            .padding(10)
-                            .focused($searchFocused)
-                        
-                        if !searchKey.isEmpty {
-                            Image(systemName: "x.circle.fill")
-                                .onTapGesture {
-                                    searchKey = ""
-                                }
-                                .opacity(0.7)
+            ZStack{
+                VStack{
+                    if !ready{
+                        VStack{
+                            Image("MainLogoTransp")
+                                .resizable()
+                                .frame(width: loadingDataRotation > 0 ? 80 : 0, height: loadingDataRotation > 0 ? 80 : 0)
+                                .background(hiddenColor ? Color.pink : (sc.settings.darkMode ? Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0) : Color("BasicColor")))
+                                .cornerRadius(180)
+                            
+                            Text("Aktualní verze dat: \(currentVersion)")
+                                .font(.subheadline)
+                            Text(networkController.connected ? ("Verze ke stažení: \(globalVersion)") : "Nejste připojen k internetu")
+                                .font(.headline)
                         }
                     }
-                    .padding(.horizontal, 10)
-                    .disabled(!ready)
-                    .opacity(ready ? 1 : 0.5)
-                }
-                
-                if !ready{
-                    VStack{
-                        Image("MainLogoTransp")
-                            .resizable()
-                            .frame(width: loadingDataRotation > 0 ? 80 : 0, height: loadingDataRotation > 0 ? 80 : 0)
-                            .background(hiddenColor ? Color.pink : (sc.settings.darkMode ? Color(red: 0.0, green: 0, blue: 0.0, opacity: 0.0) : Color("BasicColor")))
-                            .cornerRadius(180)
-                        
-                        Text("Aktualní verze dat: \(currentVersion)")
-                            .font(.subheadline)
-                        Text(networkController.connected ? ("Verze ke stažení: \(globalVersion)") : "Nejste připojen k internetu")
-                            .font(.headline)
-                    }
-                }
-                
-                LibraryView(searchKey: searchKey, favoritesOnly: onlyFavorites, fvm: fvm)
-                    .tabItem {
-                        Label("Knihovna", systemImage: "books.vertical.fill")
-                    }
-                    .tag("library")
-                    .disabled(!ready)
-                    .opacity(ready ? 1 : 0.5)
-                
-                if !searchOnTop {
-                    HStack{
-                        TextField("Vyhledávání...", text: $searchKey)
-                            .autocorrectionDisabled()
-                            .padding(10)
-                            .focused($searchFocused)
-                        
-                        if !searchKey.isEmpty {
-                            Image(systemName: "x.circle.fill")
-                                .onTapGesture {
-                                    searchKey = ""
-                                }
-                                .opacity(0.7)
+                    
+                    LibraryView(searchKey: searchKey, favoritesOnly: onlyFavorites, fvm: fvm)
+                        .tabItem {
+                            Label("Knihovna", systemImage: "books.vertical.fill")
                         }
-                    }
-                    .padding(.horizontal, 10)
-                    .disabled(!ready)
-                    .opacity(ready ? 1 : 0.5)
-                }
-            }
-            .onTapGesture {
-                UIApplication.shared.endEditing()
-            }
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                        .onTapGesture {
-                            Task {
-                                await self.prepareData()
-                            }
-                        }
-                        .foregroundColor(.secondary)
-                        .rotationEffect(.degrees(loadingDataRotation))
-                        .animation(loadingDataRotation > 0 ? .linear(duration: 3).repeatForever(autoreverses: false) : .default, value: loadingDataRotation)
-                        .disabled(!ready)
-                        .padding(.horizontal, 2)
-                        .imageScale(.large)
-                        .scaleEffect(ready ? 1.1 : 1.5)
-                        .overlay {
-                            if !networkController.connected{
-                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 2.8)
-                            }
-                            else if globalVersion != currentVersion {
-                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.09057433158, green: 0.1663101912, blue: 0.5200116038, alpha: 0.8707342791)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 0.4)
-                            }
-                        }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: onlyFavorites ? "heart.fill" : "heart")
-                        .onTapGesture {
-                            onlyFavorites.toggle()
-                        }
-                        .foregroundColor(Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 1)))
+                        .tag("library")
                         .disabled(!ready)
                         .opacity(ready ? 1 : 0.5)
-                        .padding(.horizontal, 2)
-                        .imageScale(.large)
-                        .scaleEffect(1.1)
                 }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        SubmenuView()
-                    } label: {
-                        Image(systemName: "ellipsis.circle")
+                .edgesIgnoringSafeArea(.bottom)
+                .onTapGesture {
+                    UIApplication.shared.endEditing()
+                }
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .onTapGesture {
+                                if isSearchVisible {
+                                    withAnimation(.spring()) {
+                                        isSearchVisible = false
+                                    }
+                                    
+                                    withAnimation(.easeInOut(duration: 1.5)) {
+                                        searchBarOpacity = 0.6
+                                    }
+                                }
+                                
+                                Task {
+                                    await self.prepareData()
+                                }
+                            }
                             .foregroundColor(.secondary)
+                            .rotationEffect(.degrees(loadingDataRotation))
+                            .animation(loadingDataRotation > 0 ? .linear(duration: 3).repeatForever(autoreverses: false) : .default, value: loadingDataRotation)
+                            .disabled(!ready)
+                            .padding(.horizontal, 2)
+                            .imageScale(.large)
+                            .scaleEffect(ready ? 1.1 : 1.5)
+                            .overlay {
+                                if !networkController.connected{
+                                    CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 2.8)
+                                }
+                                else if globalVersion != currentVersion {
+                                    CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.09057433158, green: 0.1663101912, blue: 0.5200116038, alpha: 0.8707342791)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 0.4)
+                                }
+                            }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Image(systemName: onlyFavorites ? "heart.fill" : "heart")
+                            .onTapGesture {
+                                onlyFavorites.toggle()
+                            }
+                            .foregroundColor(Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 1)))
                             .disabled(!ready)
                             .opacity(ready ? 1 : 0.5)
+                            .padding(.horizontal, 2)
                             .imageScale(.large)
                             .scaleEffect(1.1)
                     }
-                    .isDetailLink(false)
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink {
+                            SubmenuView()
+                        } label: {
+                            Image(systemName: "ellipsis.circle")
+                                .foregroundColor(.secondary)
+                                .disabled(!ready)
+                                .opacity(ready ? 1 : 0.5)
+                                .imageScale(.large)
+                                .scaleEffect(1.1)
+                        }
+                        .isDetailLink(false)
+                    }
+                }
+                .navigationDestination(isPresented: $urlViewModel.open) {
+                    if let item = urlViewModel.item {
+                        ContentItemView(item: item)
+                    }
                 }
             }
-            .navigationDestination(isPresented: $urlViewModel.open) {
-                if let item = urlViewModel.item {
-                    ContentItemView(item: item)
+            .overlay(alignment: .bottomTrailing, content: {
+                HStack{
+                    Image(systemName: "magnifyingglass.circle")
+                        .font(.system(size: 38))
+                        .foregroundColor(Color("ItemRowMenuColor"))
+                        .onTapGesture {
+                            searchBarOpacity = 0.9
+                            
+                            withAnimation(.spring()) {
+                                isSearchVisible.toggle()
+                            }
+                            
+                            if !isSearchVisible {
+                                searchBarOpacity = 0.6
+                            }
+                            else{
+                                searchFocused.toggle()
+                            }
+                        }
+                        .offset(x: !isSearchVisible ? 0 : 30, y: 0)
+                    
+                    if isSearchVisible {
+                        VStack (alignment: .leading){
+                            TextField("", text: $searchKey.max(22))
+                                .foregroundColor(Color("ItemRowMenuColor"))
+                                .offset(x: !isSearchVisible ? 0 : 30, y: 0)
+                                .focused($searchFocused)
+                            
+                            Rectangle()
+                                .frame(width: 250, height: 2)
+                                .foregroundColor(Color("ItemRowMenuColor"))
+                                .offset(x: !isSearchVisible ? 0 : 30, y: 0)
+                                .opacity(0.6)
+                        }
+                        
+                    }
                 }
-            }
+                .background(
+                    RoundedRectangle(cornerRadius: !isSearchVisible ? 50 : 25)
+                        .fill(Color("BasicColor"))
+                        .frame(width: !isSearchVisible ? 75 : 355, height: 75)
+                )
+                .overlay{
+                    if !isSearchVisible && !searchKey.isEmpty {
+                        CustomBadgeView(imageSystem: "xmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)), size: 16, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 2.8)
+                            .onTapGesture {
+                                searchKey = ""
+                            }
+                    }
+                }
+                .opacity(searchBarOpacity)
+                .offset(x: !isSearchVisible ? -40 : 0, y: -15)
+                .disabled(!ready)
+            })
         }
         .onAppear{
             UIApplication.shared.isIdleTimerDisabled = keepDisplayOn
@@ -295,5 +323,16 @@ struct MainView: View {
 extension UIApplication {
     func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+extension Binding where Value == String {
+    func max(_ limit: Int) -> Self {
+        if self.wrappedValue.count > limit {
+            DispatchQueue.main.async {
+                self.wrappedValue = String(self.wrappedValue.dropLast())
+            }
+        }
+        return self
     }
 }

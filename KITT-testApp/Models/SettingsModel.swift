@@ -25,14 +25,6 @@ struct SettingsModel {
             UserDefaults.standard.set(newValue, forKey: "settings.downloadDataOnStartup")
         }
     }
-    var searchOnTop: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: "settings.searchOnTop")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "settings.searchOnTop")
-        }
-    }
     var keepDisplayOn: Bool {
         get {
             return UserDefaults.standard.bool(forKey: "settings.keepDisplayOn")
