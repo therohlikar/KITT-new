@@ -10,8 +10,7 @@ import SwiftUI
 struct CYCMenuView: View {
 
     @State private var record: Int = 0
-    @Binding var showingCYC: Bool
-    
+
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea()

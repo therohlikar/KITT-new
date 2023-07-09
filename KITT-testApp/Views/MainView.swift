@@ -22,9 +22,6 @@ struct MainView: View {
     
     @State private var ready: Bool = true
     @State private var searchKey: String = ""
-    @State private var filterListViewOpened: Bool = false
-    @State private var settingsViewOpened: Bool = false
-    @State private var submenuViewOpened: Bool = false
     @State private var onlyFavorites: Bool = false
     
     @FocusState private var searchFocused: Bool
@@ -35,10 +32,6 @@ struct MainView: View {
     @AppStorage("globalVersion") private var globalVersion: String = "0.0.0"
     @AppStorage("welcome") private var welcome: Bool = false
     @AppStorage("settings.hiddenColor") var hiddenColor: Bool = false
-    
-    @State private var toBeUpdated: Bool = false
-    @State private var settingsToOpen: Bool = false
-    @State private var showWelcomePanel: Bool = false
     
     @State private var loadingDataRotation:Double = 0.0
 
@@ -75,7 +68,7 @@ struct MainView: View {
                         
                         Text("Aktualní verze dat: \(currentVersion)")
                             .font(.subheadline)
-                        Text("Verze ke stažení: \(globalVersion)")
+                        Text(networkController.connected ? ("Verze ke stažení: \(globalVersion)") : "Nejste připojen k internetu")
                             .font(.headline)
                     }
                 }
@@ -127,7 +120,10 @@ struct MainView: View {
                         .imageScale(.large)
                         .scaleEffect(ready ? 1.1 : 1.5)
                         .overlay {
-                            if globalVersion != currentVersion {
+                            if !networkController.connected{
+                                CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)))
+                            }
+                            else if globalVersion != currentVersion {
                                 CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.09057433158, green: 0.1663101912, blue: 0.5200116038, alpha: 0.8707342791)))
                             }
                         }
@@ -148,7 +144,7 @@ struct MainView: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        SubmenuView(settingsToOpen: $settingsToOpen, submenuViewOpened: $submenuViewOpened)
+                        SubmenuView()
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .foregroundColor(.secondary)
@@ -158,18 +154,6 @@ struct MainView: View {
                             .scaleEffect(1.1)
                     }
                     .isDetailLink(false)
-                }
-                
-                if !networkController.connected {
-                    ToolbarItem(placement: .status) {
-                        HStack{
-                            Text("Nejste připojen k Internetu")
-                                .frame(width: 400, height: 25, alignment: .center)
-                                .padding(2)
-                                .background(Color("NetworkErrorColor"))
-                                .cornerRadius(7)
-                        }
-                    }
                 }
             }
             .navigationDestination(isPresented: $urlViewModel.open) {
@@ -304,11 +288,6 @@ struct MainView: View {
         withAnimation(.easeInOut(duration: 0.7)) {
             loadingDataRotation = 0.0
             ready = isReady
-        }
-        
-        
-        if ready{
-            showWelcomePanel = !welcome
         }
     }
 }

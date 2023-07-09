@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct SubmenuView: View {
-    @Binding var settingsToOpen: Bool
-    @Binding var submenuViewOpened: Bool
-    
     @EnvironmentObject var sc: SettingsController
     
-    @State var showingCYC: Bool = false
     var appVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
     
     @AppStorage("currentVersion") var dataVersion: String = "0.0.0"
@@ -118,7 +114,7 @@ struct SubmenuView: View {
             }
             
             NavigationLink{
-                CYCMenuView(showingCYC: $showingCYC)
+                CYCMenuView()
             } label: {
                 HStack{
                     Image(systemName: "gamecontroller.fill")
