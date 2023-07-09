@@ -16,6 +16,10 @@ struct SubGroupListView: View {
     
     var favoritesOnly: Bool
     
+    let layout = [
+        GridItem(.flexible(minimum:40))
+    ]
+    
     var body: some View {
         ScrollViewReader { value in
             ScrollView {
@@ -33,7 +37,9 @@ struct SubGroupListView: View {
                 }
                 
                 if categoriesRoll {
-                    GroupBox(content: {
+                    LazyVGrid(columns: [
+                        GridItem(.flexible())
+                    ]) {
                         ForEach(dict, id: \.description) { subgroup in
                             HStack{
                                 Button("\(subgroup.description.uppercased())") {
@@ -49,7 +55,7 @@ struct SubGroupListView: View {
                             }
                             .padding(.bottom, 2)
                         }
-                    })
+                    }
                 }
                 
                 ForEach(dict, id: \.description) { subgroup in
