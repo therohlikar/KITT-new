@@ -108,6 +108,8 @@
 		967ACBBE2A5621CF00BD3B35 /* C11b.webp in Resources */ = {isa = PBXBuildFile; fileRef = 967ACB9C2A5621CF00BD3B35 /* C11b.webp */; };
 		967ACBBF2A5621CF00BD3B35 /* C9b.webp in Resources */ = {isa = PBXBuildFile; fileRef = 967ACB9D2A5621CF00BD3B35 /* C9b.webp */; };
 		967ACBC02A5621CF00BD3B35 /* C2a.webp in Resources */ = {isa = PBXBuildFile; fileRef = 967ACB9E2A5621CF00BD3B35 /* C2a.webp */; };
+		96847B832A5BEE9D0033D336 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96847B822A5BEE9D0033D336 /* ToolsView.swift */; };
+		96847B862A5BEED40033D336 /* SchengenCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96847B852A5BEED40033D336 /* SchengenCalculatorView.swift */; };
 		9696388D29D4757F009365C5 /* SubGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696388C29D4757F009365C5 /* SubGroupListView.swift */; };
 		969638A329D4861D009365C5 /* ContentItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696389F29D4861D009365C5 /* ContentItem+CoreDataClass.swift */; };
 		969638A429D4861D009365C5 /* ContentItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969638A029D4861D009365C5 /* ContentItem+CoreDataProperties.swift */; };
@@ -285,6 +287,8 @@
 		967ACB9C2A5621CF00BD3B35 /* C11b.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = C11b.webp; sourceTree = "<group>"; };
 		967ACB9D2A5621CF00BD3B35 /* C9b.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = C9b.webp; sourceTree = "<group>"; };
 		967ACB9E2A5621CF00BD3B35 /* C2a.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = C2a.webp; sourceTree = "<group>"; };
+		96847B822A5BEE9D0033D336 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
+		96847B852A5BEED40033D336 /* SchengenCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchengenCalculatorView.swift; sourceTree = "<group>"; };
 		9696388C29D4757F009365C5 /* SubGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGroupListView.swift; sourceTree = "<group>"; };
 		9696388E29D47C23009365C5 /* KittDataModel UpdateV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "KittDataModel UpdateV2.xcdatamodel"; sourceTree = "<group>"; };
 		9696389F29D4861D009365C5 /* ContentItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -389,6 +393,14 @@
 				96965E9B29B8CB830094520F /* Version+CoreDataProperties.swift */,
 			);
 			path = DataModels;
+			sourceTree = "<group>";
+		};
+		96847B842A5BEEC80033D336 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				96847B852A5BEED40033D336 /* SchengenCalculatorView.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		969638AF29D6C67F009365C5 /* Fonts */ = {
@@ -648,6 +660,7 @@
 		96D30B9129B1E33C0018F750 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				96847B842A5BEEC80033D336 /* Tools */,
 				9660492E29B5308000F64E55 /* FiltersList.swift */,
 				96965E8229B8A3660094520F /* MailView.swift */,
 				96965E9E29B8CD090094520F /* NewsView.swift */,
@@ -655,6 +668,7 @@
 				9696388C29D4757F009365C5 /* SubGroupListView.swift */,
 				969638AD29D6C580009365C5 /* ContentItemView.swift */,
 				964D0BBD29E00C95008ED31C /* ContentItemRowView.swift */,
+				96847B822A5BEE9D0033D336 /* ToolsView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -876,6 +890,7 @@
 				96965E8329B8A3660094520F /* MailView.swift in Sources */,
 				9619DC732A59E634006D479C /* CoreDataViewModel.swift in Sources */,
 				9660490D29B217AC00F64E55 /* ParagraphModel.swift in Sources */,
+				96847B832A5BEE9D0033D336 /* ToolsView.swift in Sources */,
 				969638A429D4861D009365C5 /* ContentItem+CoreDataProperties.swift in Sources */,
 				96965EA329BB8D890094520F /* CustomBadgeView.swift in Sources */,
 				96965E9C29B8CB830094520F /* Version+CoreDataClass.swift in Sources */,
@@ -884,6 +899,7 @@
 				9696388D29D4757F009365C5 /* SubGroupListView.swift in Sources */,
 				964D0BBE29E00C95008ED31C /* ContentItemRowView.swift in Sources */,
 				9660492B29B463B400F64E55 /* FilterModel.swift in Sources */,
+				96847B862A5BEED40033D336 /* SchengenCalculatorView.swift in Sources */,
 				96965EA129BB680F0094520F /* NetworkController.swift in Sources */,
 				9660490629B1E7A600F64E55 /* KittDataModel.xcdatamodeld in Sources */,
 				969F070A29D74BFF0017FB99 /* LinkModel.swift in Sources */,

@@ -89,12 +89,29 @@ struct SubmenuView: View {
         
         List{
             NavigationLink {
+                ToolsView()
+            } label: {
+                HStack{
+                    Image(systemName: "bag.badge.plus")
+                        .frame(minWidth: 40)
+                    
+                    Text("Pomůcky")
+                    
+                    Spacer()
+                }
+            }
+            .isDetailLink(false)
+            
+            NavigationLink {
                 SettingsView()
             } label: {
                 HStack{
                     Image(systemName: "gearshape.fill")
+                        .frame(minWidth: 40)
                     
                     Text("Nastavení")
+                    
+                    Spacer()
                 }
             }
             .isDetailLink(false)
@@ -104,12 +121,15 @@ struct SubmenuView: View {
             } label: {
                 HStack{
                     Image(systemName: "info.circle")
+                        .frame(minWidth: 40)
                     
                     if news.count > 0 {
-                        Text("NOVINKY (\(news.count))")
+                        Text("Novinky (\(news.count))")
                     }else {
-                        Text("NOVINKY")
+                        Text("Novinky")
                     }
+                    
+                    Spacer()
                 }
             }
             
@@ -118,14 +138,16 @@ struct SubmenuView: View {
             } label: {
                 HStack{
                     Image(systemName: "gamecontroller.fill")
+                        .frame(minWidth: 40)
                     
-                    Text("CHYŤ SI SVÉHO ZLOČINCE")
+                    Text("Chyť si svého zločince")
+                    
+                    Spacer()
                 }
             }
             .isDetailLink(false)
         }
-        .cornerRadius(12)
-        .font(.caption)
+        .cornerRadius(7)
         .foregroundColor(.primary)
         .padding()
     }
