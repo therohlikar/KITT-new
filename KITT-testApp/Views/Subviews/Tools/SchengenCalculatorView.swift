@@ -102,7 +102,6 @@ class Controls: ObservableObject{
             let count = Calendar.current.dateComponents([.day], from: lowest, to: highest).day!
             total = total + count
         }
-        
         return total
     }
     
@@ -167,176 +166,184 @@ struct SchengenCalculatorView: View {
     @ObservedObject var controls: Controls = Controls()
     
     @State var randomEntering:Bool = false
+    @State var randomEnteringError: Bool = false
     
     var body: some View {
-        VStack{
-            Text("SCHENGEN CALCULATOR")
-                .padding(0)
-            Link("https://ec.europa.eu/assets/home/visa-calculator/calculator.htm?lang=en", destination: URL(string: "https://ec.europa.eu/assets/home/visa-calculator/calculator.htm?lang=en")!)
-                .font(.caption2)
-                .padding(.bottom)
-            
+        ZStack{
             VStack{
-                DatePicker("Datum kontroly", selection: $controls.controlDate, displayedComponents: .date)
-                    .datePickerStyle(.compact)
-                    .padding(0)
-                    .lineLimit(0)
-                HStack{
-                    Text("(- \(controls.countedArea) dní = ") +
-                    Text(controls.getCountedAreaDate(), style: .date) +
-                    Text(")")
-                }
-                .font(.caption)
-            }
-        }
-        .padding(.horizontal)
-        List{
-            ForEach($controls.controlList, id:\.self) { $control in
-                HStack{
-                    DatePicker("OD", selection: $control.from, in: ...controls.controlDate, displayedComponents: .date)
-                        .datePickerStyle(.compact)
-                        .labelsHidden()
-                        .padding(.horizontal, 2)
-                        .frame(minWidth: 60)
-                        .padding(.vertical, 4)
-                    DatePicker("DO", selection: $control.until, in: control.from..., displayedComponents: .date)
-                        .datePickerStyle(.compact)
-                        .labelsHidden()
-                        .padding(.horizontal, 2)
-                        .frame(minWidth: 60)
+                VStack{
+                    Text("SCHENGEN CALCULATOR")
+                        .padding(0)
+                    Link("https://ec.europa.eu/assets/home/visa-calculator/calculator.htm?lang=en", destination: URL(string: "https://ec.europa.eu/assets/home/visa-calculator/calculator.htm?lang=en")!)
+                        .font(.caption2)
+                        .padding(.bottom)
                     
-                    Text("DNU: \(control.dateDifferenceInDays)")
+                    VStack{
+                        DatePicker("Datum kontroly", selection: $controls.controlDate, displayedComponents: .date)
+                            .datePickerStyle(.compact)
+                            .padding(0)
+                            .lineLimit(0)
+                        HStack{
+                            Text("(- \(controls.countedArea) dní = ") +
+                            Text(controls.getCountedAreaDate(), style: .date) +
+                            Text(")")
+                        }
                         .font(.caption)
-                        .frame(minWidth: 60)
+                    }
                 }
-                
-            }
-            .onDelete { index in
-                controls.removeControl(control: index)
-            }
-            .onMove { index, offIndex in
-                controls.moveControl(control: index, dest: offIndex)
-            }
-        }
-        .toolbar {
-            if controls.controlsCount() > 0{
-                ToolbarItem(placement: .automatic) {
-                    Button("Vymazat") {
-                        controls.clearControls()
+                .padding(.horizontal)
+                List{
+                    ForEach($controls.controlList, id:\.self) { $control in
+                        HStack{
+                            DatePicker("OD", selection: $control.from, in: ...controls.controlDate, displayedComponents: .date)
+                                .datePickerStyle(.compact)
+                                .labelsHidden()
+                                .padding(.horizontal, 2)
+                                .frame(minWidth: 60)
+                                .padding(.vertical, 4)
+                            DatePicker("DO", selection: $control.until, in: control.from..., displayedComponents: .date)
+                                .datePickerStyle(.compact)
+                                .labelsHidden()
+                                .padding(.horizontal, 2)
+                                .frame(minWidth: 60)
+                            
+                            Text("DNU: \(control.dateDifferenceInDays)")
+                                .font(.caption)
+                                .frame(minWidth: 60)
+                        }
+                        
+                    }
+                    .onDelete { index in
+                        controls.removeControl(control: index)
+                    }
+                    .onMove { index, offIndex in
+                        controls.moveControl(control: index, dest: offIndex)
+                    }
+                }
+                .toolbar {
+                    if controls.controlsCount() > 0{
+                        ToolbarItem(placement: .automatic) {
+                            Button("Vymazat") {
+                                controls.clearControls()
+                            }
+                        }
+                        
+                        ToolbarItem(placement: .automatic) {
+                            EditButton()
+                        }
                     }
                 }
                 
-                ToolbarItem(placement: .automatic) {
-                    EditButton()
-                }
-            }
-        }
-        
-        HStack{
-            VStack(alignment: .center){
-                Text("CELKEM")
-                Text("\(controls.countAllowedStay())")
-                    .bold()
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            Button {
-                controls.controlList.append(PassControl())
-            } label: {
-                Image(systemName: "plus.circle")
-                    .foregroundColor(.primary)
-                    .font(.largeTitle)
-            }
-            
-            Spacer()
-            
-            VStack(alignment: .center){
-                controls.authIcon()
+                HStack{
+                    VStack(alignment: .center){
+                        Text("CELKEM")
+                        Text("\(controls.countAllowedStay())")
+                            .bold()
+                    }
+                    .frame(maxWidth: 100, maxHeight: 60)
+                    .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .center){
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(.primary)
+                            .font(.largeTitle)
+                            .frame(width: 50, height: 60)
+                            
+                        Text("Stiskni dlouze pro jednodušší vkládání")
+                            .font(.caption2)
+                            .frame(alignment: .center)
+                    }
+                    .clipShape(Rectangle())
+                    .frame(maxWidth: 200, maxHeight: 100)
                     .onTapGesture {
+                        controls.controlList.append(PassControl())
+                    }
+                    .onLongPressGesture(minimumDuration: 1.0) {
                         randomEntering.toggle()
                     }
-                
-                if controls.controlsCount() > 0 {
-                    Text("\(controls.isAllowed() ? "ZBÝVÁ" : "PŘEKROČIL") \(controls.countOverstay())")
-                }
-            }
-            .padding(.horizontal)
-        }
-        .fullScreenCover(isPresented: $randomEntering) {
-            if controls.sortRandomEnters(){
-                print("DONE")
-            }else{
-                print("ERROR")
-            }
-        } content: {
-            List{
-                ForEach($controls.randomEnters, id:\.self) { $enter in
-                    HStack{
-                        Spacer()
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .center){
+                        controls.authIcon()
                         
-                        DatePicker("", selection: $enter.date, displayedComponents: .date)
-                            .datePickerStyle(.compact)
-                            .labelsHidden()
-                            .frame(minWidth: 75)
-                        
-                        Spacer()
-                        
-                        Button {
-                            enter.enter.toggle()
-                        } label: {
-                            Text(enter.enter ? "VSTOUPIL" : "VYSTOUPIL")
+                        if controls.controlsCount() > 0 {
+                            Text("\(controls.isAllowed() ? "ZBÝVÁ" : "PŘEKROČIL") \(controls.countOverstay())")
                         }
-                        .buttonStyle(.bordered)
-                        .frame(minWidth: 75)
-                        
-                        Spacer()
                     }
+                    .frame(maxWidth: 100, maxHeight: 60)
+                    .padding(.horizontal)
                 }
-                .onDelete { index in
-                    controls.removeEnter(enter: index)
-                }
-                .onMove { index, offIndex in
-                    controls.moveEnter(enter: index, dest: offIndex)
-                }
-            }
-            .toolbar {
-                if controls.randomEntersCount() > 0{
-                    ToolbarItem(placement: .automatic) {
+                .fullScreenCover(isPresented: $randomEntering) {
+                    if !controls.sortRandomEnters(){
+                        randomEnteringError.toggle()
+                    }
+                } content: {
+                    if controls.randomEntersCount() > 0{
                         Button("Vymazat") {
                             controls.clearRandomEnters()
                         }
                     }
                     
-                    ToolbarItem(placement: .automatic) {
-                        EditButton()
+                    List{
+                        ForEach($controls.randomEnters, id:\.self) { $enter in
+                            HStack{
+                                Spacer()
+                                
+                                DatePicker("", selection: $enter.date, displayedComponents: .date)
+                                    .datePickerStyle(.compact)
+                                    .labelsHidden()
+                                    .frame(minWidth: 75)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    enter.enter.toggle()
+                                } label: {
+                                    Text(enter.enter ? "VSTOUPIL" : "VYSTOUPIL")
+                                }
+                                .buttonStyle(.bordered)
+                                .frame(minWidth: 75)
+                                
+                                Spacer()
+                            }
+                        }
+                        .onDelete { index in
+                            controls.removeEnter(enter: index)
+                        }
+                        .onMove { index, offIndex in
+                            controls.moveEnter(enter: index, dest: offIndex)
+                        }
+                    }
+                    
+                    VStack{
+                        Button {
+                            controls.addNewEnter()
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.primary)
+                                .font(.largeTitle)
+                        }
+                        .padding()
+                        
+                        Button {
+                            randomEntering.toggle()
+                        } label: {
+                            Text(controls.randomEntersCount() <= 0 ? "ZRUŠIT" : "ODESLAT")
+                        }
+                        .buttonStyle(.bordered)
+                        .padding()
+                        .disabled(!controls.canBeSent())
                     }
                 }
-            }
-            
-            VStack{
-                Button {
-                    controls.addNewEnter()
-                } label: {
-                    Image(systemName: "plus.circle")
-                        .foregroundColor(.primary)
-                        .font(.largeTitle)
+                .alert("Nastala chyba při vkládání, každý vstup by měl mít svůj výstup, není-li to vstup poslední", isPresented: $randomEnteringError) {
+                    Button("OK", role: .cancel) {}
                 }
-                .padding()
-                
-                Button {
-                    randomEntering.toggle()
-                } label: {
-                    Text(controls.randomEntersCount() <= 0 ? "ZRUŠIT" : "ODESLAT")
-                }
-                .buttonStyle(.bordered)
-                .padding()
-                .disabled(!controls.canBeSent())
             }
         }
-
-        
+            
     }
 }
 

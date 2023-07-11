@@ -25,7 +25,7 @@ struct SubGroupListView: View {
             ScrollView {
                 HStack{
                     Spacer()
-                    Image(systemName: "arrow.up.and.down.text.horizontal")
+                    Image(systemName: "line.3.horizontal.decrease")
                         .foregroundColor(.primary.opacity(categoriesRoll ? 1.0 : 0.5))
                         .font(.title2)
                 }
