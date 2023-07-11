@@ -64,7 +64,6 @@ struct MainView: View {
                         .opacity(ready ? 1 : 0.5)
                 }
                 .edgesIgnoringSafeArea(.bottom)
-                .ignoresSafeArea(.keyboard, edges: .bottom) //FIX?
                 .onTapGesture {
                     UIApplication.shared.endEditing()
                 }
