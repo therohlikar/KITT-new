@@ -17,6 +17,7 @@ struct ContentItemView: View {
     
     @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     
+    @EnvironmentObject var rvm: RecentViewModel
     @EnvironmentObject var dc: DataController
     
     @ObservedObject var item: ContentItem
@@ -377,7 +378,7 @@ struct ContentItemView: View {
         }
         .onAppear{
             customNote = item.wrappedNote
-            
+            rvm.addRecentItem(id: item.wrappedId, date: Date.now)
             item.lastTime = Date.now
         }
         .onDisappear{

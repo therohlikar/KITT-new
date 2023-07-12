@@ -68,6 +68,19 @@ struct MainView: View {
                     UIApplication.shared.endEditing()
                 }
                 .toolbar{
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink {
+                            RecentListView()
+                        } label: {
+                            Image(systemName: "clock.arrow.circlepath")
+                                .foregroundColor(.blue)
+                                .disabled(!ready)
+                                .opacity(ready ? 1 : 0.5)
+                                .imageScale(.large)
+                                .scaleEffect(1.1)
+                        }
+                    }
+                    
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Image(systemName: "arrow.triangle.2.circlepath")
                             .onTapGesture {
