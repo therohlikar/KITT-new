@@ -29,7 +29,7 @@ class Controls: ObservableObject{
     public func countOverstay() -> Int {
         var count = 0
         count = allowedDays - countAllowedStay()
-        return count
+        return abs(count)
     }
     
     public func isAllowed() -> Bool {
@@ -92,10 +92,10 @@ class Controls: ObservableObject{
     
     public func countAllowedStay() -> Int {
         var total: Int = 0
-        let tempNinety: Date = self.getCountedAreaDate()
+        let tempArea: Date = self.getCountedAreaDate()
         for control in self.controlList{
             let range = control.from...control.until
-            let allowedRange = range.clamped(to: tempNinety...self.controlDate)
+            let allowedRange = range.clamped(to: tempArea...self.controlDate)
             let lowest = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: allowedRange.lowerBound)!
             let highest = Calendar.current.date(byAdding: .hour, value: 24, to: allowedRange.upperBound)!
             
@@ -280,7 +280,7 @@ struct SchengenCalculatorView: View {
                             Text("\(controls.isAllowed() ? "ZBÝVÁ" : "PŘEKROČIL") \(controls.countOverstay())")
                         }
                     }
-                    .frame(maxWidth: 100, maxHeight: 60)
+                    .frame(maxWidth: 100, maxHeight: 100)
                     .padding(.horizontal)
                 }
                 .fullScreenCover(isPresented: $randomEntering) {
