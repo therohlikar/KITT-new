@@ -115,31 +115,36 @@ class Controls: ObservableObject{
     }
     
     public func sortRandomEnters() -> Bool {
-        self.clearControls()
-        
-        let tempArray:[RandomPassControl] = self.randomEnters.sorted(by: {$0.date < $1.date})
-        
         var error: Bool = false
-        var i = 0
-        while i < tempArray.count {
-            let from: Date = tempArray[i].date
-            var until: Date = Date.now
+        
+        if self.randomEnters.count > 0 {
+            self.clearControls()
             
-            if i+1 < tempArray.count {
-                let tempUntil = tempArray[i+1]
-                if tempUntil.enter == !tempArray[i].enter {
-                    until = tempUntil.date
+            let tempArray:[RandomPassControl] = self.randomEnters.sorted(by: {$0.date < $1.date})
+            
+            
+            var i = 0
+            while i < tempArray.count {
+                let from: Date = tempArray[i].date
+                var until: Date = Date.now
+                
+                if i+1 < tempArray.count {
+                    let tempUntil = tempArray[i+1]
+                    if tempUntil.enter == !tempArray[i].enter {
+                        until = tempUntil.date
+                    }
+                    else{
+                        error = true
+                        break
+                    }
                 }
-                else{
-                    error = true
-                    break
+                if !error {
+                    self.controlList.append(PassControl(from: from, until: until))
                 }
+                i = i+2
             }
-            if !error {
-                self.controlList.append(PassControl(from: from, until: until))
-            }
-            i = i+2
         }
+       
         
         return !error
     }
@@ -156,7 +161,9 @@ struct PassControl:Hashable{
     
     public var dateDifferenceInDays:Int {
         let tempModifiedDateFrom: Date = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self.from)!
-        let tempModifiedDateUntil: Date = Calendar.current.date(byAdding: .hour, value: 24, to: self.until)!
+        
+        let tempModifiedDateUntilNoon: Date = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self.until)!
+        let tempModifiedDateUntil: Date = Calendar.current.date(byAdding: .hour, value: 24, to: tempModifiedDateUntilNoon)!
         
         return Calendar.current.dateComponents([.day], from: tempModifiedDateFrom, to: tempModifiedDateUntil).day!
     }
