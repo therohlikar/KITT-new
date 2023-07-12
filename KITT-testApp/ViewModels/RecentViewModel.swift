@@ -43,7 +43,7 @@ class RecentViewModel: ObservableObject{
     
     public func addRecentItem(id: String, date: Date) {
         if var item = self.recentItemsList.last(where: {$0.id == id}) {
-            item.opened = dateç
+            item.opened = date
         }else{
             recentItemsList.append(RecentItemModel(id: id, opened: date))
         }
