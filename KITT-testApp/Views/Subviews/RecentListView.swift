@@ -25,7 +25,7 @@ struct RecentListView: View {
                 }
             }
             else{
-                Text("Prozatím nemáte žádnou historii otevírání")
+                Text("Prozatím nemáte žádnou historii prohlížení")
             }
         }
         .toolbar{
