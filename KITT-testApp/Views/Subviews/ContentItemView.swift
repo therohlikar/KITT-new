@@ -377,6 +377,8 @@ struct ContentItemView: View {
         }
         .onAppear{
             customNote = item.wrappedNote
+            
+            item.lastTime = Date.now
         }
         .onDisappear{
             item.note = customNote

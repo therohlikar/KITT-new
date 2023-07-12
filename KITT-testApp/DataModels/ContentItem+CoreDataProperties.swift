@@ -31,6 +31,7 @@ extension ContentItem {
     @NSManaged public var favorited: Bool
     @NSManaged public var note: String?
     @NSManaged public var example: String?
+    @NSManaged public var lastTime: Date?
 
     public var wrappedId: String { id ?? "" }
     public var wrappedGroup: String { group?.wrappedTitle ?? "" }
@@ -46,6 +47,7 @@ extension ContentItem {
     public var wrappedKeywords: String { keywords ?? "" }
     public var wrappedNote: String { note ?? "" }
     public var wrappedExample: String { example ?? "" }
+    public var wrappedLastTime: Date { lastTime ?? Date.now }
     
     var sanctionList: [SanctionModel] {
         if !wrappedSanctions.isEmpty {

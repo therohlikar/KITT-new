@@ -289,6 +289,7 @@
 		967ACB9E2A5621CF00BD3B35 /* C2a.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = C2a.webp; sourceTree = "<group>"; };
 		96847B822A5BEE9D0033D336 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 		96847B852A5BEED40033D336 /* SchengenCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchengenCalculatorView.swift; sourceTree = "<group>"; };
+		96847B872A5E8C2C0033D336 /* KittDataModel UpdateV 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "KittDataModel UpdateV 3.xcdatamodel"; sourceTree = "<group>"; };
 		9696388C29D4757F009365C5 /* SubGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGroupListView.swift; sourceTree = "<group>"; };
 		9696388E29D47C23009365C5 /* KittDataModel UpdateV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "KittDataModel UpdateV2.xcdatamodel"; sourceTree = "<group>"; };
 		9696389F29D4861D009365C5 /* ContentItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1148,11 +1149,12 @@
 		9660490429B1E7A600F64E55 /* KittDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				96847B872A5E8C2C0033D336 /* KittDataModel UpdateV 3.xcdatamodel */,
 				9696388E29D47C23009365C5 /* KittDataModel UpdateV2.xcdatamodel */,
 				96B498D529C4195300883BFA /* KittDataModel AddWarningAndMiranda.xcdatamodel */,
 				9660490529B1E7A600F64E55 /* KittDataModel.xcdatamodel */,
 			);
-			currentVersion = 9696388E29D47C23009365C5 /* KittDataModel UpdateV2.xcdatamodel */;
+			currentVersion = 96847B872A5E8C2C0033D336 /* KittDataModel UpdateV 3.xcdatamodel */;
 			path = KittDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
