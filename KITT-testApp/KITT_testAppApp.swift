@@ -14,11 +14,13 @@ struct KITT_testAppApp: App {
     @StateObject private var settingsController = SettingsController()
     @StateObject private var networkController = NetworkController()
     @StateObject private var recentViewModel = RecentViewModel()
+    @StateObject private var guideViewModel = GuideViewModel()
 
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(\.managedObjectContext, dataController.context)
+                .environmentObject(guideViewModel)
                 .environmentObject(filterViewModel)
                 .environmentObject(settingsController)
                 .environmentObject(recentViewModel)

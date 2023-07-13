@@ -13,6 +13,7 @@ struct MainView: View {
     @EnvironmentObject var networkController: NetworkController
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var dc: DataController
+    @EnvironmentObject var gvm: GuideViewModel
     
     @ObservedObject var urlViewModel: UrlViewModel = UrlViewModel()
     
@@ -60,8 +61,8 @@ struct MainView: View {
                             Label("Knihovna", systemImage: "books.vertical.fill")
                         }
                         .tag("library")
-                        .disabled(!ready)
-                        .opacity(ready ? 1 : 0.5)
+                        .disabled(isDisabled())
+                        .opacity(!isDisabled() ? 1 : 0.5)
                 }
                 .edgesIgnoringSafeArea(.bottom)
                 .onTapGesture {
@@ -74,11 +75,11 @@ struct MainView: View {
                         } label: {
                             Image(systemName: "clock.arrow.circlepath")
                                 .foregroundColor(.blue)
-                                .disabled(!ready)
-                                .opacity(ready ? 1 : 0.5)
+                                .opacity(!isDisabled() ? 1 : 0.5)
                                 .imageScale(.large)
                                 .scaleEffect(1.1)
                         }
+                        .disabled(isDisabled())
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -101,10 +102,11 @@ struct MainView: View {
                             .foregroundColor(.secondary)
                             .rotationEffect(.degrees(loadingDataRotation))
                             .animation(loadingDataRotation > 0 ? .linear(duration: 3).repeatForever(autoreverses: false) : .default, value: loadingDataRotation)
-                            .disabled(!ready)
+                            .disabled(isDisabled())
+                            .opacity(!isDisabled() ? 1.0 : 0.5)
                             .padding(.horizontal, 2)
                             .imageScale(.large)
-                            .scaleEffect(ready ? 1.1 : 1.5)
+                            .scaleEffect(!ready ? 1.5 : 1.1)
                             .overlay {
                                 if !networkController.connected{
                                     CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 2.8)
@@ -122,8 +124,8 @@ struct MainView: View {
                                 onlyFavorites.toggle()
                             }
                             .foregroundColor(Color(#colorLiteral(red: 0.6247290969, green: 0, blue: 0, alpha: 1)))
-                            .disabled(!ready)
-                            .opacity(ready ? 1 : 0.5)
+                            .disabled(isDisabled())
+                            .opacity(!isDisabled() ? 1 : 0.5)
                             .padding(.horizontal, 2)
                             .imageScale(.large)
                             .scaleEffect(1.1)
@@ -135,12 +137,12 @@ struct MainView: View {
                         } label: {
                             Image(systemName: "ellipsis.circle")
                                 .foregroundColor(.secondary)
-                                .disabled(!ready)
-                                .opacity(ready ? 1 : 0.5)
+                                .opacity(!isDisabled() ? 1 : 0.5)
                                 .imageScale(.large)
                                 .scaleEffect(1.1)
                         }
                         .isDetailLink(false)
+                        .disabled(isDisabled())
                     }
                 }
                 .navigationDestination(isPresented: $urlViewModel.open) {
@@ -149,12 +151,13 @@ struct MainView: View {
                     }
                 }
                 
-                VStack{
-                    Spacer()
-                    
-                    GuideView()
+                if gvm.beginGuide(){
+                    VStack{
+                        Spacer()
+                        
+                        GuideView()
+                    }
                 }
-                
             }
             .overlay(alignment: .bottomTrailing, content: {
                 HStack{
@@ -206,9 +209,9 @@ struct MainView: View {
                             }
                     }
                 }
-                .opacity(searchBarOpacity)
+                .opacity(isDisabled() ? 0.0 : searchBarOpacity)
                 .offset(x: !isSearchVisible ? -40 : 0, y: -15)
-                .disabled(!ready)
+                .disabled(isDisabled())
             })
         }
         .onAppear{
@@ -249,6 +252,13 @@ struct MainView: View {
                 globalVersion = newestVersion
             }
         }
+    }
+    
+    func isDisabled() -> Bool {
+        if gvm.beginGuide() || !ready {
+            return true
+        }
+        return false
     }
     
     func prepareData() async {
