@@ -97,7 +97,8 @@ class Controls: ObservableObject{
             let range = control.from...control.until
             let allowedRange = range.clamped(to: tempArea...self.controlDate)
             let lowest = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: allowedRange.lowerBound)!
-            let highest = Calendar.current.date(byAdding: .hour, value: 24, to: allowedRange.upperBound)!
+            let tempHighest: Date = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: allowedRange.upperBound)!
+            let highest = Calendar.current.date(byAdding: .hour, value: 24, to: tempHighest)!
             
             let count = Calendar.current.dateComponents([.day], from: lowest, to: highest).day!
             total = total + count
