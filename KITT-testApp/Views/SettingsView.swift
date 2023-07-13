@@ -39,18 +39,12 @@ struct SettingsView: View {
                                 .labelsHidden()
                         }
                     }
-                    HStack{
-                        Text("Tmavý režim")
-                        Spacer()
-                        Toggle("", isOn: $sc.settings.darkMode)
-                            .labelsHidden()
+                    
+                    NavigationLink {
+                        VisualThemeView()
+                    } label: {
+                        Text("Nastavení barevného motivu")
                     }
-    //                HStack{
-    //                    Text("Vypnout usínání displeje při prohlížení")
-    //                    Spacer()
-    //                    Toggle("", isOn: $sc.settings.keepDisplayOn)
-    //                        .labelsHidden()
-    //                }
                 }
                 Section("SYSTÉM"){
                     if !gvm.beginGuide() {
@@ -58,10 +52,9 @@ struct SettingsView: View {
                             gvm.startGuide()
                         } label: {
                             Text("Spustit průvodce")
-                            
                         }
                     }
-                    
+            
                     NavigationLink {
                         FiltersList(fvm: fvm)
                     } label: {
@@ -69,7 +62,7 @@ struct SettingsView: View {
                     }
 
                     Link(destination: URL(string: "mailto:\(mailTo)")!) {
-                        Text("NAPIŠTE MI")
+                        Text("Napište mi")
                     }
                     
                     Button {

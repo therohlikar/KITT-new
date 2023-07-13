@@ -17,14 +17,6 @@ struct SettingsModel {
             UserDefaults.standard.set(newValue, forKey: "settings.darkMode")
         }
     }
-    var downloadDataOnStartup: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: "settings.downloadDataOnStartup")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "settings.downloadDataOnStartup")
-        }
-    }
     var keepDisplayOn: Bool {
         get {
             return UserDefaults.standard.bool(forKey: "settings.keepDisplayOn")
