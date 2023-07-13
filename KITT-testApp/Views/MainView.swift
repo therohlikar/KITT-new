@@ -148,6 +148,13 @@ struct MainView: View {
                         ContentItemView(item: item)
                     }
                 }
+                
+                VStack{
+                    Spacer()
+                    
+                    GuideView()
+                }
+                
             }
             .overlay(alignment: .bottomTrailing, content: {
                 HStack{
