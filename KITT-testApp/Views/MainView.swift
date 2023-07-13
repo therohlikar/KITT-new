@@ -32,7 +32,6 @@ struct MainView: View {
     @AppStorage("settings.displayOn") private var keepDisplayOn: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
     @AppStorage("globalVersion") private var globalVersion: String = "0.0.0"
-    @AppStorage("welcome") private var welcome: Bool = false
     @AppStorage("settings.hiddenColor") var hiddenColor: Bool = false
     
     @State private var loadingDataRotation:Double = 0.0
@@ -220,8 +219,7 @@ struct MainView: View {
         .task {
             await self.isNewVersionDownloadable()
             
-            if !welcome {
-                welcome = true
+            if gvm.beginGuide() {
                 await self.prepareData()
             }
         }

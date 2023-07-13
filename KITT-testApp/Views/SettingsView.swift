@@ -18,7 +18,6 @@ struct SettingsView: View {
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
     @AppStorage("settings.hiddenColor") private var hiddenColor: Bool = false
     @AppStorage("foundEasterEgg") private var foundEasterEgg: Bool = false
-    @AppStorage("welcome") private var welcome: Bool = false
     
     let mailTo = Bundle.main.object(forInfoDictionaryKey: "MAIL_TO") as! String
     
@@ -86,7 +85,7 @@ struct SettingsView: View {
             .alert("VYMAZAT DATA", isPresented: $showingAlertRemoveData) {
                 Button("Smazat", role: .destructive) {
                     dataVersion = "0.0.0"
-                    welcome = false
+                    UserDefaults.standard.setValue(1, forKey: "currentGuideStep")
                     
                     if self.removeAll(){
                         exit(0)
