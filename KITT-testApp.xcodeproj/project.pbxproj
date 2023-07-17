@@ -26,6 +26,7 @@
 		9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492C29B4648500F64E55 /* FilterViewModel.swift */; };
 		9660492F29B5308000F64E55 /* FiltersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660492E29B5308000F64E55 /* FiltersList.swift */; };
 		9660493629B53E7700F64E55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9660493529B53E7700F64E55 /* LaunchScreen.storyboard */; };
+		9677BEB12A63DCD500BAB169 /* A12c.webp in Resources */ = {isa = PBXBuildFile; fileRef = 9677BEB02A63DCD500BAB169 /* A12c.webp */; };
 		967ACB252A56049000BD3B35 /* P3.webp in Resources */ = {isa = PBXBuildFile; fileRef = 967ACB1D2A56049000BD3B35 /* P3.webp */; };
 		967ACB262A56049000BD3B35 /* P8.webp in Resources */ = {isa = PBXBuildFile; fileRef = 967ACB1E2A56049000BD3B35 /* P8.webp */; };
 		967ACB272A56049000BD3B35 /* P6.webp in Resources */ = {isa = PBXBuildFile; fileRef = 967ACB1F2A56049000BD3B35 /* P6.webp */; };
@@ -116,6 +117,7 @@
 		96847B902A5F0FFF0033D336 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96847B8F2A5F0FFF0033D336 /* GuideView.swift */; };
 		96847B942A6034150033D336 /* GuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96847B932A6034150033D336 /* GuideViewModel.swift */; };
 		96847B982A6089FB0033D336 /* VisualThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96847B972A6089FB0033D336 /* VisualThemeView.swift */; };
+		96847B9A2A6153570033D336 /* LawSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96847B992A6153570033D336 /* LawSearchView.swift */; };
 		9696388D29D4757F009365C5 /* SubGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696388C29D4757F009365C5 /* SubGroupListView.swift */; };
 		969638A329D4861D009365C5 /* ContentItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696389F29D4861D009365C5 /* ContentItem+CoreDataClass.swift */; };
 		969638A429D4861D009365C5 /* ContentItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969638A029D4861D009365C5 /* ContentItem+CoreDataProperties.swift */; };
@@ -179,7 +181,6 @@
 		969A63BC2A5537D900A7D378 /* A30.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63922A5537D900A7D378 /* A30.webp */; };
 		969A63BD2A5537D900A7D378 /* A2a.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63932A5537D900A7D378 /* A2a.webp */; };
 		969A63BE2A5537D900A7D378 /* A20.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63942A5537D900A7D378 /* A20.webp */; };
-		969A63CE2A55EA5900A7D378 /* A12c.webp in Resources */ = {isa = PBXBuildFile; fileRef = 969A63CD2A55EA5900A7D378 /* A12c.webp */; };
 		969F070829D745D30017FB99 /* SanctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070729D745D30017FB99 /* SanctionModel.swift */; };
 		969F070A29D74BFF0017FB99 /* LinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070929D74BFF0017FB99 /* LinkModel.swift */; };
 		969F070C29D7594E0017FB99 /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F070B29D7594E0017FB99 /* ContentModel.swift */; };
@@ -211,6 +212,7 @@
 		9660492C29B4648500F64E55 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		9660492E29B5308000F64E55 /* FiltersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersList.swift; sourceTree = "<group>"; };
 		9660493529B53E7700F64E55 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9677BEB02A63DCD500BAB169 /* A12c.webp */ = {isa = PBXFileReference; lastKnownFileType = file; name = A12c.webp; path = "../../../../DZ/Výstražné dopravní značení/A12c.webp"; sourceTree = "<group>"; };
 		967ACB1D2A56049000BD3B35 /* P3.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = P3.webp; sourceTree = "<group>"; };
 		967ACB1E2A56049000BD3B35 /* P8.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = P8.webp; sourceTree = "<group>"; };
 		967ACB1F2A56049000BD3B35 /* P6.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = P6.webp; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		96847B8F2A5F0FFF0033D336 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		96847B932A6034150033D336 /* GuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewModel.swift; sourceTree = "<group>"; };
 		96847B972A6089FB0033D336 /* VisualThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualThemeView.swift; sourceTree = "<group>"; };
+		96847B992A6153570033D336 /* LawSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawSearchView.swift; sourceTree = "<group>"; };
 		9696388C29D4757F009365C5 /* SubGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGroupListView.swift; sourceTree = "<group>"; };
 		9696388E29D47C23009365C5 /* KittDataModel UpdateV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "KittDataModel UpdateV2.xcdatamodel"; sourceTree = "<group>"; };
 		9696389F29D4861D009365C5 /* ContentItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -369,7 +372,6 @@
 		969A63922A5537D900A7D378 /* A30.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = A30.webp; sourceTree = "<group>"; };
 		969A63932A5537D900A7D378 /* A2a.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = A2a.webp; sourceTree = "<group>"; };
 		969A63942A5537D900A7D378 /* A20.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = A20.webp; sourceTree = "<group>"; };
-		969A63CD2A55EA5900A7D378 /* A12c.webp */ = {isa = PBXFileReference; lastKnownFileType = file; name = A12c.webp; path = ../../../../../Desktop/A12c.webp; sourceTree = "<group>"; };
 		969F070729D745D30017FB99 /* SanctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SanctionModel.swift; sourceTree = "<group>"; };
 		969F070929D74BFF0017FB99 /* LinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkModel.swift; sourceTree = "<group>"; };
 		969F070B29D7594E0017FB99 /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				96847B852A5BEED40033D336 /* SchengenCalculatorView.swift */,
+				96847B992A6153570033D336 /* LawSearchView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -485,7 +488,7 @@
 				969A638E2A5537D900A7D378 /* A11.webp */,
 				969A63902A5537D900A7D378 /* A12a.webp */,
 				969A636B2A5537D800A7D378 /* A12b.webp */,
-				969A63CD2A55EA5900A7D378 /* A12c.webp */,
+				9677BEB02A63DCD500BAB169 /* A12c.webp */,
 				969A636D2A5537D800A7D378 /* A13.webp */,
 				969A63822A5537D800A7D378 /* A14.webp */,
 				969A638D2A5537D900A7D378 /* A15.webp */,
@@ -649,7 +652,6 @@
 		96D30B8329B1E1AF0018F750 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				96847B962A6089EC0033D336 /* SettingsViews */,
 				96965EC029BE76740094520F /* CYCViews */,
 				96D30B9129B1E33C0018F750 /* Subviews */,
 				96D30B8429B1E1BC0018F750 /* LibraryView.swift */,
@@ -693,6 +695,7 @@
 		96D30B9129B1E33C0018F750 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				96847B962A6089EC0033D336 /* SettingsViews */,
 				96847B8E2A5F0FAA0033D336 /* Guide */,
 				96847B842A5BEEC80033D336 /* Tools */,
 				9660492E29B5308000F64E55 /* FiltersList.swift */,
@@ -814,7 +817,6 @@
 				967ACB6A2A561B6900BD3B35 /* B1.webp in Resources */,
 				967ACB5D2A561B6900BD3B35 /* B3.webp in Resources */,
 				967ACBB52A5621CF00BD3B35 /* C1.webp in Resources */,
-				969A63CE2A55EA5900A7D378 /* A12c.webp in Resources */,
 				967ACBA12A5621CF00BD3B35 /* C4b.webp in Resources */,
 				967ACB722A561B6900BD3B35 /* B29.webp in Resources */,
 				967ACB2C2A56049000BD3B35 /* P4.webp in Resources */,
@@ -826,6 +828,7 @@
 				967ACBC02A5621CF00BD3B35 /* C2a.webp in Resources */,
 				967ACB762A561B6900BD3B35 /* B30.webp in Resources */,
 				969A63972A5537D900A7D378 /* A13.webp in Resources */,
+				9677BEB12A63DCD500BAB169 /* A12c.webp in Resources */,
 				969A63A12A5537D900A7D378 /* A9.webp in Resources */,
 				967ACBB82A5621CF00BD3B35 /* C14b.webp in Resources */,
 				967ACB772A561B6900BD3B35 /* B34.webp in Resources */,
@@ -946,6 +949,7 @@
 				9660492D29B4648500F64E55 /* FilterViewModel.swift in Sources */,
 				969638AB29D490A9009365C5 /* Group+CoreDataClass.swift in Sources */,
 				96847B8B2A5E92A80033D336 /* RecentViewModel.swift in Sources */,
+				96847B9A2A6153570033D336 /* LawSearchView.swift in Sources */,
 				96965E9729B8C51C0094520F /* VersionController.swift in Sources */,
 				964D719929F5C89E006155B0 /* UrlViewModel.swift in Sources */,
 				96965E9D29B8CB830094520F /* Version+CoreDataProperties.swift in Sources */,
@@ -1089,7 +1093,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.5.2;
+				CURRENT_PROJECT_VERSION = 1.5.3;
 				DEVELOPMENT_ASSET_PATHS = "\"KITT-testApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q795WXF4MM;
 				ENABLE_PREVIEWS = YES;
@@ -1110,7 +1114,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.20;
+				MARKETING_VERSION = 1.6.21;
 				PRODUCT_BUNDLE_IDENTIFIER = "rjwannabefit.KITT-testApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1129,7 +1133,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.5.2;
+				CURRENT_PROJECT_VERSION = 1.5.3;
 				DEVELOPMENT_ASSET_PATHS = "\"KITT-testApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q795WXF4MM;
 				ENABLE_PREVIEWS = YES;
@@ -1150,7 +1154,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.20;
+				MARKETING_VERSION = 1.6.21;
 				PRODUCT_BUNDLE_IDENTIFIER = "rjwannabefit.KITT-testApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

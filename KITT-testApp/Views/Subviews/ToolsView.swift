@@ -21,6 +21,17 @@ struct ToolsView: View {
                 }
             }
             
+            // ZAKONYPROLIDI SEARCHER
+            NavigationLink {
+                LawSearchView(tfSearch: "")
+            } label: {
+                HStack{
+                    Image(systemName: "network")
+                    
+                    Text("Hledám, co tu není")
+                }
+            }
+            
             //WHAT ELSE? MAYBE OTHER LINKS?
         }
     }
