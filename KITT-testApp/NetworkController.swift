@@ -7,8 +7,12 @@
 
 import Foundation
 import Network
-
+/**
+ Class manages network connection status. The icon on the main page changes whenever change in network connection occurs. 
+ */
 class NetworkController: ObservableObject {
+    static let network = NetworkController()
+    
     let monitor = NWPathMonitor()
     let queue = DispatchQueue.global(qos: .background)
 

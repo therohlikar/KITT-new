@@ -9,9 +9,10 @@
 import CoreData
 import Foundation
 
+/**
+ Class runs its own instances, static, that holds and manages CoreData structure and data itself.
+ */
 class DataController: ObservableObject{
-    //@AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
-    
     static let instance = DataController()
     
     lazy var context: NSManagedObjectContext = {
@@ -30,6 +31,11 @@ class DataController: ObservableObject{
         }
     }
     
+    /**
+     Tries to save current NSManagedObjectContext (CoreData type) and its changes. Or catches an error.
+     
+     - Throws: error.localizedDescription in print()
+     */
     func save(){
         do {
             try context.save()

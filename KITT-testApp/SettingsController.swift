@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+/**
+    Class manages user's settings.
+ */
 class SettingsController: ObservableObject{
     @Published var settings = SettingsModel()
 }

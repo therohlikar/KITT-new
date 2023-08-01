@@ -6,13 +6,17 @@
 //
 
 import Foundation
-
+/**
+ Class manages JSON file downloads and its conversion into Array of type Any.
+ */
 class JsonDataController{
-    enum DataType{
-        case contentitem
-    }
-
-    func downloadJsonData(_ type: DataType) async -> Array<Any>?{
+    /**
+     
+     Asynchronous function that downloads file from url (LIST_JSON_FILES) and converts that file into Array of type FileModel, then loops through that array and in each FileModel downloads a file on given item's attribute name. Each downloaded file converts into Array of type ItemModel.
+     
+     - Returns: Array of type Any
+     */
+    func downloadJsonData() async -> Array<Any>?{
         guard let baseUrl = Bundle.main.object(forInfoDictionaryKey: "JSON_FILE_LINK") else {
             fatalError("Configuration file missing baseUrl variable")
         }
@@ -63,6 +67,48 @@ class JsonDataController{
         }
         return []
     }
+    
+    static let controller = JsonDataController()
+    
+    /**
+     
+     */
+    func getDataFromUrlSession(url: URL, config: URLSessionConfiguration) async -> Data? {
+        do {
+            let (data, _) = try await URLSession(configuration: config).data(from: url)
+            return data
+        }catch{
+            
+        }
+        
+        return nil
+    }
+
+    /**
+     
+     */
+
+    func encodeData<T: Encodable>(_ object: T) -> String {
+        do {
+            let data = try JSONEncoder().encode(object)
+            return String(data: data, encoding: .utf8)!
+        }catch{
+            
+        }
+        
+        return ""
+    }
+    /**
+     
+     */
+    
+    func decodeData<T: Decodable>(_ data: Data) -> T? {
+        do {
+            return try JSONDecoder().decode(T.self, from: data)
+        }catch{
+            
+        }
+        
+        return nil
+    }
 }
-
-

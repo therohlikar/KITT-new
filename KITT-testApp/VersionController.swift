@@ -8,14 +8,16 @@
 import Foundation
 
 class VersionController {
-    @Published var newestVersion: String = "0.0.0"
-    init(){
+    static let controller = VersionController()
+    
+    /**
+     
+     */
+  
+    func getRemoteVersion() async -> String? {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
-    }
-    
-    static let versionController = VersionController()
-    
-    func getNewestVersion() async -> String {
         guard let baseUrl = Bundle.main.object(forInfoDictionaryKey: "JSON_FILE_LINK") else {
             fatalError("Configuration file missing baseUrl variable")
         }
@@ -26,17 +28,20 @@ class VersionController {
     
         guard let url = URL(string: "\(baseUrl)\(versionFile)") else{
             print("Invalid URL")
-            return ""
+            return nil
         }
         
-        let data = try! Data(contentsOf: url)
-        let version = String(data: data, encoding: .utf8)!
+        if let data = await JsonDataController.controller.getDataFromUrlSession(url: url, config: config) {
+            return String(decoding: data, as: UTF8.self)
+        }
         
-        self.newestVersion = version
-        return version
+        return nil
     }
     
-    func loadVersionUpdates() async -> [VersionModel]? {
+    /**
+     
+     */
+    func getVersionNews() async -> [VersionModel]? {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
@@ -45,23 +50,35 @@ class VersionController {
         }
         
         guard let versionFile = Bundle.main.object(forInfoDictionaryKey: "VERSION_JSON_FILE") else{
-            fatalError("OFFENSE - Configuration file missing variable")
+            fatalError("VERSION NEWS - Configuration file missing variable")
         }
     
         guard let url = URL(string: "\(baseUrl)\(versionFile)") else{
             print("Invalid URL")
             return []
         }
-
-        do {
-            let (data, _) = try await URLSession(configuration: config).data(from: url)
-            if let decodedResponse = try? JSONDecoder().decode([VersionModel].self, from: data){
-                return decodedResponse
-            }else{
-                fatalError("VERSION - Json could not be decoded")
+        
+        if let data = await JsonDataController.controller.getDataFromUrlSession(url: url, config: config) {
+            if let response:[VersionModel] = JsonDataController.controller.decodeData(data) {
+                return response
             }
-        }catch{
-            fatalError("VERSION - Data failed to be recieved")
         }
+        
+        return nil
+    }
+    /**
+     
+     */
+    func isDataUpToDate() async -> Bool {
+        if NetworkController.network.connected {
+            if let currentVersion = UserDefaults.standard.string(forKey: "currentVersion") {
+                if let remoteVersion = await self.getRemoteVersion() {
+                    UserDefaults.standard.set(remoteVersion, forKey: "remoteVersion")
+                    return currentVersion >= remoteVersion
+                }
+            }
+        }
+        
+        return false
     }
 }

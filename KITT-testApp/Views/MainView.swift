@@ -10,7 +10,6 @@ import CoreData
 
 struct MainView: View {
     @EnvironmentObject var fvm: FilterViewModel
-    @EnvironmentObject var networkController: NetworkController
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var dc: DataController
     @EnvironmentObject var gvm: GuideViewModel
@@ -31,7 +30,7 @@ struct MainView: View {
     
     @AppStorage("settings.displayOn") private var keepDisplayOn: Bool = false
     @AppStorage("currentVersion") private var currentVersion: String = "0.0.0"
-    @AppStorage("globalVersion") private var globalVersion: String = "0.0.0"
+    @AppStorage("remoteVersion") private var remoteVersion: String = "0.0.0"
     @AppStorage("settings.hiddenColor") var hiddenColor: Bool = false
     
     @State private var loadingDataRotation:Double = 0.0
@@ -50,7 +49,7 @@ struct MainView: View {
                             
                             Text("Aktualní verze dat: \(currentVersion)")
                                 .font(.subheadline)
-                            Text(networkController.connected ? ("Verze ke stažení: \(globalVersion)") : "Nejste připojen k internetu")
+                            Text(NetworkController.network.connected ? ("Verze ke stažení: \(remoteVersion)") : "Nejste připojen k internetu")
                                 .font(.headline)
                         }
                     }
@@ -107,11 +106,11 @@ struct MainView: View {
                             .imageScale(.large)
                             .scaleEffect(!ready ? 1.5 : 1.1)
                             .overlay {
-                                if !networkController.connected{
+                                if !NetworkController.network.connected{
                                     CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 2.8)
                                 }
                                 
-                                if globalVersion != currentVersion {
+                                if remoteVersion != currentVersion {
                                     CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.09057433158, green: 0.1663101912, blue: 0.5200116038, alpha: 0.8707342791)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 0.4)
                                 }
                             }
@@ -217,7 +216,7 @@ struct MainView: View {
             UIApplication.shared.isIdleTimerDisabled = keepDisplayOn
         }
         .task {
-            await self.isNewVersionDownloadable()
+            _ = await VersionController.controller.isDataUpToDate()
             
             if gvm.beginGuide() {
                 await self.prepareData()
@@ -242,16 +241,7 @@ struct MainView: View {
         }
     }
     
-    func isNewVersionDownloadable() async {
-        if networkController.connected {
-            let newestVersion = await VersionController().getNewestVersion()
-            
-            if newestVersion > currentVersion {
-                globalVersion = newestVersion
-            }
-        }
-    }
-    
+
     func isDisabled() -> Bool {
         if gvm.beginGuide() || !ready {
             return true
@@ -268,30 +258,30 @@ struct MainView: View {
         
         var isReady = false
         
-        if !networkController.connected {
+        if !NetworkController.network.connected {
             isReady = true
         }else{
             
-            await isNewVersionDownloadable()
-            
-            if let versionArray = await VersionController().loadVersionUpdates() {
-                var read:Bool = false
-                for item in versionArray {
-                    read = false
-                    if let versionExists = versions.first(where: {$0.version == item.version }){
-                        read = versionExists.read
+            if await VersionController.controller.isDataUpToDate() {
+                if let remoteVersions = await VersionController.controller.getVersionNews() {
+                    var read:Bool = false
+                    for item in remoteVersions {
+                        read = false
+                        if let versionExists = versions.first(where: {$0.version == item.version }){
+                            read = versionExists.read
+                        }
+                        
+                        let version = Version(context: dc.context)
+                        version.version = item.version
+                        version.content = item.news.joined(separator: "\n")
+                        version.read = read
                     }
-                    
-                    let version = Version(context: dc.context)
-                    version.version = item.version
-                    version.content = item.news.joined(separator: "\n")
-                    version.read = read
                 }
             }
-            
+
             let jsonController = JsonDataController()
 
-            if let ciArray = await jsonController.downloadJsonData(.contentitem) as? Array<ItemModel> {
+            if let ciArray = await jsonController.downloadJsonData() as? Array<ItemModel> {
                 for item in ciArray {
                     //prepare group
                     let group = Group(context: dc.context)
@@ -337,7 +327,7 @@ struct MainView: View {
             
             dc.save()
             
-            currentVersion = globalVersion
+            currentVersion = remoteVersion
             
             isReady = true
         }
