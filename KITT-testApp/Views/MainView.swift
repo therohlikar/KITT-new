@@ -261,7 +261,6 @@ struct MainView: View {
         if !NetworkController.network.connected {
             isReady = true
         }else{
-            
             if await VersionController.controller.isDataUpToDate() {
                 if let remoteVersions = await VersionController.controller.getVersionNews() {
                     var read:Bool = false
@@ -279,49 +278,47 @@ struct MainView: View {
                 }
             }
 
-            let jsonController = JsonDataController()
+            let itemArray = await JsonDataController.controller.getRemoteContent()
+            
+            for item in itemArray {
+                //prepare group
+                let group = Group(context: dc.context)
+                group.title = item.group
 
-            if let ciArray = await jsonController.downloadJsonData() as? Array<ItemModel> {
-                for item in ciArray {
-                    //prepare group
-                    let group = Group(context: dc.context)
-                    group.title = item.group
-
-                    let new = ContentItem(context: dc.context)
-                    new.id = item.id
-                    
-                    var currentFavorited = false
-                    var currentNote = ""
-                    
-                    if let exists = items.first(where: {$0.id == item.id}){
-                        currentFavorited = exists.favorited
-                        currentNote = exists.wrappedNote
-                    }
-                    
-                    new.group = group
-                    var subgroupName = item.subgroup ?? "NEZAŘAZENO"
-                    if subgroupName.isEmpty {
-                        subgroupName = "NEZAŘAZENO"
-                    }
-                    new.subgroup = subgroupName
-                    new.type = item.type
-                    new.title = item.title
-                    new.sanctions = item.sanctions
-                    new.links = item.links
-                    new.keywords = item.keywords
-                    new.warning = item.warning
-                    new.miranda = item.miranda
-                    new.content = item.content
-                    new.example = item.example
-                    
-                    new.note = currentNote
-                    new.favorited = currentFavorited
+                let new = ContentItem(context: dc.context)
+                new.id = item.id
+                
+                var currentFavorited = false
+                var currentNote = ""
+                
+                if let exists = items.first(where: {$0.id == item.id}){
+                    currentFavorited = exists.favorited
+                    currentNote = exists.wrappedNote
                 }
                 
-                for item in items {
-                    if !ciArray.contains(where: {$0.id == item.wrappedId}){
-                        dc.context.delete(item)
-                    }
+                new.group = group
+                var subgroupName = item.subgroup ?? "NEZAŘAZENO"
+                if subgroupName.isEmpty {
+                    subgroupName = "NEZAŘAZENO"
+                }
+                new.subgroup = subgroupName
+                new.type = item.type
+                new.title = item.title
+                new.sanctions = item.sanctions
+                new.links = item.links
+                new.keywords = item.keywords
+                new.warning = item.warning
+                new.miranda = item.miranda
+                new.content = item.content
+                new.example = item.example
+                
+                new.note = currentNote
+                new.favorited = currentFavorited
+            }
+            
+            for item in items {
+                if !itemArray.contains(where: {$0.id == item.wrappedId}){
+                    dc.context.delete(item)
                 }
             }
             

@@ -32,18 +32,13 @@ class DataController: ObservableObject{
     }
     
     /**
-     Tries to save current NSManagedObjectContext (CoreData type) and its changes. Or catches an error.
      
-     - Throws: error.localizedDescription in print()
-     */
+    */
     func save(){
         do {
             try context.save()
         }catch let error{
             print("Error saving Core Data. \(error.localizedDescription)")
         }
-        
     }
-    
-    
 }
