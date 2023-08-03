@@ -41,7 +41,7 @@ class VersionController {
     /**
      
      */
-    func getVersionNews() async -> [VersionModel]? {
+    func getVersionNews(_ dc:DataController, saveLocally:Bool = true) async -> [VersionModel]? {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
@@ -60,6 +60,11 @@ class VersionController {
         
         if let data = await JsonDataController.controller.getDataFromUrlSession(url: url, config: config) {
             if let response:[VersionModel] = JsonDataController.controller.decodeData(data) {
+                if saveLocally {
+                    for item in response {
+                        await dc.updateVersionNews(item)
+                    }
+                }
                 return response
             }
         }

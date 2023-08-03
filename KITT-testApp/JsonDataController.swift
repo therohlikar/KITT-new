@@ -15,7 +15,7 @@ class JsonDataController{
     /**
      
      */
-    func getRemoteContent() async -> [ItemModel] {
+    func getRemoteContent(_ dc:DataController, saveLocally:Bool = true) async -> [ItemModel] {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         
@@ -44,6 +44,12 @@ class JsonDataController{
                     if let itemData = await JsonDataController.controller.getDataFromUrlSession(url: itemUrl, config: config) {
                         if let itemResponse:[ItemModel] = JsonDataController.controller.decodeData(itemData) {
                             items.append(contentsOf: itemResponse)
+                            
+                            if saveLocally{
+                                for item in items {
+                                    await dc.updateItemContent(item)
+                                }
+                            }
                         }
                     }
                 }

@@ -20,7 +20,7 @@ struct MainView: View {
     @FetchRequest(sortDescriptors: []) var items: FetchedResults<ContentItem>
     @FetchRequest(sortDescriptors: []) var versions: FetchedResults<Version>
     
-    @State private var ready: Bool = true
+    @State private var isAllowedToUseApp: Bool = true
     @State private var searchKey: String = ""
     @State private var onlyFavorites: Bool = false
     @State private var isSearchVisible: Bool = false
@@ -39,7 +39,7 @@ struct MainView: View {
         NavigationStack{
             ZStack{
                 VStack{
-                    if !ready{
+                    if !isAllowedToUseApp{
                         VStack{
                             Image("MainLogoTransp")
                                 .resizable()
@@ -104,7 +104,7 @@ struct MainView: View {
                             .opacity(!isDisabled() ? 1.0 : 0.5)
                             .padding(.horizontal, 2)
                             .imageScale(.large)
-                            .scaleEffect(!ready ? 1.5 : 1.1)
+                            .scaleEffect(!isAllowedToUseApp ? 1.5 : 1.1)
                             .overlay {
                                 if !NetworkController.network.connected{
                                     CustomBadgeView(imageSystem: "exclamationmark.circle", backgroundColor: Color(#colorLiteral(red: 0.6157925129, green: 0, blue: 0, alpha: 1)), size: 0, hPosition: [.top, .bottom], vPosition: [.trailing, .trailing], hOffset: 0.2, vOffset: 2.8)
@@ -243,7 +243,7 @@ struct MainView: View {
     
 
     func isDisabled() -> Bool {
-        if gvm.beginGuide() || !ready {
+        if gvm.beginGuide() || !isAllowedToUseApp {
             return true
         }
         return false
@@ -253,7 +253,7 @@ struct MainView: View {
         loadingDataRotation = 360
         
         withAnimation(.easeInOut(duration: 0.5)) {
-            ready = false
+            isAllowedToUseApp = false
         }
         
         var isReady = false
@@ -262,59 +262,10 @@ struct MainView: View {
             isReady = true
         }else{
             if await VersionController.controller.isDataUpToDate() {
-                if let remoteVersions = await VersionController.controller.getVersionNews() {
-                    var read:Bool = false
-                    for item in remoteVersions {
-                        read = false
-                        if let versionExists = versions.first(where: {$0.version == item.version }){
-                            read = versionExists.read
-                        }
-                        
-                        let version = Version(context: dc.context)
-                        version.version = item.version
-                        version.content = item.news.joined(separator: "\n")
-                        version.read = read
-                    }
-                }
+                let _ = await VersionController.controller.getVersionNews(dc)
             }
 
-            let itemArray = await JsonDataController.controller.getRemoteContent()
-            
-            for item in itemArray {
-                //prepare group
-                let group = Group(context: dc.context)
-                group.title = item.group
-
-                let new = ContentItem(context: dc.context)
-                new.id = item.id
-                
-                var currentFavorited = false
-                var currentNote = ""
-                
-                if let exists = items.first(where: {$0.id == item.id}){
-                    currentFavorited = exists.favorited
-                    currentNote = exists.wrappedNote
-                }
-                
-                new.group = group
-                var subgroupName = item.subgroup ?? "NEZAŘAZENO"
-                if subgroupName.isEmpty {
-                    subgroupName = "NEZAŘAZENO"
-                }
-                new.subgroup = subgroupName
-                new.type = item.type
-                new.title = item.title
-                new.sanctions = item.sanctions
-                new.links = item.links
-                new.keywords = item.keywords
-                new.warning = item.warning
-                new.miranda = item.miranda
-                new.content = item.content
-                new.example = item.example
-                
-                new.note = currentNote
-                new.favorited = currentFavorited
-            }
+            let itemArray = await JsonDataController.controller.getRemoteContent(dc)
             
             for item in items {
                 if !itemArray.contains(where: {$0.id == item.wrappedId}){
@@ -322,16 +273,12 @@ struct MainView: View {
                 }
             }
             
-            dc.save()
-            
-            currentVersion = remoteVersion
-            
             isReady = true
         }
         
         withAnimation(.easeInOut(duration: 0.7)) {
             loadingDataRotation = 0.0
-            ready = isReady
+            isAllowedToUseApp = isReady
         }
     }
 }

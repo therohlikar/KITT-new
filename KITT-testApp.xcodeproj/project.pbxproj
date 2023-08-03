@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9619DC732A59E634006D479C /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619DC722A59E634006D479C /* CoreDataViewModel.swift */; };
 		964D0BB729DF3EFE008ED31C /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */; };
 		964D0BB829DF3EFE008ED31C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */; };
 		964D0BB929DF3EFE008ED31C /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */; };
@@ -192,7 +191,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9619DC722A59E634006D479C /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 		964D0BB129DF3EFE008ED31C /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		964D0BB229DF3EFE008ED31C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		964D0BB329DF3EFE008ED31C /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
@@ -682,7 +680,6 @@
 			children = (
 				9660492C29B4648500F64E55 /* FilterViewModel.swift */,
 				964D719829F5C89E006155B0 /* UrlViewModel.swift */,
-				9619DC722A59E634006D479C /* CoreDataViewModel.swift */,
 				96847B8A2A5E92A80033D336 /* RecentViewModel.swift */,
 				96847B932A6034150033D336 /* GuideViewModel.swift */,
 			);
@@ -925,7 +922,6 @@
 				96965E9F29B8CD090094520F /* NewsView.swift in Sources */,
 				969F070C29D7594E0017FB99 /* ContentModel.swift in Sources */,
 				96965E8329B8A3660094520F /* MailView.swift in Sources */,
-				9619DC732A59E634006D479C /* CoreDataViewModel.swift in Sources */,
 				96847B892A5E90CE0033D336 /* RecentListView.swift in Sources */,
 				96847B832A5BEE9D0033D336 /* ToolsView.swift in Sources */,
 				96847B982A6089FB0033D336 /* VisualThemeView.swift in Sources */,
