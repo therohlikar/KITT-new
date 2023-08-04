@@ -58,7 +58,7 @@ class JsonDataController{
         
         return items
     }
-    
+
     /**
      
      */

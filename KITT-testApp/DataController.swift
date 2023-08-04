@@ -31,6 +31,27 @@ class DataController: ObservableObject{
     /**
      
      */
+    func clearItemDuplicates(items: [ItemModel]) async -> Int {
+        var removedCount = 0
+        if !items.isEmpty {
+            await self.context.perform {
+                let request = ContentItem.fetchRequest()
+                //request.predicate = NSPredicate(format: "")
+                if let contentItems = try? self.context.fetch(request) {
+                    print("\(contentItems.count)")
+                }
+    //            for item in items {
+    //                if !itemArray.contains(where: {$0.id == item.wrappedId}){
+    //                    dc.context.delete(item)
+    //                }
+    //            }
+            }
+        }
+        return removedCount
+    }
+    /**
+     
+     */
     func updateItemContent(_ item: ItemModel) async {
         await self.context.perform {
             var currentFavorited = false

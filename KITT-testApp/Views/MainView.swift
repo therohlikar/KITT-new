@@ -273,6 +273,8 @@ struct MainView: View {
                 }
             }
             
+            let _ = await dc.clearItemDuplicates(items: itemArray)
+            
             isReady = true
         }
         
