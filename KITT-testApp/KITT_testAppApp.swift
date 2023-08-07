@@ -14,6 +14,7 @@ struct KITT_testAppApp: App {
     @StateObject private var settingsController = SettingsController()
     @StateObject private var recentViewModel = RecentViewModel()
     @StateObject private var guideViewModel = GuideViewModel()
+    @StateObject private var networkController = NetworkController()
 
     var body: some Scene {
         WindowGroup {

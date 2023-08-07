@@ -31,20 +31,33 @@ class DataController: ObservableObject{
     /**
      
      */
+    func prepareData(_ forceUpdate: Bool = false) async {
+        
+        
+        if await !VersionController.controller.isDataUpToDate() || forceUpdate {
+            let _ = await VersionController.controller.getVersionNews(self)
+            VersionController.controller.setCurrentVersionAsRemoteVersion()
+            
+            let itemArray = await JsonDataController.controller.getRemoteContent(self)
+            let _ = await self.clearItemDuplicates(items: itemArray)
+        }
+    }
+    /**
+     
+     */
     func clearItemDuplicates(items: [ItemModel]) async -> Int {
         var removedCount = 0
         if !items.isEmpty {
             await self.context.perform {
                 let request = ContentItem.fetchRequest()
-                //request.predicate = NSPredicate(format: "")
                 if let contentItems = try? self.context.fetch(request) {
-                    print("\(contentItems.count)")
+                    for item in contentItems {
+                        if !items.contains(where: {$0.id == item.wrappedId}){
+                            self.context.delete(item)
+                            removedCount = removedCount + 1
+                        }
+                    }
                 }
-    //            for item in items {
-    //                if !itemArray.contains(where: {$0.id == item.wrappedId}){
-    //                    dc.context.delete(item)
-    //                }
-    //            }
             }
         }
         return removedCount

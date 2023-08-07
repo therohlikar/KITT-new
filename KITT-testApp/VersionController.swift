@@ -83,7 +83,17 @@ class VersionController {
                 }
             }
         }
-        
         return false
+    }
+    
+    /**
+     
+     */
+    func setCurrentVersionAsRemoteVersion() {
+        if let currentVersion = UserDefaults.standard.string(forKey: "currentVersion") {
+            if let remoteVersion = UserDefaults.standard.string(forKey: "remoteVersion") {
+                UserDefaults.standard.set(remoteVersion, forKey: "currentVersion")
+            }
+        }
     }
 }

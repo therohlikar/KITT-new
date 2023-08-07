@@ -216,7 +216,7 @@ struct MainView: View {
             UIApplication.shared.isIdleTimerDisabled = keepDisplayOn
         }
         .task {
-            _ = await VersionController.controller.isDataUpToDate()
+            _ = await self.prepareData(false)
             
             if gvm.beginGuide() {
                 await self.prepareData()
@@ -249,7 +249,7 @@ struct MainView: View {
         return false
     }
     
-    func prepareData() async {
+    func prepareData(_ forceUpdate: Bool = false) async {
         loadingDataRotation = 360
         
         withAnimation(.easeInOut(duration: 0.5)) {
@@ -261,19 +261,7 @@ struct MainView: View {
         if !NetworkController.network.connected {
             isReady = true
         }else{
-            if await VersionController.controller.isDataUpToDate() {
-                let _ = await VersionController.controller.getVersionNews(dc)
-            }
-
-            let itemArray = await JsonDataController.controller.getRemoteContent(dc)
-            
-            for item in items {
-                if !itemArray.contains(where: {$0.id == item.wrappedId}){
-                    dc.context.delete(item)
-                }
-            }
-            
-            let _ = await dc.clearItemDuplicates(items: itemArray)
+            await dc.prepareData(forceUpdate)
             
             isReady = true
         }
