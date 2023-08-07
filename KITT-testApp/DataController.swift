@@ -9,10 +9,17 @@
 import CoreData
 import Foundation
 
+enum DataException: Error{
+    case networkNotConnected
+    case emptyLocalStorage
+}
+
 /**
  Class runs its own instances, static, that holds and manages CoreData structure and data itself.
  */
 class DataController: ObservableObject{
+    
+    
     lazy var context: NSManagedObjectContext = {
         return container.viewContext
     }()
@@ -29,26 +36,48 @@ class DataController: ObservableObject{
         }
     }
     /**
+     Updates local content with downloaded remote content if there is a new version to be downloaded.
      
+     Condition can be ignored with parameter 'forceUpdate'. It is executed on its own when user opens the app for the first time and also on a specific action (f.e. button action). Checks remote version and if there is a new version to be downloaded, downloads that version, converts downloaded .json file into Models (ItemModel and VersionModel), updates local storage (coredata context) and saves new version as a current one.
+     
+     While doing so the app is not functional - disabled - for user. Terminating an app will stop the process but it should not damage already downloaded content.
+  - Parameters:
+         - forceUpdate: Boolean that forces update ignoring all conditions - downloads content no matter what version device has
+  - Throws: `DataController.networkNotconnected` if device is not connected to a network
      */
-    func prepareData(_ forceUpdate: Bool = false) async {
-        
-        
+    func prepareData(_ forceUpdate: Bool = false) async throws {
+        if !NetworkController.network.connected {
+            throw DataException.networkNotConnected
+        }
         if await !VersionController.controller.isDataUpToDate() || forceUpdate {
             let _ = await VersionController.controller.getVersionNews(self)
-            VersionController.controller.setCurrentVersionAsRemoteVersion()
             
             let itemArray = await JsonDataController.controller.getRemoteContent(self)
-            let _ = await self.clearItemDuplicates(items: itemArray)
+            VersionController.controller.setCurrentVersionAsRemoteVersion()
+            do {
+                
+                let _ = try await self.clearItemDuplicates(items: itemArray)
+            }
+            catch DataException.emptyLocalStorage{
+                print("There is nothing to remove on a local storage")
+            }catch{
+                print(error.localizedDescription)
+            }
         }
     }
     /**
-     
+        Removes unnecessary duplicates in the local storage, is used after the content data are prepared - either on .task or forced via button action.
+
+        It's a tool more like a function. Goes through all ContentItem types in local storage and converted remote json and looks for items, that do not exist in the remote version and removes them locally. Basically if we do not want to have any item and push its removal to devices, just remove them remotely. Same logic works if we change ID on remote storage.
+     - Parameters:
+            - items: an array of type ItemModel
+     - Returns: count of removed duplicates (removedCount - Integer)
+     - Throws: `DataController.emptyLocalStorage` if there is no local database with ContentItem
      */
-    func clearItemDuplicates(items: [ItemModel]) async -> Int {
+    func clearItemDuplicates(items: [ItemModel]) async throws -> Int {
         var removedCount = 0
         if !items.isEmpty {
-            await self.context.perform {
+            try await self.context.perform {
                 let request = ContentItem.fetchRequest()
                 if let contentItems = try? self.context.fetch(request) {
                     for item in contentItems {
@@ -57,13 +86,20 @@ class DataController: ObservableObject{
                             removedCount = removedCount + 1
                         }
                     }
+                }else{
+                    throw DataException.emptyLocalStorage
                 }
             }
         }
         return removedCount
     }
     /**
+     Saves asynchronously Item locally with parameter's values and creates Groups if the one as a value does not exist.
      
+     It also saves changes made to the core data context.
+     
+     - Parameters:
+        - item: ItemModel - holds values
      */
     func updateItemContent(_ item: ItemModel) async {
         await self.context.perform {
@@ -110,10 +146,16 @@ class DataController: ObservableObject{
         
     }
     /**
+     Saves asynchronously Version locally with parameter's values.
      
+     It also saves changes made to the core data context.
+     
+     - Parameters:
+        - item: VersionModel - holds values
      */
     func updateVersionNews(_ item: VersionModel) async{
         var read = false
+        
         let request = Version.fetchRequest()
         request.predicate = NSPredicate(format: "version == %@", item.version)
         request.fetchLimit = 1
@@ -130,7 +172,7 @@ class DataController: ObservableObject{
         self.save()
     }
     /**
-     
+            Saves local storage (context).
     */
     func save(){
         do {

@@ -261,7 +261,14 @@ struct MainView: View {
         if !NetworkController.network.connected {
             isReady = true
         }else{
-            await dc.prepareData(forceUpdate)
+            do {
+                try await dc.prepareData(forceUpdate)
+            }catch DataException.networkNotConnected{
+                print("Device is not connected into network.")
+            }catch{
+                print(error.localizedDescription)
+            }
+            
             
             isReady = true
         }
