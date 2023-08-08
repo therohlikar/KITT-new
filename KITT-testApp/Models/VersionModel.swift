@@ -10,5 +10,4 @@ import Foundation
 struct VersionModel: Codable, Hashable{
     var version: String = "0.0.0"
     var news: [String] = []
-    var read: Bool = false
 }

@@ -266,7 +266,7 @@ struct MainView: View {
             }catch DataException.networkNotConnected{
                 print("Device is not connected into network.")
             }catch{
-                print(error.localizedDescription)
+                print(error)
             }
             
             

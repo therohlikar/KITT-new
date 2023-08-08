@@ -82,7 +82,7 @@ struct SettingsView: View {
                     UserDefaults.standard.setValue(1, forKey: "currentGuideStep")
                     rvm.clearRecentItems()
                     
-                    if self.removeAll(){
+                    if dc.removeAll(){
                         exit(0)
                     }
                 }
@@ -105,39 +105,5 @@ struct SettingsView: View {
                 }
             }
         }
-    }
-    
-    func removeAll() -> Bool {
-        var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ContentItem")
-        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            try dc.context.execute(deleteRequest)
-        } catch let error as NSError {
-            // TODO: handle the error
-            fatalError("\(error.localizedDescription)")
-        }
-        
-        fetchRequest = NSFetchRequest(entityName: "Version")
-        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            try dc.context.execute(deleteRequest)
-        } catch let error as NSError {
-            // TODO: handle the error
-            fatalError("\(error.localizedDescription)")
-        }
-        
-        fetchRequest = NSFetchRequest(entityName: "Group")
-        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            try dc.context.execute(deleteRequest)
-        } catch let error as NSError {
-            // TODO: handle the error
-            fatalError("\(error.localizedDescription)")
-        }
-        
-        return true
     }
 }

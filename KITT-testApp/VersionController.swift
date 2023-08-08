@@ -120,7 +120,7 @@ class VersionController {
             }catch VersionException.invalidUrl{
                 print("VersionException: Url is invalid")
             }catch{
-                print("VersionException: \(error.localizedDescription)")
+                print("VersionException: \(error)")
             }
         }
         return false
@@ -145,7 +145,7 @@ class VersionController {
             }catch VersionException.invalidUrl{
                 print("VersionException: Url is invalid")
             }catch{
-                print("VersionException: \(error.localizedDescription)")
+                print("VersionException: \(error)")
             }
         }
         

@@ -27,7 +27,7 @@ class DataController: ObservableObject{
     init () {
         container.loadPersistentStores { description, error in
             if let error = error {
-                print("Core data failed to load: \(error.localizedDescription)")
+                print("Core data failed to load: \(error)")
             }
             
             self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
@@ -60,11 +60,11 @@ class DataController: ObservableObject{
                 catch DataException.emptyLocalStorage{
                     print("There is nothing to remove on a local storage")
                 }catch{
-                    print(error.localizedDescription)
+                    print(error)
                 }
             }
         }catch {
-            print(error.localizedDescription)
+            print(error)
         }
         
     }
@@ -181,7 +181,46 @@ class DataController: ObservableObject{
         do {
             try context.save()
         }catch let error{
-            print("Error saving Core Data. \(error.localizedDescription)")
+            print("Error saving Core Data. \(error)")
         }
+    }
+    /**
+     Removes all tables currently saved in the database locally
+     
+     Note to myself: rework
+     - Returns: Boolean if process was success or not
+     */
+    func removeAll() -> Bool {
+        var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ContentItem")
+        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try self.context.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error)")
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: "Version")
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try self.context.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error)")
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: "Group")
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try self.context.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            fatalError("\(error)")
+        }
+        
+        return true
     }
 }

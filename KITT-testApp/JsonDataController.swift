@@ -94,7 +94,7 @@ class JsonDataController{
             let (data, _) = try await URLSession(configuration: config).data(from: url)
             return data
         }catch{
-            print(error.localizedDescription)
+            print(error)
         }
         
         return nil
@@ -111,7 +111,7 @@ class JsonDataController{
             let data = try JSONEncoder().encode(object)
             return String(data: data, encoding: .utf8)!
         }catch{
-            print(error.localizedDescription)
+            print(error)
         }
         
         return ""
@@ -127,7 +127,7 @@ class JsonDataController{
         do {
             return try JSONDecoder().decode(T.self, from: data)
         }catch{
-            print(error.localizedDescription)
+            print(error)
         }
         
         return nil

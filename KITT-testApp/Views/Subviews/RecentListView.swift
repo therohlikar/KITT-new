@@ -28,6 +28,7 @@ struct RecentListView: View {
                 Text("Prozatím nemáte žádnou historii prohlížení")
             }
         }
+        .padding()
         .toolbar{
             if rvm.countRecentItems() > 0 {
                 ToolbarItem(placement: .navigationBarTrailing) {
