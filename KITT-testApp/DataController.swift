@@ -18,8 +18,6 @@ enum DataException: Error{
  Class runs its own instances, static, that holds and manages CoreData structure and data itself.
  */
 class DataController: ObservableObject{
-    
-    
     lazy var context: NSManagedObjectContext = {
         return container.viewContext
     }()
@@ -49,21 +47,26 @@ class DataController: ObservableObject{
         if !NetworkController.network.connected {
             throw DataException.networkNotConnected
         }
-        if await !VersionController.controller.isDataUpToDate() || forceUpdate {
-            let _ = await VersionController.controller.getVersionNews(self)
-            
-            let itemArray = await JsonDataController.controller.getRemoteContent(self)
-            VersionController.controller.setCurrentVersionAsRemoteVersion()
-            do {
+        do {
+            if try await !VersionController.controller.isDataUpToDate() || forceUpdate {
+                let _ = try await VersionController.controller.getVersionNews(self)
                 
-                let _ = try await self.clearItemDuplicates(items: itemArray)
+                let itemArray = try await JsonDataController.controller.getRemoteContent(self)
+                try await VersionController.controller.setCurrentVersionAsRemoteVersion()
+                do {
+                    
+                    let _ = try await self.clearItemDuplicates(items: itemArray)
+                }
+                catch DataException.emptyLocalStorage{
+                    print("There is nothing to remove on a local storage")
+                }catch{
+                    print(error.localizedDescription)
+                }
             }
-            catch DataException.emptyLocalStorage{
-                print("There is nothing to remove on a local storage")
-            }catch{
-                print(error.localizedDescription)
-            }
+        }catch {
+            print(error.localizedDescription)
         }
+        
     }
     /**
         Removes unnecessary duplicates in the local storage, is used after the content data are prepared - either on .task or forced via button action.

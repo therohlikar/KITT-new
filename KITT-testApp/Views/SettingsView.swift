@@ -13,6 +13,7 @@ struct SettingsView: View {
     @EnvironmentObject var fvm: FilterViewModel
     @EnvironmentObject var sc: SettingsController
     @EnvironmentObject var dc: DataController
+    @EnvironmentObject var rvm: RecentViewModel
     @EnvironmentObject var gvm: GuideViewModel
 
     @AppStorage("currentVersion") private var dataVersion: String = "0.0.0"
@@ -79,6 +80,7 @@ struct SettingsView: View {
                 Button("Smazat", role: .destructive) {
                     dataVersion = "0.0.0"
                     UserDefaults.standard.setValue(1, forKey: "currentGuideStep")
+                    rvm.clearRecentItems()
                     
                     if self.removeAll(){
                         exit(0)

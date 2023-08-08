@@ -94,7 +94,7 @@ struct MainView: View {
                                 }
                                 
                                 Task {
-                                    await self.prepareData()
+                                    await self.prepareData(true)
                                 }
                             }
                             .foregroundColor(.secondary)
